@@ -1,0 +1,12 @@
+<odoo>
+    <record id="huroos_wizard_asset_generate_depreciation_form_view" model="ir.ui.view">
+        <field name="name">huroos_wizard_asset_generate_depreciation_form_view</field>
+        <field name="model">wizard.asset.generate.depreciation</field>
+        <field name="inherit_id" ref="assets_management.wizard_asset_generate_depreciation_form_view"/>
+        <field name="arch" type="xml">
+            <field name="category_ids" position="after">
+                <field name="skip_invoice_generation" widget="boolean_toggle"/>
+            </field>
+        </field>
+    </record>
+</odoo>

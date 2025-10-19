@@ -1,0 +1,94 @@
+<odoo>
+
+    <record id="view_year_closing_tree" model="ir.ui.view">
+        <field name="name">fiscal.year.closing.tree</field>
+        <field name="model">year.closing</field>
+        <field name="arch" type="xml">
+            <tree string="Chiusura Anno Fiscale">
+                <field name="name" string="Periodo"/>
+                <field name="company_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_year_closing_form" model="ir.ui.view">
+        <field name="name">fiscal.year.closing.form</field>
+        <field name="model">year.closing</field>
+        <field name="arch" type="xml">
+            <form string="Chiusura Anno Fiscale">
+                <header>
+                    <button name="compute_closing" string="Calcola" type="object" class="btn btn-primary"/>
+                    <button name="generate_closing" string="Genera Movimenti" type="object" class="btn btn-primary"
+                            attrs="{'invisible':[('can_generate_closing', '=', False)]}"/>
+                </header>
+
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="can_generate_closing" invisible="1"/>
+
+                            <field name="name"/>
+                            <field name="date_from"/>
+                            <field name="date_to"/>
+                            <field name="profit_loss_account_id"/>
+                            <field name="sp_opening_closing_account_id"/>
+                        </group>
+                        <group>
+                            <field name="journal_closing"/>
+                            <field name="journal_opening"/>
+                            <field name="profit_loss_amount"/>
+                            <field name="company_id"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Conto Economico">
+                            <field name="ce_account_ids" readonly="1">
+                                <tree no_open="1">
+                                    <field name="macro_account_id"/>
+                                    <field name="debit"/>
+                                    <field name="credit"/>
+                                    <field name="balance"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Stato Patrimoniale">
+                            <field name="sp_account_ids" readonly="1">
+                                <tree no_open="1">
+                                    <field name="macro_account_id"/>
+                                    <field name="debit"/>
+                                    <field name="credit"/>
+                                    <field name="balance"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Movimenti Generati">
+                            <field name="move_year_ids">
+                                <tree>
+                                    <field name="name" string="Nome"/>
+                                    <field name="date" string="Data"/>
+                                    <field name="ref" string="Riferimento"/>
+                                    <field name="state" string="Stato"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="action_year_closing">
+        <field name="name">Chiusura Anno Fiscale</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">year.closing</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="view_year_closing_tree"/>
+    </record>
+
+    <menuitem id="menu_year_closing"
+              parent="account.menu_finance_entries_actions"
+              name="Chiusura Anno Fiscale"
+              action="action_year_closing"
+              sequence="200"/>
+    <!--              groups="account.group_account_manager"-->
+</odoo>

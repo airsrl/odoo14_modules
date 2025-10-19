@@ -1,0 +1,48 @@
+<odoo>
+    <record id="excel_import_easy_form_view" model="ir.ui.view">
+        <field name="name">Importa da Excel</field>
+        <field name="model">excel.import.easy</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group name="main_group" string="Cosa vuoi importare?">
+                        <group name="group_left">
+                            <field name="model" nolabel="1"/>
+                        </group>
+                        <grupo name="group_right" attrs="{'invisible': [('model', '=', False)]}">
+                            <group>
+                                <button name="print_xlsx_template"
+                                        type="object"
+                                        string="Scarica il template per l'importazione"
+                                        class="btn-link"
+                                        icon="fa-cloud-download"/>
+                            </group>
+                            <group>
+                                <field name="file" filename="file_name" nolabel="1"/>
+                            </group>
+                        </grupo>
+                    </group>
+                    <footer>
+                        <button type="object" name="import_data"
+                                string="Importa" class="oe_highlight"/>
+                        <button special="cancel" string="Annulla" class="btn-secondary"/>
+                    </footer>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_excel_import_easy" model="ir.actions.act_window">
+        <field name="name">Import from Excel</field>
+        <field name="res_model">excel.import.easy</field>
+        <field name="view_mode">form</field>
+        <field name="binding_view_types">form,list</field>
+        <field name="target">new</field>
+    </record>
+
+    <menuitem id="menu_excel_import_easy"
+              name="Importa da Excel"
+              action="action_excel_import_easy"
+              parent="sale.sale_menu_root"
+              sequence="5"/>
+</odoo>

@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!--#TAGLIA DPI-->
+    <record id="securo_dpi_size_form_view" model="ir.ui.view">
+        <field name="name">securo.dpi.size.form</field>
+        <field name="model">securo.dpi.size</field>
+        <field name="arch" type="xml">
+            <form string="Taglia">
+                <sheet>
+                    <div class="oe_title">
+                        <label for="name"/>
+                        <h1>
+                            <field name="name" required='1' placeholder="Title"/>
+                        </h1>
+                    </div>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="securo_dpi_size_tree_view" model="ir.ui.view">
+        <field name="name">securo_dpi_size.tree</field>
+        <field name="model">securo.dpi.size</field>
+        <field name="arch" type="xml">
+            <tree string="Taglie" editable="bottom">
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="securo_dpi_size_search_view" model="ir.ui.view">
+        <field name="name">securo_dpi_size.search</field>
+        <field name="model">securo.dpi.size</field>
+        <field name="arch" type="xml">
+            <search string="Search">
+                <field name="name"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="securo_dpi_size_act_window" model="ir.actions.act_window">
+        <field name="name">Taglie</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">securo.dpi.size</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                There is no examples click here to add new size.
+            </p>
+        </field>
+    </record>
+    <!--#Tipo DPI-->
+
+    <record id="securo_dpi_type_form_view" model="ir.ui.view">
+        <field name="name">securo.dpi.type.form</field>
+        <field name="model">securo.dpi.type</field>
+        <field name="arch" type="xml">
+            <form string="Tipo">
+                <sheet>
+                    <div class="oe_title">
+                        <label for="name"/>
+                        <h1>
+                            <field name="name" required='1' placeholder="Tipo..."/>
+                        </h1>
+                    </div>
+
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="securo_dpi_type_tree_view" model="ir.ui.view">
+        <field name="name">securo_dpi_type.tree</field>
+        <field name="model">securo.dpi.type</field>
+        <field name="arch" type="xml">
+            <tree string="Tipo" editable="bottom">
+                <field name="name" required='1' placeholder="Guanti/calzature..."/>
+                <field name="dpi_ids" widget="many2many_tags" options="{'no_create':True}"/>
+
+            </tree>
+        </field>
+    </record>
+
+    <record id="securo_dpi_type_search_view" model="ir.ui.view">
+        <field name="name">securo_dpi_type.search</field>
+        <field name="model">securo.dpi.type</field>
+        <field name="arch" type="xml">
+            <search string="Ricerca">
+                <field name="name"/>
+
+            </search>
+        </field>
+    </record>
+
+    <record id="securo_dpi_type_act_window" model="ir.actions.act_window">
+        <field name="name">Tipo Dpi</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">securo.dpi.type</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                There is no examples click here to add new type.
+            </p>
+        </field>
+    </record>
+
+    <!--    #Category dpi-->
+
+    <record id="securo_dpi_category_form_view" model="ir.ui.view">
+        <field name="name">securo.dpi.category.form</field>
+        <field name="model">securo.dpi.category</field>
+        <field name="arch" type="xml">
+            <form string="Categoria">
+                <sheet>
+                    <div class="oe_title">
+                        <label for="name"/>
+                        <h1>
+                            <field name="name" required='1' placeholder="Monouso/Decennale..."/>
+                        </h1>
+                    </div>
+
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="securo_dpi_category_tree_view" model="ir.ui.view">
+        <field name="name">securo_dpi_category.tree</field>
+        <field name="model">securo.dpi.category</field>
+        <field name="arch" type="xml">
+            <tree string="Categoria" editable="bottom">
+                <field name="name" required='1' placeholder="Indumenti/ManiBraccia..."/>
+                <field name="attachment" widget="many2many_binary"/>
+                <field name="dpi_ids" widget="many2many_tags" options="{'no_create':True}"/>
+
+            </tree>
+        </field>
+    </record>
+
+    <record id="securo_dpi_category_search_view" model="ir.ui.view">
+        <field name="name">securo_dpi_category.search</field>
+        <field name="model">securo.dpi.category</field>
+        <field name="arch" type="xml">
+            <search string="Ricerca">
+                <field name="name"/>
+
+            </search>
+        </field>
+    </record>
+
+    <record id="securo_dpi_category_act_window" model="ir.actions.act_window">
+        <field name="name">Categoria Dpi</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">securo.dpi.category</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                There is no examples click here to add new category.
+            </p>
+        </field>
+    </record>
+
+    <!--    #DPi duration-->
+    <record id="securo_dpi_duration_form_view" model="ir.ui.view">
+        <field name="name">securo.dpi.duration.form</field>
+        <field name="model">securo.dpi.duration</field>
+        <field name="arch" type="xml">
+            <form string="Durata">
+                <sheet>
+                    <div class="oe_title">
+                        <label for="name"/>
+                        <h1>
+                            <field name="name" required='1' placeholder="Monouso/Decennale..."/>
+                        </h1>
+                        <group string="Scadenza">
+                            <field name="has_expiration"/>
+                            <label for="type" string="Scade tra"
+                                   attrs="{'invisible':[('has_expiration','=',False)]}"/>
+                            <div attrs="{'invisible':[('has_expiration','=',False)]}">
+                                <field name="num_type"
+                                       nolabel="1"
+                                       attrs="{'required':[('has_expiration','!=',False)]}"
+                                       class="oe_inline"/><span>&#160;&#160;</span>
+                                <field name="type"
+                                       nolabel="1"
+                                       attrs="{'required':[('has_expiration','!=',False)]}"
+                                       class="oe_inline"
+                                       placeholder="Periodo..."
+                                />
+                            </div>
+
+                        </group>
+                    </div>
+
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="securo_dpi_duration_tree_view" model="ir.ui.view">
+        <field name="name">securo_dpi_duration.tree</field>
+        <field name="model">securo.dpi.duration</field>
+        <field name="arch" type="xml">
+            <tree string="Durata">
+                <field name="name" required='1' placeholder="Monouso/Decennale..."/>
+                <field name="dpi_ids" widget="many2many_tags" options="{'no_create':True}"/>
+
+
+            </tree>
+        </field>
+    </record>
+
+    <record id="securo_dpi_duration_search_view" model="ir.ui.view">
+        <field name="name">securo_dpi_duration.search</field>
+        <field name="model">securo.dpi.duration</field>
+        <field name="arch" type="xml">
+            <search string="Ricerca">
+                <field name="name"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="securo_dpi_duration_act_window" model="ir.actions.act_window">
+        <field name="name">Durata Dpi</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">securo.dpi.duration</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                There is no examples click here to add new duration.
+            </p>
+        </field>
+    </record>
+
+
+    <!--    LIST MENU-->
+
+
+    <menuitem name="Taglie Dpi"
+              id="securo_dpi_size_menu"
+              parent="huroos_securo.menu_dpi_config"
+              action="securo_dpi_size_act_window"
+              sequence="4"/>
+    <menuitem name="Tipo DPi"
+              id="securo_dpi_type_menu"
+              parent="huroos_securo.menu_dpi_config"
+              action="securo_dpi_type_act_window"
+              sequence="1"/>
+    <menuitem name="Categoria DPi"
+              id="securo_dpi_category_menu"
+              parent="huroos_securo.menu_dpi_config"
+              action="securo_dpi_category_act_window"
+              sequence="2"/>
+    <menuitem name="Durata DPi"
+              id="securo_dpi_duration_menu"
+              parent="huroos_securo.menu_dpi_config"
+              action="securo_dpi_duration_act_window"
+              sequence="3"/>
+
+
+</odoo>

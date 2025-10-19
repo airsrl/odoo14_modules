@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--    SECONDO ME NON FUNZIONA, PERCHE' NON VIENE
+    AGGIUNTO FRA GLI STAGE DEI TICKET MA SOLO NELL'ELENCO-->
+    <data noupdate="0">
+        <record id="stage_attesa_ricezione" model="helpdesk.stage">
+            <field name="name">Ricezione merce</field>
+        </record>
+    </data>
+</odoo>

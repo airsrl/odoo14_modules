@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="report_vatperiodendstatement_document" inherit_id="account_vat_period_end_statement.report_vatperiodendstatement_document">
+        <xpath expr="//div[hasclass('article')]" position="attributes">
+            <attribute name="style" add=" padding-top:30px; !important"/>
+        </xpath>
+
+
+    </template>
+</odoo>

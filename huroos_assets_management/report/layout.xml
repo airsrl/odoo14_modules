@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <template id="huroos_assets_management_document_layout" inherit_id="assets_management.document_layout">
+        <xpath expr="//div[@class='header']" position="replace">
+            <div class="header">
+                <h3 t-esc="company.name"/>
+                <div>
+                    <span t-esc="company.street"/>
+                    <br/>
+                    <span t-esc="company.zip"/>-<span t-esc="company.city"/>-
+                    <span t-esc="company.state_id.code"/>
+                    <br/>
+                    <span t-esc="company.country_id.vat_label or 'TIN'"/>:
+                    <span t-esc="company.partner_id.vat"/>
+                    <br/>
+                    <span>Codice Fiscale:</span>
+                    <span t-esc="company.fiscalcode"/>
+                </div>
+            </div>
+
+        </xpath>
+
+        <xpath expr="//div[@class='footer']" position="replace">
+            <div class="footer">
+                <div class="row text-muted">
+                    <div class="col-xs-6 custom_footer">
+                        <span t-esc="' '"/>
+                    </div>
+                    <div class="col-xs-6 text-right custom_footer">
+                        <t t-if="o.report_footer_year">
+                            <span t-esc="o.report_footer_year"/>
+                        </t>
+                        <t t-else="">
+                            <span class="page"/>
+                        </t>
+                        /
+                        <t t-if="o.report_footer_year">
+                            <span class="page"/>
+                        </t>
+                        <t t-else="">
+                            <span class="topage"/>
+                        </t>
+                    </div>
+                </div>
+            </div>
+        </xpath>
+    </template>
+</odoo>

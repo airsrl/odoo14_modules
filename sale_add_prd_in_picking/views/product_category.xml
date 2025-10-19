@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+            <record id="sale_add_prd_in_picking_product_category_form_view" model="ir.ui.view">
+                <field name="name">sale_add_prd_in_picking_product_category_form_view.form_view</field>
+                <field name="model">product.category</field>
+                <field name="inherit_id" ref="product.product_category_form_view"/>
+                <field name="priority" eval="25"/>
+                <field name="arch" type="xml">
+                    <xpath expr="//group[@name='first']"  position="after">
+                        <group  string="Additional products in picking" colspan="2">
+                            <small>These products will be automatically added to the picking list, when the SO contains a product of the current category.</small>
+                            <group colspan="2">
+                                <field name="additional_products_in_picking" nolabel="1">
+                                    <tree editable="top" delete="false" create="false">
+                                        <field name="default_code" optional="show" readonly="1"/>
+                                        <field name="barcode" optional="hide" readonly="1"/>
+                                        <field name="name" readonly="1"/>
+                                        <field name="product_template_attribute_value_ids" widget="many2many_tags" groups="product.group_product_variant" readonly="1"/>
+                                        <field name="lst_price" optional="show" string="Sales Price"/>
+                                        <field name="standard_price" optional="show"/>
+                                        <field name="categ_id" optional="hide"/>
+                                    </tree>
+                                </field>
+                            </group>
+                        </group>
+                    </xpath>
+                </field>
+            </record>
+
+    </data>
+</odoo>

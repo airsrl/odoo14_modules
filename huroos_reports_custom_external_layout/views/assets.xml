@@ -1,0 +1,15 @@
+<!--
+Copyright 2023 - Huroos srl - www.huroos.com
+License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl-3.0.en.html)
+Powered by Marco Frascerra
+-->
+
+<odoo>
+    <data noupdate="0">
+        <template id="huroos_assets" inherit_id="web.report_assets_pdf">
+            <xpath expr="." position="inside">
+                <link rel="stylesheet" href="/huroos_reports_custom_external_layout/static/src/css/huroos_stylesheet.css"/>
+            </xpath>
+        </template>
+    </data>
+</odoo>

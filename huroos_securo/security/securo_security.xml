@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+   <record id="securo_dpi_comp_rule" model="ir.rule">
+        <field name="name">DPI multi company rule</field>
+        <field name="model_id" ref="model_securo_dpi"/>
+        <field name="domain_force">['|',('company_id','=',False),('company_id', 'in', company_ids)]</field>
+    </record>
+    <record id="employee_dpi_comp_rule" model="ir.rule">
+        <field name="name">Employee DPI multi company rule</field>
+        <field name="model_id" ref="model_securo_dpi_employee"/>
+        <field name="domain_force">['|',('company_id','=',False),('company_id', 'in', company_ids)]</field>
+    </record>
+    <record id="securo_employee_course_comp_rule" model="ir.rule">
+        <field name="name">Employee Course multi company rule</field>
+        <field name="model_id" ref="model_securo_employee_course"/>
+        <field name="domain_force">['|',('company_id','=',False),('company_id', 'in', company_ids)]</field>
+    </record>
+    <record id="occupational_medicine_employee_comp_rule" model="ir.rule">
+        <field name="name">Visite dipendente  multi company rule</field>
+        <field name="model_id" ref="model_occupational_medicine_employee"/>
+        <field name="domain_force">['|',('company_id','=',False),('company_id', 'in', company_ids)]</field>
+    </record>
+    <record id="occupational_medicine_comp_rule" model="ir.rule">
+        <field name="name">Visite mediche multi company rule</field>
+        <field name="model_id" ref="model_occupational_medicine"/>
+        <field name="domain_force">['|',('company_id','=',False),('company_id', 'in', company_ids)]</field>
+    </record>
+    <record id="exam_result_comp_rule" model="ir.rule">
+        <field name="name">Esiti multi company rule</field>
+        <field name="model_id" ref="model_exam_result"/>
+        <field name="domain_force">['|',('company_id','=',False),('company_id', 'in', company_ids)]</field>
+    </record>
+    <record id="securo_employee_duty_comp_rule" model="ir.rule">
+        <field name="name">Mansione dipendenti company rule</field>
+        <field name="model_id" ref="model_securo_employee_duty"/>
+        <field name="domain_force">['|',('company_id','=',False),('company_id', 'in', company_ids)]</field>
+    </record>
+    <record id="securo_employee_qualification_comp_rule" model="ir.rule">
+        <field name="name">Qualifiche dipendenti company rule</field>
+        <field name="model_id" ref="model_securo_employee_qualification"/>
+        <field name="domain_force">['|',('company_id','=',False),('company_id', 'in', company_ids)]</field>
+    </record>
+    <record id="course_visit_periodicity_comp_rule" model="ir.rule">
+        <field name="name">Periodicità corsi company rule</field>
+        <field name="model_id" ref="model_course_visit_periodicity"/>
+        <field name="domain_force">['|',('company_id','=',False),('company_id', 'in', company_ids)]</field>
+    </record>
+    <record id="exam_employee_result_comp_rule" model="ir.rule">
+        <field name="name">Esiti dipendenti company rule</field>
+        <field name="model_id" ref="model_exam_employee_result"/>
+        <field name="domain_force">['|',('company_id','=',False),('company_id', 'in', company_ids)]</field>
+    </record>
+    <record id="securo_accident_comp_rule" model="ir.rule">
+        <field name="name">Sinistri company rule</field>
+        <field name="model_id" ref="model_securo_accident"/>
+        <field name="domain_force">['|',('company_id','=',False),('company_id', 'in', company_ids)]</field>
+    </record>
+    <record id="securo_course_training_comp_rule" model="ir.rule">
+        <field name="name">Conf. Corsi e formazione company rule</field>
+        <field name="model_id" ref="model_securo_course_training"/>
+        <field name="domain_force">['|',('company_id','=',False),('company_id', 'in', company_ids)]</field>
+    </record>
+    <record id="securo_dpi_size_comp_rule" model="ir.rule">
+        <field name="name">Taglie dpi company rule</field>
+        <field name="model_id" ref="model_securo_dpi_size"/>
+        <field name="domain_force">['|',('company_id','=',False),('company_id', 'in', company_ids)]</field>
+    </record>
+    <record id="securo_dpi_type_comp_rule" model="ir.rule">
+        <field name="name">Tipi dpi company rule</field>
+        <field name="model_id" ref="model_securo_dpi_type"/>
+        <field name="domain_force">['|',('company_id','=',False),('company_id', 'in', company_ids)]</field>
+    </record>
+    <record id="securo_dpi_category_comp_rule" model="ir.rule">
+        <field name="name">Categorie dpi company rule</field>
+        <field name="model_id" ref="model_securo_dpi_category"/>
+        <field name="domain_force">['|',('company_id','=',False),('company_id', 'in', company_ids)]</field>
+    </record>
+    <record id="securo_dpi_duration_comp_rule" model="ir.rule">
+        <field name="name">Durata dpi company rule</field>
+        <field name="model_id" ref="model_securo_dpi_duration"/>
+        <field name="domain_force">['|',('company_id','=',False),('company_id', 'in', company_ids)]</field>
+    </record>
+    <record id="securo_group_user" model="res.groups">
+            <field name="name">Securo User</field>
+            <field name="implied_ids" eval="[(4,ref('hr.group_hr_user'))]"/>
+        </record>
+
+
+
+
+
+
+
+
+</odoo>

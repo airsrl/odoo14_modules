@@ -1,0 +1,91 @@
+<odoo>
+    <record id="view_account_stamp_report_form" model="ir.ui.view">
+        <field name="name">view_account_stamp_report_form</field>
+        <field name="model">account.stamp.report</field>
+        <field name="arch" type="xml">
+            <form string="Reportmposte di bollo" create="false" delete="false" duplicate="false">
+                <sheet>
+                    <script>
+                        $(document).ready(function(){
+                            $('.modal-dialog').css({'max-width': '70%', 'height': '90%'});
+                            $('.modal-content').css({'max-width': '100%', 'height': '100%'});
+                            $('.modal-body').css({'max-width': '100%', 'height': '100%'});
+                        });
+                    </script>
+
+                    <field name="computed" invisible="1"/>
+
+                    <group name="header_main_group" string="Periodo di analisi">
+                        <group name="header_left_group">
+                            <div class="o_row">
+                                <label for="date_start"/>
+                                <field name="date_start"/>
+                                <label for="date_end"/>
+                                <field name="date_end"/>
+                            </div>
+
+                        </group>
+                        <group name="header_right_group">
+                            <div class="o_row">
+                                <button name="compute_report"
+                                        type="object"
+                                        string="Genera report"
+                                        icon="fa-star"
+                                        class="oe_highlight"/>
+
+                                <label for="include_draft" style="magin-left: 10px;"/>
+                                <field name="include_draft" widget="boolean_toggle"/>
+                            </div>
+                        </group>
+                    </group>
+
+                    <group name="stamp_totals_main_group" attrs="{'invisible': [('computed', '=', False)]}">
+                        <group name="stamp_totals_left_group">
+                            <div class="oe_title">
+                                <label for="stamp_number"/>
+                                <h1><field name="stamp_number"/></h1>
+                            </div>
+                        </group>
+
+                        <group name="stamp_totals_right_group">
+                            <div class="oe_title">
+                                <label for="stamp_amount"/>
+                                <h1><field name="stamp_amount"/></h1>
+                            </div>
+                        </group>
+                    </group>
+
+                    <field name="invoice_ids" mode="tree" attrs="{'invisible': [('computed', '=', False)]}">
+                        <tree js_class="account_tree" default_order="move_type">
+                            <field name="move_type" widget="badge"
+                                   decoration-success="move_type in ('out_invoice', 'out_refund')"
+                                   decoration-info="move_type in ('in_invoice', 'in_refund')"/>
+                            <field name="name"/>
+                            <field name="partner_id"/>
+                            <field name="invoice_date"/>
+                            <field name="amount_untaxed_signed" string="Imponibile" sum="Total"/>
+                            <field name="amount_total_signed" string="Totale" sum="Total"/>
+                            <field name="state" widget="badge" decoration-success="state == 'posted'" decoration-info="state == 'draft'"/>
+                            <field name="payment_state" widget="badge"
+                                   decoration-danger="payment_state == 'not_paid'"
+                                   decoration-warning="payment_state in ('partial', 'in_payment')"
+                                   decoration-success="payment_state in ('paid', 'reversed')"
+                                   attrs="{'invisible': [('payment_state', 'in', ('invoicing_legacy'))]}"/>
+                        </tree>
+                    </field>
+
+                    <footer>
+                        <button special="cancel" string="Chiudi"/>
+                    </footer>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="account_stamp_report_action" model="ir.actions.act_window">
+        <field name="name">Report imposte di bollo</field>
+        <field name="res_model">account.stamp.report</field>
+        <field name="target">new</field>
+        <field name="view_mode">form</field>
+    </record>
+</odoo>

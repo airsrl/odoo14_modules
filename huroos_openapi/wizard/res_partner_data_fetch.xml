@@ -1,0 +1,108 @@
+<odoo>
+    <record id="view_res_partner_data_fetch_form" model="ir.ui.view">
+        <field name="name">view_res_partner_data_fetch_form</field>
+        <field name="model">res.partner.data.fetch</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="mode"/>
+                    </group>
+
+                    <group>
+                        <group>
+                            <div class="o_row">
+                                <label for="code" string="Partita IVA" attrs="{'invisible': ['|', ('mode', '=', False), ('mode', '=', 'fiscalcode_validation')]}"/>
+                                <label for="code" string="Codice Fiscale" attrs="{'invisible': ['|', ('mode', '=', False), ('mode', '!=', 'fiscalcode_validation')]}"/>
+                                <field name="code" nolabel="1" attrs="{'invisible': [('mode', '=', False)]}"/>
+                            </div>
+                        </group>
+                        <group/>
+                    </group>
+
+                    <footer>
+                        <button name="execute_action" type="object" string="Esegui azione" class="btn btn-primary"/>
+                        <button special="cancel" string="Annulla" class="btn btn-secondary"/>
+                    </footer>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="res_partner_data_fetch_message" model="ir.ui.view">
+        <field name="name">res_partner_data_fetch_message</field>
+        <field name="model">res.partner.data.fetch</field>
+        <field name="arch" type="xml">
+            <form string="_form">
+                <sheet>
+                    <h3>
+                        <field name="display_message" widget="text"/>
+                    </h3>
+
+                    <footer>
+                        <button name="proceed_anyway" string="Procedi" type="object" class="btn btn-primary"/>
+                        <button special="cancel" string="Annulla" class="btn btn-secondary"/>
+                    </footer>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="res_partner_data_fetch_message_with_table" model="ir.ui.view">
+        <field name="name">res_partner_data_fetch_message_with_table</field>
+        <field name="model">res.partner.data.fetch</field>
+        <field name="arch" type="xml">
+            <form string="_form">
+                <sheet>
+                    <h3>
+                        <field name="display_message" widget="text"/>
+                    </h3>
+                    <group>
+                        <field name="data_table" nolabel="1"/>
+                    </group>
+
+                    <footer>
+                        <button name="proceed_anyway" string="Procedi" type="object" class="btn btn-primary"/>
+                        <button special="cancel" string="Annulla" class="btn btn-secondary"/>
+                    </footer>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="res_partner_data_fetch_confirm_data" model="ir.ui.view">
+        <field name="name">res_partner_data_fetch_confirm_data</field>
+        <field name="model">res.partner.data.fetch</field>
+        <field name="arch" type="xml">
+            <form string="_form">
+                <sheet>
+                    <h3>
+                        Ho trovato questi dati:
+                    </h3>
+                    <group>
+                        <field name="data_table" nolabel="1"/>
+                    </group>
+                    <group>
+                        <field name="save_mode"/>
+                        <field name="update_partner_id" attrs="{'invisible': [('save_mode', '!=', 'edit_existing')], 'required': [('save_mode', '=', 'edit_existing')]}"/>
+                    </group>
+
+                    <footer>
+                        <button name="save_data" string="Conferma" type="object" class="btn btn-primary"/>
+                        <button special="cancel" string="Annulla" class="btn btn-secondary"/>
+                    </footer>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_res_partner_data_fetch" model="ir.actions.act_window">
+        <field name="name">Ottieni/Valida dati</field>
+        <field name="res_model">res.partner.data.fetch</field>
+        <field name="target">new</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_res_partner_data_fetch_form"/>
+        <field name="binding_model_id" ref="base.model_res_partner"/>
+        <field name="binding_view_types">form</field>
+    </record>
+</odoo>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+        <record id="documents_hr_folder_personal" model="documents.folder" forcecreate="0">
+            <field name="name">Documenti dipendenti</field>
+            <field name="parent_folder_id" eval="ref('documents_hr.documents_hr_folder')"/>
+            <field name="group_ids" eval="[(4, ref('hr.group_hr_user'))]"/>
+            <field name="read_group_ids" eval="[(4, ref('base.group_user'))]"/>
+            <field name="user_specific">True</field>
+            <field name="sequence">12</field>
+        </record>
+        <record id="securo_documents_hr_documents_employees" model="documents.facet" forcecreate="0">
+            <field name="name">Documenti dipendenti</field>
+            <field name="sequence">6</field>
+            <field name="folder_id" ref="documents_hr_folder_personal"/>
+        </record>
+        <record id="general_employee_document" model="documents.tag" forcecreate="0">
+            <field name="name">Documenti generali</field>
+            <field name="facet_id" ref="securo_documents_hr_documents_employees"/>
+            <field name="sequence">12</field>
+        </record>
+        <record id="course_employee_document" model="documents.tag" forcecreate="0">
+            <field name="name">Corsi e formazione</field>
+            <field name="facet_id" ref="securo_documents_hr_documents_employees"/>
+            <field name="sequence">12</field>
+        </record>
+        <record id="visit_employee_document" model="documents.tag" forcecreate="0">
+            <field name="name">Visite mediche</field>
+            <field name="facet_id" ref="securo_documents_hr_documents_employees"/>
+            <field name="sequence">12</field>
+        </record>
+        <record id="exam_employee_document" model="documents.tag" forcecreate="0">
+            <field name="name">Esami medici</field>
+            <field name="facet_id" ref="securo_documents_hr_documents_employees"/>
+            <field name="sequence">12</field>
+        </record>
+
+    </data>
+</odoo>

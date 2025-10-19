@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_air_dati_gestionali,air_dati_gestionali user,model_air_dati_gestionali,base.group_user,1,1,1,1
+

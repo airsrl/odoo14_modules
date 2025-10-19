@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template inherit_id="stock.report_picking" id="report_picking">
+        <span t-field="ml.product_id.display_name" position="replace">
+            <span t-field="ml.display_name"/>
+        </span>
+
+    </template>
+</odoo>

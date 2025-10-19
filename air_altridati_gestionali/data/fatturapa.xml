@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template
+        id="account_invoice_line_it_FatturaPA"
+        inherit_id="l10n_it_fatturapa_out.account_invoice_line_it_FatturaPA"
+    >
+        <xpath expr="//DettaglioLinee" position="inside">
+
+            <AltriDatiGestionali
+                    t-foreach="line.dati_gestionali_ids" t-as="gest"
+                >
+                    <TipoDato t-if="gest.tipo_dato"
+                    t-esc="gest.tipo_dato" />
+                 <RiferimentoTesto t-if="gest.rif_testo"
+                    t-esc="gest.rif_testo" />
+
+                 <RiferimentoNumero t-if="gest.rif_numero"
+                     t-esc="format_numbers(gest.rif_numero)"/>
+                 <RiferimentoData t-if="gest.rif_date"
+                    t-esc="gest.rif_date.strftime('%Y-%m-%d')" />
+
+                </AltriDatiGestionali>
+
+        </xpath>
+    </template>
+</odoo>

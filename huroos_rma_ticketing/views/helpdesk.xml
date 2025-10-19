@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="helpdesk_form_inherit" model="ir.ui.view">
+            <field name="name">helpdesk.helpdesk.form</field>
+            <field name="model">helpdesk.ticket</field>
+            <field name="inherit_id" ref="helpdesk.helpdesk_ticket_view_form"/>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <xpath expr="//sheet" position="inside">
+                    <notebook name="return_tabs">
+                        <page name="descrizione" string="Descrizione">
+                            <!-- description field goes here (see below) -->
+                        </page>
+                        <page name="return" string="Return">
+                            <group>
+                                <group>
+                                    <field name="sale_order_id" string="Ordine reso"/>
+                                    <field name="sale_order_return_id" string="Cambio merce" readonly="1"/>
+                                    <field name="shippypro_label_url" string="ShippyPRO label" readonly="1" widget="url"/>
+                                </group>
+                                <group>
+                                    <button name="create_goods_change" string="Cambio Merce" type="object"
+                                            attrs="{'invisible':[('sale_order_return_id','!=',False)]}"/>
+                                </group>
+                                <group colspan="2" groups="base.group_no_one">
+                                    <field colspan="2" name="json_return"/>
+                                </group>
+                            </group>
+                        </page>
+                    </notebook>
+                </xpath>
+                <xpath expr="//page[@name='descrizione']" position="inside">
+                    <xpath expr="//field[@name='description']" position="move"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

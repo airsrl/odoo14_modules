@@ -1,0 +1,27 @@
+<odoo>
+    <record id="stock_delivery_note_form_inherit" model="ir.ui.view">
+        <field name="name">stock_delivery_note_form_inherit</field>
+        <field name="model">stock.delivery.note</field>
+        <field name="inherit_id" ref="l10n_it_delivery_note.stock_delivery_note_form_view"/>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+
+            <xpath expr="//page[@name='details']//create[1]" position="before">
+                <create string="Aggiungi un prodotto" context="{'default_display_type': False}"/>
+            </xpath>
+
+            <xpath expr="//page[@name='details']//tree//field[@name='price_unit']" position="attributes">
+                <attribute name="attrs">{'readonly': [('sale_line_id', '!=', False)]}</attribute>
+            </xpath>
+
+            <xpath expr="//page[@name='details']//tree//field[@name='discount']" position="attributes">
+                <attribute name="attrs">{'readonly': [('sale_line_id', '!=', False)]}</attribute>
+            </xpath>
+
+            <xpath expr="//page[@name='details']//tree//field[@name='tax_ids']" position="attributes">
+                <attribute name="attrs">{'readonly': [('sale_line_id', '!=', False)]}</attribute>
+            </xpath>
+
+        </field>
+    </record>
+</odoo>

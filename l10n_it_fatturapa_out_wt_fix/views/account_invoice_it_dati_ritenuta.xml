@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <template id="wt_account_invoice_it_fattura_elettronica_body" inherit_id="l10n_it_fatturapa_out_wt.wt_account_invoice_it_fattura_elettronica_body">
+        <xpath expr="//ImportoPagamento" position="replace">
+            <ImportoPagamento
+                t-if="record.company_id.xml_divisa_value == 'keep_orig'"
+                t-esc="format_numbers_two(wt_hack_rate * (move_line.amount_currency or move_line.debit or 0.0))"
+            />
+            <ImportoPagamento
+                t-else=""
+                t-esc="format_numbers_two(fpa_to_eur(wt_hack_rate * (move_line.amount_currency or move_line.debit or 0.0), record))"
+            />
+        </xpath>
+    </template>
+
+    <template id="wt_account_invoice_it_fattura_elettronica_body" inherit_id="l10n_it_fatturapa_out.account_invoice_it_fattura_elettronica_body">
+        <xpath expr="//DettaglioPagamento//ImportoPagamento[2]" position="replace"/>
+    </template>
+</odoo>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_invoice_tree_fatturapa_in" model="ir.ui.view">
+        <field name="name">account.invoice.tree.fatturapa_in</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_invoice_tree" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='name']" position="after">
+                <field name="e_invoice_received_date" readonly="1"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

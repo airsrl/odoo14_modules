@@ -1,0 +1,52 @@
+<odoo>
+    <record id="openapi_account_res_config_settings_view_form" model="ir.ui.view">
+        <field name="name">openapi_account_res_config_settings_view_form</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="account.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//div[@data-key='account']" position="inside">
+                <h2>Pannello di controllo OpenAPI</h2>
+                <div class="row mt16 o_settings_container" name="openapi_settings_container">
+                    <div class="col-12 col-lg-6 o_setting_box" id="openapi_tokens">
+                        <div class="o_setting_left_pane"/>
+                        <div class="o_setting_right_pane">
+                            <span class="o_form_label">Token</span>
+                            <div class="text-muted">
+                                Qui puoi inserire il token OpenAPI. Il sistema riconoscerà in automatico se ti trovi
+                                in un'istanza di test.
+                            </div>
+                            <div class="content-group">
+                                <div class="row mt16">
+                                    <label for="openapi_token" class="col-lg-4 o_light_label"/>
+                                    <field name="openapi_token"/>
+                                </div>
+                                <div class="row">
+                                    <label for="openapi_sandbox_token" class="col-lg-4 o_light_label"/>
+                                    <field name="openapi_sandbox_token"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-lg-6 o_setting_box" id="openapi_credential_settings">
+                        <div class="o_setting_left_pane">
+                            <field name="openapi_force_credentials" widget="upgrade_boolean"/>
+                        </div>
+                        <div class="o_setting_right_pane">
+                            <label for="openapi_force_credentials"/>
+                            <div class="text-muted">
+                                Se selezionato invertirà le credenziali
+                                (Es: se ti trovi in produzione utilizzarà le credenziali di staging e viceversa).
+                            </div>
+                            <br/>
+                            <button name="%(huroos_openapi.action_openapi_engine)d" type="action"
+                                string="Visualizza gli endpoint" class="btn btn-link" icon="fa-code"/>
+                        </div>
+                    </div>
+                </div>
+            </xpath>
+
+        </field>
+    </record>
+</odoo>

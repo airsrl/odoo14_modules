@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_wizard_report_corrispettivi,access_wizard_report_corrispettivi,model_wizard_report_corrispettivi,base.group_user,1,1,1,1
+access_import_corrispettivi,access_import_corrispettivi,model_import_corrispettivi,base.group_user,1,1,1,1
+access_import_corrispettivi_line,access_import_corrispettivi_line,model_corrispettivi_line,base.group_user,1,1,1,1

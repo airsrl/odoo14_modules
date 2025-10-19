@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="account_due_list_form_inherit" model="ir.ui.view">
+            <field name="name">account_due_list.form</field>
+            <field name="model">account.move.line</field>
+            <field name="inherit_id" ref="account_due_list.view_payments_tree"/>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='amount_residual']" position="replace">
+                    <field name="amount_residual_rda" sum="Total Residual"/>
+                </xpath>
+            </field>
+        </record>
+        <!-- Inherit Form View to Modify it -->
+        <record id="view_payments_filter_inherit" model="ir.ui.view">
+            <field name="name">view_payments_filter.search.inherit</field>
+            <field name="model">account.move.line</field>
+            <field name="inherit_id" ref="account_due_list.view_payments_filter"/>
+            <field name="arch" type="xml">
+                <xpath expr="//search" position="inside">
+                    <filter string="Escludi ritenute" domain="[('withholding_tax_amount','=',False)]"
+                            name="exclude_ritenute"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

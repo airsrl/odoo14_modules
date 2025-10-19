@@ -1,0 +1,131 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* huroos_assets_management
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 14.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-09-28 09:05+0000\n"
+"PO-Revision-Date: 2023-09-28 09:05+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: huroos_assets_management
+#: model_terms:ir.ui.view,arch_db:huroos_assets_management.huroos_asset_journal_category_data
+#: model_terms:ir.ui.view,arch_db:huroos_assets_management.huroos_asset_previsional_category_data
+msgid "<span>Asset Category:</span>"
+msgstr "<span>Categoria: </span>"
+
+#. module: huroos_assets_management
+#: model_terms:ir.ui.view,arch_db:huroos_assets_management.huroos_asset_journal
+#: model_terms:ir.ui.view,arch_db:huroos_assets_management.huroos_asset_previsional
+msgid "<span>Asset:</span>"
+msgstr "<span>Bene ammortizzabile: </span>"
+
+#. module: huroos_assets_management
+#: model_terms:ir.ui.view,arch_db:huroos_assets_management.huroos_template_asset_journal_body
+#: model_terms:ir.ui.view,arch_db:huroos_assets_management.huroos_template_asset_previsional_body
+msgid "<span>Totals for: </span>"
+msgstr "<span>Totale per: </span>"
+
+#. module: huroos_assets_management
+#: model_terms:ir.ui.view,arch_db:huroos_assets_management.huroos_asset_journal_category_totals
+#: model_terms:ir.ui.view,arch_db:huroos_assets_management.huroos_asset_previsional_category_totals
+msgid "<span>Totals for:</span>"
+msgstr "<span>Totale per: </span>"
+
+#. module: huroos_assets_management
+#: model_terms:ir.ui.view,arch_db:huroos_assets_management.huroos_asset_management_asset_form_view
+msgid "Aggiorna ammortamenti"
+msgstr ""
+
+#. module: huroos_assets_management
+#: model:ir.model.fields,field_description:huroos_assets_management.field_asset_asset__partially_depr_times
+msgid "Ammortizzazioni subite in precedenza"
+msgstr ""
+
+#. module: huroos_assets_management
+#: model:ir.model,name:huroos_assets_management.model_asset_asset
+msgid "Assets"
+msgstr "Beni ammortizzabili"
+
+#. module: assets_management
+#: code:addons/assets_management/report/asset_journal.py:0
+#, python-format
+msgid "Assets Depreciations "
+msgstr "Libro Cespiti "
+
+#. module: assets_management
+#: code:addons/assets_management/report/asset_previsional.py:0
+#, python-format
+msgid "Assets Previsional Depreciations "
+msgstr "Ammortamenti previsionali "
+
+#. module: huroos_assets_management
+#: model:ir.model.fields,help:huroos_assets_management.field_asset_asset__can_edit_partial_depr
+msgid ""
+"Campo tecnico per rendere readonly i campi di ammortamento parziale, una "
+"volta avvenuto il primo ammortamento sul sistema Odoo."
+msgstr ""
+
+#. module: huroos_assets_management
+#: model:ir.model.fields,field_description:huroos_assets_management.field_asset_asset__can_edit_partial_depr
+msgid "Can Edit Partial Depr"
+msgstr "Modifica Ammortamento Parziale"
+
+#. module: huroos_assets_management
+#: model:ir.model.fields,field_description:huroos_assets_management.field_asset_asset__display_name
+#: model:ir.model.fields,field_description:huroos_assets_management.field_asset_depreciation__display_name
+msgid "Display Name"
+msgstr "Nome visualizzato"
+
+#. module: huroos_assets_management
+#: model:ir.model.fields,field_description:huroos_assets_management.field_asset_asset__already_partially_depr
+msgid "Già parzialmente ammortizzato"
+msgstr ""
+
+#. module: huroos_assets_management
+#: model:ir.model.fields,field_description:huroos_assets_management.field_asset_asset__id
+#: model:ir.model.fields,field_description:huroos_assets_management.field_asset_depreciation__id
+msgid "ID"
+msgstr ""
+
+#. module: huroos_assets_management
+#: model:ir.model.fields,help:huroos_assets_management.field_asset_asset__partially_depr_times
+msgid ""
+"Inserire il numero di volte in cui il bene è stato ammortizzato negli altri "
+"sistemi."
+msgstr ""
+
+#. module: huroos_assets_management
+#: model:ir.model.fields,help:huroos_assets_management.field_asset_asset__partially_depr_amount
+msgid "Inserire il valore già ammortizzato in precedenza negli altri sistemi."
+msgstr ""
+
+#. module: huroos_assets_management
+#: model:ir.model.fields,field_description:huroos_assets_management.field_asset_asset____last_update
+#: model:ir.model.fields,field_description:huroos_assets_management.field_asset_depreciation____last_update
+msgid "Last Modified on"
+msgstr "Ultima modifica il"
+
+#. module: huroos_assets_management
+#: model:ir.model.fields,help:huroos_assets_management.field_asset_asset__already_partially_depr
+msgid ""
+"Seleziona se il bene è stato precedentemente ammortizzato su un altro "
+"sistema."
+msgstr ""
+
+#. module: huroos_assets_management
+#: model_terms:ir.ui.view,arch_db:huroos_assets_management.huroos_asset_management_asset_form_view
+msgid "Storico ammortamenti"
+msgstr ""
+
+#. module: huroos_assets_management
+#: model:ir.model.fields,field_description:huroos_assets_management.field_asset_asset__partially_depr_amount
+msgid "Valore già ammortizzato"
+msgstr ""

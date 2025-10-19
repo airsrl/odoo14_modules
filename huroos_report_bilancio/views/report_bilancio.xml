@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="main_template_bilancio" inherit_id="account_reports.main_template">
+            <xpath expr="//div[hasclass('table-responsive')]" position="replace">
+                <div class="table-responsive" >
+                    <t t-set="is_report_bilancio" t-value="model.is_bilancio()" />
+                    <t t-if="is_report_bilancio == 'no_bilancio'">
+                        <table class="o_account_reports_table table-hover">
+                            <t t-call="{{model._get_templates()['main_table_header_template']}}"/>
+                            <tbody>
+                                <t t-if="lines.get('lines')">
+                                    <t t-call="{{model._get_templates()['line_template']}}"/>
+                                </t>
+                            </tbody>
+                        </table>
+                    </t>
+                    <t t-else="">
+
+                        <style>
+                            .o_account_reports_page .o_account_reports_level1{
+                                background-color: #875A7B !important;
+                                color: white;
+                                font-size: 13px;
+
+                            }
+
+                            .o_account_reports_page .o_account_reports_level1 .text-muted{
+                                color: white !important;
+                            }
+                            .o_account_reports_page .o_account_reports_table tbody tr:not(.o_account_reports_level0):hover{
+
+                            }
+
+
+                            .o_account_reports_page .o_account_reports_level2{
+                                font-size: 12px;
+                                background-color: #E6E6E6;
+                                border-bottom: 2px solid #875A7B;
+                                font-weight: bold;
+                            }
+
+                            .o_account_reports_page .o_account_reports_level0{
+                                font-size: 16px;
+                            }
+                            .o_account_reports_page .o_account_reports_level3{
+                                font-style: italic;
+                                font-weight: bold;
+                            }
+                            .o_account_reports_no_print{
+                                width: 100% !important;
+                                max-width: 100% !important;
+                            }
+                        </style>
+                        <t t-if="is_report_bilancio == 'report_bilancio'">
+                            <t t-set="righe" t-value="model.dividi_righe_report_bilancio(lines['lines'])" />
+
+                            <t t-set="lines_sezione_1" t-value="righe['sp']['sezione_1']" />
+                            <t t-set="lines_sezione_2" t-value="righe['sp']['sezione_2']" />
+                            <t t-set="lines_sezione_3" t-value="righe['sp']['sezione_3']" />
+                            <t t-set="lines_sezione_4" t-value="righe['sp']['sezione_4']" />
+                            <t t-set="lines_sezione_5" t-value="righe['sp']['sezione_5']" />
+                            <div class="row" style="width: 1400px; margin:auto;">
+                                <div class="col-12" style="padding:20px; margin:0px;">
+                                    <h2>STATO PATRIMONIALE</h2>
+                                </div>
+                            </div>
+                            <t t-call="huroos_report_bilancio.render_5_main_sections" />
+
+                            <t t-set="lines_sezione_1" t-value="righe['ce']['sezione_1']" />
+                            <t t-set="lines_sezione_2" t-value="righe['ce']['sezione_2']" />
+                            <t t-set="lines_sezione_3" t-value="righe['ce']['sezione_3']" />
+                            <t t-set="lines_sezione_4" t-value="righe['ce']['sezione_4']" />
+                            <t t-set="lines_sezione_5" t-value="righe['ce']['sezione_5']" />
+                            <p style="page-break-after:always;"/>
+                            <div class="row" style="width: 1400px; margin:auto; padding-top: 100px;">
+                                <div class="col-12" style="padding:20px; margin:0px;">
+                                    <h2>CONTO ECONOMICO</h2>
+                                </div>
+                            </div>
+                            <t t-call="huroos_report_bilancio.render_5_main_sections" />
+
+                        </t>
+                        <t t-else="">
+                            <t t-if="is_report_bilancio == 'stato_patrimoniale'">
+                            <t t-set="righe" t-value="model.dividi_righe_stato_patrimoniale(lines['lines'])" />
+                            </t>
+                            <t t-if="is_report_bilancio == 'conto_economico'">
+                                <t t-set="righe" t-value="model.dividi_righe_conto_economico(lines['lines'])" />
+                            </t>
+                            <t t-set="lines_sezione_1" t-value="righe['sezione_1']" />
+                            <t t-set="lines_sezione_2" t-value="righe['sezione_2']" />
+                            <t t-set="lines_sezione_3" t-value="righe['sezione_3']" />
+                            <t t-set="lines_sezione_4" t-value="righe['sezione_4']" />
+                            <t t-set="lines_sezione_5" t-value="righe['sezione_5']" />
+                            <t t-call="huroos_report_bilancio.render_5_main_sections" />
+                        </t>
+
+                    </t>
+
+
+                </div>
+            </xpath>
+        </template>
+
+        <template id="render_5_main_sections">
+            <div class="row" style="width: 1400px; margin:auto;">
+                <div class="col-6" style="padding:10px 35px 10px 10px; margin:0px;">
+                    <table class="o_account_reports_table" >
+                        <t t-call="{{model._get_templates()['main_table_header_template']}}"/>
+                        <tbody>
+                            <t t-if="lines.get('lines')">
+                                <t t-set="lines_to_render" t-value="lines_sezione_1" />
+                                <t t-call="huroos_report_bilancio.render_line_bilancio" />
+                            </t>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-6" style="padding:10px 35px 10px 10px; margin:0px; ">
+                    <table class="o_account_reports_table" >
+                        <t t-call="{{model._get_templates()['main_table_header_template']}}"/>
+                        <tbody >
+                            <t t-if="lines.get('lines')">
+                                <t t-set="lines_to_render" t-value="lines_sezione_2" />
+                                <t t-call="huroos_report_bilancio.render_line_bilancio" />
+                            </t>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="row" style="width: 1400px; margin:auto;">
+                <div class="col-12">
+                    <table class="o_account_reports_table">
+                        <tbody>
+                            <t t-if="lines.get('lines')">
+                                <t t-set="lines_to_render" t-value="lines_sezione_3" />
+                                <t t-call="huroos_report_bilancio.render_line_bilancio" />
+                            </t>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="row" style="width: 1400px; margin:auto;">
+                <div class="col-6">
+                    <table class="o_account_reports_table">
+                        <tbody>
+                            <t t-if="lines.get('lines')">
+                                <t t-set="lines_to_render" t-value="lines_sezione_4" />
+                                <t t-call="huroos_report_bilancio.render_line_bilancio" />
+                            </t>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-6">
+                    <table class="o_account_reports_table">
+
+                        <tbody>
+                            <t t-if="lines.get('lines')">
+                                <t t-set="lines_to_render" t-value="lines_sezione_5" />
+                                <t t-call="huroos_report_bilancio.render_line_bilancio" />
+                            </t>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+
+        </template>
+
+        <template id="render_line_bilancio">
+              <style>
+                  .o_account_reports_domain_line_3, .o_account_report_line_indent{
+                        max-width: 400px;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                    }
+             </style>
+            <t t-foreach="lines_to_render" t-as="line">
+                <t t-set="trclass" t-value="''"/>
+                <t t-set="domainClass" t-value="'o_account_reports_domain_line_2'"/>
+                <t t-if="not line.get('caret_options')">
+                    <t t-set="trclass" t-value="'o_account_reports_default_style'"/>
+                    <t t-if="line.get('level') != None">
+                        <t t-set="trclass" t-value="'o_account_reports_level'+str(line['level'])"/>
+                    </t>
+                </t>
+                <t t-if="line.get('caret_options')">
+                    <t t-if="line.get('level')">
+                        <t t-set="domainClass" t-value="'o_account_reports_domain_line_'+str(line['level'])"/>
+                    </t>
+                </t>
+
+                <tr t-attf-class="#{trclass} #{line.get('class', '')} #{'o_js_account_report_parent_row_unfolded' if line.get('unfolded', False) else ''}"
+                    t-att-data-pagebreak="'before' if (line.get('page_break') and context.get('print_mode')) else None"
+                    t-att-data-parent-id="line.get('parent_id', False)"
+                    t-att-style="line.get('style', '')" style="width:200px; background-color:green;">
+                    <td t-att-data-id="line['id']" t-att-class="'o_account_report_line o_account_report_line_indent ' + (line.get('unfoldable') and 'js_account_report_foldable o_foldable_total' or '')" t-att-data-unfolded="line.get('unfolded', False)" t-att-colspan="line.get('colspan', '1')"
+                        t-att-data-offset="line.get('offset', False)" t-att-data-progress="line.get('progress', False)"
+                    >
+                        <t t-if="line.get('unfoldable')">
+                            <span t-att-data-id="line['id']" class="o_account_reports_caret_icon">
+                                <i class="fa fa-caret-down" t-if="line.get('unfolded')" role="img" aria-label="Unfolded" title="Unfolded"/>
+                                <i class="fa fa-caret-right" t-if="not line.get('unfolded')" role="img" aria-label="Folded" title="Folded"/>
+                            </span>
+                        </t>
+                        <t t-if="not line.get('caret_options')">
+                            <span class="account_report_line_name" t-att-title="line.get('title_hover')">
+                                <a t-if="line.get('action_id')" t-att-data-id="line['id']" t-att-data-action-id="line['action_id']" t-att-action="line.get('action', 'execute_action')">
+                                    <t t-esc="line.get('name')"/>
+                                </a>
+                                <t t-if="not line.get('action_id')" t-esc="line.get('name')"/>
+                                <span class="js_account_report_line_footnote" t-att-data-id="line['id']">
+                                    <sup t-if="line.get('footnote')"><b class="o_account_reports_footnote_sup"><a t-att-href="'#footnote'+line['footnote']"></a><t t-esc="line['footnote']"/></b></sup>
+                                </span>
+                            </span>
+                        </t>
+                        <t t-if="line.get('caret_options')">
+                            <div class="dropdown">
+                                <a class="dropdown-toggle" data-toggle="dropdown" href='#'>
+                                    <span t-att-data-id="line['id']" t-att-class="domainClass" t-att-title="line.get('title_hover')">
+                                        <t t-esc="line.get('name')"/>
+                                    </span>
+                                </a>
+                                <span class="js_account_report_line_footnote" t-att-data-id="line['id']"><sup t-if="line.get('footnote')"><b class="o_account_reports_footnote_sup"><a t-att-href="'#footnote'+line['footnote']"></a><t t-esc="line['footnote']"/></b></sup></span>
+                                <div class="dropdown-menu o_account_reports_domain_dropdown" role="menu">
+                                    <t t-call="account_reports.line_caret_options"/>
+                                    <a role="menuitem" tabindex="-1" t-att-data-id="line['id']" class="dropdown-item js_account_reports_add_footnote">Annotate</a>
+                                </div>
+                            </div>
+                        </t>
+                    </td>
+                    <t t-set="column_index" t-value="0"/>
+                    <t t-foreach="line.get('columns')" t-as="column">
+                        <t t-set="hierarchies_enabled" t-value="len(lines.get('columns_header', [])) > 1"/>
+                        <td t-att-class="'o_account_report_line ' + (column.get('class', lines.get('columns_header')[-1][column_index+line.get('colspan', 1)].get('class', '')) + (line.get('unfoldable') and ' o_foldable_total' or '')) + ('' if hierarchies_enabled else ' o_account_report_line_indent')" t-att-style="column.get('style', lines.get('columns_header')[-1][column_index+line.get('colspan', 1)].get('style', ''))">
+                            <span class="o_account_report_column_value" t-att-title="column.get('title')">
+                                <t t-esc="column.get('name')"/>
+                            </span>
+                        </td>
+                        <t t-set="column_index" t-value="column_index + 1"/>
+                    </t>
+                </tr>
+            </t>
+        </template>
+    </data>
+</odoo>

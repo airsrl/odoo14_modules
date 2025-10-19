@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="res_partner_form_inherit" model="ir.ui.view">
+            <field name="name">res_partner.form</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="account.view_partner_property_form"/>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <xpath expr="//page[@name='accounting']" position="inside">
+                <group string="Altri Dati Gestionali">
+                    <field name="dati_gestionali_ids" widget="one2many" mode="tree" nolabel="1">
+                        <tree editable="bottom">
+                                    <field name="tipo_dato"/>
+                                    <field name="rif_testo"/>
+                                    <field name="rif_numero"/>
+                                    <field name="rif_date"/>
+                                </tree>
+                    </field>
+                    </group>
+                </xpath>
+
+
+            </field>
+        </record>
+    </data>
+</odoo>

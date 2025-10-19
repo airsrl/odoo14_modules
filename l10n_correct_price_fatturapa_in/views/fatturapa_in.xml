@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="fattura_attachment_in_form_inherit" model="ir.ui.view">
+            <field name="name">fattura_attachment_in.form</field>
+            <field name="model">fatturapa.attachment.in</field>
+            <field name="inherit_id" ref="l10n_it_fatturapa_in.view_fatturapa_in_attachment_form"/>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='id']" position="after">
+                    <field name="automatic_correction"/>
+                </xpath>
+
+            </field>
+        </record>
+    </data>
+</odoo>

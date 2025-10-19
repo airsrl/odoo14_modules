@@ -1,0 +1,7 @@
+<odoo>
+    <menuitem id="account_stamp_menu" name="Imposte di bollo" parent="account.menu_finance_reports" sequence="7">
+        <menuitem id="account_stamp_report_menu"
+                  name="Report imposte di bollo"
+                  action="huroos_account_stamp.account_stamp_report_action"/>
+    </menuitem>
+</odoo>

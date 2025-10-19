@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <template id="report_registro_iva" inherit_id="l10n_it_vat_registries.report_registro_iva">
+
+        <xpath expr="//t[@t-foreach='get_move(doc_ids)']" position="after">
+            <t t-call="l10n_it_vat_registries_fix.totals_by_journal"/>
+        </xpath>
+
+        <xpath expr="//tbody//t[2]" position="attributes">
+            <attribute name="t-foreach">docs.sorted('journal_id')</attribute>
+        </xpath>
+
+        <xpath expr="//th[hasclass('right_without_line')]" position="replace">
+            <th style="border-top: 0.5px solid; border-color: #adadad; text-align:right;">TOTALE</th>
+        </xpath>
+        <xpath expr="//th[hasclass('left_with_line_bottom')]" position="after">
+            <th class="right_with_line_bottom"/>
+        </xpath>
+
+        <xpath expr="//div[hasclass('article')]" position="attributes">
+            <attribute name="style" add=" padding-top:29.5px; !important"/>
+        </xpath>
+        <xpath expr="//tr[hasclass('first_th_row')]" position="replace">
+            <tr class="first_th_row">
+                <t t-if="registry_type == 'corrispettivi'">
+                    <td colspan="4"
+                        style="padding:10;"
+                        t-esc="tax_registry_name + ' Periodo di stampa dal ' + from_date + ' al ' + to_date"/>
+                </t>
+                <t t-if="registry_type != 'corrispettivi'">
+                    <td colspan="10"
+                        style="padding:10;"
+                        t-esc="tax_registry_name + ' Periodo di stampa dal ' + from_date + ' al ' + to_date"/>
+                </t>
+            </tr>
+        </xpath>
+
+        <xpath expr="(//th[hasclass('left_with_line_bottom')])[5]" position="replace">
+            <span style="width:0;" classe="left_with_line_bottom"/>
+        </xpath>
+        <xpath expr="(//th[hasclass('right_with_line_bottom')])[3]" position="after">
+            <th class="right_with_line_bottom"/>
+        </xpath>
+
+        <xpath expr="//tr[@name='vat_header_invoice']//t//th[5]" position="replace">
+            <th class="left_without_line">P.IVA/CF</th>
+        </xpath>
+
+        <xpath expr="//tr[@name='vat_body_invoice']//t//td[4]" position="replace">
+            <td class="left_without_line_bold">
+                <div style="page-break-inside: avoid">
+                    <t t-if="move.partner_id.company_type == 'person'" t-esc="move.partner_id.fiscalcode"/>
+                    <t t-else="" t-esc="move.partner_id.vat"/>
+                </div>
+            </td>
+        </xpath>
+
+        <xpath expr="//tbody//t[2]" position="before">
+            <t t-set="journal" t-value="False"/>
+        </xpath>
+
+        <xpath expr="//t[@t-foreach='inv_taxes']" position="before">
+            <t t-if="not journal or journal != move.journal_id">
+                <t t-call="l10n_it_vat_registries_fix.totals_by_journal"/>
+                <t t-set="journal" t-value="move.journal_id"/>
+                <tr style="background-color: #d4d4d4;">
+                    <td colspan="99" t-esc="journal.name"/>
+                </tr>
+            </t>
+        </xpath>
+
+        <xpath expr="//div[hasclass('article')]//div//table//tr//td//table//t[@t-foreach='total_used_taxes.sorted()']" position="attributes">
+            <attribute name="t-foreach">journal_tax_map['totals']</attribute>
+        </xpath>
+
+        <xpath expr="//div[hasclass('article')]//div//table//tr//td//table//t[@t-set='tax_code_tuple']" position="attributes">
+            <attribute name="t-value">total_used_tax</attribute>
+        </xpath>
+
+    </template>
+
+    <template id="totals_by_journal">
+        <t t-set="tot_base_partial" t-value="0"/>
+        <t t-set="tot_tax_partial" t-value="0"/>
+        <t t-set="tot_ded_partial" t-value="0"/>
+        <t t-set="tot_unded_partial" t-value="0"/>
+        <tr t-if="journal and len(docs.journal_id) > 1">
+            <td colspan="99">
+                <div style="page-break-inside: avoid;">
+                    <table style="width:100%;">
+                        <tr>
+                            <td colspan="2" style="vertical-align:text-top;padding:10">
+                                <h3 t-esc="'Subtotali registro ' + journal.name"/>
+                                <table style="width:100%;">
+                                    <thead>
+                                        <tr>
+                                            <th class="left_without_line_bold">Descrizione</th>
+                                            <th class="right_without_line_bold">Imponibile</th>
+                                            <th class="right_without_line_bold">Imposta</th>
+                                            <th class="right_without_line_bold">Detraibile</th>
+                                            <th class="right_without_line_bold">Indetraibile</th>
+                                        </tr>
+                                    </thead>
+                                    <t t-foreach="journal_tax_map[journal.id]" t-as="tax">
+                                        <t t-set="tax_code_tuple" t-value="tax"/>
+                                        <t t-set="tot_base_partial" t-value="tot_base_partial + tax_code_tuple[1]"/>
+                                        <t t-set="tot_tax_partial" t-value="tot_tax_partial + tax_code_tuple[2]"/>
+                                        <t t-set="tot_ded_partial" t-value="tot_ded_partial + tax_code_tuple[3]"/>
+                                        <t t-set="tot_unded_partial" t-value="tot_unded_partial + tax_code_tuple[4]"/>
+                                        <tr>
+                                            <td class="left_without_line" t-esc="tax_code_tuple[0]"/>
+                                            <td class="right_without_line" t-esc="formatLang(env, tax_code_tuple[1])"/>
+                                            <td class="right_without_line" t-esc="formatLang(env, tax_code_tuple[2])"/>
+                                            <td class="right_without_line" t-esc="formatLang(env, tax_code_tuple[3])"/>
+                                            <td class="right_without_line" t-esc="formatLang(env, tax_code_tuple[4])"/>
+                                        </tr>
+                                    </t>
+                                    <tr>
+                                        <td class="left_without_line_bold">General Total EUR</td>
+                                        <td class="right_without_line_bold" t-esc="formatLang(env, tot_base_partial)"/>
+                                        <td class="right_without_line_bold" t-esc="formatLang(env, tot_tax_partial)"/>
+                                        <td class="right_without_line_bold" t-esc="formatLang(env, tot_ded_partial)"/>
+                                        <td class="right_without_line_bold" t-esc="formatLang(env, tot_unded_partial)"/>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </td>
+        </tr>
+        <!--Just to add some space-->
+        <!--<tr t-if="journal" style="height: 50px;"><td colspan="99"/></tr>-->
+    </template>
+</odoo>

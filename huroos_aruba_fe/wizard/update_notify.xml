@@ -1,0 +1,38 @@
+<odoo>
+
+    <data>
+
+        <record id="wizard_update_notify_aruba_sdi" model="ir.ui.view">
+            <field name="name">wizard_update_notify_aruba_sdi</field>
+            <field name="model">update.notify.aruba</field>
+            <field name="arch" type="xml">
+                <form string="Aggiorna Notifiche SDI">
+                    <sheet string="Selected files will be sent to the Exchange System"/>
+                    <footer>
+                        <button name="recalculate" string="Aggiorna Imponibile"
+                                type="object" class="oe_highlight"/>
+                        <button name="update_notify" string="Aggiorna"
+                                type="object" class="oe_highlight"/>
+                        <button special="cancel" string="Cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+
+        <act_window name="Aggiorna Notifiche SDI"
+                    id="action_wizard_update_notify_aruba"
+                    res_model="update.notify.aruba"
+                    binding_model="account.move"
+                    binding_views="list"
+                    view_mode="form"
+                    target="new"
+        />
+
+
+
+    </data>
+
+
+
+</odoo>

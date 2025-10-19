@@ -1,0 +1,95 @@
+<odoo>
+
+    <record id="paperformat_wh_valuation" model="report.paperformat">
+        <field name="name">Valorizzazione Magazzino</field>
+        <field name="format">A4</field>
+        <field name="page_height">0</field>
+        <field name="page_width">0</field>
+        <field name="orientation">Landscape</field>
+        <field name="margin_top">15</field>
+        <field name="margin_bottom">15</field>
+        <field name="margin_left">5</field>
+        <field name="margin_right">5</field>
+        <field name="header_line" eval="False" />
+        <field name="header_spacing">10</field>
+        <field name="dpi">90</field>
+    </record>
+
+    <template id="report_wh_valuation">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.external_layout">
+                    <div class="page">
+                        <style>
+                            body,td,th{
+                            font-size: 13px;
+                            padding: 0px !important;;
+                            margin: 0px !important;
+                            border:solid 1px #e6e6e6;
+                            }
+                            .product_table td{
+                            font-size: 16px;
+                            padding: 2px !important;;
+                            margin: 2px !important;
+                            }
+                        </style>
+                        <div class="col-12">
+                            <t t-foreach="o.line_ids" t-as="product">
+                                <table class="product_table">
+                                    <tr>
+                                        <td><strong>Prodotto: </strong><t t-esc="product.product_id.display_name"/></td>
+                                        <td><strong>Tipo: </strong><t t-esc="product.product_type"/></td>
+                                        <td><strong>Metodo: </strong><t t-esc="product.valuation_id.valuation_method"/></td>
+                                    </tr>
+                                </table>
+                                <br/>
+                                <table class="table table-striped">
+                                    <thead>
+                                        <th>Data Movimento</th>
+                                        <th>Movimento</th>
+                                        <th>Tipo</th>
+                                        <th>Qt</th>
+                                        <th>Prezzo Unitario</th>
+                                        <th>Valore Unitario</th>
+                                        <th>Costo</th>
+                                        <th>Qt Iniziale</th>
+                                        <th>Qt Finale</th>
+                                        <th>Valore Finale</th>
+                                    </thead>
+                                    <tbody>
+                                        <t t-foreach="product.detail_lines" t-as="detail">
+                                            <tr>
+                                                <td><t t-esc="detail.date.strftime('%d-%m-%Y')"/></td>
+                                                <td><t t-esc="detail.move"/></td>
+                                                <td><t t-esc="detail.type"/></td>
+                                                <td class="text-right"><t t-esc="int(detail.qt)"/></td>
+                                                <td class="text-right"><t t-esc="round(detail.price_unit, 4)"/>€</td>
+                                                <td class="text-right"><t t-esc="round(detail.value_unit, 4)"/>€</td>
+                                                <td class="text-right"><t t-esc="round(detail.cost, 4)"/>€</td>
+                                                <td class="text-right"><t t-esc="int(detail.qt_initial)"/></td>
+                                                <td class="text-right"><t t-esc="int(detail.qt_final)"/></td>
+                                                <td class="text-right"><t t-esc="round(detail.amount_value, 4)"/>€</td>
+                                            </tr>
+                                        </t>
+                                    </tbody>
+                                </table>
+                            </t>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+
+    <report
+            id="warehouse_valuation_report"
+            string="Valorizzazione"
+            model="warehouse.valuation"
+            report_type="qweb-pdf"
+            file="huroos_warehouse_valuation.report_wh_valuation"
+            name="huroos_warehouse_valuation.report_wh_valuation"
+            print_report_name="object.name"
+            paperformat="paperformat_wh_valuation"
+    />
+
+</odoo>

@@ -1,0 +1,27 @@
+<odoo>
+    <record id="huroos_view_partner_form_fatturapa_private_invoice" model="ir.ui.view">
+        <field name="name">huroos_view_partner_form_fatturapa_private_invoice</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="l10n_it_fatturapa_out.view_partner_form_fatturapa"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='electronic_invoice_obliged_subject']" position="after">
+                <field name="private_foreign" invisible="True"/>
+                <field name="private_foreign" attrs="{'invisible': [('electronic_invoice_obliged_subject', '=', False)]}"/>
+            </xpath>
+        </field>
+    </record>
+
+
+    <template id="huroos_private_account_invoice_it_cessionario_committente"
+              inherit_id="l10n_it_fatturapa_out.account_invoice_it_cessionario_committente" active="True" >
+
+        <xpath expr="//IdFiscaleIVA" position="after">
+            <IdFiscaleIVA t-if="partner_id.commercial_partner_id.private_foreign and not partner_id.commercial_partner_id.fiscalcode and not partner_id.commercial_partner_id.vat and in_eu(partner_id.commercial_partner_id)">
+                <IdPaese t-esc="partner_id.commercial_partner_id.country_id.code"/>
+                <IdCodice>99999999999</IdCodice>
+            </IdFiscaleIVA>
+        </xpath>
+
+    </template>
+
+</odoo>

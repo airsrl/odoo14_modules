@@ -1,0 +1,79 @@
+<odoo>
+    <record id="excel_import_form_view" model="ir.ui.view">
+        <field name="name">Excel Import</field>
+        <field name="model">excel.import</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group name="setup">
+                        <group name="setup_left">
+                            <field name="model_id" string="Model to import records" options="{'no_create_edit': True, 'no_create': True}"/>
+                            <field name="record_limit" attrs="{'invisible':[('model_id', '=', False)]}"/>
+                        </group>
+                        <group name="setup_right">
+                            <div class="o_row" attrs="{'invisible': [('model_id', '=', False)]}">
+                                <button name="dowmload_xlsx_template"
+                                    type="object"
+                                    string="Download template"
+                                    class="btn-link"
+                                    icon="fa-cloud-download"/>
+                                <label for="template_with_technical_names"/>
+                                <field name="template_with_technical_names" widget="boolean_toggle"/>
+                            </div>
+                            <group>
+                                <field name="file" filename="file_name" attrs="{'invisible':[('model_id', '=', False)]}"/>
+                            </group>
+                        </group>
+                    </group>
+
+                    <group name="settings">
+                        <group name="settings_left">
+                            <field name="is_fast_import" widget="boolean_toggle" attrs="{'invisible':[('model_id', '=', False)]}"/>
+                        </group>
+                        <group name="settings_right">
+                            <field name="can_update" widget="boolean_toggle" attrs="{'invisible':[('model_id', '=', False)]}"/>
+                        </group>
+                    </group>
+
+                    <group name="column_relations"
+                           string="Associate columns to fields (if no field is selected, the column will be ignored)"
+                           attrs="{'invisible': ['|', ('file', '=', False), ('is_fast_import', '=', True)]}">
+                        <field name="line_ids" nolabel="1">
+                            <tree editable="bottom" create="false" delete="false">
+                                <field name="relation_model" invisible="1"/>
+                                <field name="model_id" invisible="1"/>
+                                <field name="name"/>
+                                <field name="field_id"
+                                       domain="[('model_id', '=', model_id)]"
+                                       options="{'no_create_edit': True, 'no_create': True}"/>
+                                <field name="is_unique" widget="boolean_toggle"/>
+                                <field name="is_raw_search" widget="boolean_toggle"/>
+                                <field name="raw_search_field"
+                                       attrs="{'readonly': ['|', '|', ('field_id', '=', False), ('is_raw_search', '=', False), ('relation_model', '=', False)]}"/>
+                            </tree>
+                        </field>
+                    </group>
+                    <footer>
+                        <button type="object" name="button_import_data"
+                                string="Import" class="oe_highlight"/>
+                        <button special="cancel" string="Cancel" class="btn-secondary"/>
+                    </footer>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_excel_import" model="ir.actions.act_window">
+        <field name="name">Excel Import</field>
+        <field name="res_model">excel.import</field>
+        <field name="view_mode">form</field>
+        <field name="binding_view_types">form,list</field>
+        <field name="target">new</field>
+    </record>
+
+    <menuitem id="menu_excel_import"
+              name="Import from Excel"
+              action="action_excel_import"
+              parent="sale.sale_menu_root"
+              sequence="4"/>
+</odoo>

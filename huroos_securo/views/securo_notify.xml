@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="securo_notify_form_view" model="ir.ui.view">
+            <field name="name">securo_notify.form</field>
+            <field name="model">securo.notify</field>
+            <field name="arch" type="xml">
+                <form string="Notiifca scadenze">
+                    <header>
+                        <button name="send_email_scadenze" string="Invio email" type="object"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_title">
+                            <label for="company_id"/>
+                            <h1>
+                                <field name="company_id" readonly="1" placeholder="Title"/>
+                            </h1>
+                        </div>
+                        <div>
+                            <label for="mail_destinatari"/>
+                            <field name="mail_destinatari" widget="many2many_tags"/>
+                        </div>
+                        <div>
+                            <label for="active" string="Attivo"/>
+                            <field name="active"/>
+                        </div>
+                        <group>
+                            <group name="visit" string="Scadenza visite mediche">
+                                <label for="visit_days"/>
+                                <div>
+                                    <field name="visit_days"/>
+                                </div>
+                                <field name="visit_mail"/>
+
+                            </group>
+                            <group name="visit" string="Scadenza Corsi e Formazione">
+                                <label for="course_days"/>
+                                <div>
+                                    <field name="course_days"/>
+                                </div>
+                                <field name="course_mail"/>
+
+                            </group>
+                            <group name="veichle" string="Scadenza documenti autoveicoli">
+                                <label for="veichle_days"/>
+                                <div>
+                                    <field name="veichle_days"/>
+                                </div>
+                                <field name="veichle_mail"/>
+
+                            </group>
+                            <group name="equipment" string="Scadenza documenti automezzi/attrezzature">
+                                <label for="tool_days"/>
+                                <div>
+                                    <field name="tool_days"/>
+                                </div>
+                                <field name="tool_mail"/>
+
+                            </group>
+                        </group>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" groups="base.group_user"/>
+                        <field name="activity_ids"/>
+                        <field name="message_ids"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record id="securo_notify_tree_view" model="ir.ui.view">
+            <field name="name">securo_notify.tree</field>
+            <field name="model">securo.notify</field>
+            <field name="arch" type="xml">
+                <tree string="Configurazione notifiche scadenze">
+                    <field name="mail_destinatari"/>
+                    <field name="company_id"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="securo_notify_config_action" model="ir.actions.server">
+            <field name="name">Notifiche scadenze</field>
+            <field name="model_id" ref="huroos_securo.model_securo_notify"/>
+            <field name="type">ir.actions.server</field>
+            <field name="state">code</field>
+
+            <field name="code">
+                action = env['securo.notify'].open_notify_config()
+            </field>
+        </record>
+
+
+        <menuitem id="securo_notifiche_menu"
+                  sequence="99"
+                  name="Configurazione notifiche"
+                  parent="huroos_securo.configuration_menu"
+                  action="huroos_securo.securo_notify_config_action"/>
+
+    </data>
+</odoo>

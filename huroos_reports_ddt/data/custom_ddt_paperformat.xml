@@ -1,0 +1,25 @@
+<!--
+Copyright 2023 - Huroos srl - www.huroos.com
+License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl-3.0.en.html)
+Powered by Marco Frascerra
+-->
+
+<odoo>
+    <data noupdate="0">
+        <record id="huroos_custom_ddt_paperformat" model="report.paperformat">
+            <field name="name">Formato carta custom per i report DDT Huroos</field>
+            <field name="default" eval="True"/>
+            <field name="format">A4</field>
+            <field name="page_height">0</field>
+            <field name="page_width">0</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">107</field>
+            <field name="margin_bottom">65</field>
+            <field name="margin_left">5</field>
+            <field name="margin_right">5</field>
+            <field name="header_line" eval="False"/>
+            <field name="header_spacing">100</field>
+            <field name="dpi">90</field>
+        </record>
+    </data>
+</odoo>

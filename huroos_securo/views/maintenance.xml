@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Inherit Form View to Modify it -->
+    <record id="hr_equipment_view_form_securo" model="ir.ui.view">
+        <field name="name">maintenance.equipment.securo</field>
+        <field name="model">maintenance.equipment</field>
+        <field name="mode">primary</field>
+        <field name="inherit_id" ref="maintenance.hr_equipment_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='assign_date']" position="before">
+                <field name="date_purchase" class="oe_inline"/>
+                <field name="construction_year" class="oe_inline"/>
+            </xpath>
+            <xpath expr="//field[@name='serial_no']" position="after">
+                <field name="num_telaio"/>
+            </xpath>
+            <xpath expr="//field[@name='location']" position="attributes">
+                    <attribute name="string">Ubicazione</attribute>
+            </xpath>
+            <xpath expr="//field[@name='location']" position="after">
+                <field name="work_environment_id"/>
+                <field name="code"/>
+                <field name="is_marchio_ce"/>
+                <field name="is_libretto"/>
+                <field name="is_conformita"/>
+                <field name="is_rental"/>
+                <field name="own_type" widget="radio"/>
+
+            </xpath>
+            <xpath expr="//notebook" position="inside">
+                <page string="Noleggi" attrs="{'invisible':[('is_rental','=',False)]}">
+                    <group >
+                        <label for="start_rental" string="Date"/>
+                        <div>
+                            Dal <field name="start_rental" class="oe_inline"/> al <field name="end_rental" class="oe_inline"/>
+                        </div>
+                    </group>
+                    <field name='attachment_rental' widget='many2many_binary' />
+                </page>
+                <page string="Leasing" attrs="{'invisible':[('own_type','!=','leasing')]}">
+                    <group >
+                        <label for="start_leasing" string="Date"/>
+                        <div>
+                            Dal <field name="start_leasing" class="oe_inline"/> al <field name="end_leasing" class="oe_inline"/>
+                        </div>
+                    </group>
+                    <field name='attachment_leasing' widget='many2many_binary' />
+                </page>
+                <page string="Finanziamento" attrs="{'invisible':[('own_type','!=','finanziamento')]}">
+                    <group >
+                        <label for="start_finanziamento" string="Date"/>
+                        <div>
+                            Dal <field name="start_finanziamento" class="oe_inline"/> al <field name="end_finanziamento" class="oe_inline"/>
+                        </div>
+                    </group>
+                    <field name='attachment_finanziamento' widget='many2many_binary' />
+                </page>
+                <page string="Documentazione">
+                    <field name='attachment' widget='many2many_binary' />
+                </page>
+                <page string="Scadenze">
+                            <field name='scadenze_ids'  >
+                                    <tree editable="bottom">
+                                        <field name="name"/>
+                                        <field name="description"/>
+                                        <field name="doc_date" string="Data "/>
+                                        <field name="due_date" string="Data scadenza"/>
+                                        <field name='attachment' widget='many2many_binary' />
+                                    </tree>
+                                <form>
+                                    <sheet>
+                                        <group>
+
+                                             <field name="name"/>
+                                                <field name="description"/>
+                                                <field name="doc_date" string="Data "/>
+                                                <field name="due_date" string="Data scadenza"/>
+
+                                        </group>
+                                        <group>
+                                             <field name='attachment' widget='many2many_binary' />
+                                        </group>
+                                    </sheet>
+                                </form>
+                            </field>
+                        </page>
+            </xpath>
+            <xpath position="attributes" expr="//field[@name='code']">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='code']" position="after">
+               <field name="transport_type"/>
+            </xpath>
+        </field>
+    </record>
+    <record id="securo_maintenance_equipment_action" model="ir.actions.act_window">
+            <field name="name">Attrezzature</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">maintenance.equipment</field>
+            <field name="view_mode">kanban,tree,form</field>
+            <field
+                name="view_ids"
+                eval="[(5,0,0),
+                          (0, 0, {'view_mode': 'kanban', 'view_id': False}),
+                          (0, 0, {'view_mode':'form' , 'view_id': ref('huroos_securo.hr_equipment_view_form_securo')}),
+                          (0,0, {'view_mode':'tree', 'view_id':False})
+
+                          ]"
+            />
+        </record>
+
+
+
+
+   <menuitem id="securo_maintenance_menu" name="Attrezzature" parent="huroos_securo.securo_maintenance_main" action="huroos_securo.securo_maintenance_equipment_action" sequence="2"/>
+   <menuitem id="securo_maintenance_category_menu" name="Categorie attrezzature" parent="huroos_securo.securo_maintenance_main" action="maintenance.hr_equipment_category_action" sequence="3"/>
+
+
+</odoo>

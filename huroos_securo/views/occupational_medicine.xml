@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="occupational_medicine_form_view" model="ir.ui.view">
+            <field name="name">occupational_medicine.form</field>
+            <field name="model">occupational.medicine</field>
+            <field name="arch" type="xml">
+                <form string="Protocollo">
+                    <sheet>
+                        <div class="oe_title">
+                            <label for="name"/>
+                            <h1>
+                                <field name="name" placeholder="Protocollo"/>
+                            </h1>
+                        </div>
+
+                        <group>
+                            <field name="description"/>
+                        </group>
+                        <group>
+                            <group>
+                                <field name="period_id" options="{'no_create':1}"/>
+                                <field name="category"/>
+                            </group>
+                            <group>
+                                <field name="doctor"/>
+                                <field name="cost"/>
+                            </group>
+                        </group>
+                        <group>
+                            <field name="attachment" widget='many2many_binary'/>
+                        </group>
+                        <notebook>
+                            <page string="Esami">
+                                <field name="exam_ids">
+                                    <tree editable="bottom">
+                                        <field name="name"/>
+                                    </tree>
+                                </field>
+
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+        <record id="occupational_medicine_tree_view" model="ir.ui.view">
+            <field name="name">occupational_medicine.tree</field>
+            <field name="model">occupational.medicine</field>
+            <field name="arch" type="xml">
+                <tree string="Protocolli sanitari">
+                    <field name="name"/>
+                    <field name="period_id"/>
+                    <field name="category"/>
+                    <field name="cost"/>
+                </tree>
+            </field>
+        </record>
+
+
+        <record id="occupational_medicine_search_view" model="ir.ui.view">
+            <field name="name">occupational_medicine.search</field>
+            <field name="model">occupational.medicine</field>
+            <field name="arch" type="xml">
+                <search string="Ricerca">
+                    <field name="name"/>
+                </search>
+            </field>
+        </record>
+
+
+        <record id="occupational_medicine_act_window" model="ir.actions.act_window">
+            <field name="name">Protocolli sanitari</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">occupational.medicine</field>
+            <field name="view_mode">tree,form</field>
+
+        </record>
+
+        <menuitem name="Protocolli sanitari"
+                  id="occupational_medicine_menu"
+                  parent="huroos_securo.huroos_securo_main_menu"
+                  action="occupational_medicine_act_window"/>
+
+    </data>
+</odoo>

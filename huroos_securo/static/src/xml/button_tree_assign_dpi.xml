@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<template xml:space="preserve">
+    <t t-extend="ListView.buttons">
+        <t t-jquery="button.o_list_button_add" t-operation="after">
+            <button
+                type="button"
+                 t-if="widget.modelName == 'securo.dpi.employee'"
+                class="btn btn-primary assign_dpi"
+            >Assegna dpi
+            </button>
+        </t>
+    </t>
+</template>
+

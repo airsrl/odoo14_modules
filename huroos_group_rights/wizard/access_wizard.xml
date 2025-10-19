@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record model="ir.ui.view" id="wizard_fatturapa_export">
+        <field name="name">Access Wizard</field>
+        <field name="model">access.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Attention">
+                <group>
+                    <h2><field name="text" readonly="1" string="Message:"/></h2>
+                </group>
+                <footer>
+                    <button string="Confirm" name="button_confirm" type="object" />
+                    <button string="Cancel" special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

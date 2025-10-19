@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="report_registro_iva">
+        <t t-call="web.html_container">
+            <t t-if="registry_type == 'customer'">
+                <t t-set="title" t-value="'Registro IVA Vendite'"/>
+            </t>
+            <t t-if="registry_type == 'supplier'">
+                <t t-set="title" t-value="'Registro IVA Acquisti'"/>
+            </t>
+            <t t-if="registry_type == 'corrispettivi'">
+                <t t-set="title" t-value="'Registro Corrispettivi'"/>
+            </t>
+            <t t-set="l10n_it_count_fiscal_year" t-value="year_footer"/>
+            <t t-call="web.internal_layout">
+                <style>
+                    table {border: 0px;}
+                    thead {background: #F5F5F5;}
+
+
+                    .left_with_line {
+                        text-align:left; vertical-align:text-top; border-top:1px solid #A1A1A1; padding:5px;
+                    }
+                    .right_with_line {
+                        text-align:right; vertical-align:text-top; border-top:1px solid #A1A1A1; padding:5px;
+                    }
+                    .left_without_line {
+                        text-align:left; vertical-align:text-top; padding:5px;
+                    }
+                    .right_without_line {
+                        text-align:right; vertical-align:text-top; padding:5px;
+                    }
+                    .left_with_line_bottom {
+                        text-align:left; vertical-align:text-top; border-bottom:1px solid #A1A1A1; padding:5px;
+                    }
+                    .right_with_line_bottom {
+                        text-align:right; vertical-align:text-top; border-bottom:1px solid #A1A1A1; padding:5px;
+                    }
+                    .left_without_line_bold {
+                        text-align:left; vertical-align:text-top; padding:5px; font-weight: bold;
+                    }
+                    .right_without_line_bold {
+                        text-align:right; vertical-align:text-top; padding:5px; font-weight: bold;
+                    }
+
+                    .first_th_row {
+                        border-style:solid;border-width:1px;border-color:#A1A1A1; background: #fff;
+                    }
+                </style>
+                <div class="page">
+                    <t t-set="print_details" t-value="1"/>
+                    <t t-if="only_totals == True">
+                        <t t-set="print_details" t-value="0"/>
+                    </t>
+                    <table style="width:100%; font-size: small;" cellspacing="0" id="vat_registries_thead">
+                        <thead>
+                            <tr class="first_th_row">
+                                <t t-if="registry_type == 'corrispettivi'">
+                                    <td colspan="4" style="padding:10;" t-esc="tax_registry_name + ' Periodo di stampa dal ' + from_date + ' al ' + to_date"/>
+                                </t>
+                                <t t-if="registry_type != 'corrispettivi'">
+                                    <td colspan="10" style="padding:10;" t-esc="tax_registry_name + ' Periodo di stampa dal ' + from_date + ' al ' + to_date"/>
+                                </t>
+                            </tr>
+
+                            <t t-if="print_details > 0 ">
+                                <tr style="page-break-inside: avoid" name="vat_header_invoice">
+                                    <th class="left_without_line">REG. DATE</th>
+                                    <th class="left_without_line">MONTH. TAX</th>
+                                    <th class="left_without_line">REG. NUM.</th>
+                                    <t t-if="registry_type != 'corrispettivi'">
+                                        <th class="left_without_line">REASON</th>
+                                        <th class="left_without_line">INV. DATE</th>
+                                        <th class="left_without_line">INV. NUM.</th>
+                                        <th class="left_without_line">BUSINESS NAME</th>
+                                        <th class="left_without_line">TAX</th>
+                                    </t>
+                                    <th class="left_without_line"></th>
+                                    <th class="left_without_line"></th>
+                                    <th class="right_without_line">TOTAL</th>
+                                </tr>
+                                <tr style="page-break-inside: avoid" name="vat_header_tax">
+                                    <t t-if="registry_type != 'corrispettivi'">
+                                        <th class="left_with_line_bottom"></th>
+                                        <th class="left_with_line_bottom"></th>
+                                        <th class="left_with_line_bottom"></th>
+                                        <th class="left_with_line_bottom"></th>
+                                        <th class="left_with_line_bottom"></th>
+                                    </t>
+                                    <th class="right_with_line_bottom"></th>
+                                    <th class="right_with_line_bottom"></th>
+                                    <th class="left_with_line_bottom">Tax Name</th>
+                                    <th class="right_with_line_bottom">Taxable</th>
+                                    <th class="right_with_line_bottom">Amount</th>
+                                    <th class="right_with_line_bottom"></th>
+                                </tr>
+                            </t>
+                        </thead>
+
+                        <style>
+                            .no_exigible_line td *{
+                            color:red !important;
+                            }
+                            #vat_registries_body td{
+                            font-size: 10px;
+                            }
+                            #vat_registries_thead th{
+                            font-size: 12px;
+                            }
+                            #total_taxes_table th, #total_taxes_table td{
+                            font-size: 12px;
+                            }
+                        </style>
+
+                        <tbody id="vat_registries_body">
+                            <t t-set="total_used_taxes" t-value="env['account.tax']"></t>
+                            <t t-foreach="get_move(doc_ids)" t-as="move">
+                                <t t-set="taxes_tuple" t-value="tax_lines(move, data)"/>
+                                <t t-set="inv_taxes" t-value="taxes_tuple[0]"/>
+                                <t t-set="used_taxes" t-value="taxes_tuple[1]"/>
+                                <t t-set="total_used_taxes" t-value="total_used_taxes | used_taxes"></t>
+                                <t t-foreach="inv_taxes" t-as="line">
+                                    <t t-if="print_details > 0 ">
+                                        <t t-set="line_class_left" t-value="left_without_line"/>
+                                        <t t-set="line_class_right" t-value="right_without_line"/>
+                                        <t t-if="line['index'] == 0">
+                                            <tr style="page-break-inside: avoid; border:1px solid #fff;" name="vat_body_invoice">
+                                                <!-- Data registrazione -->
+                                                <td class="left_without_line_bold"><div style="page-break-inside: avoid" t-esc="format_date(move.date,date_format)"/></td>
+                                                <!-- Data IVA -->
+                                                <td class="left_without_line_bold">
+                                                    <div style="page-break-inside: avoid" t-esc="format_date(move.date,date_format)"/>
+                                                </td>
+                                                <!-- Numero registrazione -->
+                                                <td class="left_without_line_bold"><div style="page-break-inside: avoid" t-esc="move.name"/></td>
+                                                <t t-if="registry_type != 'corrispettivi'">
+                                                    <!-- Causale -->
+                                                    <td class="left_without_line_bold">
+                                                        <div style="page-break-inside: avoid" t-esc="line['invoice_type']"/>
+                                                    </td>
+                                                    <!-- Data fattura -->
+                                                    <td class="left_without_line_bold"><div style="page-break-inside: avoid" t-esc="format_date(line['invoice_date'],date_format)"/></td>
+                                                    <t t-if="move.journal_id.type == 'purchase'">
+                                                        <!-- Numero fattura (fornitore)-->
+                                                        <td class="left_without_line_bold"><div style="page-break-inside: avoid" t-esc="line['reference']"/></td>
+                                                    </t>
+                                                    <t t-if="move.journal_id.type == 'sale'">
+                                                        <!-- Numero fattura -->
+                                                        <td class="left_without_line_bold"><div style="page-break-inside: avoid" t-esc="move.name"/></td>
+                                                    </t>
+                                                    <!-- Ragione sociale -->
+                                                    <td class="left_without_line_bold"><div style="page-break-inside: avoid" t-esc="move.partner_id.name"/></td>
+                                                    <!-- PIVA -->
+                                                    <td class="left_without_line_bold" colspan="3" style="height:auto;">
+                                                        <!-- <div style="page-break-inside: avoid" t-esc="move.partner_id.vat"/>-->
+                                                        <table style="width:100%; height:auto;">
+                                                            <t t-foreach="inv_taxes" t-as="line">
+                                                                <tr style="page-break-inside: avoid; width:100%;" name="vat_body_tax" class="vat_body_tax">
+                                                                    <!--  imposta -->
+                                                                    <td class="left_without_line" style="border:solid 1px #e6e6e6; padding: 0px; width:30%;"><div style="page-break-inside: avoid;" t-esc="(line['tax_code_name'])"/></td>
+                                                                    <!-- base -->
+                                                                    <td class="right_without_line" style="border:solid 1px #e6e6e6; padding: 0px; width:35%;"><div style="page-break-inside: avoid;" t-esc="formatLang(env, line['base'])"/></td>
+                                                                    <!-- tax -->
+                                                                    <td class="right_without_line" style="border:solid 1px #e6e6e6; padding: 0px; width:35%;"><div style="page-break-inside: avoid;" t-esc="formatLang(env, line['tax'])"/></td>
+                                                                    <!-- sospesa -->
+                                                                    <!-- <td class="right_without_line"><div style="page-break-inside: avoid" t-esc="formatLang(env, line['tax_no_exigible'])"/></td>-->
+
+                                                                </tr>
+                                                            </t>
+                                                        </table>
+                                                    </td>
+                                                </t>
+                                                <!--                                            <td class="left_without_line"></td>-->
+                                                <!--                                            <td class="left_without_line"></td>-->
+                                                <!-- totale -->
+                                                <td class="right_without_line_bold"><div style="page-break-inside: avoid" t-esc="formatLang(env, invoice_total(move))"/></td>
+                                            </tr>
+                                        </t>
+                                        <!--                                    <tr style="page-break-inside: avoid; " name="vat_body_tax" class="vat_body_tax">-->
+                                        <!--                                        <t t-if="registry_type != 'corrispettivi'">-->
+                                        <!--                                            <td class="left_without_line"></td>-->
+                                        <!--                                            <td class="left_without_line"></td>-->
+                                        <!--                                            <td class="left_without_line"></td>-->
+                                        <!--                                            <td class="left_without_line"></td>-->
+                                        <!--                                            <td class="left_without_line"></td>-->
+                                        <!--                                        </t>-->
+                                        <!--                                        &lt;!&ndash;  imposta &ndash;&gt;-->
+                                        <!--                                        <td class="left_without_line" style="border:solid 1px #e6e6e6; padding: 0px;"><div style="page-break-inside: avoid;" t-esc="(line['tax_code_name'])"/></td>-->
+                                        <!--                                        &lt;!&ndash; base &ndash;&gt;-->
+                                        <!--                                        <td class="right_without_line" style="border:solid 1px #e6e6e6; padding: 0px;"><div style="page-break-inside: avoid;" t-esc="formatLang(env, line['base'])"/></td>-->
+                                        <!--                                        &lt;!&ndash; tax &ndash;&gt;-->
+                                        <!--                                        <td class="right_without_line" style="border:solid 1px #e6e6e6; padding: 0px;"><div style="page-break-inside: avoid;" t-esc="formatLang(env, line['tax'])"/></td>-->
+                                        <!--                                        &lt;!&ndash; sospesa &ndash;&gt;-->
+                                        <!--&lt;!&ndash;                                        <td class="right_without_line"><div style="page-break-inside: avoid" t-esc="formatLang(env, line['tax_no_exigible'])"/></td>&ndash;&gt;-->
+
+                                        <!--                                        <td class="left_without_line"></td>-->
+                                        <!--                                    </tr>-->
+                                    </t>
+                                </t>
+                            </t>
+                        </tbody>
+                    </table>
+                    <br/>
+
+                    <t t-set="tot_base" t-value="0"/>
+                    <t t-set="tot_tax" t-value="0"/>
+                    <t t-set="tot_ded" t-value="0"/>
+                    <t t-set="tot_unded" t-value="0"/>
+                    <div style="page-break-inside: avoid;">
+                        <table style="width:100%;" id="total_taxes_table">
+                            <tr>
+                                <td colspan="2" style="vertical-align:text-top;padding:10">
+                                    <h3>Tax Totals</h3>
+                                    <table style="width:100%;">
+                                        <thead>
+                                            <tr>
+                                                <th class="left_without_line_bold">Description</th>
+                                                <th class="right_without_line_bold">Taxable</th>
+                                                <th class="right_without_line_bold">Tax Amount</th>
+                                                <th class="right_without_line_bold">Deduc.</th>
+                                                <th class="right_without_line_bold">Not Deduc.</th>
+                                            </tr>
+                                        </thead>
+                                        <t t-foreach="total_used_taxes" t-as="total_used_tax">
+                                            <t t-set="tax_code_tuple" t-value="compute_totals_tax(total_used_tax, data)"/>
+                                            <t t-if="tax_code_tuple[1] != 0 and tax_code_tuple[1] != -0">
+                                                <!--NON MOSTRARE LE IMPOSTE "FIGLIE" DI GRUPPI DI IMPOSTE-->
+                                                <t t-set="tot_base" t-value="tot_base + tax_code_tuple[1]"/>
+                                                <t t-set="tot_tax" t-value="tot_tax + tax_code_tuple[2]"/>
+                                                <t t-set="tot_ded" t-value="tot_ded + tax_code_tuple[3]"/>
+                                                <t t-set="tot_unded" t-value="tot_unded + tax_code_tuple[4]"/>
+                                                <tr>
+                                                    <td class="left_without_line" t-esc="tax_code_tuple[0]"/>
+                                                    <td class="right_without_line" t-esc="formatLang(env, tax_code_tuple[1])"/>
+                                                    <td class="right_without_line" t-esc="formatLang(env, tax_code_tuple[2])"/>
+                                                    <td class="right_without_line" t-esc="formatLang(env, tax_code_tuple[3])"/>
+                                                    <td class="right_without_line" t-esc="formatLang(env, tax_code_tuple[4])"/>
+                                                </tr>
+                                            </t>
+                                        </t>
+                                        <tr>
+                                            <td class="left_without_line_bold">General Total EUR</td>
+                                            <td class="right_without_line_bold" t-esc="formatLang(env, tot_base)"/>
+                                            <td class="right_without_line_bold" t-esc="formatLang(env, tot_tax)"/>
+                                            <td class="right_without_line_bold" t-esc="formatLang(env, tot_ded)"/>
+                                            <td class="right_without_line_bold" t-esc="formatLang(env, tot_unded)"/>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </t>
+        </t>
+    </template>
+
+</odoo>

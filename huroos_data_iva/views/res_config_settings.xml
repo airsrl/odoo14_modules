@@ -1,0 +1,31 @@
+<odoo>
+
+
+    <record id="view_account_config_settings_data_iva" model="ir.ui.view">
+        <field name="name">view_account_config_settings_data_iva</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="account.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@name='default_taxes_setting_container']" position="inside">
+
+                <div class="col-12 col-lg-6 o_setting_box" id="competence_iva">
+                    <div class="o_setting_left_pane">
+                        <field name="competence_iva" string="Competenza IVA"/>
+                    </div>
+                    <div class="o_setting_right_pane" name="l10n_eu_service_right_pane">
+                        <label for="competence_iva" string="Competenza IVA"/>
+                        <div class="text-muted">
+                            Attivare per abilitare la competenza IVA sulle fatture di acquisto
+                            ad esempio spsotare la competenza nel mese precedente se entro il giorno 16 del mese successivo.
+                        </div><br/>
+                        <button name="compute_competence_iva" class="btn btn-primary btn-default" type="object" string="Calcola Pregresso"/>
+                    </div>
+                </div>
+
+
+            </xpath>
+        </field>
+    </record>
+
+
+</odoo>

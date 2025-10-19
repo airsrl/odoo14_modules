@@ -1,0 +1,44 @@
+<odoo>
+    <record id="view_res_partner_visura_camerale_tree" model="ir.ui.view">
+        <field name="name">view_res_partner_visura_camerale_tree</field>
+        <field name="model">res.partner.visura.camerale</field>
+        <field name="arch" type="xml">
+            <tree string="Visure camerali" editable="bottom" default_order="create_date desc" create="false" delete="false">
+                <field name="create_date" string="Data creazione" optional="show"/>
+                <field name="name" optional="hide"/>
+                <field name="type" optional="show"/>
+                <field name="partner_id"/>
+                <field name="cf_piva_id" optional="show"/>
+                <field name="file" widget="binary"/>
+                <field name="state" widget="badge"
+                       decoration-info="state not in ('In erogazione', 'Dati disponibili', 'Visura evasa')"
+                       decoration-danger="state == 'In erogazione'"
+                       decoration-warning="state == 'Dati disponibili'"
+                       decoration-success="state == 'Visura evasa'"/>
+
+                <button name="obtain_file" type="object" string="Ottieni file" class="btn btn-secondary"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_res_partner_visura_camerale_search" model="ir.ui.view">
+        <field name="name">view_res_partner_visura_camerale_search</field>
+        <field name="model">res.partner.visura.camerale</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="cf_piva_id" string="C.F./P.IVA"/>
+                <filter name="filter_active" string="In archivio" domain="[('active', '=', False)]"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_visure_camerali" model="ir.actions.act_window">
+        <field name="name">Visure camerali</field>
+        <field name="res_model">res.partner.visura.camerale</field>
+        <field name="view_mode">tree</field>
+    </record>
+
+    <menuitem id="menu_visure_camerali_main" name="Gestione visure camerali" parent="account.menu_finance_reports" sequence="99">
+        <menuitem id="menu_visure_camerali" name="Visure camerali" action="action_visure_camerali" sequence="1"/>
+    </menuitem>
+</odoo>

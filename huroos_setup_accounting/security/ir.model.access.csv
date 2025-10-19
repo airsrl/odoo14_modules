@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_wizard_setup_accounting,access_wizard_setup_accounting,model_wizard_setup_accounting,base.group_user,1,1,1,1
+access_setup_account_tax,access_setup_account_tax,model_setup_account_tax,base.group_user,1,1,1,1
+access_setup_account_journal,access_setup_account_journal,model_setup_account_journal,base.group_user,1,1,1,1
+access_setup_account_payment_term,access_setup_account_payment_term,model_setup_account_payment_term,base.group_user,1,1,1,1
+access_setup_withholding_tax,access_setup_withholding_tax,model_setup_withholding_tax,base.group_user,1,1,1,1

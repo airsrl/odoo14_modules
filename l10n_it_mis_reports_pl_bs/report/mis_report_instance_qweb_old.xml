@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="report_mis_report_instance" inherit_id="l10n_it_mis_reports_pl_bs.report_mis_report_instance">
+        <xpath expr="//div[hasclass('page')]" position="before">
+            <div class="row">
+                <div class="col-3">
+                    <b>Dal: </b><span t-field="o.date_from" />
+                </div>
+                <div class="col-3">
+                    <b>Al: </b><span t-field="o.date_to" />
+                </div>
+            </div>
+        </xpath>
+    </template>
+</odoo>

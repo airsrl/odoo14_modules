@@ -1,0 +1,24 @@
+<odoo>
+    <record id="huroos_asset_management_asset_form_view" model="ir.ui.view">
+        <field name="name">huroos_asset_management_asset_form_view</field>
+        <field name="model">asset.asset</field>
+        <field name="inherit_id" ref="assets_management.asset_form_view"/>
+        <field name="arch" type="xml">
+            <field name="used" position="after">
+                <field name="can_edit_partial_depr" invisible="1"/>
+                <field name="already_partially_depr" attrs="{'readonly': [('can_edit_partial_depr', '=', False)]}"/>
+            </field>
+
+            <group name="sale_purchase_info" position="after">
+                <group name="depreciation_history" string="Storico ammortamenti" attrs="{'invisible': [('already_partially_depr', '=', False)]}">
+                    <group name="depr_history_left">
+                        <field name="partially_depr_times" attrs="{'readonly': [('can_edit_partial_depr', '=', False)]}"/>
+                    </group>
+                    <group name="depr_history_right" attrs="{'invisible': [('can_edit_partial_depr', '=', False)]}">
+                        <button name="update_depreciation_lines" type="object" string="Aggiorna ammortamenti" class="oe_highlight" icon="fa-refresh"/>
+                    </group>
+                </group>
+            </group>
+        </field>
+    </record>
+</odoo>

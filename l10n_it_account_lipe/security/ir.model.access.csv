@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_comunicazione_liquidazione_export_file,comunicazione_liquidazione_export_file,model_comunicazione_liquidazione_export_file,base.group_user,1,1,1,1
+access_comunicazione_liquidazione_annuale_file,comunicazione_liquidazione_annuale_file,model_comunicazione_liquidazione_annuale_file,base.group_user,1,1,1,1
+access_ateco_category,ateco_category,model_ateco_category,base.group_user,1,1,1,1

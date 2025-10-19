@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+account_year_closing,year_closing,model_year_closing,base.group_user,1,1,1,1
+account_year_closing_line,year_closing_line,model_year_closing_line,base.group_user,1,1,1,1

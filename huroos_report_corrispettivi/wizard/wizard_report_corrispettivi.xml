@@ -1,0 +1,40 @@
+<odoo>
+
+<!--
+Powered by Karanveer Singh.
+Part of Huroos. See LICENSE file for full copyright and licensing details.
+© 2022 Huroos Srl. (<https://www.huroos.com>).-->
+    <record model="ir.ui.view" id="wizard_corrispettivi_form">
+        <field name="name">wizard_report_corrispettivi</field>
+        <field name="model">wizard.report.corrispettivi</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="document_type" string="Tipo di Report" required="1"/>
+                        <field name="journal_ids" string="Registri" widget="many2many_tags"/>
+                        <field name="date_start" required="1"/>
+                        <field name="date_end" required="1"/>
+                    </group>
+                </sheet>
+                <footer>
+                    <button string="Scarica Report" name="download_xls" type="object" class="oe_highlight"/>
+                    or
+                    <button string="Cancel" class="oe_link" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_wizard_corrispettivi" model="ir.actions.act_window">
+        <field name="name">Selezionare range di date</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">wizard.report.corrispettivi</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="wizard_corrispettivi_form" />
+        <field name="target">new</field>
+    </record>
+
+    <menuitem id="report_corrispettivi_label" name="Riepilogo Doc. Fiscali" sequence="100" parent="account.menu_finance_reports"/>
+    <menuitem id="report_corrispettivi" name="Report Corrispettivi" sequence="50" action="action_wizard_corrispettivi" parent="report_corrispettivi_label"/>
+</odoo>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+        <record id="securo_work_environment_form_view" model="ir.ui.view">
+            <field name="name">securo_work_environment.form</field>
+            <field name="model">securo.work.environment</field>
+            <field name="arch" type="xml">
+                <form string="Ambiente di lavoro">
+                    <sheet>
+                        <div class="oe_title">
+                            <label for="name"/>
+                            <h1>
+                                <field name="name" placeholder="Trasporto/cantieri/deposito..."/>
+                            </h1>
+                        </div>
+
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="securo_work_environment_tree_view" model="ir.ui.view">
+            <field name="name">securo_work_environment.tree</field>
+            <field name="model">securo.work.environment</field>
+            <field name="arch" type="xml">
+                <tree string="Ambiente di lavoro" editable="bottom">
+                    <field name="name" placeholder="Trasporto/cantieri/deposito..."/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="securo_work_environment_search_view" model="ir.ui.view">
+            <field name="name">securo_work_environment.search</field>
+            <field name="model">securo.work.environment</field>
+            <field name="arch" type="xml">
+                <search string="Ambiente di lavoro">
+                    <field name="name"/>
+                </search>
+            </field>
+        </record>
+
+        <record id="securo_work_environment_act_window" model="ir.actions.act_window">
+            <field name="name">Ambiente di lavoro</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">securo.work.environment</field>
+            <field name="view_mode">tree,form</field>
+
+        </record>
+
+        <menuitem name="Ambiente di lavoro"
+                  id="securo_work_environment_menu"
+                  parent="huroos_securo.menu_attr_veicolo_config"
+                  action="securo_work_environment_act_window"
+                  sequence="1"/>
+
+
+</odoo>

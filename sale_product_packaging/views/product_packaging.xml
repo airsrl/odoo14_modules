@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+        <record id="stock.product_template_action_product" model="ir.actions.act_window">
+            <field name="domain">[('product_packaging','=',False)]</field>
+        </record>
+
+        <record id="template_packaging_form_view" model="ir.ui.view">
+            <field name="name">template_packaging_form_view</field>
+            <field name="model">product.template</field>
+            <field name="arch" type="xml">
+                <form string="Imballaggio">
+                    <header>
+                    </header>
+                    <sheet>
+
+                        <div class="oe_button_box" name="button_box"/>
+
+
+                        <field name="image_1920" widget="image" class="oe_avatar" options="{'preview_image': 'image_128'}"/>
+                        <div class="oe_title">
+                            <label class="oe_edit_only" for="name" string="Product Name"/>
+                            <h1><field name="name" placeholder="Box Name"/></h1>
+                            <div name="options" groups="base.group_user">
+                                <div>
+                                    <field name="product_packaging"/>
+                                    <label for="product_packaging"/>
+                                </div>
+                                <div>
+                                    <field name="sale_ok"/>
+                                    <label for="sale_ok"/>
+                                </div>
+                                <div>
+                                    <field name="purchase_ok"/>
+                                    <label for="purchase_ok"/>
+                                </div>
+                                <div>
+                                    <field name="hide_in_doc"/>
+                                    <label for="hide_in_doc"/>
+                                </div>
+                            </div>
+                        </div>
+                        <notebook>
+                            <page string="Informazioni Generali" name="general_information">
+                                <group>
+                                    <group name="group_general">
+                                        <field name="active" invisible="1"/>
+                                        <field name="default_code" />
+                                        <field name="barcode" />
+
+                                    </group>
+                                    <group name="detail" string="Dettagli imballaggio">
+                                        <field name="qty_contained"/>
+                                        <field name="uom_id" groups="uom.group_uom" options="{'no_create': True}"/>
+                                        <field name="uom_po_id" groups="uom.group_uom" options="{'no_create': True}"/>
+                                    </group>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids"/>
+                        <field name="activity_ids"/>
+                        <field name="message_ids"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record id="template_packaging_tree_view" model="ir.ui.view">
+            <field name="name">template_packaging_tree_view</field>
+            <field name="model">product.template</field>
+            <field name="arch" type="xml">
+                <tree string="Imballaggi">
+                    <field name="name"/>
+                    <field name="default_code"/>
+                    <field name="qty_contained"/>
+                    <field name="uom_id" groups="uom.group_uom" options="{'no_create': True}"/>
+
+                </tree>
+            </field>
+        </record>
+        <record id="product.action_packaging_view" model="ir.actions.act_window">
+            <field name="res_model">product.template</field>
+            <field name="domain">[('product_packaging','=',True)]</field>
+            <field name="context">{'default_product_packaging':True,'default_purchase_ok':True,'default_sale_ok':True}</field>
+            <field name="view_ids" eval="[(5,0,0),
+                          (0,0,{'view_mode':'tree','view_id': ref('template_packaging_tree_view')}),
+                          (0,0,{'view_mode':'form', 'view_id': ref('template_packaging_form_view')})]"/>
+        </record>
+
+
+</odoo>

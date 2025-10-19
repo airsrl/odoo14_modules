@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="securo_document_type_form_view" model="ir.ui.view">
+            <field name="name">securo_document_type.form</field>
+            <field name="model">securo.document.type</field>
+            <field name="arch" type="xml">
+                <form string="Tipo documento">
+                    <sheet>
+                        
+                        <group>
+                                <field name="name"/>
+                           
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="securo_document_type_tree_view" model="ir.ui.view">
+            <field name="name">securo_document_type.tree</field>
+            <field name="model">securo.document.type</field>
+            <field name="arch" type="xml">
+                <tree string="Tipo documenti" editable="bottom">
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+
+
+        <record id="securo_document_type_act_window" model="ir.actions.act_window">
+            <field name="name">Tipo Documenti</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">securo.document.type</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    There is no document type.
+                </p>
+            </field>
+        </record>
+
+        <menuitem name="Tipo documenti" id="securo_document_type_menu" parent="menu_doc_deadline_config" action="securo_document_type_act_window"/>
+
+    </data>
+</odoo>

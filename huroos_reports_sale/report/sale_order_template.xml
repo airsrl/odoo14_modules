@@ -1,0 +1,238 @@
+<!--
+Copyright 2023 - Huroos srl - www.huroos.com
+License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl-3.0.en.html)
+Powered by Marco Frascerra
+-->
+
+<odoo>
+    <template id="report_saleorder_document" inherit_id="sale.report_saleorder_document">
+
+        <xpath expr="//t[@t-call='web.external_layout']" position="replace">
+
+            <t t-call="web.external_layout">
+
+                <!--Custom header-->
+                <t t-set="sale_order_header">
+                    <!--Order infos-->
+                    <div class="row" style="text-align:center; margin-top:15px;" name="order_info">
+                        <div class="col-12">
+                            <h1 style="font-size:30px;font-weight:900;">
+                                <t t-if="not (env.context.get('proforma', False) or is_pro_forma)">
+                                    <span t-if="doc.state not in ['draft','sent']">Ordine di vendita N°</span>
+                                    <span t-if="doc.state in ['draft','sent']">Preventivo N°</span>
+                                </t>
+                                <t t-if="env.context.get('proforma', False) or is_pro_forma">
+                                    <span>Fattura PRO FORMA N°</span>
+                                </t>
+                                <span t-field="doc.name"/>
+                                <t t-if="doc.date_order">
+                                    &amp;nbsp;<span>del</span>&amp;nbsp;
+                                    <span t-field="doc.date_order" t-options="{'widget': 'date'}"/>
+                                </t>
+                            </h1>
+                        </div>
+                    </div>
+                    <!--Partner infos-->
+                    <table style="margin-top:20px;" name="partner_address_boxes">
+                        <tr>
+                            <td style="width:45%;border:1px solid;" name="main_address">
+                                <h2 style="font-size:17px;">
+                                    <strong>Spett.le</strong>
+                                    <br/>
+                                    <span t-field="doc.partner_id"
+                                          t-options="{'widget': 'contact', 'fields': ['name', 'address', 'phone'], 'no_marker': True, 'phone_icons': True}"/>
+                                    <t t-if="doc.partner_id.vat">
+                                        <span>Partita IVA:</span>&amp;nbsp;
+                                        <span t-field="doc.partner_id.vat"/>
+                                    </t>
+                                </h2>
+                            </td>
+                            <td style="width:10%;"/>
+                            <td style="width:45%;border:1px solid;" name="shipping_address">
+                                <h2 style="font-size:17px;">
+                                    <strong>Indirizzo di consegna</strong>
+                                    <br/>
+                                    <span t-field="doc.partner_shipping_id"
+                                          t-options="{'widget': 'contact', 'fields': ['name', 'address', 'phone'], 'no_marker': True, 'phone_icons': True}"/>
+                                    <t t-if="doc.partner_shipping_id.vat">
+                                        <span>P. IVA:</span>&amp;nbsp;
+                                        <span t-field="doc.partner_shipping_id.vat"/>
+                                    </t>
+                                </h2>
+                            </td>
+                        </tr>
+                    </table>
+
+                    <table style="margin-top:10px;" name="order_secondary_infos">
+                        <tr>
+                            <td t-if="doc.client_order_ref" style="width:45%;border:1px solid;" name="td_client_ref_info">
+                                <h2 style="font-size:17px;">
+                                    <strong>Suo riferimento:&amp;nbsp;</strong><span t-field="doc.client_order_ref"/>
+                                </h2>
+                            </td>
+                            <td style="width:auto;" t-if="doc.client_order_ref"/>
+                            <td t-if="doc.validity_date and doc.state in ['draft', 'sent']" style="width:45%;border:1px solid;" name="td_expiration">
+                                <h2 style="font-size:17px;">
+                                    <strong>Scadenza preventivo:&amp;nbsp;</strong><span t-field="doc.validity_date"/>
+                                </h2>
+                            </td>
+                            <td style="width:auto;" t-if="not doc.client_order_ref and (doc.validity_date and doc.state in ['draft', 'sent'])"/>
+                        </tr>
+                    </table>
+                </t>
+
+                <div class="page">
+                    <!--Controllo se c'è almeno una riga in cui il prodotto ha il default code, altrimenti non stampo la colonna-->
+                    <t t-set="display_product_default_code" t-value="any(line.product_id.default_code for line in doc.order_line)"/>
+
+                    <!--Stessa cosa con lo sconto, se c'è almeno una riga con lo sconto diverso da zero, stampo la colonna-->
+                    <t t-set="display_discount" t-value="any(line.discount for line in doc.order_line)"/>
+
+                    <table name="sale_order_rows" style="margin-top:-45px;">
+                        <thead>
+                            <tr style="height:15px;border-bottom:2px solid;" name="table_head">
+                                <th t-if="display_product_default_code" name="th_product" style="padding-right:20px;">PRODOTTO</th>
+                                <th name="th_description">DESCRIZIONE</th>
+                                <th name="th_quantity" style="width:5%;" class="right_align">Q.TÀ</th>
+                                <th name="th_udm" style="width:5%;">UDM</th>
+                                <th name="th_priceunit" style="width:10%;" class="right_align">PR.UNIT.</th>
+                                <th t-if="display_discount" name="th_discount" style="width:10%;" class="right_align">SCONTO(%)</th>
+                                <th name="th_taxes" style="width:5%;">I.V.A.</th>
+                                <th name="th_subtotal" style="width:10%;" class="right_align">IMPONIBILE</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-foreach="doc.order_line" t-as="line">
+
+                                <!--Righe prodotto-->
+                                <t t-if="not line.display_type">
+                                    <tr class="table_row" style="height:18px;" name="product_row">
+                                        <!--PRODOTTO-->
+                                        <td t-if="display_product_default_code" name="td_product">
+                                            <span t-field="line.product_id.default_code"/>
+                                        </td>
+                                        <!--DESCRIZIONE-->
+                                        <td name="td_description">
+                                            <span t-field="line.name"/>
+                                        </td>
+                                        <!--Q.TÀ-->
+                                        <td name="td_quantity" class="right_align">
+                                            <span t-field="line.product_uom_qty"/>
+                                        </td>
+                                        <!--UDM-->
+                                        <td name="td_udm">
+                                            <span t-field="line.product_uom"/>
+                                        </td>
+                                        <!--PR.UNIT.-->
+                                        <td name="td_priceunit" class="right_align">
+                                            <span t-field="line.price_unit"/>
+                                        </td>
+                                        <!--SCONTO(%)-->
+                                        <td t-if="display_discount" name="td_discount" class="right_align">
+                                            <span t-field="line.discount"/>
+                                        </td>
+                                        <!--I.V.A.-->
+                                        <td name="td_taxes">
+                                            <span t-esc="', '.join(map(lambda x: (x.description or x.name), line.tax_id))"/>
+                                        </td>
+                                        <!--IMPONIBILE-->
+                                        <td name="td_subtotal" class="right_align">
+                                            <span t-field="line.price_subtotal"/>
+                                        </td>
+                                    </tr>
+                                </t>
+
+                                <!--Sezioni-->
+                                <t t-if="line.display_type == 'line_section'">
+                                    <tr class="table_row" style="background-color:#cccccc;" name="section_row">
+                                        <td colspan="8" name="td_section">
+                                            <strong><span style="font-weight:bold;" t-field="line.name"/></strong>
+                                        </td>
+                                    </tr>
+                                </t>
+
+                                <!--Righe di nota-->
+                                <t t-if="line.display_type == 'line_note'">
+                                    <tr class="table_row" name="note_row">
+                                        <td colspan="8" name="td_note">
+                                            <span style="font-style:oblique;" t-field="line.name"/>
+                                        </td>
+                                    </tr>
+                                </t>
+                            </t>
+
+                            <!--Note generali ordine di vendita-->
+                            <tr t-if="doc.note" class="terms_and_condition" name="note_block">
+                                <td colspan="8" name="td_note_block">
+                                    <h3 class="cell_name">Note</h3>
+                                    <span t-field="doc.note"/>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <t t-set="sale_order_footer">
+                        <div class="last-page">
+                            <table class="bordered" name="sale_footer">
+                                <tr style="height:125px;">
+                                    <td class="right_bordered" style="width:40%;" name="td_payment_term">
+                                        <h3 class="cell_name">Termini di pagamento</h3>
+                                        <span t-if="doc.payment_term_id" t-field="doc.payment_term_id.note"/>
+                                    </td>
+                                    <td name="td_tax_recap_names">
+                                        <h3 class="cell_name">I.V.A.</h3>
+                                        <t t-foreach="doc.amount_by_group" t-as="tax">
+                                            <t t-esc="tax[0]"/><br/>
+                                        </t>
+                                    </td>
+                                    <td class="right_bordered right_align" name="td_tax_recap_amounts">
+                                        <h3 class="cell_name">Importo</h3>
+                                        <t t-foreach="doc.amount_by_group" t-as="tax">
+                                            <t t-esc="tax[3]"/><br/>
+                                        </t>
+                                    </td>
+
+                                    <td class="right_align" style="width:40%;border:3px solid;vertical-align:bottom;" name="td_totals">
+                                        <t t-if="display_discount">
+                                            <h3 class="cell_name">
+                                                Totale merce:
+                                                <span t-esc="str('{:.2f}'.format(doc.amount_undiscounted)).replace('.', ',') + ' ' + doc.currency_id.symbol"/>
+                                            </h3>
+                                            <t t-set="total_discount" t-value="doc.amount_undiscounted - doc.amount_untaxed"/>
+                                            <h3 class="cell_name">
+                                                Sconto:
+                                                <span t-esc="str('{:.2f}'.format(total_discount)).replace('.', ',') + ' ' + doc.currency_id.symbol"/>
+                                            </h3>
+                                        </t>
+                                        <h3 class="cell_name">Totale imponibile: <span t-field="doc.amount_untaxed"/></h3>
+                                        <h3 class="cell_name">Totale I.V.A.: <span t-field="doc.amount_tax"/></h3>
+                                        <h3 style="font-size:18px;font-weight:900;">Importo da pagare: <span t-field="doc.amount_total"/></h3>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </t>
+
+                    <!--Per evitare problemi di inherit-->
+                    <address style="display:none;"/>
+                    <information_block style="display:none;"/>
+                    <div id="informations" style="display:none;"/>
+                    <div name="so_total_summary" style="display:none;"/>
+                    <div id="total" style="display:none;"/>
+                    <div name="signature" style="display:none;"/>
+                    <p id="fiscal_position_remark" style="display:none;"/>
+                    <!--################################-->
+
+                </div>
+            </t>
+        </xpath>
+    </template>
+
+    <record id="sale.action_report_saleorder" model="ir.actions.report">
+        <field name="paperformat_id" ref="huroos_reports_sale.huroos_custom_sale_paperformat"/>
+    </record>
+
+    <record id="sale.action_report_pro_forma_invoice" model="ir.actions.report">
+        <field name="paperformat_id" ref="huroos_reports_sale.huroos_custom_sale_paperformat"/>
+    </record>
+</odoo>

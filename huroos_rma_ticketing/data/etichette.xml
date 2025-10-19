@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+        <record id="etichetta_sale_reso" model="crm.tag">
+            <field name="name">Reso</field>
+        </record>
+
+    </data>
+</odoo>

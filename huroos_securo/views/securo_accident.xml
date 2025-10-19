@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="securo_accident_form_view" model="ir.ui.view">
+            <field name="name">securo_accident.form</field>
+            <field name="model">securo.accident</field>
+            <field name="arch" type="xml">
+                <form string="Sinistri">
+                    <header>
+                            <field name="status" widget="statusbar"  options="{'clickable': '1'}"/>
+                        </header>
+                    <sheet>
+
+                        <div class="oe_title">
+                            <label for="name"/>
+                            <h1>
+                                <field name="name" placeholder="Titolo"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group  string="Rilevazione">
+                                <field name="relieved_on"/>
+                                <field name="relieved_by"/>
+                                <field name="location"/>
+                                <field name="vehicle_id" options="{'no_create':True}"/>
+                                <field name="driver_id" options="{'no_create':True}"/>
+                            </group>
+                            <group string="Descrizione">
+                                <field name="reason"/>
+                                <field name="cause"/>
+                                <field name="cost"/>
+                                <field name="severity" string="Gravità" widget="radio"/>
+
+
+                            </group>
+                            <group string="Soluzione">
+                                <field name="action"/>
+                                <field name="to_do"/>
+                                <field name="date_by"/>
+                            </group>
+                            <field name='attachment' widget='many2many_binary' string='Aggiungi documentazione'/>
+                        </group>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                        <field name="activity_ids" widget="mail_activity"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record id="securo_accident_tree_view" model="ir.ui.view">
+            <field name="name">securo_accident.tree</field>
+            <field name="model">securo.accident</field>
+            <field name="arch" type="xml">
+                <tree string="Sinistri">
+                    <field name="name" />
+                    <field name="company_id" invisible="1"/>
+                    <field name="relieved_on"/>
+                    <field name="relieved_by"/>
+                    <field name="vehicle_id" />
+                    <field name="driver_id" />
+                    <field name="date_by" string="Chiusura"/>
+                    <field name="status"/>
+                </tree>
+            </field>
+        </record>
+        <record id="securo_accident_tree_button_view" model="ir.ui.view">
+            <field name="name">securo_accident.tree</field>
+            <field name="model">securo.accident</field>
+            <field name="priority">1</field>
+            <field name="arch" type="xml">
+                <tree string="Sinistri">
+                    <field name="name" />
+                    <field name="relieved_on"/>
+                    <field name="relieved_by"/>
+                    <field name="driver_id" />
+                </tree>
+            </field>
+        </record>
+
+        <record id="securo_accident_search_view" model="ir.ui.view">
+            <field name="name">securo_accident.search</field>
+            <field name="model">securo.accident</field>
+            <field name="arch" type="xml">
+                <search string="Ricerca">
+                    <field name="name"/>
+                    <field name="vehicle_id"/>
+
+                </search>
+            </field>
+        </record>
+
+        <record id="securo_accident_act_window" model="ir.actions.act_window">
+            <field name="name">Sinistri</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">securo.accident</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="securo_accident_tree_view"/>
+
+        </record>
+
+        <menuitem name="Sinistri" id="securo_accident_menu" parent="huroos_securo.securo_vehicle_menu" action="securo_accident_act_window"/>
+
+    </data>
+</odoo>

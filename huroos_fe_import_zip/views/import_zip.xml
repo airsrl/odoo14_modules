@@ -1,0 +1,22 @@
+<odoo>
+    <data>
+
+
+        <!--Fatture Form-->
+        <record id="fatturapa_attachment_import_zip_form" model="ir.ui.view">
+            <field name="name">fatturapa_attachment_import_zip_form</field>
+            <field name="model">fatturapa.attachment.import.zip</field>
+            <field name="inherit_id" ref="l10n_it_fatturapa_import_zip.fatturapa_attachment_import_zip_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//notebook" position="before">
+                    <group>
+                        <field name="journal_id" string="Registro"/>
+                        <field name="use_sequence" string="Forza Protocollo XML" />
+                    </group>
+                </xpath>
+            </field>
+        </record>
+
+
+    </data>
+</odoo>

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+    # Copyright 2022 - Huroos srl - www.huroos.com
+    # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl-3.0.en.html)
+-->
+<odoo>
+    <record model="ir.ui.view" id="api_auth_form_view">
+        <field name="name">api.auth.form</field>
+        <field name="model">api.auth</field>
+        <field name="arch" type="xml">
+            <form string="API auth">
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group string="Definition">
+                            <field name="active" widget="boolean_toggle"/>
+                            <field name="contact_id"/>
+                            <field name="password" readonly="1" force_save="1"/>
+                        </group>
+                        <group string="Validity period">
+                            <field name="validity_start"/>
+                            <field name="validity_end"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Description">
+                            <field name="description" nolabel="1"/>
+                        </page>
+                        <page string="Sessions">
+                            <field name="api_session_ids" nolabel="1">
+                                <tree>
+                                    <field name="auth_token"/>
+                                    <field name="auth_token_expiration"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                    <field name="activity_ids" widget="mail_activity"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="api_auth_tree_view">
+        <field name="name">api.auth.tree</field>
+        <field name="model">api.auth</field>
+        <field name="arch" type="xml">
+            <tree string="API auth">
+                <field name="name"/>
+                <field name="password"/>
+                <field name="validity_start"/>
+                <field name="validity_end"/>
+                <field name="contact_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="action_api_auth">
+        <field name="name">API auth</field>
+        <field name="res_model">api.auth</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <menuitem
+            name="API auth"
+            parent="base.menu_custom"
+            id="api_auth"
+            action="action_api_auth"
+    />
+
+</odoo>

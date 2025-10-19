@@ -1,0 +1,24 @@
+<odoo>
+
+    <report
+            id="corrispettivi_xlsx"
+            model="account.move"
+            report_type="xlsx"
+            string="Ricevute/Fatture (XLSX)"
+            name="report_corrispettivi"
+            file="corrispettivi"
+            menu="False"
+    />
+
+    <report
+            id="corrispettivi_grouped_by_day_xlsx"
+            model="account.move"
+            report_type="xlsx"
+            string="Riepilogo Ricevute/Fatture (XLSX)"
+            name="report_corrispettivi_by_day"
+            file="report corrispettivi"
+            menu="False"
+    />
+
+
+</odoo>

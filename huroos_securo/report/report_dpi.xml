@@ -1,0 +1,36 @@
+<odoo>
+    <data noupdate="0">
+        <record id="action_report_print_dpi" model="ir.actions.report">
+            <field name="name">Report consegna Dpi</field>
+            <field name="model">securo.dpi.employee</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">huroos_securo.report_consegna_dpi</field>
+            <field name="report_file">huroos_securo.report_consegna_dpi</field>
+
+        </record>
+        <record id="action_report_print_dpi_empl" model="ir.actions.server">
+            <field name="name">Stampa consegna DPI</field>
+            <field name="model_id" ref="huroos_securo.model_securo_dpi_employee"/>
+            <field name="binding_model_id" ref="huroos_securo.model_securo_dpi_employee"/>
+            <field name="state">code</field>
+            <field name="code">
+if records:
+    action = records._print_consegna_dpi()
+            </field>
+        </record>
+        <record id="action_report_print_dpi_hr" model="ir.actions.server">
+            <field name="name">Stampa consegna DPI</field>
+            <field name="model_id" ref="hr.model_hr_employee"/>
+            <field name="binding_model_id" ref="hr.model_hr_employee"/>
+            <field name="binding_view_types">form</field>
+            <field name="state">code</field>
+            <field
+                    name="groups_id"
+                    eval="[(6,0,[ref('hr.group_hr_user')])]"
+            />
+            <field name="code">
+action = records.employee_print_dpi()
+            </field>
+        </record>
+    </data>
+</odoo>

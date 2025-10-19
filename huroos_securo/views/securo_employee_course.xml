@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="securo_employee_course_form_view" model="ir.ui.view">
+            <field name="name">securo_employee_course.form</field>
+            <field name="model">securo.employee.course</field>
+            <field name="arch" type="xml">
+                <form string="Corsi /formazioni dipendente" delete="0">
+                    <header>
+                        <button name="assign" type="object" string="Assegna" attrs="{'invisible':[('status','not in',['draft'])]}"/>
+                        <button name="complete" type="object" string="Completato" attrs="{'invisible':[('status','not in',['assign'])]}"/>
+                        <button name="delete" type="object" string="Elimina" confirm="Eliminare la programmazione del corso e tutti i dati collegati?"/>
+                        <field name="status" widget="statusbar"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_button_box" name="button_box"  >
+                            <button name="show_employee_course" nolabel="1" type="object" class="oe_stat_button"
+                            icon="fa-users"
+                            >
+                                <field
+                                        name="count_empl_res"
+                                        widget="statinfo"
+                                        string="Partecipanti"
+
+                                    />
+                            </button>
+                        </div>
+                        <div class="oe_title">
+                            <label for="name"/>
+                            <h1>
+                                <field name="name" attrs="{'readonly':[('status','not in',['draft'])]}"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <field name="description"/>
+                        </group>
+                        <group>
+                            <group>
+                                <field name="duty_id" string="Mansione"  attrs="{'readonly':[('status','not in',['draft'])]}"/>
+
+                            </group>
+                            <group>
+                                <field name="administrator"  attrs="{'readonly':[('status','in',['done'])]}"/>
+                                <field name="teacher" attrs="{'readonly':[('status','in',['done'])]}"/>
+                            </group>
+                            <group>
+                                <field name="course_date" string="Data corso" attrs="{'readonly':[('status','in',['done'])]}"/>
+                                <field name="course_hour" widget="float_time" string="Durata" attrs="{'readonly':[('status','in',['done'])]}"/>
+                                <field name="course_deadline" attrs="{'readonly':[('status','in',['done'])]}"/>
+                            </group>
+                            <field name="attachment" widget='many2many_binary'/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="securo_employee_course_tree_view" model="ir.ui.view">
+            <field name="name">securo_employee_course.tree</field>
+            <field name="model">securo.employee.course</field>
+            <field name="arch" type="xml">
+                <tree string="Corsi/formazione dipendenti" delete="0"
+                      decoration-danger="course_deadline &lt; current_date and course_deadline != False">
+                    <field name="name"/>
+                    <field name="employee_result_ids" widget="many2many_tags" string="Partecipanti"/>
+                    <field name="course_date" string="Data corso"/>
+                    <field name="course_hour" widget="float_time" string="Durata"/>
+                    <field name="course_deadline"/>
+                    <field name="status"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="securo_employee_course_calendar_view" model="ir.ui.view">
+            <field name="name">securo_employee_course.calendar</field>
+            <field name="model">securo.employee.course</field>
+            <field name="arch" type="xml">
+                <calendar string="Calendario" date_start="course_date" date_delay="course_hour" date_stop="course_stop"   mode="month" quick_add="False">
+                    <field name="name"/>
+
+                    <field name="course_date" string="Data corso"/>
+                    <field name="course_hour" string="Durata"/>
+                    <field name="course_deadline"/>
+                </calendar>
+            </field>
+        </record>
+
+
+        <record id="securo_employee_course_search_view" model="ir.ui.view">
+            <field name="name">securo_employee_course.search</field>
+            <field name="model">securo.employee.course</field>
+            <field name="arch" type="xml">
+                <search string="Ricerca">
+                    <field name="name" string="Dpi"/>
+                    <field name="course_deadline" string="Scadenza"/>
+
+                    <group expand="1" string="Group By">
+                        <filter string="Corsi e formazione" name="group_course"
+                                context="{'group_by':'name'}"/>
+                        <separator/>
+
+                        <filter name="expired" string="Già scaduti"
+                                domain="[('course_deadline','&lt;', context_today().strftime('%Y-%m-%d')),('course_deadline','!=',False)]"/>
+                        <filter name="next_three_months" string="Prossimo trimestre"
+                                domain="[('course_deadline','&lt;',  (context_today() + relativedelta(months=3)).strftime('%Y-%m-%d')),('course_deadline','!=',False)]"/>
+                        <filter name="next_six_months" string="Prossimo semestre"
+                                domain="[('course_deadline','&lt;',  (context_today() + relativedelta(months=6)).strftime('%Y-%m-%d')),('course_deadline','!=',False)]"/>
+                        <filter name="next_year" string="Prossimo anno"
+                                domain="[('course_deadline','&gt;',  (context_today() + relativedelta(months=12)).strftime('%Y-%m-01')),('course_deadline','!=',False)]"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+
+        <record id="securo_employee_course_act_window" model="ir.actions.act_window">
+            <field name="name">Organizzazione Corsi</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">securo.employee.course</field>
+            <field name="view_mode">tree,form,calendar</field>
+            <field name="context">{"search_default_group_course":1}</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                   Non ci sono dipendenti che partecipano a corsi.
+                </p>
+            </field>
+        </record>
+
+        <menuitem name="Organizzazione corsi"
+                  id="securo_employee_course_menu"
+                  parent="huroos_securo.hr_menu_securo_main"
+                  action="securo_employee_course_act_window"
+                    sequence="3"/>
+
+    </data>
+</odoo>

@@ -1,0 +1,7 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_cambio_conti,access_cambio_conti,model_cambio_conti,base.group_user,1,1,1,1
+access_cambio_conti_line,access_cambio_conti_line,model_cambio_conti_line,base.group_user,1,1,1,1
+access_cambio_imposte_line,access_cambio_imposte_line,model_cambio_imposte_line,base.group_user,1,1,1,1
+access_inserimento_imposte_line,access_inserimento_imposte_line,model_inserimento_imposte_line,base.group_user,1,1,1,1
+access_cambio_creato_imposte_line,access_cambio_creato_imposte_line,model_cambio_creato_imposte_line,base.group_user,1,1,1,1
+access_inserimento_creato_imposte_line,access_inserimento_creato_imposte_line,model_inserimento_creato_imposte_line,base.group_user,1,1,1,1

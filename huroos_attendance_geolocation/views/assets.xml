@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="assets_backend" name="huroos_attendance assets" inherit_id="web.assets_backend">
+        <xpath expr="." position="inside">
+            <script type="text/javascript" src="/huroos_attendance_geolocation/static/src/js/kiosk.js"></script>
+            <script type="text/javascript" src="/huroos_attendance_geolocation/static/src/js/kiosk_confirm.js"></script>
+            <script type="text/javascript" src="/huroos_attendance_geolocation/static/src/js/attendances_location.js"></script>
+            <link rel="stylesheet" type="text/scss" href="/huroos_attendance_geolocation/static/src/scss/hr_attendance.scss"/>
+        </xpath>
+    </template>
+</odoo>

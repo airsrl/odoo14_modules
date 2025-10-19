@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+
+    <t t-extend="HrAttendanceKioskConfirm">
+        <t t-jquery="div.o_hr_attendance_kiosk_mode" t-operation="after">
+            <t t-set="checked_in" t-value="widget.employee_state=='checked_in'"/>
+            <t t-if="checked_in">
+                <div class="o_hr_attendance_break_mode">
+                    <t t-set="on_break" t-value="widget.break_state=='break_check_in'"/>
+                    <a class="fa fa-2x o_hr_attendance_break_icon fa-coffee  btn-warning"  aria-label="End Break" title="Break end" t-if="on_break"/>
+                    <a class="fa fa-2x o_hr_attendance_break_icon fa-coffee btn-secondary"  aria-label="Start Break" title="Break start" t-if="!on_break"/>
+                    <h3 class="mt0 mb0 text-muted">Fai click per <b t-if="on_break">finire la pausa.</b><b t-if="!on_break">iniziare la pausa.</b></h3>
+                </div>
+            </t>
+
+
+        </t>
+    </t>
+    <t  t-extend="HrAttendanceMyMainMenu">
+        <t t-jquery="h1" t-operation="after">
+            <h3 class="mt0 mb0" id="location_placeholder"></h3>
+        </t>
+        <t t-jquery="div.o_hr_attendance_kiosk_mode" t-operation="after">
+            <t t-set="checked_in" t-value="widget.employee.attendance_state=='checked_in'"/>
+            <t t-if="checked_in">
+                <div class="o_hr_attendance_break_mode">
+                    <t t-set="on_break" t-value="widget.employee.break_state=='break_check_in'"/>
+
+
+
+                    <a class="fa fa-2x o_hr_attendance_break_icon fa-coffee  btn-warning"  aria-label="End Break" title="Break end" t-if="on_break"/>
+                   <a class="fa fa-2x o_hr_attendance_break_icon fa-coffee btn-secondary"  aria-label="Start Break" title="Break start" t-if="!on_break"/>
+                    <h3 class="mt0 mb0 text-muted">Fai click per <b t-if="on_break">finire la pausa.</b><b t-if="!on_break">iniziare la pausa.</b></h3>
+
+
+                </div>
+                 </t>
+
+
+        </t>
+    </t>
+
+</templates>
+        <!--<template inherit_id="hr_attendance.HrAttendanceKioskConfirm" id="HrAttendanceKioskConfirm" name="Kiosk location">-->
+        <!--    <xpath expr="//div[hasclass('.oe_attendance_sign_in_out')]" position="after">-->
+        <!--            <a class="fa fa-3x o_hr_attendance_break_icon fa-coffee btn-warning" t-if="checked_in" aria-label="End Break" title="Break end"/> -->
+
+        <!--    </xpath>-->
+        <!--</template>-->
+

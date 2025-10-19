@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="securo_notify_cron" forcecreate='True' model="ir.cron">
+            <field name="name">Securo notify scadenze</field>
+            <field eval="True" name="active"/>
+            <field name="user_id" ref="base.user_root"/>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="numbercall">-1</field>
+            <field name="model_id" ref="huroos_securo.model_securo_notify"/>
+            <field name="state">code</field>
+            <field name="code">model.cron_mail_deadline()</field>
+        </record>
+        <record id="securo_documents_cron" forcecreate='True' model="ir.cron">
+            <field name="name">Generate first documents from employee</field>
+            <field eval="False" name="active"/>
+            <field name="user_id" ref="base.user_root"/>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="numbercall">-1</field>
+            <field name="model_id" ref="hr.model_hr_employee"/>
+            <field name="state">code</field>
+            <field name="code">records = model.search([]).general_create_document_attachment()</field>
+        </record>
+
+    </data>
+</odoo>

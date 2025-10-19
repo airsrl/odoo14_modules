@@ -1,0 +1,51 @@
+<odoo>
+    <record id="view_openapi_engine_form" model="ir.ui.view">
+        <field name="name">view_openapi_engine_form</field>
+        <field name="model">openapi.engine</field>
+        <field name="arch" type="xml">
+            <form string="OpenAPI Engine">
+                <script>
+                    $(document).ready(function(){
+                        $('.o_form_sheet').css({'max-width': '90%'});
+                    });
+                </script>
+                <sheet>
+                    <field name="production" invisible="1"/>
+
+                    <widget name="web_ribbon" title="Endpoint produzione" bg_color="bg-warning" attrs="{'invisible': [('production', '=', False)]}"/>
+                    <widget name="web_ribbon" title="Endpoint staging" bg_color="bg-warning" attrs="{'invisible': [('production', '=', True)]}"/>
+
+                    <div class="oe_title">
+                        <h1><field name="name" readonly="1"/></h1>
+                    </div>
+                    <group name="main_config_group">
+                        <group>
+                            <field name="token" attrs="{'invisible': [('production', '=', False)]}"/>
+                            <field name="sandbox_token" attrs="{'invisible': [('production', '=', True)]}"/>
+                        </group>
+                        <group/>
+                    </group>
+
+                    <field name="endpoint_ids" mode="tree" no_open="1">
+                        <tree editable="bottom">
+                            <field name="sequence" widget="handle"/>
+                            <field name="library"/>
+                            <field name="name"/>
+                            <field name="func"/>
+                            <field name="numbercall"/>
+                            <field name="success" optional="hide"/>
+                            <field name="errors" optional="hide"/>
+                        </tree>
+                    </field>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_openapi_engine" model="ir.actions.act_window">
+        <field name="name">Pannello di controllo OpenAPI</field>
+        <field name="res_model">openapi.engine</field>
+        <field name="view_mode">form</field>
+        <field name="res_id" ref="huroos_openapi.openapi_engine_main"/>
+    </record>
+</odoo>

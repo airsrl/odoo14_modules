@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="huroos_rma_ticketing_info_aggiuntive" model="mail.template">
+            <field name="name">Reso richiesta info aggiuntive</field>
+            <field name="model_id" ref="helpdesk.model_helpdesk_ticket"/>
+            <field name="subject">Reso ${object.display_name}: richiesta informazioni aggiuntive</field>
+            <field name="email_from">${(object.user_id.email_formatted or user.email_formatted) | safe}</field>
+            <field name="use_default_to">1</field>
+            <field name="body_html" type="html">
+                <div style="font-size:13px;font-family:&quot;Lucida Grande&quot;, Helvetica, Verdana, Arial, sans-serif;">
+                    % set access_token = object.rating_get_access_token()
+                    % set partner = object.rating_get_partner_id()
+                    <br/>
+                    Gentile ${object.sudo().partner_id.name or ''},
+                    <br/>
+                    <br/>per elaborare al meglio e in modo efficiente la richiesta di reso <b
+                        style="font-weight:bolder;">${object.display_name}
+                </b>, ci occorre avere tutte le
+                    informazioni necessarie.
+                    <br/>
+                    <br/>Vi preghiamo pertanto di rispondere a questa mail
+                    <font
+                            style="background-color: rgb(255, 239, 198);">includendo le seguenti informazioni:
+                    </font>
+                    <ul style="margin:0px 0 1rem 0;">
+                        <li>numero ordine o riferimento ordine Shopify</li>
+                        <li>motivazione del reso</li>
+                        <li>eventuali foto dei prodotti per i quali si fa richiesta di reso</li>
+                        <li>elenco dei prodotti per i quali si fa richiesta di reso con
+                            <b style="font-weight:bolder;">
+                                Codice articolo
+                            </b>
+                            <br/>
+                        </li>
+                    </ul>
+                    Per essere costantemente aggiornati sull'avanzamento della pratica di reso può consultare il
+                    seguente link a Lei dedicato:
+                    <br/>
+                    <div style="font-size:13px;font-family:&quot;Lucida Grande&quot;, Helvetica, Verdana, Arial, sans-serif;text-align: center; margin: 16px 0px;">
+                        <a style="text-decoration:none;color:rgb(0, 135, 132);background-color:#875A7B;padding: 8px 16px 8px 16px; text-decoration: none; color: #fff; border-radius: 5px; font-size:13px;"
+                           href="${object.get_portal_url()}">Visualizza richiesta reso
+                        </a>
+                        <br/>
+                    </div>
+                    <p>
+                        Distinti saluti
+                        <br/>
+                        Rifò - Reparto resi
+                    </p>
+                </div>
+            </field>
+            <field name="lang">${object.lang}</field>
+            <field name="auto_delete" eval="True"/>
+        </record>
+
+        <record id="huroos_rma_ticketing_etichetta_cliente" model="mail.template">
+            <field name="name">Reso etichetta cliente</field>
+            <field name="model_id" ref="helpdesk.model_helpdesk_ticket"/>
+            <field name="subject">Etichetta ${object.display_name}</field>
+            <field name="email_from">${(object.user_id.email_formatted or user.email_formatted) | safe}</field>
+            <field name="use_default_to">1</field>
+            <field name="body_html" type="html">
+                <p>
+                    <br/>
+                    Gentile ${object.sudo().partner_id.name or ''},
+                    <br/>
+                    <br/>
+                </p>
+                <p>al seguente link può scaricare l'etichetta del corriere per effettuare il reso <b>
+                    ${object.display_name}</b>:
+                    <br/>
+                </p>
+                <p>
+                    <div style="font-size:13px;font-family:&quot;Lucida Grande&quot;, Helvetica, Verdana, Arial, sans-serif;text-align: center; margin: 16px 0px;">
+                        <a style="text-decoration:none;color:rgb(0, 135, 132);background-color:#875A7B;padding: 8px 16px 8px 16px; text-decoration: none; color: #fff; border-radius: 5px; font-size:13px;"
+                           href="${object.label_url}">Link etichetta
+                        </a>
+                        <br/>
+                    </div>
+                </p>
+                <p>
+                    Distinti saluti
+                    <br/>
+                    Rifò - Reparto resi
+                </p>
+            </field>
+            <field name="lang">${object.lang}</field>
+            <field name="auto_delete" eval="True"/>
+        </record>
+    </data>
+</odoo>

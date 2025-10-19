@@ -1,0 +1,39 @@
+<odoo>
+    <record id="view_visura_camerale_request_form" model="ir.ui.view">
+        <field name="name">view_visura_camerale_request_form</field>
+        <field name="model">visura.camerale.request</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="code" required="1"/>
+                    </group>
+
+                    <footer>
+                        <button name="request_visura" type="object" string="Richiedi visura camerale" class="btn btn-primary"/>
+                        <button special="cancel" string="Annulla" class="btn btn-secondary"/>
+                    </footer>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_visura_camerale_confirm_request" model="ir.ui.view">
+        <field name="name">view_visura_camerale_confirm_request</field>
+        <field name="model">visura.camerale.request</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <h3>
+                        Sembra che tu abbia già richiesto una visura camerale per questa P.IVA/C.F. Fare comunque la richiesta di una nuova visura?
+                    </h3>
+
+                    <footer>
+                        <button name="confirm_request" type="object" string="Richiedi comunque" class="btn btn-primary"/>
+                        <button special="cancel" string="Annulla" class="btn btn-secondary"/>
+                    </footer>
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>

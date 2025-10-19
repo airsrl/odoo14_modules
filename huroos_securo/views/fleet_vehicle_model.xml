@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="securo_vehicle_type_form_view" model="ir.ui.view">
+            <field name="name">securo_vehicle_type.form</field>
+            <field name="model">securo.vehicle.type</field>
+            <field name="arch" type="xml">
+                <form string="Tipo generale">
+                    <sheet>
+                        <div class="oe_title">
+                            <label for="name"/>
+                            <h1>
+                                <field name="name" placeholder="Tipo..."/>
+                            </h1>
+                        </div>
+
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="securo_vehicle_type_tree_view" model="ir.ui.view">
+            <field name="name">securo_vehicle_type.tree</field>
+            <field name="model">securo.vehicle.type</field>
+            <field name="arch" type="xml">
+                <tree string="Tipo generale" editable="top">
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="securo_vehicle_type_search_view" model="ir.ui.view">
+            <field name="name">securo_vehicle_type.search</field>
+            <field name="model">securo.vehicle.type</field>
+            <field name="arch" type="xml">
+                <search string="Cerca">
+                    <field name="name"/>
+
+                </search>
+            </field>
+        </record>
+
+        <record id="securo_vehicle_type_act_window" model="ir.actions.act_window">
+            <field name="name">Modello: tipo generale</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">securo.vehicle.type</field>
+            <field name="view_mode">tree,form</field>
+
+        </record>
+
+        <menuitem name="Modello: Tipo generale"
+                  id="securo_vehicle_type_menu"
+                  parent="menu_attr_veicolo_config"
+                  sequence="20"
+                  action="securo_vehicle_type_act_window"/>
+
+    </data>
+</odoo>

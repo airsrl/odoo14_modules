@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="order_form_inherit" model="ir.ui.view">
+            <field name="name">sale.order.form</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <xpath expr="//group[@name='order_details']/label[@for='pricelist_id']" position="replace"/>
+                <xpath expr="//group[@name='order_details']/div/field[@name='pricelist_id']" position="replace"/>
+                <xpath expr="//group[@name='order_details']/div/button[@name='update_prices']" position="replace"/>
+                <xpath expr="//field[@name='order_line']/tree/field[@name='price_unit']" position="after">
+                    <field name="pricelist_id" string="Listino" force_save="1"/>
+                </xpath>
+                <xpath expr="//group[@name='order_details']" position="after">
+                    <group string="Listino prezzi" groups="product.group_product_pricelist">
+                        <xpath expr="//field[@name='show_update_pricelist']" position="move"/>
+                        <field name="pricelist_option" widget="radio"/>
+                        <div>
+                            <field name="pricelist_id" options="{'no_open':True,'no_create': True}"
+                                   attrs="{'invisible':[('pricelist_option','=','most_convenient_line')]}"/>
+                            <button name="update_prices" type="object" string=" Aggiorna prezzi"
+                                    help="Ricalcola tutti i prezzi in base al listino" class="btn-link mb-1 px-0"
+                                    icon="fa-refresh"
+
+                                    confirm="Aggiornerà tutti i prezzi unitari con il listino corrente."
+                                    attrs="{'invisible': ['|', ('show_update_pricelist', '=', False), ('state', 'in', ['sale', 'done','cancel'])]}"/>
+                            <button name="set_most_convenient_pricelist_line" string="Aggiorna prezzi" type="object"
+                                    class="btn-link mb-1 px-0" icon="fa-refresh"
+                                    attrs="{'invisible':['|', ('pricelist_option','=','standard'), ('state', 'in', ['sale', 'done','cancel'])]}"
+                                    confirm="Aggiornerà i prezzi delle righe con listino più conveniente."/>
+                        </div>
+                    </group>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

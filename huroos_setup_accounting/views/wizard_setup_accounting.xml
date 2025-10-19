@@ -1,0 +1,383 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="wizard_setup_accounting_form" model="ir.ui.view">
+        <field name="name">wizard_setup_accounting_form</field>
+        <field name="model">wizard.setup.accounting</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <script>
+                        $(document).ready(function(){
+                            $('.modal-dialog').css({'max-width': '70%', 'height': '90%'});
+                            $('.modal-content').css({'max-width': '100%', 'height': '100%'});
+                            $('.modal-body').css({'max-width': '100%', 'height': '100%'});
+                        });
+                    </script>
+
+                    <header attrs="{'invisible': [('state', '=', False)]}">
+                        <field name="state" widget="statusbar" options="{'clickable': '1'}"/>
+                    </header>
+
+                    <group name="start" attrs="{'invisible': [('state', '!=', False)]}">
+                        <div class="d-flex flex-column">
+                            <div class="d-flex justify-content-center">
+                                <img src="/huroos_setup_accounting/static/description/huroos_logo.png" alt="Logo" style="width:40%;"/>
+                            </div>
+                            <br/>
+                            <h1 style="text-align:center;font-family:Verdana;font-weight:900;color:#00a09d;">
+                                Benvenuto nello strumento di setup della contabilità
+                            </h1>
+                            <br/>
+                            <div class="d-flex justify-content-center">
+                                <button name="button_init" type="object" string="Inizia" class="oe_highlight" style="max-width:30%;"/>
+                            </div>
+                        </div>
+                    </group>
+
+                    <!--FUNZIONALITÀ CONTABILI-->
+                    <group name="step_1" attrs="{'invisible': [('state', '!=', 'step_1')]}">
+                        <div class="d-flex flex-column">
+                            <br/>
+                            <h1 style="text-align:center;font-family:Verdana;font-weight:900;color:#00a09d;">Seleziona i moduli da installare</h1>
+                            <br/>
+                            <group class="d-flex justify-content-center">
+                                <group>
+                                    <field name="module_e_invoice_out" string="Ciclo Attivo e FE" />
+                                    <field name="module_e_invoice_in" string="Ciclo Passivo e FE" />
+                                    <field name="module_aruba" string="SDI Aruba" />
+                                    <field name="module_reverse_charge" string="Reverse Charge" />
+                                    <field name="module_corrispettivi" string="Corrispettivi" />
+                                    <field name="module_competenza_iva" string="Competenza IVA" />
+                                    <field name="module_ddt" string="DDT" />
+                                </group>
+                                <group>
+                                    <field name="module_intrastat" string="Intrastat" />
+                                    <field name="module_riba" string="Ricevute Bancarie" />
+                                    <field name="module_vat_registries" string="Registri IVA" />
+                                    <field name="module_vat_statement" string="Liquidazione IVA" />
+                                    <field name="module_lipe" string="LIPE IVA" />
+                                    <field name="module_withholding_tax" string="Ritenute D'acconto" />
+                                    <field name="module_declaration_intent" string="Dichiarazioni Intento" />
+                                </group>
+                                <group class="d-flex align-items-start">
+                                    <field name="module_massive_operations" string="Operazioni Massive" />
+                                    <field name="module_template_registrazioni" string="Template Reg."/>
+                                    <field name="module_split_payment" string="Split Payment"/>
+                                </group>
+                            </group>
+                            <br/>
+                            <div class="d-flex justify-content-center">
+                                <button name="installa_moduli"
+                                    type="object"
+                                    style="max-width:30%;"
+                                    class="oe_highlight"
+                                    string="Installa moduli"
+                                    icon="fa-cloud-download"/>
+                            </div>
+                        </div>
+                    </group>
+
+                    <!--PIANO DEI CONTI-->
+                    <group name="step_2" attrs="{'invisible': [('state', '!=', 'step_2')]}">
+                        <div class="d-flex flex-column">
+                            <br/>
+                            <h1 style="text-align:center;font-family:Verdana;font-weight:900;color:#00a09d;">
+                                Inserisci qui il tuo piano dei conti in formato xlsx
+                            </h1>
+                            <br/>
+                            <div class="d-flex justify-content-center">
+                                <div>
+                                    <field name="pdc_file_import" nolabel="1"/>
+                                </div>
+                            </div>
+                            <br/>
+                            <br/>
+                            <div class="d-flex justify-content-around">
+                                <button name="download_sample_pdc"
+                                        string="SCARICA ESEMPIO"
+                                        type="object"
+                                        class="btn btn-warning"
+                                        style="width:40%;height:100px;font-size:25px;"/>
+
+                                <button name="upload_pdc"
+                                        string="Importa il piano dei conti"
+                                        type="object"
+                                        class="btn btn-primary"
+                                        style="width:40%;height:100px;font-size:25px;"/>
+                            </div>
+                        </div>
+                    </group>
+
+                    <!--IMPOSTE-->
+                    <group name="step_3" attrs="{'invisible': [('state', '!=', 'step_3')]}">
+                        <div class="d-flex flex-column">
+                            <br/>
+                            <h1 style="text-align:center;font-family:Verdana;font-weight:900;color:#00a09d;">
+                                Seleziona le imposte che vuoi installare
+                            </h1>
+                            <br/>
+                            <div class="d-inline-flex p-2 justify-content-center">
+                                <div style="max-width:40%;">
+                                    <field name="account_tax_ids" readonly="1" force_save="1">
+                                        <tree no_open="1">
+                                            <field name="name" string="Nome"/>
+                                            <field name="install" nolabel="1" widget="boolean_toggle"/>
+                                        </tree>
+                                    </field>
+                                </div>
+                            </div>
+                            <div class="d-inline-flex p-2 justify-content-center">
+                                <button name="create_tax" string="Crea Imposte" type="object" class="btn btn-primary"/>
+                            </div>
+                        </div>
+                    </group>
+
+                    <!--REGISTRI-->
+                    <group name="step_4" attrs="{'invisible': [('state', '!=', 'step_4')]}">
+                        <div class="d-flex flex-column">
+                            <br/>
+                            <h1 style="text-align:center;font-family:Verdana;font-weight:900;color:#00a09d;">
+                                Seleziona i registri che vuoi installare
+                            </h1>
+                            <br/>
+                            <div class="d-inline-flex p-2 justify-content-center">
+                                <div style="max-width:40%;">
+                                    <field name="account_journal_ids" readonly="1" force_save="1">
+                                        <tree no_open="1">
+                                            <field name="name" string="Nome"/>
+                                            <field name="install" nolabel="1" widget="boolean_toggle"/>
+                                        </tree>
+                                    </field>
+                                </div>
+                            </div>
+                            <div class="d-inline-flex p-2 justify-content-center">
+                                <button name="create_journal" string="Crea Registri" type="object" class="btn btn-primary"/>
+                            </div>
+                        </div>
+                    </group>
+
+                    <!--ASSEGNA CONTI-->
+                    <group name="step_5" attrs="{'invisible': [('state', '!=', 'step_5')]}">
+                        <div class="d-flex flex-column">
+                            <br/>
+                            <h1 style="text-align:center;font-family:Verdana;font-weight:900;color:#00a09d;">
+                                Configura i conti standard della tua azienda
+                            </h1>
+                            <br/>
+                            <div class="d-flex p-2 justify-content-center">
+                                <group>
+                                    <group>
+                                        <field name="a_partner_credit" string="Conto Credito" />
+                                        <field name="a_partner_debit" string="Conto Debito" />
+                                        <field name="a_product_income" string="Conto Ricavo" />
+                                        <field name="a_product_expense" string="Conto Costo" />
+                                        <field name="a_suspense" string="Conto Provvisorio" />
+                                    </group>
+                                    <group>
+                                        <field name="a_utili" string="Conto Utili su cambi" />
+                                        <field name="a_perdite" string="Conto Perdite su cambi" />
+                                        <field name="a_tax_credit" string="Conto Imposta Credito" />
+                                        <field name="a_tax_debit" string="Conto Imposta Debito" />
+                                    </group>
+                                </group>
+                            </div>
+                            <div class="d-flex p-2 justify-content-center">
+                                <button name="assign_account" string="Assegna Conti" type="object" class="btn btn-primary" />
+                            </div>
+                        </div>
+                    </group>
+
+                    <!--IMPORT SALDI-->
+                    <group name="step_6" attrs="{'invisible': [('state', '!=', 'step_6')]}">
+                        <div class="d-flex flex-column">
+                            <br/>
+                            <h1 style="text-align:center;font-family:Verdana;font-weight:900;color:#00a09d;">
+                                Importa i saldi
+                            </h1>
+                            <br/>
+                            <div class="d-inline-flex p-2 justify-content-center">
+                                <div style="width:40%;">
+                                    <group>
+                                        <field name="file_saldi" string="Saldi (XLSX)" />
+                                        <field name="account_credit_id" string="Conto Crediti" />
+                                        <field name="account_debit_id" string="Conto Debiti" />
+                                        <field name="account_bilancio_apertura" string="Bilancio Apertura" />
+                                        <field name="journal_saldi_id" string="Registro" />
+                                        <field name="date_saldi" string="Data Apertura" />
+                                    </group>
+                                </div>
+                            </div>
+                            <br/>
+                            <div class="d-flex justify-content-center">
+                                <div class="d-flex justify-content-around" style="width:60%;">
+                                    <button name="download_sample_saldi"
+                                            string="Scarica Esempio"
+                                            type="object"
+                                            class="btn btn-warning"
+                                            style="width:40%;height:60px;font-size:25px;"/>
+
+                                    <button name="upload_saldi"
+                                            string="Carica"
+                                            type="object"
+                                            class="btn btn-primary"
+                                            style="width:40%;height:60px;font-size:25px;"/>
+                                </div>
+                            </div>
+                        </div>
+                    </group>
+
+                    <!--REVERSE CHARGE-->
+                    <group name="step_7" attrs="{'invisible': [('state', '!=', 'step_7')]}">
+                        <div class="d-flex flex-column">
+                            <br/>
+                            <h1 style="text-align:center;font-family:Verdana;font-weight:900;color:#00a09d;">
+                                Configurazione del Reverse Charge
+                            </h1>
+                            <br/>
+                            <div class="d-flex p-2 justify-content-center">
+                                <div style="width:40%;">
+                                    <group>
+                                        <field name="journal_ita_rc" string="REGISTRO AUTOFATTURA RC ITALIA"/>
+                                        <field name="journal_intra_rc" string="REGISTRO AUTOFATTURA INTRA CEE"/>
+                                        <field name="journal_extra_rc" string="REGISTRO AUTOFATTURA EXTRA CEE"/>
+                                    </group>
+                                </div>
+                                <div style="width:40%;">
+                                    <group>
+                                        <field name="journal_payment" string="REGISTRO PAGAMENTO AUTOFATTURE"/>
+                                        <field name="transitory_account" string="CONTO TRANSITORIO AUTOFATTURA"/>
+                                        <field name="bank_account_rc" string="CONTO BANCARIO RC"/>
+                                    </group>
+                                </div>
+                            </div>
+                            <br/>
+                            <div class="d-flex justify-content-center">
+                                <div class="d-flex justify-content-around" style="width:60%;">
+                                    <button name="create_rc_automatism" string="Crea Reverse Charge" type="object"
+                                            class="btn btn-primary"/>
+                                    <button name="create_fiscal_position" string="Crea Posizioni Fiscali" type="object"
+                                            class="btn btn-primary"/>
+                                </div>
+                            </div>
+                        </div>
+                    </group>
+
+                    <!--TERMINI DI PAGAMENTO-->
+                    <group name="step_8" attrs="{'invisible': [('state', '!=', 'step_8')]}">
+                        <div class="d-flex flex-column">
+                            <br/>
+                            <h1 style="text-align:center;font-family:Verdana;font-weight:900;color:#00a09d;">
+                                Seleziona i termini di pagamento che vuoi utilizzare
+                            </h1>
+                            <br/>
+                            <div class="d-inline-flex p-2 justify-content-center">
+                                <div style="max-width:40%;">
+                                    <field name="account_payment_term_ids" readonly="1" force_save="1">
+                                        <tree no_open="1">
+                                            <field name="name" string="Nome"/>
+                                            <field name="install" nolabel="1" widget="boolean_toggle"/>
+                                        </tree>
+                                    </field>
+                                </div>
+                            </div>
+                            <div class="d-inline-flex p-2 justify-content-center">
+                                <button name="create_payment_terms" string="Crea Termini di Pagamento" type="object" class="btn btn-primary"/>
+                            </div>
+                        </div>
+                    </group>
+
+                    <!--RITENUTE D'ACCONTO-->
+                    <group name="step_9" attrs="{'invisible': [('state', '!=', 'step_9')]}">
+                        <div class="d-flex flex-column">
+                            <br/>
+                            <h1 style="text-align:center;font-family:Verdana;font-weight:900;color:#00a09d;">
+                                Configurazione delle ritenute d'acconto
+                            </h1>
+                            <br/>
+                            <div class="d-inline-flex p-2 justify-content-center">
+                                <group>
+                                    <group>
+                                        <field name="withholding_credit_account_id" string="Conto di credito"/>
+                                        <field name="withholding_debit_account_id" string="Conto di debito"/>
+                                    </group>
+                                    <group>
+                                        <field name="withholding_journal_id" string="Registro ritenuta d'acconto"/>
+                                        <field name="withholding_payment_term_id" string="Termini di pagamento"/>
+                                    </group>
+                                </group>
+                            </div>
+                            <div class="d-inline-flex p-2 justify-content-center">
+                                <div style="max-width:40%;">
+                                    <field name="withholding_tax_ids" readonly="1" force_save="1">
+                                        <tree no_open="1">
+                                            <field name="name" string="Nome"/>
+                                            <field name="install" nolabel="1" widget="boolean_toggle"/>
+                                        </tree>
+                                    </field>
+                                </div>
+                            </div>
+                            <div class="d-inline-flex p-2 justify-content-center">
+                                <button name="create_ritenute_acconto" string="Crea Ritenute d'acconto" type="object" class="btn btn-primary"/>
+                            </div>
+                        </div>
+                    </group>
+
+                    <!--DATA RANGE-->
+                    <group name="step_10" attrs="{'invisible': [('state', '!=', 'step_10')]}">
+                        <div class="d-flex flex-column">
+                            <br/>
+                            <h1 style="text-align:center;font-family:Verdana;font-weight:900;color:#00a09d;">
+                                Imposta qui i tuoi intervalli data
+                            </h1>
+                            <br/>
+                            <div class="d-inline-flex p-2 justify-content-center">
+                                <div style="max-width:40%;">
+                                    <group><field name="years_to_cover"/></group>
+                                </div>
+                            </div>
+                            <div class="d-inline-flex p-2 justify-content-center">
+                                <div style="max-width:10%;">
+                                    <group>
+                                        <field name="create_months"/>
+                                        <field name="create_quarters"/>
+                                        <field name="create_years"/>
+                                    </group>
+                                </div>
+                            </div>
+                            <div class="d-inline-flex p-2 justify-content-center">
+                                <button name="create_date_range" string="Crea Intervalli" type="object" class="btn btn-primary"/>
+                            </div>
+                        </div>
+                    </group>
+
+                    <footer attrs="{'invisible': [('state', '=', False)]}">
+                        <div class="d-flex flex-row-reverse">
+                            <field name="is_last_step" invisible="1"/>
+                            <div class="p-2" attrs="{'invisible': [('is_last_step', '=', True)]}">
+                                <button name="button_next" type="object" string="Successivo" class="oe_highlight" icon="fa-arrow-circle-right"/>
+                            </div>
+                            <div class="p-2" attrs="{'invisible': [('is_last_step', '=', False)]}">
+                                <button name="button_exit" type="object" string="Termina" class="oe_highlight"/>
+                            </div>
+                            <div class="p-2" attrs="{'invisible': [('state', '=', 'step_1')]}">
+                                <button name="button_previous" type="object" string="Precedente" class="oe_highlight" icon="fa-arrow-circle-left"/>
+                            </div>
+                        </div>
+                    </footer>
+
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="setup_accounting_action">
+        <field name="name">Setup Contabilità</field>
+        <field name="res_model">wizard.setup.accounting</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <menuitem id="menu_setup_accounting" name="Setup Contabilità" action="setup_accounting_action" parent="account.menu_finance_configuration" sequence="0" groups="base.group_system"/>
+
+</odoo>

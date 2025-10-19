@@ -1,0 +1,248 @@
+<!--
+Copyright 2023 - Huroos srl - www.huroos.com
+License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl-3.0.en.html)
+Powered by Marco Frascerra
+-->
+
+<odoo>
+    <template id="delivery_note_report_template" inherit_id="l10n_it_delivery_note.delivery_note_report_template">
+
+        <xpath expr="//t[@t-call='web.external_layout']" position="replace">
+
+            <t t-call="web.external_layout">
+
+                <!--Custom header-->
+                <t t-set="delivery_note_header">
+                    <!--Order infos-->
+                    <div class="row" style="text-align:center; margin-top:15px;" name="delivery_note_info">
+                        <div class="col-12">
+                            <h1 style="font-size:30px;font-weight:900;">
+                                <span t-if="doc.state in ['draft']">Documento di trasporto in bozza</span>
+                                <span t-if="doc.state not in ['draft']">Documento di trasporto N° </span>
+                                <span t-if="doc.state not in ['draft'] and doc.name" t-field="doc.name"/>
+                                <t t-if="doc.date">
+                                    &amp;nbsp;del&amp;nbsp;<span t-field="doc.date"/>
+                                </t>
+                            </h1>
+                        </div>
+                    </div>
+                    <!--Partner infos-->
+                    <table style="margin-top:20px;" name="partner_address_boxes">
+                        <tr>
+                            <td style="width:45%;border:1px solid;" name="main_address">
+                                <h2 style="font-size:17px;">
+                                    <strong>Spett.le</strong>
+                                    <br/>
+                                    <span t-field="doc.partner_id"
+                                          t-options="{'widget': 'contact', 'fields': ['name', 'address', 'phone'], 'no_marker': True, 'phone_icons': True}"/>
+                                    <t t-if="doc.partner_id.vat">
+                                        <span>Partita IVA:</span>&amp;nbsp;
+                                        <span t-field="doc.partner_id.vat"/>
+                                    </t>
+                                </h2>
+                            </td>
+                            <td style="width:10%;"/>
+                            <td style="width:45%;border:1px solid;" name="shipping_address">
+                                <h2 style="font-size:17px;">
+                                    <strong>Indirizzo di consegna</strong>
+                                    <br/>
+                                    <span t-field="doc.partner_shipping_id"
+                                          t-options="{'widget': 'contact', 'fields': ['name', 'address', 'phone'], 'no_marker': True, 'phone_icons': True}"/>
+                                    <t t-if="doc.partner_shipping_id.vat">
+                                        <span>P. IVA:</span>&amp;nbsp;
+                                        <span t-field="doc.partner_shipping_id.vat"/>
+                                    </t>
+                                </h2>
+                            </td>
+                        </tr>
+                    </table>
+
+                    <table style="margin-top:20px;" name="transport_info">
+                        <tr>
+                            <td style="width:30%;border:1px solid;" name="td_transport_reason">
+                                <h3 class="cell_name">Causale di trasporto</h3>
+                                <span t-field="doc.transport_reason_id"/>
+                            </td>
+                            <td style="width:5%;"/>
+                            <td style="width:30%;border:1px solid;" name="td_transport_condition">
+                                <h3 class="cell_name">Condizione di trasporto</h3>
+                                <span t-field="doc.transport_condition_id"/>
+                            </td>
+                            <td style="width:5%;"/>
+                            <td style="width:30%;border:1px solid;" name="td_transport_method">
+                                <h3 class="cell_name">Metodo di trasporto</h3>
+                                <span t-field="doc.transport_method_id"/>
+                            </td>
+                        </tr>
+                    </table>
+
+                    <h2 style="font-size:17px;margin-top:10px;">Documento di trasporto: Ai sensi del DPR 472-96 del 14.08.1996</h2>
+                </t>
+
+                <div class="page">
+                    <!--Controllo se c'è almeno una riga in cui il prodotto ha il default code, altrimenti non stampo la colonna-->
+                    <t t-set="display_product_default_code" t-value="any(line.product_id.default_code for line in doc.line_ids)"/>
+
+                    <!--Stessa cosa con lo sconto, se c'è almeno una riga con lo sconto diverso da zero, stampo la colonna-->
+                    <t t-set="display_discount" t-value="any(line.discount for line in doc.line_ids)"/>
+
+                    <table id="product_data" name="delivery_note_rows" style="margin-top:-45px;">
+                        <thead>
+                            <tr style="height:15px; border-bottom:2px solid;" name="table_head">
+                                <th t-if="display_product_default_code" name="th_product" style="padding-right:20px;">PRODOTTO</th>
+                                <th name="th_description">DESCRIZIONE</th>
+                                <th name="th_quantity" style="width:5%;" class="right_align">Q.TÀ</th>
+                                <th name="th_udm" style="width:5%;">UDM</th>
+                                <th t-if="doc.print_prices" name="th_priceunit" style="width:10%;" class="right_align">PR.UNIT.</th>
+                                <th t-if="display_discount and doc.print_prices" name="th_discount" style="width:10%;" class="right_align">SCONTO(%)</th>
+                                <th t-if="doc.print_prices" name="th_taxes" style="width:5%;">I.V.A.</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-foreach="doc.line_ids" t-as="line">
+
+                                <!--Righe prodotto-->
+                                <t t-if="not line.display_type">
+                                    <tr class="table_row" style="height:18px;" name="product_row">
+                                        <!--PRODOTTO-->
+                                        <td t-if="display_product_default_code" name="td_product">
+                                            <span t-field="line.product_id.default_code"/>
+                                        </td>
+                                        <!--DESCRIZIONE-->
+                                        <td name="td_description">
+                                            <span t-field="line.name"/>
+                                        </td>
+                                        <!--Q.TÀ-->
+                                        <td name="td_quantity" class="right_align">
+                                            <span t-field="line.product_qty"/>
+                                        </td>
+                                        <!--UDM-->
+                                        <td name="td_udm">
+                                            <span t-field="line.product_uom_id"/>
+                                        </td>
+                                        <!--PR.UNIT.-->
+                                        <td t-if="doc.print_prices" name="td_priceunit" class="right_align">
+                                            <span t-field="line.price_unit"/>
+                                        </td>
+                                        <!--SCONTO(%)-->
+                                        <td t-if="display_discount and doc.print_prices" name="td_discount" class="right_align">
+                                            <span t-field="line.discount"/>
+                                        </td>
+                                        <!--I.V.A.-->
+                                        <td t-if="doc.print_prices" name="td_taxes">
+                                            <span t-esc="', '.join(map(lambda x: (x.description or x.name), line.tax_ids))"/>
+                                        </td>
+                                    </tr>
+                                </t>
+
+                                <!--Sezioni-->
+                                <t t-if="line.display_type == 'line_section'">
+                                    <tr class="table_row" style="background-color:#cccccc;" name="section_row">
+                                        <td colspan="7" name="td_section">
+                                            <strong><span style="font-weight:bold;" t-field="line.name"/></strong>
+                                        </td>
+                                    </tr>
+                                </t>
+
+                                <!--Righe di nota-->
+                                <t t-if="line.display_type == 'line_note'">
+                                    <tr class="table_row" name="note_row">
+                                        <td colspan="7" name="td_note">
+                                            <span style="font-style:oblique;" t-field="line.name"/>
+                                        </td>
+                                    </tr>
+                                </t>
+                            </t>
+
+                            <!--Note generali DDT-->
+                            <!--Le note del DDT sono un field in formato html, quindi field vuoto significa <p><br></p> -->
+                            <tr t-if="doc.note != '&lt;p&gt;&lt;br&gt;&lt;/p&gt;'" class="terms_and_condition">
+                                <td colspan="7">
+                                    <h3 class="cell_name">Note</h3>
+                                    <span style="line-height:0.1px;" t-field="doc.note"/>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <t t-set="delivery_note_footer">
+                        <div class="last-page" style="page-break-inside:avoid;">
+                            <table class="bordered" name="ddt_footer">
+                                <tr class="underline">
+                                    <td class="right_bordered" style="width:20%;">
+                                        <h3 class="cell_name">Descrizione dei beni</h3>
+                                        <span t-field="doc.goods_appearance_id"/>
+                                    </td>
+                                    <td class="right_bordered right_align" style="width:20%;">
+                                        <h3 class="cell_name">Peso lordo</h3>
+                                        <span t-field="doc.gross_weight"/>
+                                    </td>
+                                    <td class="right_bordered right_align" style="width:20%;">
+                                        <h3 class="cell_name">Peso netto</h3>
+                                        <span t-field="doc.net_weight"/>
+                                    </td>
+                                    <td class="right_bordered" style="width:20%;">
+                                        <h3 class="cell_name">Data e ora di trasporto</h3>
+                                        <span t-field="doc.transport_datetime"/>
+                                    </td>
+                                    <td class="right_bordered right_align" style="width:20%;">
+                                        <h3 class="cell_name">Colli</h3>
+                                        <span t-field="doc.packages"/>
+                                    </td>
+                                </tr>
+                                <tr style="height:100px;">
+                                    <td t-if="doc.carrier_id" colspan="5" class="right_bordered">
+                                        <h3 class="cell_name">Vettore</h3>
+                                        <span style="line-height:12px;"
+                                              t-field="doc.carrier_id"
+                                              t-options="{'widget': 'contact', 'fields': ['name', 'address'], 'no_marker': True}"/>
+                                    </td>
+                                </tr>
+                            </table>
+
+                            <table class="bordered" name="signatures">
+                                <tr style="height:75px;">
+                                    <td class="right_bordered" style="width:33.33%">
+                                        <h3 class="cell_name">Firma del vettore</h3>
+                                    </td>
+                                    <td class="right_bordered" style="width:33.33%">
+                                        <h3 class="cell_name">Firma del mittente</h3>
+                                    </td>
+                                    <td class="right_bordered" style="width:33.33%">
+                                        <h3 class="cell_name">Firma del destinatario</h3>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </t>
+
+                    <!--Per evitare problemi di inherit-->
+                    <t id="partner_outgoing" style="display:none;"/>
+                    <address style="display:none;"/>
+                    <information_block style="display:none;"/>
+                    <div id="warehouse_outgoing" style="display:none;"/>
+                    <div id="dn_terms" style="display:none;"/>
+                    <h2 id="document_title" style="display:none;"/>
+                    <div id="delivery_data_information" style="display:none;"/>
+                    <table id="parcel_info" style="display:none;"/>
+                    <div name="good_description" style="display:none;"/>
+                    <div name="gross_weight" style="display:none;"/>
+                    <div name="net_weight" style="display:none;"/>
+                    <div name="transport_date" style="display:none;"/>
+                    <div name="packages" style="display:none;"/>
+                    <div name="notes" style="display:none;"/>
+                    <div name="carrier_signature" style="display:none;"/>
+                    <div name="driver_signature" style="display:none;"/>
+                    <div name="recipint_signature" style="display:none;"/>
+                    <!--################################-->
+
+                </div>
+            </t>
+        </xpath>
+    </template>
+
+
+    <record id="l10n_it_delivery_note.delivery_note_report_action" model="ir.actions.report">
+        <field name="paperformat_id" ref="huroos_reports_ddt.huroos_custom_ddt_paperformat"/>
+    </record>
+</odoo>

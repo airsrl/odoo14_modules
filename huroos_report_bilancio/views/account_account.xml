@@ -1,0 +1,135 @@
+<odoo>
+    <data>
+
+        <!--TreeView Conti, aggiunta colonne credito, debito e saldo-->
+<!--        <record id="huroos_view_account_list" model="ir.ui.view">-->
+<!--            <field name="name">view_account_list</field>-->
+<!--            <field name="model">account.account</field>-->
+<!--            <field name="inherit_id" ref="account.view_account_list"/>-->
+<!--            <field name="arch" type="xml">-->
+<!--                <xpath expr="//tree" position="inside">-->
+<!--                    <field name="credit" string="Avere" sum="Crediti"/>-->
+<!--                    <field name="debit" string="Dare" sum="Debiti"/>-->
+<!--                    <field name="balance" string="Saldo" sum="Saldo"/>-->
+<!--                </xpath>-->
+<!--            </field>-->
+<!--        </record>-->
+
+        <!--Modifica Action apertura piano dei conti per nascondere i conti di tipo Aggregato e Macroaggregato e Disattivati
+        Inoltre parte già raggruppata per Macro e Aggregati-->
+        <record id="action_account_form" model="ir.actions.act_window">
+            <field name="name">Chart of Accounts</field>
+            <field name="res_model">account.account</field>
+            <field name="view_mode">tree,kanban,form</field>
+            <field name="search_view_id" ref="account.view_account_search"/>
+            <field name="view_id" ref="account.view_account_list"/>
+            <field name="context">{'search_default_macroaggregate_id': 1,
+                                   'search_default_aggregate_id': 1,'search_default_sottoconto_terzo_livello_group': 1}</field>
+            <field name="domain" eval="['&amp;',('deprecated','=', False),('hierarchy_type', '=', False)]"/>
+        </record>
+
+<!--        <menuitem action="l10n_it_account.action_account_form"-->
+<!--                  id="account.menu_action_account_form"-->
+<!--                  parent="account.account_account_menu"-->
+<!--                  groups="account.group_account_user"-->
+<!--                  sequence="2"/>-->
+
+        <!--Aggiunta dei filtri di raggruppamento per magro e aggregato-->
+        <record id="huroos_view_account_search" model="ir.ui.view">
+            <field name="name">view_account_search</field>
+            <field name="model">account.account</field>
+            <field name="inherit_id" ref="account.view_account_search"/>
+            <field name="arch" type="xml">
+                <search position="inside">
+                    <filter name="area" string="Conto Economico" domain="[('area', '=', 'conto_economico')]"/>
+                    <filter name="area" string="Stato Patrimoniale" domain="[('area', '=', 'stato_patrimoniale')]"/>
+                    <separator/>
+                    <filter name="macroaggregati" string="Macroaggregati" domain="[('hierarchy_type', '=', 'macroaggragate')]"/>
+                    <filter name="aggregati" string="Aggregati" domain="[('hierarchy_type', '=', 'aggregate')]"/>
+                    <filter string="Terzo Livello" name="sottoconto_terzo_livello" />
+                    <filter string="Quarto Livello" name="sottoconto_quarto_livello" />
+                    <filter string="Quinto Livello" name="sottoconto_quinto_livello" />
+                    <filter string="Sesto Livello" name="sottoconto_sesto_livello" />
+                </search>
+                <group position="inside">
+                    <filter string="Macroaggregato" name="macroaggregate_id" domain="[]" context="{'group_by':'macroaggregate_id'}"/>
+                    <filter string="Aggregato" name="aggregate_id" domain="[]" context="{'group_by':'aggregate_id'}"/>
+                    <filter string="Terzo Livello" name="sottoconto_terzo_livello_group" domain="[]" context="{'group_by':'sottoconto_terzo_livello'}"/>
+                    <filter string="Quarto Livello" name="sottoconto_quarto_livello_group" domain="[]" context="{'group_by':'sottoconto_quarto_livello'}"/>
+                    <filter string="Quinto Livello" name="sottoconto_quinto_livello_group" domain="[]" context="{'group_by':'sottoconto_quinto_livello'}"/>
+                    <filter string="Sesto Livello" name="sottoconto_sesto_livello_group" domain="[]" context="{'group_by':'sottoconto_sesto_livello'}"/>
+                </group>
+            </field>
+        </record>
+
+        <!-- FormView Conti -->
+        <record id="huroos_view_account_form" model="ir.ui.view">
+            <field name="name">account.view_account_form</field>
+            <field name="model">account.account</field>
+            <field name="inherit_id" ref="account.view_account_form"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//field[@name='user_type_id']" position="replace">
+
+
+                    <field name="user_type_id" string="Tipo" domain="[('internal_group', '!=', False)]" widget="account_hierarchy_selection"/>
+                    <field name="area" />
+                    <field name="hierarchy_type" string="Tipo Gerarchia"/>
+                    <field name="macroaggregate_id"
+                           string="Macroaggregato"
+                           options="{'no_quick_create':True,'no_create_edit':True}"
+                           domain="['&amp;',('area', '=', area),('hierarchy_type', '=', 'macroaggragate') ]"
+                           attrs="{'invisible': [('hierarchy_type', '=', 'macroaggragate')]}"/>
+                    <field name="aggregate_id"
+                           string="Aggregato"
+                           options="{'no_quick_create':True,'no_create_edit':True}"
+                           domain="['&amp;',('area', '=', area),('hierarchy_type', '=', 'aggregate')]"
+                           attrs="{'invisible': [('hierarchy_type', 'in', ['macroaggragate', 'aggregate'])]}"/>
+                    <field name="sottoconto_terzo_livello"
+                           string="Sottoconto Terzo Livello"
+                           options="{'no_quick_create':True,'no_create_edit':True}"
+                           domain="['&amp;',('area', '=', area),('hierarchy_type', '=', 'sottoconto_terzo_livello')]"
+                          attrs="{'invisible': [('hierarchy_type', 'in', ['macroaggragate', 'aggregate'])]}"/>
+                    <field name="sottoconto_quarto_livello"
+                           string="Sottoconto Quarto Livello"
+                           options="{'no_quick_create':True,'no_create_edit':True}"
+                           domain="['&amp;',('area', '=', area),('hierarchy_type', '=', 'sottoconto_quarto_livello')]"
+                          attrs="{'invisible': [('hierarchy_type', 'in', ['macroaggragate', 'aggregate'])]}"/>
+                    <field name="sottoconto_quinto_livello"
+                           string="Sottoconto Quinto Livello"
+                           options="{'no_quick_create':True,'no_create_edit':True}"
+                           domain="['&amp;',('area', '=', area),('hierarchy_type', '=', 'sottoconto_quinto_livello')]"
+                          attrs="{'invisible': [('hierarchy_type', 'in', ['macroaggragate', 'aggregate'])]}"/>
+                    <field name="sottoconto_sesto_livello"
+                           string="Sottoconto Sesto Livello"
+                           options="{'no_quick_create':True,'no_create_edit':True}"
+                           domain="['&amp;',('area', '=', area),('hierarchy_type', '=', 'sottoconto_sesto_livello')]"
+                          attrs="{'invisible': [('hierarchy_type', 'in', ['macroaggragate', 'aggregate'])]}"/>
+
+
+                </xpath>
+
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="aggregate_action">
+            <field name="name">Aggregati</field>
+            <field name="res_model">account.account</field>
+            <field name="view_mode">tree,form</field>
+            <field name="search_view_id" ref="huroos_view_account_search"/>
+            <field name="context">{'search_default_aggregati': 1}</field>
+        </record>
+
+        <record model="ir.actions.act_window" id="macroaggregate_action">
+            <field name="name">Macroaggregati</field>
+            <field name="res_model">account.account</field>
+            <field name="view_mode">tree,form</field>
+            <field name="search_view_id" ref="huroos_view_account_search"/>
+            <field name="context">{'search_default_macroaggregati': 1}</field>
+        </record>
+
+        <menuitem id="macro_aggregate_menu" name="Macroaggregati" sequence="2" parent="account.account_account_menu" action="macroaggregate_action"/>
+        <menuitem id="aggregate_menu" name="Aggregati" sequence="2" parent="account.account_account_menu" action="aggregate_action"/>
+<!--        <menuitem action="account.action_tax_form" id="account.menu_action_tax_form" parent="account.account_account_menu" sequence="3"/>-->
+    </data>
+</odoo>

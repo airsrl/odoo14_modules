@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record model="ir.ui.view" id="mis_report_instance_view_form">
+        <field name="name">mis.report.instance.view.tree</field>
+            <field name="model">mis.report.instance</field>
+            <field name="inherit_id" ref="l10n_it_mis_reports_pl_bs.mis_report_instance_view_form" />
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='comparison_mode']" position="after">
+                    <field name="show_void_moves" />
+                </xpath>
+            </field>
+    </record>
+</odoo>

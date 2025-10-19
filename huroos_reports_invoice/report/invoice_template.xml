@@ -1,0 +1,261 @@
+<!--
+Copyright 2023 - Huroos srl - www.huroos.com
+License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl-3.0.en.html)
+Powered by Marco Frascerra
+-->
+
+<odoo>
+    <template id="report_invoice_document" inherit_id="account.report_invoice_document">
+
+        <xpath expr="//t[@t-call='web.external_layout']" position="replace">
+
+            <t t-call="web.external_layout">
+
+                <!--Custom header-->
+                <t t-set="invoice_header">
+                    <!--Order infos-->
+                    <div class="row" style="text-align:center; margin-top:15px;">
+                        <div class="col-12">
+                            <h1 style="font-size:30px;font-weight:900;">
+                                <span t-if="o.move_type == 'out_invoice' and o.state == 'posted'">Fattura</span>
+                                <span t-if="o.move_type == 'out_invoice' and o.state == 'draft'">Fattura in bozza</span>
+                                <span t-if="o.move_type == 'out_invoice' and o.state == 'cancel'">Fattura annullata</span>
+                                <span t-if="o.move_type == 'out_refund'">Nota di credito</span>
+                                <span t-if="o.move_type == 'in_refund'">Nota di credito fornitore</span>
+                                <span t-if="o.move_type == 'in_invoice'">Fattura fornitore</span>
+                                <span t-if="o.name != '/'" t-field="o.name"/>
+                                <t t-if="o.invoice_date">
+                                    &amp;nbsp;<span>del</span>&amp;nbsp;
+                                    <span t-field="o.invoice_date"/>
+                                </t>
+                            </h1>
+                        </div>
+                    </div>
+                    <!--Partner infos-->
+                    <table style="margin-top:20px;">
+                        <tr>
+                            <td style="width:45%;border:1px solid;">
+                                <h2 style="font-size:17px;">
+                                    <strong>Indirizzo di fatturazione</strong>
+                                    <br/>
+                                    <span t-field="o.partner_id"
+                                          t-options="{'widget': 'contact', 'fields': ['name', 'address', 'phone'], 'no_marker': True, 'phone_icons': True}"/>
+                                    <t t-if="o.partner_id.vat">
+                                        <span>Partita IVA:</span>&amp;nbsp;
+                                        <span t-field="o.partner_id.vat"/>
+                                    </t>
+                                </h2>
+                            </td>
+                            <td style="width:10%;"/>
+                            <td style="width:45%;border:1px solid;">
+                                <h2 style="font-size:17px;">
+                                    <strong>Indirizzo di consegna</strong>
+                                    <br/>
+                                    <span t-field="o.partner_shipping_id"
+                                          t-options="{'widget': 'contact', 'fields': ['name', 'address', 'phone'], 'no_marker': True, 'phone_icons': True}"/>
+                                    <t t-if="o.partner_shipping_id.vat">
+                                        <span>P. IVA:</span>&amp;nbsp;
+                                        <span t-field="o.partner_shipping_id.vat"/>
+                                    </t>
+                                </h2>
+                            </td>
+                        </tr>
+                    </table>
+                </t>
+
+                <div class="page">
+                    <!--Controllo se c'è almeno una riga in cui il prodotto ha il default code, altrimenti non stampo la colonna-->
+                    <t t-set="display_product_default_code" t-value="any(line.product_id.default_code for line in o.invoice_line_ids)"/>
+
+                    <!--Stessa cosa con lo sconto, se c'è almeno una riga con lo sconto diverso da zero, stampo la colonna-->
+                    <t t-set="display_discount" t-value="any(line.discount for line in o.invoice_line_ids)"/>
+
+                    <table style="margin-top:-40px;" name="invoice_line_table">
+                        <thead>
+                            <tr style="height:15px;border-bottom:2px solid;">
+                                <th t-if="display_product_default_code" name="th_product" style="padding-right:20px;">PRODOTTO</th>
+                                <th name="th_description">DESCRIZIONE</th>
+                                <th name="th_quantity" style="width:5%;" class="right_align">Q.TÀ</th>
+                                <th name="th_udm" style="width:5%;">UDM</th>
+                                <th name="th_priceunit" style="width:10%;" class="right_align">PR.UNIT.</th>
+                                <th t-if="display_discount" name="th_discount" style="width:10%;" class="right_align">SCONTO(%)</th>
+                                <th name="th_taxes" style="width:5%;">I.V.A.</th>
+                                <th name="th_subtotal" style="width:10%;" class="right_align">IMPONIBILE</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-foreach="o.invoice_line_ids" t-as="line">
+                                <t t-if="not line.display_type">
+                                    <tr class="table_row" style="height:18px;">
+                                        <!--PRODOTTO-->
+                                        <td t-if="display_product_default_code" name="td_product">
+                                            <span t-field="line.product_id.default_code"/>
+                                        </td>
+                                        <!--DESCRIZIONE-->
+                                        <td name="td_description">
+                                            <span t-field="line.name"/>
+                                        </td>
+                                        <!--Q.TÀ-->
+                                        <td name="td_quantity" class="right_align">
+                                            <span t-field="line.quantity"/>
+                                        </td>
+                                        <!--UDM-->
+                                        <td name="td_udm">
+                                            <span t-field="line.product_uom_id"/>
+                                        </td>
+                                        <!--PR.UNIT.-->
+                                        <td name="td_priceunit" class="right_align">
+                                            <span t-field="line.price_unit"/>
+                                        </td>
+                                        <!--SCONTO(%)-->
+                                        <td t-if="display_discount" name="td_discount" class="right_align">
+                                            <span t-field="line.discount"/>
+                                        </td>
+                                        <!--I.V.A.-->
+                                        <td name="td_taxes">
+                                            <span t-esc="', '.join(map(lambda x: (x.description or x.name), line.tax_ids))"/>
+                                        </td>
+                                        <!--IMPONIBILE-->
+                                        <td name="td_subtotal" class="right_align">
+                                            <span t-field="line.price_subtotal"/>
+                                        </td>
+                                    </tr>
+                                </t>
+
+                                <!--Sezioni-->
+                                <t t-if="line.display_type == 'line_section'">
+                                    <tr class="table_row" style="background-color:#cccccc;" name="section_row">
+                                        <td colspan="8" name="td_section">
+                                            <strong><span style="font-weight:bold;" t-field="line.name"/></strong>
+                                        </td>
+                                    </tr>
+                                </t>
+
+                                <!--Righe di nota-->
+                                <t t-if="line.display_type == 'line_note'">
+                                    <tr class="table_row" name="note_row">
+                                        <td colspan="8" name="td_note">
+                                            <span style="font-style:oblique;" t-field="line.name"/>
+                                        </td>
+                                    </tr>
+                                </t>
+                            </t>
+
+                            <!--Termini e condizioni fattura-->
+                            <tr t-if="o.narration" class="terms_and_condition" name="invoice_terms">
+                                <td colspan="8">
+                                    <h3 class="cell_name">Termini e condizioni</h3>
+                                    <span t-field="o.narration"/>
+                                </td>
+                            </tr>
+
+                            <!--Pagamenti-->
+                            <tr t-if="print_with_payments and o.payment_state != 'invoicing_legacy'" style="border-top:2px solid;">
+                                <td colspan="8" class="right_align">
+                                    <t t-set="payments_vals" t-value="o.sudo()._get_reconciled_info_JSON_values()"/>
+                                    <t t-foreach="payments_vals" t-as="payment">
+                                        <i>
+                                            <h3 class="cell_name">
+                                                Pagato il: <t t-esc="payment['date']" t-options='{"widget": "date"}'/>
+                                                &amp;nbsp;-&amp;nbsp;<span t-esc="payment['amount']" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                                            </h3>
+                                        </i>
+                                    </t>
+                                    <t t-if="len(payments_vals) &gt; 0">
+                                        <h3 style="font-size:18px;font-weight:900;">Importo da pagare: <span t-field="o.amount_residual"/></h3>
+                                    </t>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <t t-set="invoice_footer">
+                        <div class="last-page">
+                            <table class="bordered" name="invoice_footer_table">
+
+                                <tr class="underline">
+                                    <td colspan="4" class="right_bordered" style="width:50%;">
+                                        <h3 class="cell_name">Termini di pagamento:</h3>
+                                        <span t-if="o.invoice_payment_term_id" t-field="o.invoice_payment_term_id.note"/>
+                                    </td>
+                                    <td style="width:50%;">
+                                        <h3 class="cell_name">
+                                            Banca del beneficiario:&amp;nbsp;<span t-field="o.partner_bank_id.bank_id.name"/>
+                                        </h3>
+                                        <h3 class="cell_name">
+                                            IBAN:&amp;nbsp;<span t-field="o.partner_bank_id.acc_number"/>
+                                        </h3>
+                                    </td>
+                                </tr>
+
+                                <tr class="underline" style="height: 125px;">
+                                    <td style="width:12.5%;" name="td_tax_recap_names">
+                                        <h3 class="cell_name">I.V.A.</h3>
+                                        <t t-foreach="o.amount_by_group" t-as="tax">
+                                            <t t-esc="tax[0]"/><br/>
+                                        </t>
+                                    </td>
+                                    <td class="right_bordered right_align" style="width:12.5%;" name="td_tax_recap_amounts">
+                                        <h3 class="cell_name">Importo</h3>
+                                        <t t-foreach="o.amount_by_group" t-as="tax">
+                                            <t t-esc="tax[3]"/><br/>
+                                        </t>
+                                    </td>
+
+                                    <td style="width:12.5%;" name="td_invoice_date_due">
+                                        <h3 class="cell_name">Scadenze</h3>
+                                        <t t-foreach="o.payment_due_ids" t-as="due">
+                                            <span t-field="due.due_date"/><br/>
+                                        </t>
+                                    </td>
+                                    <td class="right_bordered right_align" style="width:12.5%;" name="td_due_amounts">
+                                        <h3 class="cell_name">Importo</h3>
+                                        <t t-foreach="o.payment_due_ids" t-as="due">
+                                            <span t-esc="str('{:.2f}'.format(due.amount)).replace('.', ',') + ' ' + o.currency_id.symbol"/><br/>
+                                        </t>
+                                    </td>
+
+                                    <td class="right_align" style="width:50%;border:3px solid;vertical-align:bottom;" name="td_totals">
+                                        <h3 class="cell_name">Totale imponibile: <span t-field="o.amount_untaxed"/></h3>
+                                        <h3 class="cell_name">Totale I.V.A.: <span t-field="o.amount_tax"/></h3>
+                                        <h3 style="font-size:18px;font-weight:900;">Totale: <span t-field="o.amount_total"/></h3>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </t>
+
+                    <!--Per evitare problemi di inherit-->
+                    <address style="display:none;"/>
+                    <div t-if="o.partner_id.vat" style="display:none;"/>
+                    <div t-if="o.partner_id.ref" style="display:none;"/>
+                    <div id="informations" style="display:none;"/>
+                    <div id="informations" style="display:none;"/>
+                    <div id="total" style="display:none;"/>
+                    <p name="payment_communication" style="display:none;"/>
+                    <p name="payment_term" style="display:none;"/>
+                    <p name="comment" style="display:none;"/>
+                    <p name="note" style="display:none;"/>
+                    <p name="incoterm" style="display:none;"/>
+                    <div id="qrcode" style="display:none;"/>
+                    <div name="due_date" style="display:none;"/>
+                    <div name="invoice_date" style="display:none;"/>
+                    <div name="origin" style="display:none;"/>
+                    <div name="customer_code" style="display:none;"/>
+                    <div name="reference" style="display:none;"/>
+                    <!--################################-->
+
+                </div>
+            </t>
+        </xpath>
+    </template>
+
+    <record id="account.account_invoices" model="ir.actions.report">
+        <field name="paperformat_id" ref="huroos_reports_invoice.huroos_custom_invoice_paperformat"/>
+    </record>
+
+    <record id="account.account_invoices_without_payment" model="ir.actions.report">
+        <field name="paperformat_id" ref="huroos_reports_invoice.huroos_custom_invoice_paperformat"/>
+    </record>
+
+</odoo>

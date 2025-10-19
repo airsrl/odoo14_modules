@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="wizard_deleteline_view_form" model="ir.ui.view">
+        <field name="name">wizard_deleteline_view_form</field>
+        <field name="model">wizard.deleteline</field>
+        <field name="arch" type="xml">
+            <form string="Elimina righe">
+                <sheet>
+
+                        <field name="name" invisible="1"/>
+                        <field name="move_id" invisible="1"/>
+                        <field name="account_line_ids" context="{'check_move_validity':False}" widget="one2many_delete" mode="tree,form" readonly="1" >
+                                <tree>
+                                    <field name="sequence" widget="handle"/>
+                                        <field name="move_name" invisible="1"/>
+                                        <field name="move_id" invisible="1"/>
+                                        <field name="product_id" optional="show" />
+                                        <field name="name" widget="section_and_note_text" />
+                                        <field name="account_id" groups="account.group_account_readonly" options="{'no_create': True}"  />
+                                        <field name="analytic_account_id"  groups="analytic.group_analytic_accounting" optional="show"/>
+                                        <field name="analytic_tag_ids" groups="analytic.group_analytic_tags" optional="show" widget="many2many_tags"/>
+                                        <field name="quantity"/>
+                                        <field name="product_uom_category_id" invisible="1"/>
+                                        <field name="product_uom_id" string="UoM" groups="uom.group_uom" optional="show"/>
+                                        <field name="price_unit" string="Price"/>
+                                        <field name="discount" string="Disc.%" optional="hide"/>
+                                        <field name="tax_ids" widget="many2many_tags" options="{'no_create': True}" optional="show"/>
+                                        <field name="price_subtotal" string="Subtotal" groups="account.group_show_line_subtotals_tax_excluded"/>
+                                        <field name="price_total" string="Total" groups="account.group_show_line_subtotals_tax_included"/>
+
+                                        <!-- Others fields -->
+                                        <field name="partner_id" invisible="1"/>
+                                        <field name="amount_currency" invisible="1"/>
+                                        <field name="currency_id" invisible="1"/>
+                                        <field name="debit" invisible="1"/>
+                                        <field name="credit" invisible="1"/>
+                                        <field name="date" invisible="1"/>
+                                        <field name="date_maturity" invisible="1"/>
+
+                                        <field name="tax_line_id" invisible="1"/>
+                                        <field name="tax_repartition_line_id" invisible="1"/>
+                                        <field name="tax_tag_ids" invisible="1"/>
+                                        <field name="tax_base_amount" invisible="1"/>
+                                        <field name="tax_exigible" invisible="1"/>
+                                        <field name="company_id" invisible="1"/>
+                                        <field name="company_currency_id" invisible="1"/>
+                                        <field name="recompute_tax_line" invisible="1" force_save="1"/>
+                                        <field name="display_type" force_save="1" invisible="1"/>
+                                        <field name="is_rounding_line" invisible="1"/>
+                                        <field name="exclude_from_invoice_tab" invisible="1"/>
+                                        <field name="account_internal_type" invisible="1"/>
+                                        <field name="account_internal_group" invisible="1"/>
+                                </tree>
+                        </field>
+
+
+                </sheet>
+                <footer>
+                        <button special="cancel" string="Indietro" class="oe_link" />
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

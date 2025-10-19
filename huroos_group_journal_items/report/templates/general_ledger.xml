@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="template_report_general_ledger_lines_inherit" inherit_id="account_financial_report.report_general_ledger_lines">
+        <xpath expr="//div[@class='act_as_cell first_column']" position="replace">
+            <!--## date-->
+            <div class="act_as_cell first_column" style="width: 4.51%;">
+                Date
+            </div>
+        </xpath>
+        <xpath expr="(//div[@class='act_as_cell'])[4]" position="replace">
+            <!--## taxes -->
+            <div class="act_as_cell" style="width: 7.89%;">Taxes</div>
+        </xpath>
+        <xpath expr="(//div[@class='act_as_cell'])[5]" position="replace">
+            <!--## partner-->
+            <div class="act_as_cell" style="width: 9.01%;">Partner</div>
+        </xpath>
+        <xpath expr="(//div[@class='act_as_cell'])[6]" position="replace">
+            <!--## ref - label-->
+            <div class="act_as_cell" style="width: 14.2%;">
+                Ref -
+                Label
+            </div>
+        </xpath>
+        <xpath expr="//div[@class='act_as_cell first_column']" position="after">
+            <!--## document_date-->
+            <div class="act_as_cell" style="width: 5.70%;">
+                Data documento
+            </div>
+        </xpath>
+        <xpath expr="(//div[@class='act_as_row lines']/div[@class='act_as_cell'])[1]" position="after">
+            <!--## document_date-->
+            <div class="act_as_cell" />
+        </xpath>
+        <xpath expr="(//t/div[@class='act_as_row lines']/div[@class='act_as_cell left'])[1]" position="after">
+            <!--## document_date-->
+            <div class="act_as_cell left">
+                <t t-if="line['entry_id']">
+                    <t t-set="invoice_date" t-value="line['document_date']"/>
+                    <!--## We don't use t-field because it throws an error on click -->
+                    <span
+                        t-att-res-id="line['entry_id']"
+                        res-model="account.move"
+                        view-type="form"
+                    >
+                        <t
+                            t-esc="line['document_date']"
+                            t-options="{'widget': 'date'}"
+                        />
+                    </span>
+                </t>
+                <t t-else="">
+                    <span>
+                        <!--## We don't use t-field because it throws an error on click -->
+                        <t
+                            t-esc="line['document_date']"
+                            t-options="{'widget': 'date'}"
+                        />
+                    </span>
+                </t>
+            </div>
+        </xpath>
+    </template>
+</odoo>

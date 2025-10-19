@@ -1,0 +1,17 @@
+<odoo>
+    <record id="view_comunicazione_liquidazione_form" model="ir.ui.view">
+        <field name="name">comunicazione.liquidazione.form</field>
+        <field name="model">comunicazione.liquidazione</field>
+        <field name="inherit_id" ref="l10n_it_vat_statement_communication.view_comunicazione_liquidazione_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='declarant_fiscalcode']" position="after">
+                <field name="natura_giuridica"/>
+                <field name="declarant_firstname"/>
+                <field name="declarant_lastname"/>
+                <field name="declarant_city"/>
+                <field name="declarant_date"/>
+                <field name="codice_ateco_id"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

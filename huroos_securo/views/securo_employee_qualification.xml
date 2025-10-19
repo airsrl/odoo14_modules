@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="securo_employee_qualification_form_view" model="ir.ui.view">
+            <field name="name">securo_employee_qualification.form</field>
+            <field name="model">securo.employee.qualification</field>
+            <field name="arch" type="xml">
+                <form string="Qualifica dipendente">
+                    <sheet>
+                        <div class="oe_title">
+                            <label for="name"/>
+                            <h1>
+                                <field name="name" placeholder="Magazziniere..."/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="employee_ids"
+                                       widget="many2many_tags"
+                                       options="{'no_create':True}"/>
+                            </group>
+
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="securo_employee_qualification_tree_view" model="ir.ui.view">
+            <field name="name">securo_employee_qualification.tree</field>
+            <field name="model">securo.employee.qualification</field>
+            <field name="arch" type="xml">
+                <tree string="Qualifica dipendente" editable="bottom">
+                    <field name="name" placeholder="Magazziniere..."/>
+                    <field name="employee_ids"
+                           widget="many2many_tags"
+                           options="{'no_create':True}"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="securo_employee_qualification_search_view" model="ir.ui.view">
+            <field name="name">securo_employee_qualification.search</field>
+            <field name="model">securo.employee.qualification</field>
+            <field name="arch" type="xml">
+                <search string="Qualifica dipendente">
+                    <field name="name"/>
+                    <field name="employee_ids"/>
+                </search>
+            </field>
+        </record>
+
+        <record id="securo_employee_qualification_act_window" model="ir.actions.act_window">
+            <field name="name">Qualifica dipendente</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">securo.employee.qualification</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Non ci sono record, clicca crea per aggiungere qualifica dipendente.
+                </p>
+            </field>
+        </record>
+
+        <menuitem name="Qualifica dipendente" id="securo_employee_qualification_menu"
+                  parent="huroos_securo.menu_hr_config"
+                  action="securo_employee_qualification_act_window"
+                  sequence="1"/>
+
+    </data>
+</odoo>

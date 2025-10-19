@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <template id="report_registro_iva"  inherit_id="l10n_it_vat_registries.report_registro_iva">
+            <xpath expr="//tr[@name='vat_header_invoice']/th[1]" position="after">
+                <th>DATA IVA</th>
+            </xpath>
+            <xpath expr="//tr[@name='vat_body_invoice']/td[1]" position="after">
+                <!-- Data IVA -->
+                <td class="left_without_line_bold">
+                    <t t-if="not move.date_iva">
+                        <div style="page-break-inside: avoid" t-esc="format_date(move.date,date_format)"/>
+                    </t>
+                    <t t-if="move.date_iva">
+                        <div style="page-break-inside: avoid" t-esc="format_date(move.date_iva,'%b').upper()"/>
+                    </t>
+                </td>
+            </xpath>
+        </template>
+
+    </data>
+</odoo>

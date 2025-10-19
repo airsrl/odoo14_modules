@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="account_resequence_view_exception" model="ir.ui.view">
+            <field name="name">Re-sequence Journal Entries Exception</field>
+            <field name="model">account.resequence.wizard</field>
+            <field name="arch" type="xml">
+            <form string="Re-Sequence">
+
+                <group>
+
+                        <field name="notify_text" readonly="1" widget="html"/>
+                    </group>
+
+                <footer>
+                    <button string="Prosegui" name="resequence" type="object" default_focus="1" class="btn-primary" context="{'checked':True}"/>
+                    <button string="Cancella" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+            </field>
+        </record>
+
+    </data>
+</odoo>

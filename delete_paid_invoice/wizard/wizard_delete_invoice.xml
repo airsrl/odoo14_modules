@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="wizard_delete_invoice_view_form" model="ir.ui.view">
+        <field name="name">wizard.delete.invoice.form</field>
+        <field name="model">wizard.delete.invoice</field>
+        <field name="arch" type="xml">
+            <form string="Generate Date Ranges">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="date_start" class="oe_inline" required="1"/>
+                            <field name="date_end" class="oe_inline" required="1"/>
+                            <field name="journal_ids" widget="many2many_tags" required="1"/>
+                        </group>
+                    </group>
+
+                    <footer>
+                        <button
+
+                                class="btn btn-sm btn-primary"
+                                name="invoice_to_delete"
+                                string="Conferma"
+                                type="object"
+                        />
+                        <button
+                                class="btn btn-sm btn-default"
+                                special="cancel"
+                                string="Cancella"
+                        />
+                    </footer>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="wizard_delete_invoice_action" model="ir.actions.act_window">
+        <field name="name">Elimina documenti fiscali</field>
+        <field name="res_model">wizard.delete.invoice</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+    <menuitem
+            name="Elimina documenti fiscali"
+            action="wizard_delete_invoice_action"
+            id="wizard_delete_invoice_menu"
+            parent="account.account_invoicing_menu"
+    />
+</odoo>

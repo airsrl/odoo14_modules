@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="view_attendance_tree_inherit" model="ir.ui.view">
+            <field name="name">hr.attendance.tree</field>
+            <field name="model">hr.attendance</field>
+            <field name="inherit_id" ref="hr_attendance.view_attendance_tree"/>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='check_in']" position="after">
+                    <field name="check_in_location" readonly="1"/>
+                </xpath>
+                <xpath expr="//field[@name='check_out']" position="after">
+                    <field name="check_out_location" readonly="1"/>
+                </xpath>
+                <xpath expr="//field[@name='worked_hours']" position="after">
+                    <field name="break_hours" widget="float_time" string="Ore di pausa" readonly="1"/>
+                    <field name="net_worked_hours" widget="float_time" string="Ore effettive" readonly="1"/>
+                    <field name="attendance_break_html" string="Pause" readonly="1"/>
+                </xpath>
+
+            </field>
+        </record>
+        <!-- Inherit Form View to Modify it -->
+        <record id="hr_employees_view_kanban_inherit" model="ir.ui.view">
+            <field name="name">hr.employee.kanban</field>
+            <field name="model">hr.employee</field>
+            <field name="priority">99</field>
+            <field name="inherit_id" ref="hr_attendance.hr_employees_view_kanban"/>
+            <field name="arch" type="xml">
+
+                <kanban class="o_hr_employee_attendance_kanban" position="inside">
+                    <field name="break_state"/>
+                </kanban>
+
+            </field>
+        </record>
+
+    </data>
+</odoo>

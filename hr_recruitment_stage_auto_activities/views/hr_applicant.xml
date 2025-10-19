@@ -1,0 +1,76 @@
+<odoo>
+    <data>
+
+        <record model="ir.ui.view" id="hr_recruitment_stage_auto_activities_hr_applicant_view_form">
+            <field name="name">hr_recruitment_stage_auto_activities_hr_applicant_view_form</field>
+            <field name="model">hr.applicant</field>
+            <field name="inherit_id" ref="hr_recruitment.hr_applicant_view_form"/>
+            <field name="arch" type="xml">
+
+                <field name="kanban_state" position="after">
+                    <field name="is_last_update_max_stage_red_warning" invisible="1"/>
+                    <field name="is_last_update_max_stage_yellow_warning" invisible="1"/>
+                    <span class="badge badge-pill badge-danger pull-right"
+                          attrs="{'invisible': [('is_last_update_max_stage_red_warning', '=', False)]}">
+                        <field name="date_last_stage_update"
+                               widget="date"
+                               readonly="1"/>
+                    </span>
+                    <span class="badge badge-pill badge-warning pull-right"
+                          attrs="{'invisible': [('is_last_update_max_stage_yellow_warning', '=', False)]}">
+                        <field name="date_last_stage_update"
+                               widget="date"
+                               readonly="1"/>
+                    </span>
+                    <span class="badge badge-pill badge-primary pull-right"
+                          attrs="{'invisible': ['|',('is_last_update_max_stage_red_warning', '!=', False), ('is_last_update_max_stage_yellow_warning', '!=', False)]}">
+                        <field name="date_last_stage_update"
+                               widget="date"
+                               readonly="1"/>
+                    </span>
+                </field>
+
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="hr_recruitment_stage_auto_activities_crm_case_tree_view_job">
+            <field name="name">hr_recruitment_stage_auto_activities_crm_case_tree_view_job</field>
+            <field name="model">hr.applicant</field>
+            <field name="inherit_id" ref="hr_recruitment.crm_case_tree_view_job"/>
+            <field name="arch" type="xml">
+
+                <field name="date_last_stage_update" position="replace">
+                    <field name="date_last_stage_update"
+                           widget="date"
+                           readonly="1"/>
+                </field>
+
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="hr_recruitment_stage_auto_activities_hr_kanban_view_applicant">
+            <field name="name">hr_recruitment_stage_auto_activities_hr_kanban_view_applicant</field>
+            <field name="model">hr.applicant</field>
+            <field name="inherit_id" ref="hr_recruitment.hr_kanban_view_applicant"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[hasclass('o_kanban_record_headings')]" position="inside">
+                    <field name="is_last_update_max_stage_red_warning" invisible="1"/>
+                    <field name="is_last_update_max_stage_yellow_warning" invisible="1"/>
+                    <span class="badge badge-pill badge-danger pull-right mr-4"
+                          attrs="{'invisible': [('is_last_update_max_stage_red_warning', '=', False)]}">
+                        <field name="date_last_stage_update"/>
+                    </span>
+                    <span class="badge badge-pill badge-warning pull-right mr-4"
+                          attrs="{'invisible': [('is_last_update_max_stage_yellow_warning', '=', False)]}">
+                        <field name="date_last_stage_update"/>
+                    </span>
+                    <span class="badge badge-pill badge-primary pull-right mr-4"
+                          attrs="{'invisible': ['|',('is_last_update_max_stage_red_warning', '!=', False), ('is_last_update_max_stage_yellow_warning', '!=', False)]}">
+                        <field name="date_last_stage_update"/>
+                    </span>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>

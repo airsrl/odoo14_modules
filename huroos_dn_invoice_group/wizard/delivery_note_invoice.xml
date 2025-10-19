@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+        <!-- Inherit Form View to Modify it -->
+         <record id="view_stock_delivery_note_invoice_wizard" model="ir.ui.view">
+            <field name="name">stock.delivery.note.invoice.form</field>
+            <field name="model">stock.delivery.note.invoice.wizard</field>
+            <field name="inherit_id" ref="l10n_it_delivery_note.view_stock_delivery_note_invoice_wizard"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//field[@name='group_line']" position="after">
+                    <field name="group_by" type="radio" attrs="{'invisible':[('group_line','=',False)]}"/>
+
+                </xpath>
+
+            </field>
+        </record>
+
+
+         <record id="view_stock_delivery_note_invoice_form" model="ir.ui.view">
+            <field name="name">view_stock_delivery_note_invoice_form</field>
+            <field name="model">stock.delivery.note</field>
+            <field name="inherit_id" ref="l10n_it_delivery_note.stock_delivery_note_form_view"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//header" position="inside">
+                    <button name="set_to_invoice" string="Reset" type="object" class="btn btn-default"/>
+                </xpath>
+
+            </field>
+        </record>
+
+
+    </data>
+</odoo>

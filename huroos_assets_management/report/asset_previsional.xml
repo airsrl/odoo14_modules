@@ -1,0 +1,133 @@
+<odoo>
+    <!-- Modifica dimensione titolo h2->h5-->
+    <template id="huroos_asset_previsional"
+              inherit_id="assets_management.template_asset_previsional_asset_title">
+        <xpath expr="//h2" position="replace">
+            <h5 style="text-align: left; margin-top: 15px;">
+                <t t-set="active_id" t-value="asset_section.asset_id.id"/>
+                <span>Asset:</span>
+                <a t-att-data-active-id="active_id"
+                   t-att-data-res-model="'asset.asset'"
+                   class="o_account_financial_reports_web_action"
+                >
+                    <t t-raw="asset_section.asset_name"/>
+                </a>
+            </h5>
+        </xpath>
+    </template>
+
+    <!-- Modifica dimensione titolo h2->h3 -->
+    <template id="huroos_asset_previsional_category_data"
+              inherit_id="assets_management.template_asset_previsional_category_data">
+        <xpath expr="//h2" position="replace">
+            <h3 style="text-align: center;">
+                <t t-set="domain" t-value="[('id', 'in', category_section.report_asset_ids.mapped('asset_id').ids)]"/>
+                <span style="margin: 5px; font-weight: bold;">
+                    <span>Asset Category:</span>
+                    <a t-att-data-domain="domain"
+                       t-att-data-res-model="'asset.asset'"
+                       class="o_account_financial_reports_web_action_multi"
+                    >
+                        <t t-raw="category_section.category_name"/>
+                    </a>
+                </span>
+            </h3>
+        </xpath>
+    </template>
+
+    <!-- Modifica a capo ogni nuova categoria-->
+    <template id="huroos_template_asset_previsional_body"
+              inherit_id="assets_management.template_asset_previsional_body">
+        <!-- Modifica per evitare che le tabelle dei totali attraversino le pagine-->
+        <xpath expr="//t[@t-call='assets_management.template_asset_previsional_category_totals']" position="replace">
+            <style type="text/css">
+                    .not-across-pages, .not-across-pages * {
+                    page-break-inside: avoid !important;
+                    }
+                </style>
+            <div class="not-across-pages">
+                <div name="category_name">
+                    <h3 style="text-align: centerNel;"> <!-- Modifica dimensione titolo h2->h3 -->
+                        <span style="margin: 5px; font-weight: bold;">
+                            <span>Totals for: </span>
+                            <span t-field="category_section.category_name" />
+                        </span>
+                    </h3>
+                </div>
+                <div>
+                    <t t-set="totals_sections" t-value="category_section.report_total_ids" />
+                    <t t-call="assets_management.template_asset_previsional_totals" />
+                </div>
+            </div>
+        </xpath>
+        <xpath expr="//t[@t-else='']" position="after">
+            <div style="page-break-after: always;"/> <!-- Va nella pagina dopo alla fine di ogni report category -->
+        </xpath>
+    </template>
+
+    <!-- Modifica per evitare che le tabelle degli assets attraversino le pagine-->
+    <template id="huroos_template_asset_previsional_asset"
+              inherit_id="assets_management.template_asset_previsional_asset">
+        <xpath expr="//t[@t-foreach='category_section.report_asset_ids']" position="replace">
+            <style type="text/css">
+                .not-across-pages, .not-across-pages * {
+                page-break-inside: avoid !important;
+                }
+            </style>
+            <t t-foreach="category_section.report_asset_ids" t-as="asset_section">
+                <div class="not-across-pages">
+                    <t t-call="assets_management.template_asset_previsional_asset_title" />
+                    <div class="act_as_table" style="width: 100%">
+                        <div class="act_as_thead" style="width: 100%; font-size: 14px; margin: 3px;" >
+                            <t t-call="assets_management.template_asset_previsional_asset_table_header" />
+                            <t t-call="assets_management.template_asset_previsional_asset_table_data" />
+                        </div>
+                    </div>
+                    <t t-if="asset_section.report_purchase_doc_id">
+                        <div class="act_as_table" style="width: 100%">
+                            <div
+                                class="act_as_thead"
+                                style="width: 100%; font-size: 14px; margin: 3px;"
+                            >
+                                <t
+                                    t-set="accounting_doc"
+                                    t-value="asset_section.report_purchase_doc_id"
+                                />
+                                <t
+                                    t-call="assets_management.template_asset_previsional_asset_accounting_table_header"
+                                />
+                                <t
+                                    t-call="assets_management.template_asset_previsional_asset_accounting_table_data"
+                                />
+                            </div>
+                        </div>
+                    </t>
+                    <t t-call="assets_management.template_asset_previsional_asset_depreciations" />
+                    <t t-if="asset_section.report_sale_doc_id">
+                        <div class="act_as_table" style="width: 100%">
+                            <div
+                                class="act_as_thead"
+                                style="width: 100%; font-size: 14px; margin: 3px;"
+                            >
+                                <t
+                                    t-set="accounting_doc"
+                                    t-value="asset_section.report_sale_doc_id"
+                                />
+                                <t
+                                    t-call="assets_management.template_asset_previsional_asset_accounting_table_header"
+                                />
+                                <t
+                                    t-call="assets_management.template_asset_previsional_asset_accounting_table_data"
+                                />
+                            </div>
+                        </div>
+                    </t>
+                    <t t-if="asset_counter &lt; len(category_section.report_asset_ids)">
+                        <t t-set="asset_counter" t-value="asset_counter + 1" />
+                    </t>
+                </div>
+            </t>
+        </xpath>
+    </template>
+
+</odoo>

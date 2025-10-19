@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="hr_employee_form_inherit" model="ir.ui.view">
+            <field name="name">hr_employee.form</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="hr.view_employee_form"/>
+            <field name="mode">primary</field>
+            <field name="priority">20</field>
+            <field name="arch" type="xml">
+                   <xpath expr="//header" position="inside">
+            <button name="download_employee_attachments" type="object" string="Download tutti i file"/>
+        </xpath>
+                <xpath expr="//field[@name='work_location']" position="after">
+                    <field name="contract_level"/>
+                </xpath>
+                <xpath expr="//field[@name='department_id']" position="after">
+                    <field name="qualification_id" options="{'no_create':True}" required="1"/>
+                    <field name="duty_ids" options="{'no_create':True}" required="1" widget="many2many_tags"/>
+                    <field name="hire_date"/>
+                </xpath>
+                <xpath expr="//notebook/page[1]" position="inside">
+                    <group>
+                        <field name="attachment" widget="many2many_binary"/>
+                    </group>
+                </xpath>
+                <xpath expr="//notebook" position="inside">
+                    <page string="DPI">
+                        <group string="Taglie dipendente">
+                            <group>
+                                <field name="size_casco" string="Casco"/>
+                                <field name="size_scarpe" string="Scarpe"/>
+                                <field name="size_abbigliamento" string="Abbigliamento"/>
+                            </group>
+                            <group>
+                                <field name="size_pantaloni" string="Pantaloni"/>
+                                <field name="size_guanti" string="Guanti"/>
+                            </group>
+                        </group>
+                        <group string="DPI assegnati">
+                            <field name="dpi_ids" nolabel="1">
+                                <tree editable="bottom">
+                                    <field name="category_id"
+                                           attrs="{'readonly':True,'invisible':[('name','=',False)]}"/>
+                                    <field name="type_id" attrs="{'readonly':True,'invisible':[('name','=',False)]}"/>
+                                    <field name="name" options="{'no_create':True}"
+                                           domain="[('duty_ids','in',parent.duty_ids)]"/>
+                                    <field name="size_id" options="{'no_create':True}"/>
+                                    <field name="date_use"/>
+                                    <field name="date_expire"/>
+                                    <field name="duration_id"
+                                           attrs="{'readonly':True,'invisible':[('name','=',False)]}"/>
+                                </tree>
+                            </field>
+                        </group>
+                    </page>
+                    <page string="Corsi e formazione">
+                        <field name="employee_course_ids">
+                            <tree create="1" delete="1" editable="bottom">
+                                <field name="single_course_id"/>
+                                <field name="course_id" options="{'no_create':True}"/>
+                                <!--                                readonly="1"/>-->
+                                <field name="course_date" widget="date"/>
+                                <field name="course_hour" widget="float_time" string="Durata"/>
+                                <field name="course_deadline"/>
+                                <field name="esito"/>
+                                <field name='attestato' widget='many2many_binary' string='Attestato'/>
+                            </tree>
+                        </field>
+                    </page>
+                    <page string="Protocollo sanitario">
+                        <field name="employee_medical_ids" nolabel="1">
+                            <tree create="1" delete="1" editable="bottom">
+                                <field name="medical_visit_id"/>
+                                <field name="visit_id"/>
+                                <field name="visit_date" widget="date"/>
+                                <field name="visit_deadline" widget="date"/>
+                                <field name="esito"/>
+                                <field name='document_ids' widget='many2many_binary' string='Documenti'/>
+                                <button name="view_open_exams" type="object" string="Vedi Esami"
+                                        class="oe_inline oe_stat_button oe_highlight"/>
+
+                            </tree>
+                        </field>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="securo_hr_employee_action" model="ir.actions.act_window">
+            <field name="name">Dipendenti</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">hr.employee</field>
+            <field name="view_mode">kanban,tree,form</field>
+            <field
+                    name="view_ids"
+                    eval="[(5,0,0),
+                          (0, 0, {'view_mode': 'kanban', 'view_id': False}),
+                          (0, 0, {'view_mode':'form' , 'view_id': ref('huroos_securo.hr_employee_form_inherit')}),
+                          (0,0, {'view_mode':'tree', 'view_id':False})
+
+                          ]"
+            />
+
+        </record>
+
+
+        <menuitem id="hr_menu_securo"
+                  name="Dipendenti"
+                  parent="huroos_securo.hr_menu_securo_main"
+                  action="securo_hr_employee_action"
+                  sequence="1"/>
+
+
+    </data>
+</odoo>

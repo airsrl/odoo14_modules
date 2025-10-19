@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem id="huroos_securo_main_menu"
+              name="SecurO"
+              sequence="8"
+              groups="hr.group_hr_user"
+              web_icon="huroos_securo,static/description/odoo_icon.png"
+    />
+    <menuitem id="hr_menu_securo_main"
+                name="Dipendenti"
+                parent="huroos_securo.huroos_securo_main_menu"
+                sequence="1"
+    />
+    <menuitem id="securo_vehicle_menu"
+                    name="Veicoli"
+                    parent="huroos_securo.huroos_securo_main_menu"
+                    sequence="2"
+    />
+    <menuitem id="securo_maintenance_main"
+              name="Attrezzature"
+              parent="huroos_securo.huroos_securo_main_menu"
+              sequence="2"
+    />
+    <menuitem id="configuration_menu"
+                    name="Configurazione"
+                    parent="huroos_securo.huroos_securo_main_menu"
+                    sequence="12"
+    />
+    <menuitem id="menu_dpi_config"
+            parent="huroos_securo.configuration_menu"
+            sequence="1"
+            name="Dpi"/>
+    <menuitem id="menu_attr_veicolo_config"
+            parent="huroos_securo.configuration_menu"
+            sequence="2"
+            name="Veicoli e attrezzature"/>
+    <menuitem id="menu_hr_config"
+            parent="huroos_securo.configuration_menu"
+            sequence="3"
+            name="Dipendenti"/>
+    <menuitem id="menu_corsi_visite_config"
+            parent="huroos_securo.configuration_menu"
+            sequence="4"
+            name="Corsi e visite"/>
+    <menuitem id="menu_doc_deadline_config"
+        parent="huroos_securo.configuration_menu"
+        sequence="5"
+        name="Doc e scadenze"/>
+
+</odoo>

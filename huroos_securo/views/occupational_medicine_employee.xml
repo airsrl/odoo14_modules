@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="occupational_medicine_employee_form_view" model="ir.ui.view">
+            <field name="name">occupational_medicine_employee.form</field>
+            <field name="model">occupational.medicine.employee</field>
+            <field name="arch" type="xml">
+                <form string="Visite mediche e esiti">
+                    <header>
+                        <button name="assign" type="object" string="Assegna"
+                                attrs="{'invisible':[('status','not in',['draft'])]}"/>
+                        <button name="complete" type="object" string="Completato"
+                                attrs="{'invisible':[('status','not in',['assign'])]}"/>
+                        <button name="delete" type="object" string="Elimina"
+                                confirm="Eliminare la programmazione dell'esame/visita e tutti i dati collegati?"/>
+                        <field name="status" widget="statusbar"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button name="show_employee_visit" nolabel="1" type="object" class="oe_stat_button"
+                                    icon="fa-users"
+                            >
+                                <field
+                                        name="count_empl_res"
+                                        widget="statinfo"
+                                        string="Partecipanti"
+
+                                />
+                            </button>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="name" required="1" attrs="{'readonly':[('status','not in',['draft'])]}"/>
+                                <field name="doctor" attrs="{'readonly':[('status','in',['done'])]}"/>
+                                <field name="visit_date" attrs="{'readonly':[('status','in',['done'])]}"/>
+                                <field name="visit_deadline" attrs="{'readonly':[('status','in',['done'])]}"/>
+                                <field name="duty_id" required="1" attrs="{'readonly':[('status','not in',['draft'])]}"/>
+                            </group>
+                        </group>
+                        <group>
+                            <field name="description" />
+                        </group>
+                        <group>
+                            <field name="attachment" widget='many2many_binary' />
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="occupational_medicine_employee_tree_view" model="ir.ui.view">
+            <field name="name">occupational_medicine_employee.tree</field>
+            <field name="model">occupational.medicine.employee</field>
+            <field name="arch" type="xml">
+                <tree string="Visite mediche">
+                    <field name="name"/>
+                    <field name="doctor"/>
+                    <field name="visit_date"/>
+                    <field name="employee_result_ids" widget="many2many_tags" string="Partecipanti"/>
+                    <field name="visit_deadline"/>
+                    <field name="duty_id"/>
+                    <field name="status"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="occupational_medicine_employee_calendar_view" model="ir.ui.view">
+            <field name="name">occupational_medicine_employee.calendar</field>
+            <field name="model">occupational.medicine.employee</field>
+            <field name="arch" type="xml">
+                <calendar string="Visite mediche e esiti" date_start="visit_date" color="duty_id">
+                    <field name="name"/>
+                    <field name="duty_id"/>
+                    <field name="visit_date"/>
+                    <field name="visit_deadline"/>
+                    <field name="status"/>
+                </calendar>
+            </field>
+        </record>
+
+
+        <record id="occupational_medicine_employee_search_view" model="ir.ui.view">
+            <field name="name">occupational_medicine_employee.search</field>
+            <field name="model">occupational.medicine.employee</field>
+            <field name="arch" type="xml">
+                <search string="Visite mediche">
+                    <field name="name"/>
+                    <field name="duty_id"/>
+                    <field name="employee_result_ids"/>
+                    <filter name="expired" string="Già scaduti"
+                                domain="[('visit_deadline','&lt;', context_today().strftime('%Y-%m-%d')),('visit_deadline','!=',False)]"/>
+                        <filter name="next_three_months" string="Prossimo trimestre"
+                                domain="[('visit_deadline','&lt;',  (context_today() + relativedelta(months=3)).strftime('%Y-%m-%d')),('visit_deadline','!=',False)]"/>
+                        <filter name="next_six_months" string="Prossimo semestre"
+                                domain="[('visit_deadline','&lt;',  (context_today() + relativedelta(months=6)).strftime('%Y-%m-%d')),('visit_deadline','!=',False)]"/>
+                        <filter name="next_year" string="Prossimo anno"
+                                domain="[('visit_deadline','&gt;',  (context_today() + relativedelta(months=12)).strftime('%Y-%m-01')),('visit_deadline','!=',False)]"/>
+
+                </search>
+            </field>
+        </record>
+
+
+        <record id="occupational_medicine_employee_act_window" model="ir.actions.act_window">
+            <field name="name">Visite mediche</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">occupational.medicine.employee</field>
+            <field name="view_mode">tree,form,calendar</field>
+
+        </record>
+
+        <menuitem
+                name="Visite mediche"
+                id="occupational_medicine_employee_menu"
+                parent="huroos_securo.hr_menu_securo_main"
+                action="occupational_medicine_employee_act_window"/>
+
+    </data>
+</odoo>

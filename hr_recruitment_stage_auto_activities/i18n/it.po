@@ -1,0 +1,150 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* hr_recruitment_stage_auto_activities
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 14.0+e-20220215\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-01-31 07:47+0000\n"
+"PO-Revision-Date: 2023-01-31 07:47+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: hr_recruitment_stage_auto_activities
+#: model:ir.actions.server,name:hr_recruitment_stage_auto_activities.hr_recruitment_stage_auto_activities_create_activities_ir_actions_server
+#: model:ir.cron,cron_name:hr_recruitment_stage_auto_activities.hr_recruitment_stage_auto_activities_create_activities
+#: model:ir.cron,name:hr_recruitment_stage_auto_activities.hr_recruitment_stage_auto_activities_create_activities
+msgid ".Huroos HR - Create applicant activities"
+msgstr ""
+
+#. module: hr_recruitment_stage_auto_activities
+#: model_terms:ir.ui.view,arch_db:hr_recruitment_stage_auto_activities.hr_recruitment_stage_auto_activities_hr_recruitment_stage_form
+msgid "Activities"
+msgstr "Attività"
+
+#. module: hr_recruitment_stage_auto_activities
+#: model:ir.model,name:hr_recruitment_stage_auto_activities.model_mail_activity_type
+#: model:ir.model.fields,field_description:hr_recruitment_stage_auto_activities.field_hr_recruitment_stage_cron_activities__activity_type_id
+msgid "Activity Type"
+msgstr "Tipo di attività"
+
+#. module: hr_recruitment_stage_auto_activities
+#: model_terms:ir.ui.view,arch_db:hr_recruitment_stage_auto_activities.hr_recruitment_stage_auto_activities_hr_recruitment_stage_form
+msgid "Alert colors"
+msgstr "Colori avvisi"
+
+#. module: hr_recruitment_stage_auto_activities
+#: model:ir.model,name:hr_recruitment_stage_auto_activities.model_hr_applicant
+msgid "Applicant"
+msgstr "Candidato"
+
+#. module: hr_recruitment_stage_auto_activities
+#: model:ir.model.fields,field_description:hr_recruitment_stage_auto_activities.field_hr_applicant__created_cron_activity_type_ids
+msgid "Created Cron Activity Type"
+msgstr ""
+
+#. module: hr_recruitment_stage_auto_activities
+#: model:ir.model.fields,field_description:hr_recruitment_stage_auto_activities.field_mail_activity_type__created_cron_hr_applicant_ids
+msgid "Created Cron Hr Applicant"
+msgstr ""
+
+#. module: hr_recruitment_stage_auto_activities
+#: model:ir.model.fields,field_description:hr_recruitment_stage_auto_activities.field_hr_recruitment_stage_cron_activities__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: hr_recruitment_stage_auto_activities
+#: model:ir.model.fields,field_description:hr_recruitment_stage_auto_activities.field_hr_recruitment_stage_cron_activities__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: hr_recruitment_stage_auto_activities
+#: model:ir.model.fields,field_description:hr_recruitment_stage_auto_activities.field_hr_recruitment_stage__cron_activities_ids
+msgid "Cron Activities"
+msgstr "Attività automatiche alla scadenza"
+
+#. module: hr_recruitment_stage_auto_activities
+#: model:ir.model.fields,field_description:hr_recruitment_stage_auto_activities.field_hr_applicant__display_name
+#: model:ir.model.fields,field_description:hr_recruitment_stage_auto_activities.field_hr_recruitment_stage__display_name
+#: model:ir.model.fields,field_description:hr_recruitment_stage_auto_activities.field_hr_recruitment_stage_cron_activities__display_name
+#: model:ir.model.fields,field_description:hr_recruitment_stage_auto_activities.field_mail_activity_type__display_name
+msgid "Display Name"
+msgstr "Nome visualizzato"
+
+#. module: hr_recruitment_stage_auto_activities
+#: model:ir.model,name:hr_recruitment_stage_auto_activities.model_hr_recruitment_stage_cron_activities
+msgid "HR Recruitment stage cron activities"
+msgstr "HR Selezione personale, attività automatiche alla scadenza"
+
+#. module: hr_recruitment_stage_auto_activities
+#: model:ir.model.fields,field_description:hr_recruitment_stage_auto_activities.field_hr_recruitment_stage_cron_activities__cron_hours_trigger
+msgid "Hours"
+msgstr "Ore"
+
+#. module: hr_recruitment_stage_auto_activities
+#: model:ir.model.fields,field_description:hr_recruitment_stage_auto_activities.field_hr_applicant__id
+#: model:ir.model.fields,field_description:hr_recruitment_stage_auto_activities.field_hr_recruitment_stage__id
+#: model:ir.model.fields,field_description:hr_recruitment_stage_auto_activities.field_hr_recruitment_stage_cron_activities__id
+#: model:ir.model.fields,field_description:hr_recruitment_stage_auto_activities.field_mail_activity_type__id
+msgid "ID"
+msgstr ""
+
+#. module: hr_recruitment_stage_auto_activities
+#: model:ir.model.fields,field_description:hr_recruitment_stage_auto_activities.field_hr_applicant__is_last_update_max_stage_red_warning
+msgid "Is Last Update Max Stage Red Warning"
+msgstr ""
+
+#. module: hr_recruitment_stage_auto_activities
+#: model:ir.model.fields,field_description:hr_recruitment_stage_auto_activities.field_hr_applicant__is_last_update_max_stage_yellow_warning
+msgid "Is Last Update Max Stage Yellow Warning"
+msgstr ""
+
+#. module: hr_recruitment_stage_auto_activities
+#: model:ir.model.fields,field_description:hr_recruitment_stage_auto_activities.field_hr_applicant____last_update
+#: model:ir.model.fields,field_description:hr_recruitment_stage_auto_activities.field_hr_recruitment_stage____last_update
+#: model:ir.model.fields,field_description:hr_recruitment_stage_auto_activities.field_hr_recruitment_stage_cron_activities____last_update
+#: model:ir.model.fields,field_description:hr_recruitment_stage_auto_activities.field_mail_activity_type____last_update
+msgid "Last Modified on"
+msgstr "Ultima modifica il"
+
+#. module: hr_recruitment_stage_auto_activities
+#: model:ir.model.fields,field_description:hr_recruitment_stage_auto_activities.field_hr_recruitment_stage_cron_activities__write_uid
+msgid "Last Updated by"
+msgstr "Ultima modifica il"
+
+#. module: hr_recruitment_stage_auto_activities
+#: model:ir.model.fields,field_description:hr_recruitment_stage_auto_activities.field_hr_recruitment_stage_cron_activities__write_date
+msgid "Last Updated on"
+msgstr "Ultima modifica il"
+
+#. module: hr_recruitment_stage_auto_activities
+#: model:ir.model.fields,field_description:hr_recruitment_stage_auto_activities.field_hr_recruitment_stage__last_update_max_stage_red_warning
+msgid "Max hours red color"
+msgstr "Ore limite colore rosso"
+
+#. module: hr_recruitment_stage_auto_activities
+#: model:ir.model.fields,field_description:hr_recruitment_stage_auto_activities.field_hr_recruitment_stage__last_update_max_stage_yellow_warning
+msgid "Max hours yellow color"
+msgstr "Ore limite colore giallo"
+
+#. module: hr_recruitment_stage_auto_activities
+#: model:ir.model,name:hr_recruitment_stage_auto_activities.model_hr_recruitment_stage
+msgid "Recruitment Stages"
+msgstr "Fasi della selezione"
+
+#. module: hr_recruitment_stage_auto_activities
+#: model:ir.model.fields,field_description:hr_recruitment_stage_auto_activities.field_hr_recruitment_stage_cron_activities__stage_id
+msgid "Stage"
+msgstr "Fasi"
+
+#. module: hr_recruitment_stage_auto_activities
+#: model_terms:ir.ui.view,arch_db:hr_recruitment_stage_auto_activities.hr_recruitment_stage_auto_activities_hr_recruitment_stage_form
+msgid ""
+"The previous activities will be automatically scheduled\n"
+"                                once the applicant last change update is before the hours specified."
+msgstr "Le attività qui sopra verranno pianificate automaticamente al responsabile della scheda selezione, una volta superate le ore specificate dopo l'ultimo cambiamento di fase."

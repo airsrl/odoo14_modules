@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<template xml:space="preserve">
+    <t t-extend="ListView.buttons">
+        <t t-jquery=".o_list_button_add" t-operation="after">
+            <button type="button" t-if='widget and widget.modelName === "res.partner"' class="btn btn-primary data-fetch">Ottieni/Valida dati</button>
+        </t>
+        <t t-jquery="div" t-operation="append">
+            <button type="button" t-if='widget and widget.modelName === "res.partner.visura.camerale"' class="btn btn-primary request-visura">
+                Richiedi visura camerale
+            </button>
+
+            <button type="button" t-if='widget and widget.modelName === "res.partner.visura.camerale"' class="btn btn-link sync-visure" title="Aggiorna">
+                <i class="fa fa-refresh"/>
+            </button>
+        </t>
+    </t>
+
+    <t t-extend="KanbanView.buttons">
+        <t t-jquery="button" t-operation="after">
+            <button type="button" t-if='widget and widget.modelName === "res.partner"' class="btn btn-primary data-fetch">Ottieni/Valida dati</button>
+        </t>
+    </t>
+</template>

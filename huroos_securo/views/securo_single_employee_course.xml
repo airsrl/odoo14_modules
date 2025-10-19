@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="securo_single_employee_course_view_form" model="ir.ui.view">
+            <field name="name">securo_single_employee_course_view_form</field>
+            <field name="model">securo.single.employee.course</field>
+            <field name="arch" type="xml">
+                <form string="Corso dipendente">
+                    <sheet>
+                        <group>
+                            <field name="hr_employee_id"/>
+                            <field name="course_id"/>
+                            <field name="single_course_id" options="{'no_create':True}"/>
+                            <field name="course_date"/>
+                            <field name="course_deadline"/>
+
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="securo_single_employee_course_tree_view" model="ir.ui.view">
+            <field name="name">securo_single_employee_course_tree</field>
+            <field name="model">securo.single.employee.course</field>
+            <field name="priority">30</field>
+            <field name="arch" type="xml">
+                <tree string="Dipendenti corso" editable="bottom">
+                    <field name="hr_employee_id" readonly="1"
+                           context="{'form_view_ref': 'huroos_securo.hr_employee_form_inherit'}"/>
+                    <field name="esito"/>
+                    <field name="attestato" widget='many2many_binary'/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="securo_single_employee_course_tree_main_view" model="ir.ui.view">
+            <field name="name">securo_single_employee_course_main_tree</field>
+            <field name="model">securo.single.employee.course</field>
+            <field name="priority">1</field>
+            <field name="arch" type="xml">
+                <tree string="Corsi" editable="bottom">
+                    <field name="hr_employee_id" context="{'form_view_ref': 'huroos_securo.hr_employee_form_inherit'}"/>
+                    <field name="single_course_id" options="{'no_create':True}"/>
+                    <field name="course_id"/>
+                    <field name="course_date"/>
+                    <field name="course_deadline"/>
+                    <field name="esito"/>
+                    <field name="attestato" widget='many2many_binary'/>
+                </tree>
+            </field>
+        </record>
+
+
+        <record id="single_securo_employee_course_calendar_view" model="ir.ui.view">
+            <field name="name">single_securo_employee_course.calendar</field>
+            <field name="model">securo.single.employee.course</field>
+            <field name="arch" type="xml">
+                <calendar string="Calendario" date_start="course_deadline"  mode="month"
+                          quick_add="False">
+                    <field name="name"/>
+
+                    <field name="course_date" string="Data corso"/>
+                    <field name="course_deadline"/>
+                </calendar>
+            </field>
+        </record>
+
+
+        <record id="single_securo_employee_course_search_view" model="ir.ui.view">
+            <field name="name">single_securo_employee_course.search</field>
+            <field name="model">securo.single.employee.course</field>
+            <field name="arch" type="xml">
+                <search string="Ricerca">
+                    <field name="single_course_id" string="Corso"/>
+                    <field name="course_id" string="Organizzazione corso"/>
+                    <field name="course_deadline" string="Scadenza"/>
+
+                    <group expand="1" string="Group By">
+                        <filter string="Dipendente" name="group_dip"
+                                context="{'group_by':'hr_employee_id'}"/>
+                        <filter string="Corso" name="group_course"
+                                context="{'group_by':'single_course_id'}"/>
+                        <separator/>
+                        <filter string="Esito positivo" name="passed_course" domain="[('esito','=',True)]"
+                        />
+                        <filter name="expired" string="Già scaduti"
+                                domain="[('course_deadline','&lt;', context_today().strftime('%Y-%m-%d')),('course_deadline','!=',False)]"/>
+                        <filter name="next_three_months" string="Prossimo trimestre"
+                                domain="[('course_deadline','&lt;',  (context_today() + relativedelta(months=3)).strftime('%Y-%m-%d')),('course_deadline','!=',False)]"/>
+                        <filter name="next_six_months" string="Prossimo semestre"
+                                domain="[('course_deadline','&lt;',  (context_today() + relativedelta(months=6)).strftime('%Y-%m-%d')),('course_deadline','!=',False)]"/>
+                        <filter name="next_year" string="Prossimo anno"
+                                domain="[('course_deadline','&gt;',  (context_today() + relativedelta(months=12)).strftime('%Y-%m-01')),('course_deadline','!=',False)]"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+
+        <record id="single_securo_employee_course_act_window" model="ir.actions.act_window">
+            <field name="name">Elenco corsi dipendenti</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">securo.single.employee.course</field>
+            <field name="view_mode">tree,form,calendar</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Non ci sono dipendenti che partecipano a corsi.
+                </p>
+            </field>
+        </record>
+
+        <menuitem name="Elenco corsi dipendenti"
+                  id="single_securo_employee_course_menu"
+                  parent="huroos_securo.hr_menu_securo_main"
+                  action="single_securo_employee_course_act_window"
+                  sequence="5"/>
+    </data>
+</odoo>

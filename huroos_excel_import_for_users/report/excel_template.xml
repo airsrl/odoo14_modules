@@ -1,0 +1,12 @@
+<odoo>
+    <record id="action_report_excel_template" model="ir.actions.report">
+        <field name="name">Template Excel per import su Odoo</field>
+        <field name="model">excel.import.easy</field>
+        <field name="type">ir.actions.report</field>
+        <field name="report_name">huroos_excel_import_for_users.excel_template</field>
+        <field name="report_type">xlsx</field>
+        <field name="report_file">excel_template</field>
+        <field name="print_report_name">'Template Importazione %s' % object.model</field>
+        <field name="binding_model_id" ref="model_excel_import_easy"/>
+    </record>
+</odoo>

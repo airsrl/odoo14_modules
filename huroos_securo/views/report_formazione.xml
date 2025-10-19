@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="main_template">
+    <div class='o_course_report_body'>
+
+        <div class="o_course_report_page o_course_report_no_print">
+
+
+            <div class="table-responsive">
+                <table class="o_course_report_table table-hover">
+                    <t t-call="{{model._get_templates()['main_table_header_template']}}"/>
+                    <tbody>
+                        <t t-if="lines.get('lines')">
+                            <t t-call="{{model._get_templates()['line_template']}}"/>
+                        </t>
+                    </tbody>
+                </table>
+            </div>
+            <div class="js_account_report_footnotes"/>
+        </div>
+    </div>
+</template>
+
+</odoo>

@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+
+    <record id="fleet_search_inherit" model="ir.ui.view">
+        <field name="name">fleet.search.inherit</field>
+        <field name="model">fleet.vehicle</field>
+        <field name="mode">primary</field>
+        <field name="inherit_id" ref="fleet.fleet_vehicle_view_search"/>
+        <field name="priority" eval="8"/>
+        <field name="arch" type="xml">
+            <xpath expr="//search" position="inside">
+                <filter name="is_our" string="E' nostro" domain="[('is_external','=',False)]"/>
+                <filter name="is_external" string="E' esterno" domain="[('is_external','=',True)]"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="fleet_form_vehicle_inherit" model="ir.ui.view">
+        <field name="name">fleet.vehicle.form.inherit</field>
+        <field name="model">fleet.vehicle</field>
+        <field name="mode">primary</field>
+        <field name="priority">20</field>
+        <field name="inherit_id" ref="fleet.fleet_vehicle_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@name='button_box']" position="inside">
+                <button name="button_show_accident" type="object" class="oe_stat_button" icon="fa-warning">
+                    <field name="accident_count" widget="statinfo" string="Sinistri"/>
+                </button>
+            </xpath>
+            <xpath expr="//field[@name='company_id']/.." position="after">
+                <group string="Dettagli">
+                    <field name="is_external" string="Veicolo esterno"/>
+                    <field name="transport_type"/>
+                    <field name="is_marchio_ce"/>
+                    <field name="is_libretto"/>
+                    <field name="is_conformita"/>
+                    <field name="own_type" widget="radio"/>
+                </group>
+            </xpath>
+            <xpath expr="//field[@name='acquisition_date']" position="before">
+                <field name="date_purchase" class="oe_inline"/>
+                <field name="construction_year" class="oe_inline"/>
+            </xpath>
+            <xpath expr="//field[@name='location']" position="before">
+                <field name="work_environment_id"/>
+                <field name="code"/>
+            </xpath>
+            <xpath expr="//sheet" position="inside">
+                <notebook>
+                    <page string="Documentazione">
+                        <field name='attachment' widget='many2many_binary'/>
+                    </page>
+                    <page string="Scadenze">
+                        <field name='scadenze_ids'>
+                            <tree editable="bottom">
+                                <field name="name"/>
+                                <field name="description"/>
+                                <field name="doc_date" string="Data "/>
+                                <field name="due_date" string="Data scadenza"/>
+                                <field name='attachment' widget='many2many_binary'/>
+                            </tree>
+                            <form>
+                                <sheet>
+                                    <group>
+
+                                        <field name="name"/>
+                                        <field name="description"/>
+                                        <field name="doc_date" string="Data "/>
+                                        <field name="due_date" string="Data scadenza"/>
+
+                                    </group>
+                                    <group>
+                                        <field name='attachment' widget='many2many_binary'/>
+                                    </group>
+                                </sheet>
+                            </form>
+                        </field>
+                    </page>
+                </notebook>
+
+            </xpath>
+
+
+        </field>
+    </record>
+    <record id="securo_fleet_action" model="ir.actions.act_window">
+        <field name="name">Veicoli</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">fleet.vehicle</field>
+        <field name="view_mode">kanban,tree,form</field>
+        <field
+                name="view_ids"
+                eval="[(5,0,0),
+                          (0, 0, {'view_mode': 'kanban', 'view_id': False}),
+                          (0, 0, {'view_mode':'form' , 'view_id': ref('huroos_securo.fleet_form_vehicle_inherit')}),
+                          (0,0, {'view_mode':'tree', 'view_id':False})
+
+                          ]"
+        />
+        <field name="search_view_id" ref="huroos_securo.fleet_search_inherit"/>
+    </record>
+
+
+    <menuitem id="securo_vehicle_fleet"
+              name="Veicoli"
+              parent="huroos_securo.securo_vehicle_menu"
+              action="securo_fleet_action"
+              groups="hr.group_hr_user"
+              sequence="1"
+    />
+    <menuitem id="securo_contract_fleet"
+              name="Contratti"
+              parent="huroos_securo.securo_vehicle_menu"
+              action="fleet.fleet_vehicle_log_contract_action"
+              groups="hr.group_hr_user"
+              sequence="2"
+    />
+    <menuitem id="securo_contract_type"
+              name="Tipo di servizi"
+              parent="huroos_securo.menu_attr_veicolo_config"
+              action="fleet.fleet_vehicle_service_types_action"
+              groups="hr.group_hr_user"
+              sequence="2"
+    />
+
+</odoo>

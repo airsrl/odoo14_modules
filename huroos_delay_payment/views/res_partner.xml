@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="huroos_res_partner_form_inherit" model="ir.ui.view">
+            <field name="name">res.partner.form</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <xpath expr="//group[@name='purchase']" position="after">
+                    <group string="Ritardo pagamenti">
+                        <field name="due_date_delay" string="Rit. Scadenza"/>
+                        <field name="months_due_date_delay" string="Rit.su Mesi"
+                               options="{'no_create':1,'no_open':1}" widget="many2many_tags"/>
+                    </group>
+                </xpath>
+
+            </field>
+        </record>
+    </data>
+</odoo>

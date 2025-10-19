@@ -1,0 +1,15 @@
+<odoo>
+    <data>
+        <record id="shippy_pro_update_carriers" model="ir.cron">
+            <field name="name">ShippyPRO - Update carriers</field>
+            <field name="model_id" ref="huroos_shippypro_connector.model_shippypro_carrier"/>
+            <field name="state">code</field>
+            <field name="code">model._update_carriers_from_shippypro()</field>
+            <field name="user_id" ref="base.user_root"/>
+            <field name='interval_number'>1</field>
+            <field name='interval_type'>days</field>
+            <field name="numbercall">-1</field>
+            <field name="doall" eval="False"/>
+        </record>
+    </data>
+</odoo>

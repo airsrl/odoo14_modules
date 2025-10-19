@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="gestionali_form_view" model="ir.ui.view">
+            <field name="name">air.dati.gestionali.form</field>
+            <field name="model">account.move.line</field>
+            <field name="arch" type="xml">
+                <form string="Altri dati gestionali">
+                    <sheet>
+
+                        <group>
+                            <field name="dati_gestionali_ids">
+                                <tree editable="bottom">
+                                    <field name="tipo_dato"/>
+                                    <field name="rif_testo"/>
+                                    <field name="rif_numero"/>
+                                    <field name="rif_date"/>
+                                </tree>
+                            </field>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+<!--        <record id="gestionali_tree_view" model="ir.ui.view">-->
+<!--            <field name="name">air.dati.gestionali.tree</field>-->
+<!--            <field name="model">air.dati.gestionali</field>-->
+<!--            <field name="arch" type="xml">-->
+<!--                <tree string="Altri dati gestionali" editable="bottom">-->
+<!--                     <field name="tipo_dato"/>-->
+<!--                    <field name="rif_testo"/>-->
+<!--                    <field name="rif_numero"/>-->
+<!--                    <field name="rif_date"/>-->
+<!--                </tree>-->
+<!--            </field>-->
+<!--        </record>-->
+
+
+<!--        <record id="ModelName_act_window" model="ir.actions.act_window">-->
+<!--            <field name="name">ModelTitle</field>-->
+<!--            <field name="type">ir.actions.act_window</field>-->
+<!--            <field name="res_model">ProjectName.ModelName</field>-->
+<!--            <field name="view_type">form</field>-->
+<!--            <field name="view_mode">kanban,tree,form,calendar,graph,pivot</field>-->
+<!--            <field name="context">{"search_default_example_field":1}</field>-->
+<!--            <field name="help" type="html">-->
+<!--                <p class="oe_view_nocontent_create">-->
+<!--                    There is no examples click here to add new ModelTitle.-->
+<!--                </p>-->
+<!--            </field>-->
+<!--        </record>-->
+
+
+
+    </data>
+</odoo>

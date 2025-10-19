@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+    <template id="bank_info_account_move_report" inherit_id="account.report_invoice_document">
+        <!--            Add bank name swift and IBAN number-->
+        <xpath expr="//p[@name='note']" position="after">
+
+            <p t-if="o.partner_bank_id" name="partner_bank_id">
+                <strong>IBAN:</strong>
+                <span t-field="o.partner_bank_id"/>
+            </p>
+            <p t-if="o.bank_name" name="bank_name">
+                <strong>Bank Name And Swift:</strong>
+                <span t-field="o.bank_name"/>
+            </p>
+        </xpath>
+
+
+    </template>
+</odoo>

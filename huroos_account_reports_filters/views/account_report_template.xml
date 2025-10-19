@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="search_template_extra_options" inherit_id="account_reports.search_template_extra_options">
+            <xpath expr="//div[hasclass('o_filter_menu')]" position="inside">
+                <a role="menuitem" class="dropdown-item js_account_report_bool_filter"
+                   t-if="options.get('partially_reconciled') != None"
+                   title="Registrazioni riconciliate" data-filter="partially_reconciled">
+                    Registrazioni riconciliate
+                </a>
+            </xpath>
+        </template>
+</odoo>

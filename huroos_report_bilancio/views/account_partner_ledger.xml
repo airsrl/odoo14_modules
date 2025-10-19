@@ -1,0 +1,15 @@
+<odoo>
+    <!-- SEARCH TEMPLATE PER FILTRO NASCONDI SALDI A ZERO: MASTRO DEL PARTNER.    -->
+    <template id="search_template_filter_hide_zero_balance">
+        <a class="dropdown-item js_account_report_bool_filter" t-if="options.get('hide_zero_balance') != None"
+           title="Nascondi Saldi a 0" data-filter="hide_zero_balance" >Nascondi Saldi a 0</a>
+    </template>
+
+    <template id="search_template_addoons_kpi" inherit_id="account_reports.search_template">
+        <xpath expr="." position="inside">
+            <div class="btn-group o_dropdown o_account_reports_filter_hide_zero_balance" t-if="options.get('hide_zero_balance') != None">
+                <t t-call="huroos_report_bilancio.search_template_filter_hide_zero_balance"/>
+            </div>
+        </xpath>
+    </template>
+</odoo>

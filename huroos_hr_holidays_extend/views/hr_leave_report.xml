@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="hr_leave_report_tree_inherit" model="ir.ui.view">
+            <field name="name">inherit.hr.holidays.report.leave_all.tree</field>
+            <field name="model">hr.leave.report</field>
+            <field name="inherit_id" ref="hr_holidays.hr_leave_report_tree"/>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='number_of_days']" position="after">
+                    <field name="number_of_hours" string="Ore" sum="Remaining Hours"/>
+                </xpath>
+
+            </field>
+        </record>
+    </data>
+</odoo>

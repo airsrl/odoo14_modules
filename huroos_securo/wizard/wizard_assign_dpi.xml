@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="wizard_assign_dpi_form_view" model="ir.ui.view">
+            <field name="name">wizard_assign_dpi.form</field>
+            <field name="model">wizard.assign.dpi</field>
+            <field name="arch" type="xml">
+                <form string="Assegna DPI a dipendenti">
+                    <sheet>
+
+                        <group>
+                            <field name="duty_ids" required="1" widget="many2many_tags"/>
+                            <field name="name" required="1" string="Dpi" widget="many2many_tags"/>
+                            <field name="date_use"/>
+                            <field name="employee_ids" widget="many2many_tags"
+                                   attrs="{'invisible':[('name','=',False)]}" required="1"/>
+
+                        </group>
+                    </sheet>
+                    <footer>
+                        <button string="Assegna" name="confirm" type="object" default_focus="1" class="btn-primary"/>
+                        <button string="Assegna e stampa" name="confirm_print" type="object" default_focus="1" class="btn-primary"/>
+
+                        <button string="Cancella" class="btn-secondary" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="assign_dpi_action" model="ir.actions.act_window">
+            <field name="name">Assegna Dpi</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">wizard.assign.dpi</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+            <field name="context">{
+                'form_view_initial_mode': 'edit'}
+            </field>
+        </record>
+
+        <!-- This Menu Item must have a parent and an action -->
+<!--        <menuitem id="assing_dpi_menu" name="Assegna dpi" parent="huroos_securo.huroos_securo_main_menu"-->
+<!--                  action="assign_dpi_action" sequence="2"/>-->
+    </data>
+</odoo>

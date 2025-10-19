@@ -1,0 +1,18 @@
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="huroos_shippypro_connector_shippypro_carrier_form">
+            <field name="name">huroos_shippypro_connector_shippypro_carrier_form</field>
+            <field name="model">delivery.carrier</field>
+            <field name="inherit_id" ref="delivery.view_delivery_carrier_form"/>
+            <field name="arch" type="xml">
+                <xpath position="before" expr="//notebook">
+                    <group>
+                        <group string="Shippy PRO">
+                            <field name="shippy_pro_carrier_id"/>
+                        </group>
+                    </group>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

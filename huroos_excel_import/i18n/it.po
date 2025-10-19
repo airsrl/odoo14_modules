@@ -1,0 +1,164 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* huroos_excel_import
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 14.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-01-05 15:04+0000\n"
+"PO-Revision-Date: 2023-01-05 15:04+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: huroos_excel_import
+#: model:ir.model.fields,help:huroos_excel_import.field_excel_import__record_limit
+msgid ""
+"After the creation of this number of records the script will commit to the "
+"database, saving all records created until now (It's suggested a number "
+"between 100 and 500)."
+msgstr "Dopo la creazione di questo numero di record, lo script salverà i dati creati fin'ora sul database (È consigliato un numero da 100 a 500)"
+
+#. module: huroos_excel_import
+#: model_terms:ir.ui.view,arch_db:huroos_excel_import.excel_import_form_view
+msgid ""
+"Associate columns to fields (if no field is selected, the column will be "
+"ignored)"
+msgstr "Associa ogni colonna ad un campo (la colonna sarà ignorata se non verrà associata ad alcun campo)"
+
+#. module: huroos_excel_import
+#: model_terms:ir.ui.view,arch_db:huroos_excel_import.excel_import_form_view
+msgid "Cancel"
+msgstr "Annulla"
+
+#. module: huroos_excel_import
+#: model:ir.model.fields,field_description:huroos_excel_import.field_field_line__name
+msgid "Column name"
+msgstr "Nome colonna"
+
+#. module: huroos_excel_import
+#: model:ir.model.fields,field_description:huroos_excel_import.field_excel_import__is_fast_import
+msgid "Direct import"
+msgstr "Importazione diretta"
+
+#. module: huroos_excel_import
+#: model_terms:ir.ui.view,arch_db:huroos_excel_import.excel_import_form_view
+msgid "Download template"
+msgstr "Scarica template"
+
+#. module: huroos_excel_import
+#: model:ir.actions.act_window,name:huroos_excel_import.action_excel_import
+msgid "Excel Import"
+msgstr "Importa da Excel"
+
+#. module: huroos_excel_import
+#: model:ir.model.fields,field_description:huroos_excel_import.field_excel_import__file
+msgid "Excel file"
+msgstr "File Excel"
+
+#. module: huroos_excel_import
+#: model:ir.model.fields,field_description:huroos_excel_import.field_field_line__field_id
+msgid "Field"
+msgstr "Campo"
+
+#. module: huroos_excel_import
+#: model:ir.model.fields,field_description:huroos_excel_import.field_field_line__is_unique
+msgid "Field is unique"
+msgstr "Univoco"
+
+#. module: huroos_excel_import
+#: model:ir.model,name:huroos_excel_import.model_ir_model_fields
+msgid "Fields"
+msgstr "Campi"
+
+#. module: huroos_excel_import
+#: model:ir.model.fields,field_description:huroos_excel_import.field_excel_import__line_ids
+msgid "File columns"
+msgstr "Nome colonna"
+
+#. module: huroos_excel_import
+#: model:ir.model.fields,help:huroos_excel_import.field_field_line__is_raw_search
+msgid ""
+"Flag this field to search in the database directly from another field, rather than the field 'name' (only for many2one and many2many fields)."
+msgstr "Seleziona questo campo per cercare nel database con un altro campo, invece del classico campo 'name' (solo per campi many2one e many2many)."
+
+#. module: huroos_excel_import
+#: model:ir.model.fields,help:huroos_excel_import.field_excel_import__template_with_technical_names
+msgid ""
+"Flag this if you want to download a xlsx template with technical names, "
+"ready for 'Direct import'."
+msgstr "Seleziona questo campo se vuoi scaricare un template excel con le colonne direttamente assegnate ai nomi tecnici dei campi su Odoo (file pronto per 'Importazione diretta')"
+
+#. module: huroos_excel_import
+#: model:ir.model.fields,help:huroos_excel_import.field_excel_import__is_fast_import
+msgid ""
+"Flag this if your Excel file already has columns with Odoo field names."
+msgstr "Seleziona questo campo se il tuo file Excel ha già le colonne con i nomi tecnici dei campi."
+
+#. module: huroos_excel_import
+#: model_terms:ir.ui.view,arch_db:huroos_excel_import.excel_import_form_view
+msgid "Import"
+msgstr "Importa"
+
+#. module: huroos_excel_import
+#: model:ir.model,name:huroos_excel_import.model_excel_import
+msgid "Import data from a xlsx file"
+msgstr "Importa dati da un file xlsx"
+
+#. module: huroos_excel_import
+#: model:ir.ui.menu,name:huroos_excel_import.menu_excel_import
+msgid "Import from Excel"
+msgstr "Importa da Excel"
+
+#. module: huroos_excel_import
+#: model:ir.model.fields,field_description:huroos_excel_import.field_excel_import__model_id
+#: model:ir.model.fields,field_description:huroos_excel_import.field_field_line__model_id
+#: model_terms:ir.ui.view,arch_db:huroos_excel_import.excel_import_form_view
+msgid "Model to import records"
+msgstr "Modello su cui importare i record"
+
+#. module: huroos_excel_import
+#: model:ir.model,name:huroos_excel_import.model_ir_model
+msgid "Models"
+msgstr "Modelli"
+
+#. module: huroos_excel_import
+#: model:ir.model.fields,field_description:huroos_excel_import.field_field_line__is_raw_search
+msgid "Raw search"
+msgstr "Ricerca diretta"
+
+#. module: huroos_excel_import
+#: model:ir.model.fields,field_description:huroos_excel_import.field_excel_import__record_limit
+msgid "Record limit"
+msgstr "Limite di record"
+
+#. module: huroos_excel_import
+#: model:ir.model.fields,field_description:huroos_excel_import.field_excel_import__can_update
+msgid "Update records if already exist"
+msgstr "Aggiorna i record, se già esistenti"
+
+#. module: huroos_excel_import
+#: code:addons/huroos_excel_import/wizard/excel_import.py:0
+#, python-format
+msgid "You can't choose a field multiple times."
+msgstr "Non puoi associare lo stesso campo più volte."
+
+#. module: huroos_excel_import
+#: code:addons/huroos_excel_import/wizard/excel_import.py:0
+#, python-format
+msgid "The record limit can't be zero. It's suggested a number between 100 and 500."
+msgstr "Il limite ai record non può essere zero. È consigliato un numero tra 100 e 500."
+
+#. module: huroos_excel_import
+#: model:ir.model.fields,field_description:huroos_excel_import.field_excel_import__template_with_technical_names
+msgid "with techincal names"
+msgstr "con nomi tecnici"
+
+#. module: huroos_excel_import
+#: model:ir.model.fields,field_description:huroos_excel_import.field_field_line__raw_search_field
+msgid "Raw search field"
+msgstr "Campo su cui cercare"

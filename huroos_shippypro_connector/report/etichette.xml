@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="etichette_consegna">
+        <t t-call="web.html_container">
+
+            <t t-call="web.basic_layout">
+                <div class="page">
+                    <table style="table-layout: fixed;width: 100%; padding:0; margin:0;">
+                        <body>
+                            <t t-foreach="data_dict['list_report']" t-as="docs">
+                                <tr>
+                                    <t t-foreach="docs" t-as="o">
+                                        <td style="width:350px;height:220px !important;padding-right:21px;padding-left:21px;padding-top:46px;padding-bottom:46px;">
+
+                                            <div class="row">
+                                                <div class="col-12 text-center">
+                                                    <h5 t-field="o.name"/>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-12 text-center">
+                                                    <img t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s' % ('Code128', o.name, 400, 70)"
+                                                         style="width:400px;height:70px;padding-left:0px;"/>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-4">
+                                                    <h4 t-field="o.origin"/>
+                                                </div>
+                                                <div class="col-8">
+                                                    <t t-if="o.sale_id ">
+                                                        <t t-if="o.sale_id.tag_ids">
+                                                            <t t-set="etichette" t-value="''"/>
+                                                            <t t-foreach="o.sale_id.tag_ids" t-as="tag">
+                                                                <t t-if="etichette == ''">
+                                                                    <t t-set="etichette" t-value="tag.name"/>
+                                                                </t>
+                                                                <t t-else="">
+                                                                    <t t-set="etichette"
+                                                                       t-value="etichette + ', ' +tag.name"/>
+                                                                </t>
+                                                            </t>
+                                                            <p t-esc="etichette"/>
+                                                        </t>
+                                                    </t>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-12">
+                                                    <h5 t-field="o.partner_id"/>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-12" name="div_note" style="font-size:11.5px;">
+                                                    <p t-field="o.note"/>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </t>
+                                </tr>
+                            </t>
+                        </body>
+                    </table>
+                </div>
+            </t>
+        </t>
+    </template>
+
+    <template id="etichette_consegna_report">
+        <t t-call="web.html_container">
+
+            <t t-call="huroos_shippypro_connector.etichette_consegna"/>
+
+        </t>
+    </template>
+    <record id="report_etichette_paperformat" model="report.paperformat">
+        <field name="name">Etichette</field>
+        <field name="format">A4</field>
+        <field name="page_height">0</field>
+        <field name="page_width">0</field>
+        <field name="orientation">Portrait</field>
+        <field name="margin_top">0</field>
+        <field name="margin_bottom">0</field>
+        <field name="margin_left">0</field>
+        <field name="margin_right">0</field>
+        <field name="header_line" eval="False"/>
+        <field name="header_spacing">0</field>
+        <field name="dpi">90</field>
+    </record>
+    <record id="action_etichette_consegna_report" model="ir.actions.report">
+        <field name="name">Etichetta temporanea</field>
+        <field name="model">stock.picking</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="paperformat_id" ref="report_etichette_paperformat"/>
+        <field name="report_file">huroos_shippypro_connector.etichette_consegna</field>
+        <field name="report_name">huroos_shippypro_connector.etichette_consegna_report</field>
+        <field name="print_report_name">'Etichetta temporanea - %s - %s' % (object.partner_id.name or '', object.name)
+        </field>
+        <field name="binding_model_id" ref="stock.model_stock_picking"/>
+        <field name="binding_type">report</field>
+    </record>
+</odoo>

@@ -1,0 +1,56 @@
+<odoo>
+    <data noupdate="1">
+        <record id="openapi_engine_main" model="openapi.engine">
+            <field name="name">OpenAPI Engine</field>
+        </record>
+
+        <record id="endpoint_it_address" model="openapi.engine.endpoint">
+            <field name="engine_id" ref="openapi_engine_main"/>
+            <field name="library">company</field>
+            <field name="name">/IT-address</field>
+            <field name="func">fetch_data_from_vat_or_cf</field>
+        </record>
+
+        <record id="endpoint_it_start" model="openapi.engine.endpoint">
+            <field name="engine_id" ref="openapi_engine_main"/>
+            <field name="library">company</field>
+            <field name="name">/IT-start</field>
+            <field name="func">fetch_data_from_vat_or_cf</field>
+        </record>
+
+        <record id="endpoint_it_verifica_cf" model="openapi.engine.endpoint">
+            <field name="engine_id" ref="openapi_engine_main"/>
+            <field name="library">risk</field>
+            <field name="name">/IT-verifica_cf</field>
+            <field name="func">fetch_data_from_vat_or_cf</field>
+        </record>
+
+        <record id="endpoint_eu_start" model="openapi.engine.endpoint">
+            <field name="engine_id" ref="openapi_engine_main"/>
+            <field name="library">company</field>
+            <field name="name">/EU-start</field>
+            <field name="func">fetch_data_from_vat_or_cf</field>
+        </record>
+
+        <record id="endpoint_it_sdicode" model="openapi.engine.endpoint">
+            <field name="engine_id" ref="openapi_engine_main"/>
+            <field name="library">company</field>
+            <field name="name">/IT-sdicode</field>
+            <field name="func">fetch_data_from_vat_or_cf</field>
+        </record>
+
+        <record id="endpoint_it_advanced" model="openapi.engine.endpoint">
+            <field name="engine_id" ref="openapi_engine_main"/>
+            <field name="library">company</field>
+            <field name="name">/IT-advanced</field>
+            <field name="func">fetch_data_from_vat_or_cf</field>
+        </record>
+
+        <record id="endpoint_ordinaria_societa_capitale" model="openapi.engine.endpoint">
+            <field name="engine_id" ref="openapi_engine_main"/>
+            <field name="library">visurecamerali</field>
+            <field name="name">/ordinaria-societa-capitale</field>
+            <field name="func">manage_ordinaria_societa_capitale</field>
+        </record>
+    </data>
+</odoo>

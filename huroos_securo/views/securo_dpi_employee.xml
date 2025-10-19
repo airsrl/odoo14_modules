@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="securo_dpi_employee_form_view" model="ir.ui.view">
+            <field name="name">securo_dpi_employee.form</field>
+            <field name="model">securo.dpi.employee</field>
+            <field name="arch" type="xml">
+                <form string="Assegnazione Dpi" >
+                    <sheet>
+
+                        <group>
+                            <group>
+                                <field name="hr_employee_id"
+                                       context="{'form_view_ref': 'huroos_securo.hr_employee_form_inherit'}"/>
+                                <field name="duty_ids" widget="many2many_tags"/>
+                                 <field name="name" domain="[('duty_ids','in',duty_ids)]"/>
+                            </group>
+                            <group>
+                                <field name="date_use"/>
+                                <field name="size_id"/>
+                                <field name="duration_id"/>
+                                <field name="date_expire"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="securo_dpi_employee_tree_view" model="ir.ui.view">
+            <field name="name">securo_dpi_employee.tree</field>
+            <field name="model">securo.dpi.employee</field>
+            <field name="arch" type="xml">
+                <tree string="Assegnazione Dpi"
+                      decoration-danger="date_expire &lt; current_date and date_expire != False" >
+
+                    <field name="name"/>
+                    <field name="hr_employee_id" context="{'form_view_ref': 'huroos_securo.hr_employee_form_inherit'}"/>
+                    <field name="date_use"/>
+                    <field name="duration_id"/>
+                    <field name="date_expire"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="securo_dpi_employee_calendar_view" model="ir.ui.view">
+            <field name="name">securo_dpi_employee.calendar</field>
+            <field name="model">securo.dpi.employee</field>
+            <field name="arch" type="xml">
+                <calendar string="Calendario" date_start="date_use" date_stop="date_expire" color="hr_employee_id"
+                          mode="month" quick_add="False">
+                    <field name="name"/>
+                    <field name="hr_employee_id" context="{'form_view_ref': 'huroos_securo.hr_employee_form_inherit'}"/>
+                    <field name="date_use" string="Data assegnazione"/>
+                    <field name="date_expire"/>
+                </calendar>
+            </field>
+        </record>
+
+
+        <record id="securo_dpi_employee_search_view" model="ir.ui.view">
+            <field name="name">securo_dpi_employee.search</field>
+            <field name="model">securo.dpi.employee</field>
+            <field name="arch" type="xml">
+                <search string="Ricerca">
+                    <field name="name" string="Dpi"/>
+                    <field name="hr_employee_id"/>
+                    <field name="date_expire" string="Scadenza"/>
+                    <field name="duty_ids"/>
+                    <group expand="1" string="Group By">
+<!--                        <filter name="group_mansione"-->
+<!--                                string="Mansione"-->
+<!--                                context="{'group_by':'duty_id'}"/>-->
+                        <filter string="Dpi"
+                                name="group_dpi"
+                                context="{'group_by':'name'}"/>
+                        <filter string="Dipendente"
+                                name="group_employee"
+                                context="{'group_by':'hr_employee_id'}"/>
+                        <filter name="expired" string="Scaduti"
+                                domain="[('date_expire','&lt;', context_today().strftime('%Y-%m-%d')),('date_expire','!=',False)]"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+
+        <record id="securo_dpi_employee_act_window" model="ir.actions.act_window">
+            <field name="name">Assegnazione Dpi</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">securo.dpi.employee</field>
+            <field name="view_mode">tree,form,calendar</field>
+            <field name="context">{"search_default_group_dpi":1,"search_default_group_mansione":1}</field>
+
+        </record>
+
+        <menuitem name="Assegnazione Dpi"
+                  id="securo_dpi_employee_menu"
+                  parent="huroos_securo.hr_menu_securo_main"
+                  action="securo_dpi_employee_act_window"
+                  sequence="2"/>
+
+    </data>
+</odoo>

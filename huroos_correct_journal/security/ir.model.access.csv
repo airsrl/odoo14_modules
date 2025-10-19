@@ -1,0 +1,3 @@
+"id","name","model_id:id","group_id:id","perm_read","perm_write","perm_create","perm_unlink"
+access_correct_journal_wizard,access.correct.journal.wizard,model_correct_journal_wizard,,1,1,1,1
+access_account_resequence_wizard,access.account.resequence.wizard,account.model_account_resequence_wizard,,1,1,1,1

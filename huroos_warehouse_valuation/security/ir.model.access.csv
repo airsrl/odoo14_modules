@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_warehouse_valuation,access_warehouse_valuation,model_warehouse_valuation,base.group_user,1,1,1,1
+access_warehouse_valuation_line,access_warehouse_valuation_line,model_warehouse_valuation_line,base.group_user,1,1,1,1
+access_warehouse_valuation_line_detail,access_warehouse_valuation_line_detail,model_warehouse_valuation_line_detail,base.group_user,1,1,1,1

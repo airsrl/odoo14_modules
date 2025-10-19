@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="res_grups_form_inherit" model="ir.ui.view">
+            <field name="name">res.group.form</field>
+            <field name="model">res.groups</field>
+            <field name="inherit_id" ref="base.view_groups_form"/>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <xpath expr="//page[@name='access_rights']/field[@name='model_access']" position="before">
+                     <div class="oe_button_box" >
+                        <button name="open_wizard_read" type="object" class="oe_edit_only oe_stat_button ">
+                            <field name="perm_read" widget="boolean_button" no_label="1" readonly="1"/>
+                            <div>
+                                <label for="perm_read"/>
+                            </div>
+
+                        </button>
+
+
+                        <button name="open_wizard_write" type="object" class="oe_stat_button oe_edit_only">
+                            <field name="perm_write" widget="boolean_button" no_label="1" readonly="1"/>
+                            <div>
+                                <label for="perm_write"/>
+                            </div>
+
+                        </button>
+
+                        <button name="open_wizard_create" type="object" class="oe_stat_button oe_edit_only">
+                            <field name="perm_create" widget="boolean_button" no_label="1" readonly="1"/>
+                            <div>
+                                <label for="perm_create"/>
+                            </div>
+
+                        </button>
+
+                        <button name="open_wizard_delete" type="object" class="oe_stat_button oe_edit_only">
+                            <field name="perm_unlink" widget="boolean_button" no_label="1" readonly="1" />
+                            <div>
+                                <label for="perm_unlink"/>
+                            </div>
+
+                        </button>
+
+                         <button name="remove_all_rights" type="object" string="Remove rows" style="background-color:#7FFF00;" class="oe_edit_only"/>
+                    </div>
+
+                </xpath>
+                <xpath expr="//page[@name='access_rights']/field[@name='model_access']" position="attributes">
+                    <attribute name="context">{
+                        'default_perm_read':parent.perm_read,
+                        'default_perm_write':parent.perm_write,
+                        'default_perm_create':parent.perm_create,
+                        'default_perm_unlink':parent.perm_unlink
+                        }
+                    </attribute>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

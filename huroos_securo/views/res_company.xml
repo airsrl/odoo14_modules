@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="hr_company_form_securo" model="ir.ui.view">
+        <field name="priority"  eval="1000"/>
+            <field name="name">hr_company_form_securo</field>
+            <field name="model">res.company</field>
+            <field name="arch" type="xml">
+                <form string="Responsabile securO" create="0" delete="0">
+                    <sheet>
+                        <div>
+                            <h1>
+                                <field name="name" readonly="1"/>
+                            </h1>
+                            <group string="Dettagli stampa consegna Dpi">
+                                <group>
+                                    <field name="securo_incaricato"/>
+                                    <field name="securo_luogo"/>
+                                    <field name="securo_signature" widget="signature" />
+                                    <field name="securo_ceo" widget="signature" />
+                                </group>
+                            </group>
+                        </div>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+         <record id="securo_hr_company_config_action" model="ir.actions.server">
+            <field name="name">Responsabile securO</field>
+            <field name="model_id" ref="hr.model_hr_employee"/>
+            <field name="type">ir.actions.server</field>
+            <field name="state">code</field>
+
+            <field name="code">
+action = env['hr.employee'].open_responsible_config()
+            </field>
+        </record>
+
+
+
+       <menuitem id="securo_hr_company_menu" name="Responsabile securO" parent="huroos_securo.menu_dpi_config" action="huroos_securo.securo_hr_company_config_action" sequence="8"/>
+</odoo>

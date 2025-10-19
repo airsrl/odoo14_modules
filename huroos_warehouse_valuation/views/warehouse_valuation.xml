@@ -1,0 +1,70 @@
+<odoo>
+
+    <record id="huroos_warehouse_valuation_view_form" model="ir.ui.view">
+        <field name="name">huroos_warehouse_valuation_view_form</field>
+        <field name="model">warehouse.valuation</field>
+        <field name="arch" type="xml">
+            <form string="Gestore Attività">
+                <header>
+                    <button name="compute_valuation" string="Calcola" type="object" class="btn btn-default btn-primary" />
+                    <button name="samples" string="Samples" type="object" class="btn btn-default btn-primary" />
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name" string="Nome" />
+                        </group>
+                        <group>
+                            <field name="valuation_method" string="Metodo" />
+                            <field name="product_ids" widget="many2many_tags" string="Prodotti" />
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Prodotti">
+                            <field name="line_ids">
+                                <tree>
+                                    <field name="product_id" string="Prodotto"/>
+                                    <field name="product_type" string="Tipo" />
+                                    <field name="final_qty" string="Qt. Finale" />
+                                    <field name="cost" string="Costo Unitario" />
+                                    <field name="cmp_total_value" string="CMP Valore" />
+                                    <field name="lifo_total_value" string="LIFO Valore" />
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+    <record id="huroos_warehouse_valuation_view_tree" model="ir.ui.view">
+        <field name="name">huroos_warehouse_valuation_view_tree</field>
+        <field name="model">warehouse.valuation</field>
+        <field name="arch" type="xml">
+            <tree string="Gestore Attività">
+                <field name="name" string="Nome" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="huroos_warehouse_valuation_action" model="ir.actions.act_window">
+        <field name="name">Valorizzazione Magazzino</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">warehouse.valuation</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="huroos_warehouse_operation"
+              name="Magazzino"
+              parent="account.menu_finance_entries"
+              sequence="100"/>
+
+    <menuitem id="huroos_warehouse_valuation"
+              name="Valorizzazione Magazzino"
+              parent="huroos_warehouse_operation"
+              action="huroos_warehouse_valuation_action"
+              sequence="100"/>
+
+</odoo>

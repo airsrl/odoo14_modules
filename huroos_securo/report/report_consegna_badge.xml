@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_consegna_badge">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="empl">
+                <t t-call="web.internal_layout">
+                    <div class="page">
+                        <h3 class="text-center align-middle font-italic">
+                            <strong>VERBALE DI CONSEGNA DEL TESSERINO DI RICONOSCIMENTO</strong>
+
+                        </h3>
+                        <div style="padding-top: 5px;font-size:14px;" class="text-left align-middle">
+                            <p>
+                                Il sottoscritto <span t-esc="empl.name"/>, nato a
+                                <t t-esc="empl.place_of_birth"/>
+                                <t t-if="empl.birthday">
+                                    <span t-esc="empl.birthday.strftime('%d/%m/%Y')"/>, N° Matricola<t t-esc="empl.barcode"/>, alle dipendenze dell'azienda
+                                    <t t-esc="empl.company_id.name"/>
+                                </t>
+                            </p>
+                        </div>
+
+                        <div style="padding-bottom: 10px;" class="text-center align-middle">
+                            <h5 class="font-bold">
+                                DICHIARA di
+                            </h5>
+                        </div>
+                        <div class="row" style="padding-bottom: 10px;margin-left:18px;margin-right:18px;font-size:14px;">
+                            <div class="col-12">
+                                <p>
+                                    aver ricevuto il tesserino di riconoscimento previsto dal D.Lgs 81/2008,provvisto di
+                                    relativa custodia da applicare agli abiti, in n°2 (DUE) unità,
+                                    <br/>
+                                    <br/>
+                                    essere consapevole in merito alle attività per cui l'esposizione del tesserino è
+                                    obbligatoria e sulle relative sanzioni previste a carico del lavoratore
+                                    per la mancata esposizione (<u>sanzione amministrativa da Euro 50 a Euro 300</u>),come
+                                    visibile nella norma sotto riportata.
+
+                                    <br/>
+                                    <br/>
+                                    Impegnarsi nella corretta conservazione ed esposizione del tesserino sul luogo di
+                                    lavoro oltre che alla immediata segnalazione al
+                                    datore di lavoro dell'eventuale deterioramento o perdita dello stesso.
+
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-12" >
+                            <table class="table table-bordered">
+
+
+                                <tbody style="font-size:14px;">
+                                    <tr>
+                                        <td>
+                                            <div class="text-center align-middle">
+                                                Art. 26. comma 8 D.lgs. 81/2008 - Obblighi connessi ai contratti
+                                                d'appalto o d'opera o di somministrazione
+                                            </div>
+                                            <p>
+                                                Nell'ambito dello svolgimento di attività in regime di appalto e di
+                                                subappalto, munire i lavoratori di apposita tessera di
+                                                riconoscimento, corredata di fotografia, contenente le generalità del
+                                                lavoratore e l'indicazione del datore di lavoro
+
+
+                                            </p>
+                                            <div class="text-center align-middle">
+                                                Art. 55. comma 8 D.Lgs 81/2008 Sanzioni per il datore di lavoro e il
+                                                dirigente
+                                            </div>
+                                            <p>
+                                                Con la sanzione amministrativa pecuniaria da 100 a 500 Euro per ciascun
+                                                lavoratore, in caso di violazione dell'articolo 26, comma 8.
+
+                                            </p>
+                                            <div class="text-center align-middle">
+                                                Art. 20. comma 3 D.Lgs 81/2008 - Obblighi dei lavoratori
+                                            </div>
+                                            <p>
+                                                I lavoratori di aziende che svolgono attività in regima di appalto o
+                                                subappalto, devono esporre apposita tessera di riconoscimento, corredata
+                                                di fotografia, contenente le generalità del lavoratore e l'indicazione
+                                                del datore di lavoro. Tale obbligo grava anche in capo ai lavoratori
+                                                autonomi che esercitano direttamente la propria attività nel medesimo
+                                                luogo di lavoro, i quali sono tenuti a provvedervi per proprio conto.
+
+                                            </p>
+                                            <div class="text-center align-middle">
+                                                Art. 20. comma 3 D.Lgs 81/2008 - Obblighi dei lavoratori
+                                            </div>
+                                            <p>
+                                                I lavoratori di aziende che svolgono attività in regima di appalto o
+                                                subappalto, devono esporre apposita tessera di riconoscimento, corredata
+                                                di fotografia, contenente le generalità del lavoratore e l'indicazione
+                                                del datore di lavoro. Tale obbligo grava anche in capo ai lavoratori
+                                                autonomi che esercitano direttamente la propria attività nel medesimo
+                                                luogo di lavoro, i quali sono tenuti a provvedervi per proprio conto.
+
+                                            </p>
+                                            <div class="text-center align-middle">
+                                                Art. 39. comma 1 lettera b D.Lgs 81/2008 - Sanzioni per i lavoratori
+                                            </div>
+                                            <p>
+                                                I lavoratori sono puniti:
+                                                <br/>
+                                                <br/>
+                                                b) con la sanzione amministrativa pecuniaria da 50 a 300 euro per la
+                                                violazione dell'articolo 20 comma 3; la stessa sanzione si applica ai
+                                                lavoratori autonomi di cui alla medesima disposizione.
+
+                                            </p>
+
+                                        </td>
+
+                                    </tr>
+                                </tbody>
+                            </table>
+                            </div>
+                        </div>
+
+                        <div style="padding-bottom: 5px;" class="align-middle">
+
+                            <span t-esc="empl.company_id.securo_luogo"/>
+                            ,
+                            <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%d/%m/%Y')"/>
+                        </div>
+                        <div class="row" align="right">
+                            <table class="table" style="border:none !important;">
+                                <colgroup>
+                                    <col span="1" style="width: 70%;"/>
+                                    <col span="1" style="width: 30%;"/>
+                                </colgroup>
+                                <tbody>
+
+                                    <tr>
+                                        <td style="border:none !important;"/>
+                                        <td class="text-center align-middle" style="border:none !important;">
+                                            <span>Per ricevuta<br/>
+                                                Firma del lavoratore
+                                            </span>
+                                        </td>
+
+
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+
+
+    <record id="action_report_badge" model="ir.actions.report">
+        <field name="name">Report consegna tesserino</field>
+        <field name="model">hr.employee</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">huroos_securo.report_consegna_badge</field>
+        <field name="report_file">huroos_securo.report_consegna_badge</field>
+        <field name="print_report_name">'Ricevuta consegna badge %s' % (object.name).replace('/', '')</field>
+        <field name="binding_model_id" ref="model_hr_employee"/>
+        <field name="binding_type">report</field>
+
+    </record>
+</odoo>

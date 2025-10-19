@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <template id="assets_backend" name="enterprise assets" inherit_id="web.assets_backend">
+        <xpath expr="." position="inside">
+            <link rel="stylesheet" href="/huroos_report_bilancio/static/src/css/addoons_account_reports.css"/>
+        </xpath>
+    </template>
+</odoo>

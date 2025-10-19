@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="result_medical_empl_form_view" model="ir.ui.view">
+            <field name="name">result.empl.medical.visit.form</field>
+            <field name="model">exam.employee.result</field>
+            <field name="arch" type="xml">
+                <form string="Visite dipendenti e risultati">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="hr_employee_id"/>
+                                <field name="medical_visit_id"/>
+                            </group>
+                            <group>
+                                <field name="visit_date"/>
+                                <field name="visit_deadline"/>
+                            </group>
+                            <group>
+                                <field name="esito"/>
+                            </group>
+                        </group>
+                        <group>
+                            <field name="document_ids" widget="many2many_binary"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="result_empl_medical_visit_tree_view" model="ir.ui.view">
+            <field name="name">result.empl.medical.visit.tree</field>
+            <field name="model">exam.employee.result</field>
+            <field name="arch" type="xml">
+                <tree string="Visite dipendenti e esiti" editable="bottom">
+                    <field name="hr_employee_id" required="1"
+                           context="{'form_view_ref': 'huroos_securo.hr_employee_form_inherit'}"/>
+                    <field name="visit_id"/>
+                    <field name="visit_date"/>
+                    <field name="visit_deadline"/>
+                    <field name="esito"/>
+                    <field name="document_ids" widget="many2many_binary"/>
+                    <button name="view_open_exams" type="object" string="Vedi Esami"
+                            class="oe_inline oe_stat_button oe_highlight"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="medical_visit_empl_search_view" model="ir.ui.view">
+            <field name="name">exam.employee.result.search</field>
+            <field name="model">exam.employee.result</field>
+            <field name="arch" type="xml">
+                <search string="Ricerca">
+                    <field name="hr_employee_id"/>
+                    <field name="visit_id"/>
+                    <field name="visit_date"/>
+                    <field name="visit_deadline"/>
+                    <field name="esito"/>
+                    <group expand="1" string="Group By">
+                        <filter string="Esito" name="group_esito"
+                                context="{'group_by':'esito'}"/>
+                        <filter string="Dipendente"
+                                name="group_employee"
+                                context="{'group_by':'hr_employee_id'}"/>
+                        <filter string="Visite"
+                                name="group_visit"
+                                context="{'group_by':'visit_id'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record id="view_exam_employee_result_form" model="ir.ui.view">
+            <field name="priority" eval="18"/>
+            <field name="name">view_exam_employee_result_form</field>
+            <field name="model">exam.employee.result</field>
+            <field name="arch" type="xml">
+                <form string="Esami" editable="top" create="0">
+                    <sheet>
+                        <group>
+                            <field name="hr_employee_id" readonly="1"/>
+                            <field name="visit_id" readonly="1"/>
+                        </group>
+                        <field name="exam_ids">
+                            <tree editable="top">
+                                <field name="name" required="1"/>
+                                <field name="esito" required="1"/>
+                                <field name="description"/>
+                                <field name="result_date"/>
+                                <field name="next_date"/>
+                                <field name="document_ids" widget="many2many_binary"/>
+                            </tree>
+                        </field>
+                    </sheet>
+
+                </form>
+            </field>
+        </record>
+
+        <record id="exam_employee_result_act_window" model="ir.actions.act_window">
+            <field name="name">Elenco visite</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">exam.employee.result</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('employee_active','=',True)]</field>
+
+        </record>
+
+        <menuitem
+                name="Scadenzario Visite"
+                id="exam_employee_result_menu"
+                parent="huroos_securo.hr_menu_securo_main"
+                action="exam_employee_result_act_window"/>
+
+    </data>
+</odoo>

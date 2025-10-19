@@ -1,0 +1,40 @@
+<odoo>
+
+
+    <record id="huroos_warehouse_valuation_detail_view_tree" model="ir.ui.view">
+        <field name="name">huroos_warehouse_valuation_detail_view_tree</field>
+        <field name="model">warehouse.valuation.line.detail</field>
+        <field name="arch" type="xml">
+            <tree string="Movimenti Prodotto"
+                  decoration-danger="type == 'Scarico' "
+                  decoration-success="type == 'Carico' ">
+                <field name="date" string="Data" />
+                <field name="product_id" string="Prodotto" />
+                <field name="move" string="Movimento" />
+                <field name="type" string="Tipologia" />
+                <field name="qt" string="Quantità" />
+                <field name="price_unit" string="Prezzo Operazione" />
+                <field name="value_unit" string="Valore Operazione" />
+                <field name="cost" string="Costo Unitario" />
+                <field name="qt_initial" string="Qt. Iniziale" />
+                <field name="qt_final" string="Qt. Finale" />
+                <field name="amount_value" string="Valore Progressivo" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="huroos_warehouse_valuation_detail_action" model="ir.actions.act_window">
+        <field name="name">Movimenti Prodotto</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">warehouse.valuation.line.detail</field>
+        <field name="view_mode">tree</field>
+    </record>
+
+
+    <menuitem id="huroos_warehouse_valuation_detail"
+              name="Movimenti Prodotto"
+              parent="huroos_warehouse_operation"
+              action="huroos_warehouse_valuation_detail_action"
+              sequence="101"/>
+
+</odoo>

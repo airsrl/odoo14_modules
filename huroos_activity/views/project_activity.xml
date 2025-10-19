@@ -1,0 +1,111 @@
+<odoo>
+    <data>
+        <record id="huroos_activity_search_view" model="ir.ui.view">
+            <field name="name">huroos_activity_search_view</field>
+            <field name="model">project.activity</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="user_id" string="Utente"/>
+                    <filter string="Effettive" name="manual" domain="[('manual', '=', True)]" />
+                    <filter string="Pianificate" name="manual" domain="[('manual', '=', False)]" />
+                    <group expand="0" string="Group By...">
+                        <filter name="groupby_user_id" string="Utente" context="{'group_by': 'user_id'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record id="huroos_activity_view_gantt" model="ir.ui.view">
+            <field name="name">huroos_activity_view_gantt</field>
+            <field name="model">project.activity</field>
+            <field name="priority">10</field>
+            <field name="arch" type="xml">
+                <gantt date_start="start_date"
+                       date_stop="end_date"
+                       default_scale="week"
+                       scales="day,week,month,year"
+                       color="project_color"
+                       string="Planning"
+                       thumbnails="{'user_id': 'image_128'}"
+                       js_class="task_gantt"
+                       display_unavailability="1"
+                       sample="1"
+                       default_group_by="user_id"
+                       precision="{'day': 'hour:quarter', 'week': 'day:half', 'month': 'day:full'}">
+                    <field name="task_id"/>
+                    <field name="user_id"/>
+                    <templates>
+                        <div t-name="gantt-popover" class="container-fluid">
+                            <div class="row no-gutters">
+                                <div class="col">
+                                    <ul class="pl-1 mb-0">
+                                        <!--                                        <li t-if="partner_id"><strong>Customer: </strong> <t t-esc="partner_id[1]"/></li>-->
+                                        <li><strong>Start Date: </strong> <t t-esc="userTimezoneStartDate.format('L LTS')"/></li>
+                                        <li><strong>Stop Date: </strong> <t t-esc="userTimezoneStopDate.format('L LTS')"/></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </templates>
+                    <field name="project_color" />
+                </gantt>
+            </field>
+        </record>
+
+        <record id="huroos_activity_view_form" model="ir.ui.view">
+            <field name="name">huroos_activity_view_form</field>
+            <field name="model">project.activity</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="user_id" string="Utente"/>
+                            <field name="date" string="Data"/>
+                            <field name="start_date" string="Inizio"/>
+                            <field name="end_date" string="Fine"/>
+                            <field name="task_id" string="Task"/>
+                            <field name="project_id" string="Progetto"/>
+                            <field name="description" string="Descrizione"/>
+                            <field name="hour" string="Tempo (Ore)"/>
+                            <field name="manual" string="Effettiva"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="huroos_activity_view_tree" model="ir.ui.view">
+            <field name="name">huroos_activity_view_tree</field>
+            <field name="model">project.activity</field>
+            <field name="arch" type="xml">
+                <tree string="Gestore Attività" editable="bottom">
+                    <field name="user_id" string="Utente"/>
+                    <field name="date" string="Data"/>
+                    <field name="start_date" string="Inizio"/>
+                    <field name="end_date" string="Fine"/>
+                    <field name="task_id" string="Task"/>
+                    <field name="project_id" string="Progetto"/>
+                    <field name="description" string="Descrizione"/>
+                    <field name="hour" string="Tempo (Ore)"/>
+                    <field name="manual" string="Effettiva"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="huroos_activity_action" model="ir.actions.act_window">
+            <field name="name">Gestore Attività</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">project.activity</field>
+            <field name="view_mode">tree,form,gantt</field>
+        </record>
+
+
+        <menuitem id="huroos_activity_menu"
+                  name="Gestore Attività"
+                  parent="project.menu_main_pm"
+                  action="huroos_activity_action"
+                  sequence="10"/>
+
+
+    </data>
+</odoo>

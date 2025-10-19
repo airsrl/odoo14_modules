@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="report_consegna_dpi">
+            <t t-call="web.html_container">
+                <t t-foreach="employee_ids" t-as="empl">
+                    <t t-call="web.external_layout">
+                        <div class="page">
+                            <h3 class="text-center align-middle">
+                                <strong>SCHEDA CONSEGNA DPI</strong>
+
+                            </h3>
+                            <div style="padding-top: 5px;" class="text-center align-middle">
+                                <h4>
+                                    <strong>
+                                        RICEVUTA DI CONSEGNA DISPOSITIVI DI PROTEZIONE INDIVIDUALI
+                                        <br/>
+                                        Art. 20 e 78 del D.lgs 81/2008
+                                    </strong>
+                                </h4>
+                            </div>
+                            <div style="padding-top: 15px;padding-bottom: 15px;" class="text-center align-middle">
+                                <h6 class="font-italic">
+                                    Tipo consegna: prima consegna
+                                </h6>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-12">
+                                    Il/La sottoscritto Signor/a
+                                    <strong>
+                                        <span t-esc="empl['empl']"/>
+                                    </strong>
+                                </div>
+                            </div>
+                            <div style="padding-bottom: 10px;" class="text-center align-middle">
+                                <h5 class="font-bold">
+                                    DICHIARA
+                                </h5>
+                            </div>
+                            <div class="row" style="padding-bottom: 10px;">
+                                <div class="col-12">
+                                    Di aver ricevuto dal Signor<span t-esc="company.securo_incaricato"/>, legale
+                                    rappresentante della ditta
+                                    <t t-esc="company.name"/>
+                                    con sede
+                                    <t t-esc="company.street"/>
+                                    <t t-esc="company.zip"/>
+                                    <t t-esc="company.city"/>
+                                    (<t t-esc="company.state_id.code"/>)
+                                    i seguenti Dispositivi di Protezione Individuale conformi alle normative vigenti:
+
+
+                                </div>
+                            </div>
+                            <div class="row">
+                                <table class="table">
+                                    <colgroup>
+                                        <col span="1" style="width: 90%;"/>
+                                        <col span="1" style="width: 10%;"/>
+                                    </colgroup>
+                                    <thead>
+                                        <tr>
+                                            <th>
+                                                <strong>Dispositivo di Protezione individuale (tipo - modello)</strong>
+                                            </th>
+                                            <th class="text-center align-middle">
+                                                <strong>Q.tà</strong>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr t-foreach="empl['dpi_data']" t-as="line">
+                                            <td>
+                                                <t t-esc="line['name']"/>
+                                            </td>
+                                            <td class="text-center align-middle">
+                                                <t t-esc="line['qty']"/>
+                                            </td>
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="row" style="padding-bottom: 15px;">
+                                <div class="col-12">
+                                    di essere stato/a adeguatamente formato/a ed addestrato/a sul loro
+                                    utilizzo,manutenzione e conservazione;
+                                    <br/>
+                                    <br/>
+                                    di aver compreso i propri obblighi in merito all'uso ed alla tenuta dei DPI, con
+                                    particolare riferimento agli artt. 20 e 78 del D.Lgs. 81/08 e s.m.i e nello
+                                    specifico si impegna a:
+                                    <br/>
+                                    <br/>
+                                    <ul style="list-style-type:'- ';">
+                                        <li>non modificare in alcun caso i dispositivi di protezione individuale
+                                            ricevuti;
+                                        </li>
+                                        <li>utilizzare i dispositivi di protezione individuale ricevuti in tutte le
+                                            situazioni per le quali sono stati prescritti;
+                                        </li>
+                                        <li>utilizzare i dispositivi di protezione individuale ricevuti secondo le
+                                            modalità indicate;
+                                        </li>
+                                        <li>a richiederne la sostituzione ogni qualvolta questi risultino essersi
+                                            danneggiati o usurati;
+                                        </li>
+                                        <li>a restituire i dispositivi di protezione individuale in caso di necessità
+                                            di sostituzione oppure di cessato rapporto di lavoro;
+                                        </li>
+                                    </ul>
+
+
+                                </div>
+                            </div>
+                            <div style="padding-bottom: 15px;" class="align-left">
+
+                                <span t-esc="company.securo_luogo"/>
+                                ,
+                                <span t-esc="assign_date"/>
+                            </div>
+                            <div class="row">
+                                <table class="table" style="border:none !important;">
+                                    <colgroup>
+                                        <col span="1" style="width: 30%;"/>
+                                        <col span="1" style="width: 40%;"/>
+                                        <col span="1" style="width: 30%;"/>
+                                    </colgroup>
+                                    <tbody>
+                                        <tr>
+                                            <td style="border:none !important;">
+                                                <span>Firma del lavoratore</span>
+                                            </td>
+                                            <td class="text-left align-center " style="border:none !important;">
+                                                <span style='padding-left:25px;'>
+                                                    Firma del datore di lavoro
+                                                </span>
+                                            </td>
+                                            <td class="text-right align-left " style="border:none !important;">
+                                                <span>
+                                                    Firma dell'incaricato alla consegna
+                                                </span>
+                                            </td>
+                                        </tr>
+
+                                        <tr style="padding:0;">
+                                            <td style="border:none !important;"/>
+                                            <td class="text-left align-center" style="border:none !important;">
+                                                <t t-if="company.securo_ceo">
+                                                    <img class="image"
+                                                         t-att-src="'data:image/png;base64,%s' % to_text(company.securo_ceo)"
+                                                         style="max-height:90pt;max-width:90%;border:none !important;"/>
+                                                </t>
+                                            </td>
+                                            <td class="text-right align-right" style="border:none !important;">
+                                                <t t-if="company.securo_signature">
+                                                    <img class="image"
+                                                         t-att-src="'data:image/png;base64,%s' % to_text(company.securo_signature)"
+                                                         style="max-height:85pt;max-width:90%;border:none !important;"/>
+                                                </t>
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+                            </div>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+
+
+    </data>
+</odoo>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="account_journal_exclude_report" model="ir.ui.view">
+            <field name="name">account_journal_exclude_report</field>
+            <field name="model">account.journal</field>
+            <field name="inherit_id" ref="account.view_account_journal_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//page[@name='bank_account']//group//group" position="after">
+                    <group string="Report Bilancio">
+                        <field name="exclude_from_report" string="Escludi da Report Bilancio"/>
+                    </group>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

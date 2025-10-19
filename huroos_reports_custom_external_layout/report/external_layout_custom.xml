@@ -1,0 +1,76 @@
+<!--
+Copyright 2023 - Huroos srl - www.huroos.com
+License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl-3.0.en.html)
+Powered by Marco Frascerra
+-->
+
+<odoo>
+    <template id="external_layout_standard" inherit_id="web.external_layout_standard">
+        <!--Custom header-->
+        <xpath expr="//div[@t-attf-class='header o_company_#{company.id}_layout']" position="replace">
+            <div t-attf-class="header o_company_#{company.id}_layout" t-att-style="report_header_style">
+                <!--Company infos-->
+                <div class="row">
+                    <div class="col-8">
+                        <img t-if="company.logo" t-att-src="image_data_uri(company.logo)" style="max-height: 120px;" alt="Logo"/>
+                    </div>
+                    <div class="col-4" name="company_address" style="font-size:13px; text-align:right;">
+                        <strong><span t-field="company.name"/></strong><br/>
+                        <span t-field="company.street"/><br/>
+                        <t t-if="company.street2">
+                            <span t-field="company.street2"/><br/>
+                        </t>
+                        <span t-field="company.city"/>&amp;nbsp;
+                        <t t-if="company.state_id">
+                            (<span t-field="company.state_id.code"/>)
+                        </t>&amp;nbsp;
+                        <span t-field="company.zip"/><br/>
+                        <t t-if="company.vat">
+                            P.IVA / CF: <span t-field="company.vat"/><br/>
+                        </t>
+                        <t t-if="company.email">
+                            Mail: <span t-field="company.email"/><br/>
+                        </t>
+                        <t t-if="company.phone">
+                            Tel: <span t-field="company.phone"/>
+                        </t>
+                    </div>
+                </div>
+
+                <!--Aggiunte all'header, a seconda del modulo-->
+                <t t-if="sale_order_header">
+                    <t t-raw="sale_order_header"/>
+                </t>
+
+                <t t-if="invoice_header">
+                    <t t-raw="invoice_header"/>
+                </t>
+
+                <t t-if="delivery_note_header">
+                    <t t-raw="delivery_note_header"/>
+                </t>
+            </div>
+        </xpath>
+
+        <!--Custom footer-->
+        <xpath expr="//div[@t-attf-class='footer o_standard_footer o_company_#{company.id}_layout']" position="replace">
+            <div class="footer">
+                <!--Aggiunte al footer, a seconda del modulo-->
+                <t t-if="sale_order_footer">
+                    <t t-raw="sale_order_footer"/>
+                </t>
+                <t t-if="invoice_footer">
+                    <t t-raw="invoice_footer"/>
+                </t>
+                <t t-if="delivery_note_footer">
+                    <t t-raw="delivery_note_footer"/>
+                </t>
+
+                <div t-if="report_type == 'pdf'" class="text-muted pull-right">
+                    <br/>
+                    Pagina <span class="page"/> di <span class="topage"/>
+                </div>
+            </div>
+        </xpath>
+    </template>
+</odoo>

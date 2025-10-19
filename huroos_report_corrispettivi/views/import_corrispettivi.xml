@@ -1,0 +1,76 @@
+<odoo>
+
+    <!--
+    Powered by Federico Ranieri.
+    Part of Huroos. See LICENSE file for full copyright and licensing details.
+    © 2022 Huroos Srl. (<https://www.huroos.com>).-->
+
+     <record model="ir.ui.view" id="import_corrispettivi_tree">
+        <field name="name">import_corrispettivi</field>
+        <field name="model">import.corrispettivi</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="from_date" string="Dal"/>
+                <field name="to_date" string="Al"/>
+                <field name="state" string="Stato" />
+            </tree>
+        </field>
+     </record>
+
+    <record model="ir.ui.view" id="import_corrispettivi_form">
+        <field name="name">import_corrispettivi</field>
+        <field name="model">import.corrispettivi</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="post" attrs="{'invisible': [('state', '=', 'post')]}" type="object" string="Registra" class="btn btn-primary" />
+                    <button name="cancel" type="object" string="Annulla" class="btn btn-danger" />
+                    <field name="state" widget="statusbar" clickable="False" />
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="from_date" string="Dal" required="True"/>
+                            <field name="to_date" string="Al" required="True"/>
+                            <field name="currency_id" string="Valuta" required="True"/>
+                        </group>
+                        <group>
+                            <field name="journal_id" string="Registro" required="True"/>
+                            <field name="tax_id" string="Imposta"/>
+                            <field name="credit_account_id" string="Conto Credito" required="True" />
+                            <field name="income_account_id" string="Conto Ricavi" required="True"/>
+                            <field name="liquidity_journal_id" string="Registro Pagamento" required="True" />
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="IMPORTI">
+                            <div>
+                                <field name="line_ids">
+                                    <tree editable="bottom">
+                                        <field name="day" string="N°" readonly="1" force_save="1" style="font-size: 20px;"/>
+                                        <field name="day_name" string="Giorno" force_save="1" readonly="1" style="font-size: 20px;"/>
+                                        <field name="amount" string="Importo" style="font-size: 20px;"/>
+                                        <field name="date" invisible="1" />
+                                    </tree>
+                                </field>
+                            </div>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_import_corrispettivi" model="ir.actions.act_window">
+        <field name="name">Registra Corrispettivi</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">import.corrispettivi</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="import_corrispettivi_tree" />
+        <field name="target">current</field>
+    </record>
+
+    <menuitem id="import_corrispettivi" name="Registra Corrispettivi" sequence="80" action="action_import_corrispettivi"
+              parent="huroos_report_corrispettivi.report_corrispettivi_label"/>
+
+</odoo>

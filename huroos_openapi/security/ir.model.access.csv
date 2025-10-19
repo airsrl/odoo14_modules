@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_openapi_engine,access_openapi_engine,model_openapi_engine,base.group_user,1,1,0,0
+access_openapi_engine_endpoint,access_openapi_engine_endpoint,model_openapi_engine_endpoint,base.group_user,1,1,1,1
+access_res_partner_data_fetch,access_res_partner_data_fetch,model_res_partner_data_fetch,base.group_user,1,1,1,1
+access_res_partner_visura_camerale,access_res_partner_visura_camerale,model_res_partner_visura_camerale,base.group_user,1,1,1,1
+access_visura_camerale_request,access_visura_camerale_request,model_visura_camerale_request,base.group_user,1,1,1,1

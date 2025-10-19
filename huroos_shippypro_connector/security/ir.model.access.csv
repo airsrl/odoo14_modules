@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_create,perm_unlink,perm_write,perm_read
+access_shippypro_carrier,access.shippypro.carrier,model_shippypro_carrier,,1,1,1,1

@@ -1,0 +1,27 @@
+<odoo>
+    <record id="huroos_openapi_view_partner_form" model="ir.ui.view">
+        <field name="name">huroos_openapi_view_partner_form</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+
+            <div name="button_box" position="inside">
+                <button class="oe_stat_button" type="object" name="view_partner_visure_camerali" icon="fa-file-text-o"
+                        attrs="{'invisible': [('visure_camerali_count', '=', 0)]}">
+                    <field string="Visure camerali" name="visure_camerali_count" widget="statinfo"/>
+                </button>
+            </div>
+
+            <notebook position="inside">
+                <page name="openapi" string="OpenAPI" groups="base.group_no_one" attrs="{'invisible': [('openapi_data', '=', False)]}">
+                    <group>
+                        <field name="openapi_id"/>
+                        <field name="openapi_last_fetch_date"/>
+                    </group>
+                    <field name="openapi_data" widget="ace" options="{'mode': 'python'}"/>
+                </page>
+            </notebook>
+
+        </field>
+    </record>
+</odoo>

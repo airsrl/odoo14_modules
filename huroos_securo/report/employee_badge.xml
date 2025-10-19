@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="hr.print_employee_badge">
+        <t t-call="web.basic_layout">
+
+            <div class="page ">
+                <t t-foreach="docs" t-as="employee">
+                    <table class="table-bordered"  style="margin:1pt;width:250pt; height:146pt;">
+                        <tr >
+                            <td  colspan="2" style="font-size:12pt;" valign="center"
+                            align="center">
+                                <strong>TESSERA DI RICONOSCIMENTO</strong>
+                            </td>
+                        </tr>
+                        <tr >
+                            <td colspan="2"  valign="center" align="left" style="line-height:8pt;">
+                                <h6 style="font-size:6pt;">NOME E COGNOME:</h6>
+                                <span t-esc="employee.name" style="font-size:12pt;"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="font-size:10pt;line-height:5pt;">
+                                <h6 style="font-size:6pt;">LUOGO E DATA DI NASCITA:</h6>
+                                <span t-esc="employee.place_of_birth"/>
+                                <t t-if="employee.birthday">
+                                    <span t-esc="employee.birthday.strftime('%d/%m/%Y')"/>
+                                </t>
+                            </td>
+                            <td align="right" rowspan="6">
+                                <img t-if="employee.image_1920"
+                                     t-att-src="image_data_uri(employee.image_1920)"
+                                     style="max-height:94pt;max-width:86pt;" alt="Employee Image"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td >
+                                <span style="font-size:13pt;" t-field="employee.company_id"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="left" style="font-size:10pt;line-height:5pt;" >
+                                <h6 style="font-size:6pt;">C.F./P.IVA:</h6>
+                                <t t-if='employee.address_id and employee.address_id.vat'
+                                   t-esc="employee.address_id.vat"/>
+                                <t t-if='employee.address_id and not employee.address_id.vat'
+                                   t-esc="employee.address_id.fiscalcode"/>
+                            </td>
+
+                        </tr>
+                        <tr>
+                            <td align="left" style="font-size:10pt;line-height:5pt;" >
+                                <h6 style="font-size:6pt;">DATA ASSUNZIONE:</h6>
+                                <span t-field="employee.hire_date"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="left" style="font-size:10pt;line-height:10pt;">
+                                <h6 style="font-size:6pt;">QUALIFICA:</h6>
+                                <span t-field="employee.qualification_id" style="font-size:8pt;"/>
+                            </td>
+                        </tr>
+
+                    </table>
+                </t>
+            </div>
+        </t>
+    </template>
+</odoo>

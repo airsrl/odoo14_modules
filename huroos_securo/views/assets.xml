@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template
+        id="assets_backend"
+        name="dpi_assign assets"
+        inherit_id="web.assets_backend"
+    >
+        <xpath expr="." position="inside">
+            <script
+                type="text/javascript"
+                src="/huroos_securo/static/src/js/button_assign_dpi_js.js"
+            />
+        </xpath>
+    </template>
+</odoo>

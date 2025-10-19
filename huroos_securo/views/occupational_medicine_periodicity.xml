@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="course_visit_periodicity_form_view" model="ir.ui.view">
+            <field name="name">course_visit_periodicity.form</field>
+            <field name="model">course.visit.periodicity</field>
+            <field name="arch" type="xml">
+                <form string="Periodicità corsi e protocolli sanitari">
+                    <sheet>
+                        <div class="oe_title">
+                            <label for="name"/>
+                            <h1>
+                                <field name="name" placeholder="Periodo"/>
+                            </h1>
+                        </div>
+                        <group string="Scadenza">
+                            <label for="type" string="Scade tra"
+                                   />
+                            <div >
+                                <field name="duration"
+                                       nolabel="1"
+                                        required="1"
+                                       class="oe_inline"/><span>&#160;&#160;</span>
+                                <field name="type"
+                                       nolabel="1"
+                                       required="1"
+                                       class="oe_inline"
+                                       placeholder="Periodo..."
+                                />
+                            </div>
+
+                        </group>
+
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="course_visit_periodicity_tree_view" model="ir.ui.view">
+            <field name="name">course_visit_periodicity.tree</field>
+            <field name="model">course.visit.periodicity</field>
+            <field name="arch" type="xml">
+                <tree string="Periodicità corsi e protocolli sanitari" >
+                    <field name="name" required="1"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="course_visit_periodicity_search_view" model="ir.ui.view">
+            <field name="name">course_visit_periodicity.search</field>
+            <field name="model">course.visit.periodicity</field>
+            <field name="arch" type="xml">
+                <search string="Ricerca">
+                    <field name="name"/>
+                </search>
+            </field>
+        </record>
+
+        <record id="course_visit_periodicity_act_window" model="ir.actions.act_window">
+            <field name="name">Periodicità corsi e protocolli sanitari</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">course.visit.periodicity</field>
+            <field name="view_mode">tree,form</field>
+
+        </record>
+
+        <record id="exam_result_tree_view" model="ir.ui.view">
+            <field name="name">exam.result.tree</field>
+            <field name="model">exam.result</field>
+            <field name="arch" type="xml">
+                <tree string="Valori esito" editable="bottom">
+                    <field name="name" required="1"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="exam_result_act_window" model="ir.actions.act_window">
+            <field name="name">Valori esito</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">exam.result</field>
+            <field name="view_mode">tree,form</field>
+
+        </record>
+
+        <menuitem name="Durata corsi e protocolli sanitari"
+                  id="course_visit_periodicity_menu"
+                  parent="huroos_securo.menu_corsi_visite_config"
+                  action="course_visit_periodicity_act_window"/>
+        <menuitem name="Valori esito"
+                  id="exam_result_menu"
+                  parent="huroos_securo.menu_corsi_visite_config"
+                  action="exam_result_act_window"/>
+
+    </data>
+</odoo>

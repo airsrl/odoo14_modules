@@ -1,0 +1,17 @@
+<odoo>
+
+    <!-- Pagamento Raggruppato -->
+    <record id="view_account_move_fiscal_document_type" model="ir.ui.view">
+        <field name="name">view_account_move_fiscal_document_type</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="l10n_it_fiscal_document_type.view_account_move_fiscal_document_type"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//field[@name='fiscal_document_type_id']" position="after">
+                <field name="po_integration_invoice_id" string="Fattura da Integrare" />
+            </xpath>
+
+        </field>
+    </record>
+
+</odoo>

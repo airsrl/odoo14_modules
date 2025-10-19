@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+<!--<templates id="template" xml:space="preserve">-->
+
+<!--<t t-extend="hr_attendance.HrAttendanceKioskConfirm">-->
+<!--    <t t-jquery=".o_hr_attendance_sign_in_out_icon" t-operation="before">-->
+<!--       <div>-->
+<!--            <t id="employee_location"/>-->
+<!--        </div>-->
+<!--     </t>-->
+<!--</t>-->
+<!--    <t t-extend="hr_attendance.HrAttendanceMyMainMenu">-->
+<!--        <t t-jquery=".o_hr_attendance_sign_in_out_icon" t-operation="after">-->
+<!--            <a class="fa fa-3x o_hr_attendance_break_icon fa-coffee btn-warning" t-if="checked_in" aria-label="End Break" title="Break end"/>-->
+<!--        </t>-->
+<!--    </t>-->
+
+<!--</templates>-->
+<template inherit_id="hr_attendance.HrAttendanceMyMainMenu" id="HrAttendanceMyMainMenu" name="Attendance location">
+    <xpath expr="//a[hasclass('.o_hr_attendance_sign_in_out_icon')][2]" position="after">
+            <a class="fa fa-3x o_hr_attendance_break_icon fa-coffee btn-warning" t-if="checked_in" aria-label="End Break" title="Break end"/>
+
+    </xpath>
+</template>
+
+</odoo>

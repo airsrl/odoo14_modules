@@ -1,0 +1,15 @@
+<odoo>
+    <data>
+        <record id="shippy_pro_check_tracking_ref" model="ir.cron">
+            <field name="name">ShippyPRO - Get missing tracking numbers</field>
+            <field name="model_id" ref="stock.model_stock_picking"/>
+            <field name="state">code</field>
+            <field name="code">model.task_exec_get_tracking_numbers()</field>
+            <field name="user_id" ref="base.user_root"/>
+            <field name='interval_number'>2</field>
+            <field name='interval_type'>hours</field>
+            <field name="numbercall">-1</field>
+            <field name="doall" eval="False"/>
+        </record>
+    </data>
+</odoo>
