@@ -1,0 +1,140 @@
+<odoo>
+    <data>
+
+        <record id="ak_catalogo_prodotti_tree_view" model="ir.ui.view">
+            <field name="name">ak_catalogo_prodotti.tree</field>
+            <field name="model">ak_connettore.catalogo_prodotti</field>
+            <field name="arch" type="xml">
+                <tree string="Catalogo prodotti">
+                    <field name="currency_id" invisible="1"/>
+                    <field name="distributore_id"/>
+                    <field name="name" decoration-success="importare_in_odoo and odoo_product_id"
+                           decoration-info="importare_in_odoo and not odoo_product_id"/>
+                    <field name="categoria_fornitore"/>
+                    <field name="ean" optional="hide"/>
+                    <field name="codice_articolo"/>
+                    <field name="descrizione" optional="hide"/>
+                    <field name="produttore" optional="hide"/>
+                    <field name="descrizione_produttore" optional="hide"/>
+                    <field name="iva" optional="hide"/>
+                    <field name="descrizione_iva" optional="hide"/>
+                    <field name="giacenza_distributore" string="Giac. distr."/>
+                    <field name="giacenza_odoo" string="Giac. Odoo"/>
+                    <field name="prezzo" widget="monetary"
+                                       options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                    <field name="prezzo_calcolato" widget="monetary"
+                                       options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                    <field name="prezzo_calcolato_ivato" widget="monetary"
+                                       options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                    <field name="prezzo_bloccato" string="Prz. bloc."/>
+                    <field name="prezzo_imposto" optional="hide" widget="monetary"
+                                       options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                    <field name="importare_in_odoo" optional="hide"/>
+                    <field name="odoo_product_id" optional="hide"/>
+                    <field name="url_product" widget="url" optional="hide"/>
+                    <field name="sync_last_date" string="Sync." optional="hide"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="ak_catalogo_prodotti_form_view" model="ir.ui.view">
+            <field name="name">ak_catalogo_prodotti.form</field>
+            <field name="model">ak_connettore.catalogo_prodotti</field>
+            <field name="arch" type="xml">
+                <form string="Catalogo prodotti">
+                    <sheet>
+                        <group colspan="2">
+                            <button string="Aggiorna prodotto in Odoo" name="sync_catalogo_prodotto_odoo"
+                                    type="object"/>
+                            <field name="currency_id" invisible="1"/>
+                        </group>
+                        <group>
+                            <group string="Sinc con Odoo">
+                                <field name="odoo_product_id"/>
+                                <field name="importare_in_odoo"/>
+                                <field name="sync_to_odoo_last_date"/>
+                                <field name="giacenza_odoo"/>
+                                <field name="prezzo_bloccato"/>
+                                <field name="prezzo_imposto" widget="monetary"
+                                       options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                            </group>
+                            <group string="Prodotto">
+                                <field name="name"/>
+                                <field name="descrizione"/>
+                                <field name="categoria_fornitore"/>
+                                <field name="ean"/>
+                            </group>
+                        </group>
+                        <group>
+                            <group string="Riferimenti">
+                                <field name="sync_last_date"/>
+                                <field name="distributore_id"/>
+                                <field name="distributore_product_id"/>
+                                <field name="codice_articolo"/>
+                                <field name="produttore"/>
+                                <field name="descrizione_produttore"/>
+                            </group>
+                            <group string="Prezzo/giacenze">
+                                <field name="giacenza_distributore"/>
+                                <field name="prezzo" widget="monetary"
+                                       options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                                <field name="iva" widget="percentage"/>
+                                <!--                                <field name="descrizione_iva"/>-->
+                                <field name="prezzo_calcolato" widget="monetary"
+                                       options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                                <field name="prezzo_calcolato_ivato" widget="monetary"
+                                       options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                                <field name="url_product" widget="url"/>
+                            </group>
+                            <group colspan="2" string="Note">
+                                <field name="note" nolabel="1"/>
+                            </group>
+                        </group>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                        <field name="activity_ids" widget="mail_activity"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record id="ak_catalogo_prodotti_search_view" model="ir.ui.view">
+            <field name="name">ak_catalogo_prodotti.search</field>
+            <field name="model">ak_connettore.catalogo_prodotti</field>
+            <field name="arch" type="xml">
+                <search string="Cerca">
+                    <field name="name"/>
+                    <field name="ean"/>
+                    <field name="codice_articolo"/>
+                    <field name="descrizione"/>
+                    <filter string="Importati in Odoo" name="a_catalogo" domain="[('odoo_product_id', '!=', None)]"/>
+                    <filter string="Importare in Odoo" name="importare_in_odoo"
+                            domain="[('importare_in_odoo', '=', True)]"/>
+                    <filter string="A magazzino forn." name="a_magazz_forn"
+                            domain="[('giacenza_distributore', '>', 0)]"/>
+                    <group expand="0" string="Group By">
+                        <filter string="Distributore" name="by_distributore" domain="[]"
+                                context="{'group_by':'distributore_id'}"/>
+                        <filter string="Categoria forn." name="by_categoria_forn" domain="[]"
+                                context="{'group_by':'categoria_fornitore'}"/>
+                        <filter string="Produttore" name="by_produttore" domain="[]"
+                                context="{'group_by':'produttore'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <!-- AGGIUNGERE PULSANTE NELLE ACTION -->
+        <record id="ak_sync_catalogo_prodotto_odoo" model="ir.actions.server">
+            <field name="name">Aggiorna prodotto in Odoo</field>
+            <field name="model_id" ref="ak_connettorefornitori.model_ak_connettore_catalogo_prodotti"/>
+            <field name="binding_model_id" ref="ak_connettorefornitori.model_ak_connettore_catalogo_prodotti"/>
+            <field name="state">code</field>
+            <field name="code">
+                action = records.sync_catalogo_prodotto_odoo()
+            </field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="ak_view_sale_order_delete_woocommerce_order" model="ir.ui.view">
+            <field name="name">ak_view_sale_order_delete_woocommerce_order</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form" />
+            <field name="arch" type="xml">
+                <xpath expr="//form//header//button[@name='action_draft']" position="after">
+                        <button name="SetOrderStatusWPcancelled" type="object" string="Cancel Wordpress order"  attrs="{'invisible': ['|', ('state', 'in', ['draft', 'sent','sale']), ('id', '=', False)]}"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="ak_view_sale_order_custom_fields" model="ir.ui.view">
+            <field name="name">ak_sale_order_custom_fields</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form" />
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='payment_term_id']"  position="after">
+                    <field name="ecommerce_order_id"  groups="base.group_no_one"/>
+                    <field name="ecommerce_order_ref"  />
+                    <field name="tag_ids"  />
+                </xpath>
+                <xpath expr="//field[@name='order_line']/tree" position="inside">
+                    <field name="pricelist_item_id" force_save="1" readonly="1" groups="base.group_no_one"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="ak_view_quotation_tree_with_onboarding" model="ir.ui.view">
+            <field name="name">ak_quotation_tree_with_onboarding</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_quotation_tree_with_onboarding" />
+             <field name="arch" type="xml">
+                <xpath expr="//field[@name='name']"  position="after">
+                    <field name="ecommerce_order_ref"  />
+                    <field name="tag_ids"  widget="many2many_tags" />
+                </xpath>
+            </field>
+        </record>
+        <record id="ak_view_order_tree" model="ir.ui.view">
+            <field name="name">ak_view_order_tree</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_tree" />
+             <field name="arch" type="xml">
+                <xpath expr="//field[@name='name']"  position="after">
+                    <field name="ecommerce_order_ref"  />
+                    <field name="tag_ids"  widget="many2many_tags" />
+                </xpath>
+            </field>
+        </record>
+
+        <record id="ak_view_order_tree_search_view" model="ir.ui.view">
+            <field name="name">ak_view_order_tree_search_ecommerce_order_ref</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_sales_order_filter" />
+            <field name="arch" type="xml">
+                <search>
+                    <field name="ecommerce_order_ref"  />
+                </search>
+            </field>
+        </record>
+
+   </data>
+</odoo>

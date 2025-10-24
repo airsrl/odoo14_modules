@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+air_connector.connector_log,air_connector.access_connector_log,model_connector_log,,1,1,1,1
+access_mrp_production_tag,access_mrp_production_tag,model_mrp_production_tag,base.group_user,1,1,1,1

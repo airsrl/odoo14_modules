@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="product_pricelist_item_form_view_inherit" model="ir.ui.view">
+            <field name="name">pricelist.item.inherit.form</field>
+            <field name="model">product.pricelist.item</field>
+            <field name="inherit_id" ref="product.product_pricelist_item_form_view"/>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <xpath expr="//sheet" position="inside">
+                    <field name="sale_line_ids" readonly="1" options="{'no_open':True}">
+                            <tree create="0" edit="0" delete="0">
+                                <field name="order_id"/>
+                                <field name="product_id"/>
+                                <field name="product_uom_qty" sum="Total qty"/>
+                                <field name="price_unit"/>
+                                <field name="state" decoration-success="state == 'sale' or state == 'done'" decoration-info="state == 'draft' or state == 'sent'" widget="badge"/>
+                            </tree>
+                    </field>
+                </xpath>
+                <xpath expr="//group[@name='pricelist_rule_limits']" position="inside">
+                    <field name="qty_promo"/>
+                    <field name="qty_salable" force_save="1"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

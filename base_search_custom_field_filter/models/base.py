@@ -22,7 +22,11 @@ class Base(models.AbstractModel):
             if node:
                 elem = etree.Element(
                     "field",
-                    {"name": custom_filter.expression, "string": custom_filter.name},
+                    {
+                        "name": "ir_ui_custom_filter_%s" % custom_filter.id,
+                        "string": custom_filter.name,
+                        "custom_field_filter": custom_filter.expression,
+                    },
                 )
                 node[0].addnext(elem)
         res["arch"] = etree.tostring(arch)

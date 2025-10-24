@@ -188,22 +188,6 @@ class CityZipGeonamesImport(models.TransientModel):
             self._process_csv(parsed_csv, country)
         return True
 
-    def _action_remove_old_records(self, model_name, old_records, country):
-        model = self.env[model_name]
-        items = model.browse(list(old_records))
-        try:
-            logger.info("removing %s entries" % model._name)
-            items.unlink()
-            logger.info(
-                "%d entries deleted for country %s" % (len(old_records), country.name)
-            )
-        except Exception:
-            for item in items:
-                try:
-                    item.unlink()
-                except Exception:
-                    logger.info(_("%d could not be deleted %") % item.name)
-
     def _process_csv(self, parsed_csv, country):
         state_model = self.env["res.country.state"]
         zip_model = self.env["res.city.zip"]
@@ -241,13 +225,23 @@ class CityZipGeonamesImport(models.TransientModel):
                     zip_vals_list.append(zip_vals)
             else:
                 old_zips.discard(zip_code.id)
-        zip_model.create(zip_vals_list)
+        self.env["res.city.zip"].create(zip_vals_list)
         if not max_import:
             if old_zips:
-                self._action_remove_old_records("res.city.zip", old_zips, country)
+                logger.info("removing city zip entries")
+                self.env["res.city.zip"].browse(list(old_zips)).unlink()
+                logger.info(
+                    "%d city zip entries deleted for country %s"
+                    % (len(old_zips), country.name)
+                )
             old_cities -= set(city_dict.values())
             if old_cities:
-                self._action_remove_old_records("res.city", old_cities, country)
+                logger.info("removing city entries")
+                self.env["res.city"].browse(list(old_cities)).unlink()
+                logger.info(
+                    "%d res.city entries deleted for country %s"
+                    % (len(old_cities), country.name)
+                )
         logger.info(
             "The wizard to create cities and/or city zip entries from "
             "geonames has been successfully completed."

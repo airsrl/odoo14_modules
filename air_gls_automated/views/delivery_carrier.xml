@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="stock_picking_gls_PD_form_inherit" model="ir.ui.view">
+            <field name="name">stock_picking_gls_PD_form_inherit</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="gls_shipping_integration.stock_picking_gls_PD"/>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <xpath expr="//button[@name='gls_italy_send']" position="after">
+                    <button name="gls_close_workday" string="Close Workday"  class="oe_link oe_highlight" type="object" attrs="{'invisible':[('gls_state','in',['to_send','annullato'])]}"/>
+
+                </xpath>
+
+            </field>
+        </record>
+    </data>
+</odoo>

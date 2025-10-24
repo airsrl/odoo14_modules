@@ -33,6 +33,7 @@ class ResCompany(models.Model):
         inverse="_inverse_zip_id",
         help="Use the city name or the zip code to search the location",
     )
+
     country_enforce_cities = fields.Boolean(
         related="partner_id.country_id.enforce_cities"
     )
@@ -47,20 +48,24 @@ class ResCompany(models.Model):
         return res
 
     def _inverse_city_id(self):
-        for company in self.with_context(skip_check_zip=True):
-            company.partner_id.city_id = company.city_id
+        for company in self:
+            company.with_context(
+                skip_check_zip=True
+            ).partner_id.city_id = company.city_id
 
     def _inverse_zip_id(self):
-        for company in self.with_context(skip_check_zip=True):
-            company.partner_id.zip_id = company.zip_id
+        for company in self:
+            company.with_context(skip_check_zip=True).partner_id.zip_id = company.zip_id
 
     def _inverse_state(self):
-        self = self.with_context(skip_check_zip=True)
-        return super(ResCompany, self)._inverse_state()
+        return super(
+            ResCompany, self.with_context(skip_check_zip=True)
+        )._inverse_state()
 
     def _inverse_country(self):
-        self = self.with_context(skip_check_zip=True)
-        return super(ResCompany, self)._inverse_country()
+        return super(
+            ResCompany, self.with_context(skip_check_zip=True)
+        )._inverse_country()
 
     @api.onchange("zip_id")
     def _onchange_zip_id(self):

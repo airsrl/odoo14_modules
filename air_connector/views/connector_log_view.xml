@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="connector_log_view">
+            <field name="name">connector_log_tree_view</field>
+            <field name="model">connector.log</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Logs" default_order="creation_date desc" editable="bottom">
+                    <header>
+                        <button name="force_single_sync" type="object" string="Push sync WP" class="oe_highlight"/>
+                        <button name="force_export_image" type="object" string="Forza Foto" class="oe_highlight"/>
+                        <button name="force_export_pricelist" type="object" string="Forza Pricelist" class="oe_highlight"/>
+                    </header>
+                    <field name="id" string="Task id"/>
+                    <field name="creation_date" />
+                    <field name="model"/>
+                    <field name="record_id"/>
+                    <field name="operation"/>
+                    <field name="execution_date"/>
+                    <field name="status"/>
+                    <field name="response"/>
+                    <field name="notes"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="connector_log_search_view">
+            <field name="name">connector_log_search_view</field>
+            <field name="model">connector.log</field>
+            <field name="type">search</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="record_id"/>
+                    <field name="model"/>
+                    <field name="operation"/>
+                    <field name="status"/>
+                    <field name="notes"/>
+                </search>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="connector_log_form_view">
+            <field name="name">connector_log_tree_form_view</field>
+            <field name="model">connector.log</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Logs">
+                    <field name="creation_date" />
+                    <field name="model"/>
+                    <field name="record_id"/>
+                    <field name="operation"/>
+                    <field name="execution_date"/>
+                    <field name="status"/>
+                    <field name="notes"/>
+                </form>
+            </field>
+        </record>
+
+        <record id="connector_log_act_window" model="ir.actions.act_window">
+            <field name="name">Air connector log</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">connector.log</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record id="connector_log_act_force_sync" model="ir.actions.server">
+            <field name="name">WP force sync</field>
+            <field name="model_id" ref="air_connector.model_connector_log" />
+            <field name="state">code</field>
+            <field name="code">action = model.force_sync()</field>
+        </record>
+
+        <menuitem name="Air-WP connector log" id="connector_log_menu" parent="base.menu_administration" action="connector_log_act_window"/>
+            <menuitem name="Log list" id="connector_log_list_menu" parent="air_connector.connector_log_menu" action="connector_log_act_window"/>
+            <menuitem name="WP force sync" id="connector_force_sync_menu" parent="air_connector.connector_log_menu" action="connector_log_act_force_sync"/>
+    </data>
+</odoo>

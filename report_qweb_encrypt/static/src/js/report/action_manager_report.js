@@ -85,9 +85,8 @@ odoo.define("report_qweb_encrypt.Dialog", function (require) {
                             })
                         );
                     reportUrls = _.mapObject(reportUrls, function (value) {
-                        var val = value;
-                        val += serializedOptionsPath;
-                        return val;
+                        value += serializedOptionsPath;
+                        return value;
                     });
                 }
             }

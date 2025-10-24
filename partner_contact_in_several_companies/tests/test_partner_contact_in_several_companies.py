@@ -156,8 +156,7 @@ class PartnerContactInSeveralCompaniesCase(common.TransactionCase):
             "'search_show_all_positions': " "{'is_set': True, 'set_value': False}"
         )
 
-        xmlid = "base.action_partner_form"
-        details = self.env["ir.actions.act_window"]._for_xml_id(xmlid)
+        details = self.env.ref("base.action_partner_form").read()[0]
 
         self.assertIn(
             new_context_val,
@@ -165,8 +164,9 @@ class PartnerContactInSeveralCompaniesCase(common.TransactionCase):
             msg="Default actions not updated with new context",
         )
 
-        xmlid = "partner_contact_in_several_companies.action_partner_form"
-        details = self.env["ir.actions.act_window"]._for_xml_id(xmlid)
+        details = self.env.ref(
+            "partner_contact_in_several_companies.action_partner_form"
+        ).read()[0]
 
         self.assertNotIn(
             new_context_val,

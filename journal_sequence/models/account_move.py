@@ -17,9 +17,7 @@ class AccountMove(models.Model):
             if not move.sequence_generated and move.state == 'draft':
                 move.name = '/'
             elif not move.sequence_generated and move.state != 'draft':
-                #move.name = sequence_id.with_context({'ir_sequence_date': self.invoice_date, 'bypass_constrains': True}).next_by_id(sequence_date=self.invoice_date)
-                #fix con Kev per Errore Uncredit AK
-                move.name = sequence_id.with_context({'ir_sequence_date': move.invoice_date, 'bypass_constrains': True}).next_by_id(sequence_date=move.invoice_date)
+                move.name = sequence_id.with_context({'ir_sequence_date': self.invoice_date, 'bypass_constrains': True}).next_by_id(sequence_date=self.invoice_date)
                 move.sequence_generated = True
 
     def _get_sequence(self):

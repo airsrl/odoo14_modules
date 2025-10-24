@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_product_template_custom_fields" model="ir.ui.view">
+            <field name="name">product_template_custom_fields</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_only_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[@name='options']" position="inside">
+                    <div modifiers="{}">
+                        <field name="wp_to_sync" modifiers="{}" id="wp_to_sync"/>
+                        <label for="wp_to_sync" modifiers="{}"/>
+                    </div>
+                </xpath>
+                <xpath expr="//page[@name='general_information']" string="" position="after">
+                    <page name="woocommerce" string="WooCommerce" attrs="{'invisible':[('wp_to_sync','=', False)]}">
+                        <group colspan="2">
+                            <group string="Product info">
+                                <field name="wp_sku"/>
+                                <field name="wp_product_name" placeholder="Keep empty to use product name."/>
+                                <field name="wp_category" placeholder="Keep empty to use product category."/>
+
+                                <field name="wp_last_sync_date"/>
+                                <field name="wp_product_id" groups="base.group_no_one"/>
+                                <field name="wp_image_attachment_id" groups="base.group_no_one"/>
+                            </group>
+                            <group string="Availability">
+                                <field name="wp_availability_warehouse"/>
+                                <field name="wp_availability_store"/>
+                                <field name="wp_availability_dealer"/>
+                                <field name="wp_price_list_id"/>
+
+                                <field name="wp_price" widget="monetary"
+                                       options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                                <button icon="fa-refresh" name="compute_wp_price_list_id" string="Calculate WP"
+                                        type="object" groups="base.group_no_one" class="btn-link"/>
+
+                                <field name="wp_stock_type"/>
+                                <field name="wp_preorder_start"
+                                       attrs="{'invisible':[('wp_stock_type','!=', 'preorder')]}"/>
+                                <field name="wp_preorder_fee" attrs="{'invisible':[('wp_stock_type','!=', 'preorder')]}"
+                                       widget="monetary"
+                                       options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                                <field name="wp_shadow_start" attrs="{'invisible':[('wp_stock_type','!=', 'shadow')]}"/>
+                                <field name="wp_shadow_end" attrs="{'invisible':[('wp_stock_type','!=', 'shadow')]}"/>
+                                <field name="wp_referral" widget="url"
+                                       attrs="{'invisible':[('wp_stock_type','!=', 'external')]}"/>
+                            </group>
+                        </group>
+                        <group>
+                            <group string="Short description" name="description_b">
+                                <field name="wp_short_description" nolabel="1" placeholder="Short description"/>
+                            </group>
+                            <group string="Long description" name="description_l">
+                                <field name="wp_long_description" nolabel="1" placeholder="Long description"/>
+                            </group>
+                        </group>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="product_template_custom_tree_view" model="ir.ui.view">
+            <field name="name">product_template_custom_tree_view</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="product.product_template_tree_view"/>
+            <field name="arch" type="xml">
+                <field name="name" position="after">
+                    <field name="wp_price" widget="monetary"
+                           options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                    <field name="wp_price_list_id"/>
+                </field>
+            </field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_product_form_custom_fields" model="ir.ui.view">
+            <field name="name">product_form_custom_fields</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_only_form_view" />
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='barcode']" position="after">
+                    <field name="marchio_id" string="Brand"/>
+                </xpath>
+                 <xpath expr="//group[@name='group_standard_price']" position="after">
+                     <group string="Importazione dati distributore"  name="pubblicazione_web">
+<!--                        <field name="sync_prezzo_bloccato" string="Prezzo bloccato"/>-->
+                        <field name="sync_source" string="Distributore"/>
+                        <field name="seller_code" string="Cod prod. distr."/>
+                        <field name="sync_last_date" string="Ultimo agg. distr."/>
+                        <field name="sync_hash" string="hash" groups="base.group_no_one"/>
+                    </group>
+                </xpath>
+                <xpath expr="//page[last()]" position="after">
+                    <page name="schedatecnica" string="Scheda tecnica">
+                        <group colspan="2">
+                            <group colspan="2">
+                                <field name="scheda_tecnica" nolabel="1" />
+                            </group>
+                        </group>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

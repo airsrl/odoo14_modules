@@ -1,0 +1,59 @@
+<odoo>
+    <data>
+
+        <!--  MENU PRINCIPALE AK-->
+        <menuitem name="AK prodotti" id="ak_distributori_list"
+                  sequence="90" parent="stock.menu_stock_root"/>
+
+        <!--  CATALOGO PRODOTTI -->
+        <record id="ak_catalogo_prodotti_act_window" model="ir.actions.act_window">
+            <field name="name">Catalogo prodotti</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">ak_connettore.catalogo_prodotti</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+        <menuitem name="Catalogo prodotti" id="catalogo_prodotti_menu" sequence="5"
+                  parent="ak_distributori_list" action="ak_catalogo_prodotti_act_window"/>
+
+        <!--  DISTRIBUTORI -->
+        <record id="ak_distributori_act_window" model="ir.actions.act_window">
+            <field name="name">Distributori</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">ak_connettore.distributore</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+        <menuitem name="Distributori" id="distributori_menu" sequence="10"
+                  parent="ak_distributori_list" action="ak_distributori_act_window"/>
+
+        <!--  CATEGORIE -->
+        <record id="ak_categorie_act_window" model="ir.actions.act_window">
+            <field name="name">Categorie</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">ak_connettore.categoria</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+        <menuitem name="Categorie" id="categorie_menu" sequence="20"
+                  parent="ak_distributori_list" action="ak_categorie_act_window"/>
+
+        <!--  MARCHI -->
+        <record id="ak_marchi_act_window" model="ir.actions.act_window">
+            <field name="name">Marchi</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">ak_connettore.marchio</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+        <menuitem name="Marchi" id="marchi_menu" sequence="30"
+                  parent="ak_distributori_list" action="ak_marchi_act_window"/>
+
+        <!--  SETUP MARGINI -->
+        <record id="ak_setup_margini_act_window" model="ir.actions.act_window">
+            <field name="name">Setup margini</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">ak_connettore.setup_margini</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+        <menuitem name="Setup margini" id="marchi_menu" sequence="40"
+                  parent="ak_distributori_list" action="ak_setup_margini_act_window"/>
+    </data>
+</odoo>
+

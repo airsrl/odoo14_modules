@@ -28,5 +28,3 @@
     'currency': 'USD',
     'price': 19.99
 }
-
-

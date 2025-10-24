@@ -1,0 +1,37 @@
+Il report è da mandare settimanalmente a NVreports@nvidia.com e icarissimi@nvidia.com 
+in cc cicolarialessio@akinformatica.it e acquisti@akinformatica.it
+
+
+Il report è comnposto da 2 file xls entrambi contengono i prodotti schede video o con schede video all'interno.
+al momento abbiamo una maschera di selezione che ci fa aggiungere le categorie che ci servono nel reporto
+
+
+Il primo File è l'inventario Nome File AK INF-INV-(data espressa in gg mes)
+
+I dati saranno poi cosi strutturati in tabella:
+Prima Colonna: Reporter ID = Ak Informatica
+Seconda Colonna: Inventory Date =  data di inventario del file
+Terza Colonna: Ean del proddoto 
+Quarta Colonna: Manufacturer 
+Quinta Colonna: Product Description
+Sesta Colonna: Quantity On Hand = quantità di prodotto in casa tra i vari magazzini ( sede - negozio )
+Settima Colonna: PO Back Log = Quantità di prodotto in Arrivo da fornitore ( al momento non è gestita dall'ufficio acquisti tramite ordine fornitore)
+
+
+Secondo file è il venduto della settimana a partire dal report precedente  Nome File SO-AK INF-(data espressa in ggmmaaaa)
+
+
+I dati saranno poi cosi strutturati in tabella:
+Prima Colonna: Reporter ID = Ak Informatica
+Seconda Colonna: Ean del proddoto 
+Terza Colonna: Manufacturer
+Quarta Colonna: Product Description
+Quinta Colonna: Quantity Sold/Returned = qunatità emessa in fattura 
+Sesta Colonna: Sold/Invoice Date = DAta della fattura
+Settima Colonna: Invoice Number
+Ottava Colonna: Price Per Unit = iva esclusa 
+Nona Colonna: Currency of Sale = che credo sarà sempre euro
+Decima Colonna: Ship to Name = qua va distinto in Anonimo se è azineda o privato e pc production se è uno scarico per produrre un pc
+Undicesima Colonna: Shipto Postal Code = il postal code di spedizione se pc prodcion è XXX
+Dodicesima Colonna: Shipto Country Code = è la nazione di spedizione
+

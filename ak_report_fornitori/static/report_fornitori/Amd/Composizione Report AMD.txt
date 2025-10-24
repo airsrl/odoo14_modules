@@ -1,0 +1,34 @@
+Il report è da mandare settimanalmente a amd_data@cdmapp.modeln.com 
+in cc cicolarialessio@akinformatica.it e acquisti@akinformatica.it
+
+
+Il report è comnposto da 2 file xls entrambi contengono i prodotti AMD.
+al momento abbiamo una maschera di selezione che ci fa aggiungere le categorie che ci servono nel report
+
+
+Il primo File è l'inventario Nome File INV(stock)-(settimana di riferimento espressa come WN)-AK INFO 901680
+
+I dati saranno poi cosi strutturati in tabella:
+Colonna A: Reseller Customer Number = 901680
+Colonna B: Manufacturer Part Number or OPN = è il codice secondario che è il codice prodotto del produttore
+Colonna C: Description - manufacturer, model, memory, bus type	= la descrizione
+Colonna D: Quantity On Hand = quantità di prodotto in casa tra i vari magazzini ( sede - negozio )
+Colonna E: Quantity on order = Quantità di prodotto in Arrivo da fornitore ( al momento non è gestita dall'ufficio acquisti tramite ordine fornitore)
+Colonna F: Date = Data inventario
+
+Secondo file è il venduto della settimana a partire dal report precedente  Nome File POS(sell)-(settimana di riferimento espressa come WN)-AK INFO 901680
+
+I dati saranno poi cosi strutturati in tabella:
+Colonna A: Reseller Customer Number = 901680
+Colonna B: Manufacturer Part Number or OPN = è il codice secondario che è il codice prodotto del produttore
+Colonna C: Description - manufacturer, model, memory, bus type	= la descrizione
+Colonna D: Qty sold
+Colonna E: Invoice Date
+Colonna F: Invoice #
+Colonna G: POS Type = Comp se venduto come componente SI se assemblato in un pc (Sistem Integrator)
+Colonna H: Sold To Name = vuoto
+Colonna I: Sold To Address = se disponibile
+Colonna J: Sold To City = se disponibile
+Colonna K: Sold To State = se disponibile
+Colonna L: Sold To Zip/Postal Code = se disponibile
+Colonna M: Sold To Country = se disponibile

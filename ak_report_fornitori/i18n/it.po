@@ -1,0 +1,735 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* ak_report_fornitori
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 14.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-05-09 14:08+0000\n"
+"PO-Revision-Date: 2024-05-09 14:08+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: ak_report_fornitori
+#: model:mail.template,report_name:ak_report_fornitori.email_report_base
+msgid "${(object.name or '')}"
+msgstr ""
+
+#. module: ak_report_fornitori
+#: model:mail.template,body_html:ak_report_fornitori.email_report_base
+msgid ""
+"<div style=\"margin: 0px; padding: 0px;\">\n"
+"        <p style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
+"\n"
+"        Salve,\n"
+"        <br/><br/>\n"
+"        In allegato troverà i report settimanali.\n"
+"        <br/><br/>\n"
+"\n"
+"\n"
+"\n"
+"        Non esitate a contattarci per ogni esigenza.\n"
+"        <br/>\n"
+"    </p>\n"
+"</div>\n"
+"            "
+msgstr ""
+
+#. module: ak_report_fornitori
+#: model:ir.actions.server,name:ak_report_fornitori.cron_update_report_delete_ir_actions_server
+#: model:ir.cron,cron_name:ak_report_fornitori.cron_update_report_delete
+#: model:ir.cron,name:ak_report_fornitori.cron_update_report_delete
+msgid "AK - Elimina record report fornitori"
+msgstr ""
+
+#. module: ak_report_fornitori
+#: model:ir.actions.server,name:ak_report_fornitori.cron_update_report_maintenance_ir_actions_server
+#: model:ir.cron,cron_name:ak_report_fornitori.cron_update_report_maintenance
+#: model:ir.cron,name:ak_report_fornitori.cron_update_report_maintenance
+msgid "AK - Manutenzione record report fornitori"
+msgstr ""
+
+#. module: ak_report_fornitori
+#: model:ir.actions.server,name:ak_report_fornitori.cron_update_report_bom_ir_actions_server
+#: model:ir.cron,cron_name:ak_report_fornitori.cron_update_report_bom
+#: model:ir.cron,name:ak_report_fornitori.cron_update_report_bom
+msgid "AK - Sync report bom"
+msgstr ""
+
+#. module: ak_report_fornitori
+#: model:ir.actions.server,name:ak_report_fornitori.cron_update_report_ir_actions_server
+#: model:ir.cron,cron_name:ak_report_fornitori.cron_update_report
+#: model:ir.cron,name:ak_report_fornitori.cron_update_report
+msgid "AK - Sync report fornitori"
+msgstr ""
+
+#. module: ak_report_fornitori
+#: model:ir.actions.server,name:ak_report_fornitori.cron_test_ir_actions_server
+#: model:ir.cron,cron_name:ak_report_fornitori.cron_test
+#: model:ir.cron,name:ak_report_fornitori.cron_test
+msgid "AK - TEST"
+msgstr ""
+
+#. module: ak_report_fornitori
+#: model:ir.actions.server,name:ak_report_fornitori.cron_send_report_ir_actions_server
+#: model:ir.cron,cron_name:ak_report_fornitori.cron_send_report
+#: model:ir.cron,name:ak_report_fornitori.cron_send_report
+msgid "AK -Invia report automatico"
+msgstr ""
+
+#. module: ak_report_fornitori
+#: model:ir.model.fields,field_description:ak_report_fornitori.field_report_fornitori__message_needaction
+msgid "Action Needed"
+msgstr ""
+
+#. module: ak_report_fornitori
+#: model:ir.model.fields,field_description:ak_report_fornitori.field_report_fornitori__activity_ids
+msgid "Activities"
+msgstr ""
+
+#. module: ak_report_fornitori
+#: model:ir.model.fields,field_description:ak_report_fornitori.field_report_fornitori__activity_exception_decoration
+msgid "Activity Exception Decoration"
+msgstr ""
+
+#. module: ak_report_fornitori
+#: model:ir.model.fields,field_description:ak_report_fornitori.field_report_fornitori__activity_state
+msgid "Activity State"
+msgstr ""
+
+#. module: ak_report_fornitori
+#: model:ir.model.fields,field_description:ak_report_fornitori.field_report_fornitori__activity_type_icon
+msgid "Activity Type Icon"
+msgstr ""
+
+#. module: ak_report_fornitori
+#: model:ir.model.fields.selection,name:ak_report_fornitori.selection__report_fornitori__report_type_fornitore__amd
+msgid "Amd"
+msgstr ""
+
+#. module: ak_report_fornitori
+#: model:ir.model.fields.selection,name:ak_report_fornitori.selection__report_fornitori__report_type_fornitore__asus
+msgid "Asus"
+msgstr ""
+
+#. module: ak_report_fornitori
+#: model:ir.model.fields,field_description:ak_report_fornitori.field_report_fornitori__message_attachment_count
+msgid "Attachment Count"
+msgstr ""
+
+#. module: ak_report_fornitori
+#: model:ir.model.fields,field_description:ak_report_fornitori.field_report_fornitori_data__bom_id
+msgid "Bom"
+msgstr ""
+
+#. module: ak_report_fornitori
+#: model:ir.model.fields,field_description:ak_report_fornitori.field_report_fornitori_data__bom_date
+msgid "Bom Date"
+msgstr ""
+
+#. module: ak_report_fornitori
+#: model:ir.model.fields,field_description:ak_report_fornitori.field_report_fornitori_data__bom_name
+msgid "Bom Name"
+msgstr ""
+
+#. module: ak_report_fornitori
+#: model:ir.model.fields,field_description:ak_report_fornitori.field_report_fornitori__categorie_ids
+msgid "Categorie"
+msgstr ""
+
+#. module: ak_report_fornitori
+#: model_terms:ir.ui.view,arch_db:ak_report_fornitori.report_fornitori_data_search_view
+#: model_terms:ir.ui.view,arch_db:ak_report_fornitori.report_fornitori_search_view
+msgid "Cerca"
+msgstr ""
+
+#. module: ak_report_fornitori
+#: model_terms:ir.ui.view,arch_db:ak_report_fornitori.report_fornitori_data_search_view
+#: model_terms:ir.ui.view,arch_db:ak_report_fornitori.report_fornitori_data_tree_view
+msgid "Cliente"
+msgstr ""
+
+#. module: ak_report_fornitori
+#: model:ir.model.fields,field_description:ak_report_fornitori.field_stock_warehouse__code_msi
+msgid "Codice Mag. MSI"
+msgstr ""
+
+#. module: ak_report_fornitori
+#: model_terms:ir.ui.view,arch_db:ak_report_fornitori.stock_warehouse_form_inherit
+msgid "Codici esterni"
+msgstr ""
+
+#. module: ak_report_fornitori
+#: model:ir.model.fields.selection,name:ak_report_fornitori.selection__report_fornitori_data__product_type__comp
+msgid "Componente"
+msgstr ""
+
+#. module: ak_report_fornitori
+#: model_terms:ir.ui.view,arch_db:ak_report_fornitori.report_fornitori_form_view
+msgid "Crea e invia report"
+msgstr ""
+
+#. module: ak_report_fornitori
+#: model:ir.model.fields,field_description:ak_report_fornitori.field_report_fornitori__create_uid
+#: model:ir.model.fields,field_description:ak_report_fornitori.field_report_fornitori_data__create_uid
+#: model:ir.model.fields,field_description:ak_report_fornitori.field_report_fornitori_line__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: ak_report_fornitori
+#: model:ir.model.fields,field_description:ak_report_fornitori.field_report_fornitori__create_date
+#: model:ir.model.fields,field_description:ak_report_fornitori.field_report_fornitori_data__create_date
+#: model:ir.model.fields,field_description:ak_report_fornitori.field_report_fornitori_line__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: ak_report_fornitori
+#: model_terms:ir.ui.view,arch_db:ak_report_fornitori.report_fornitori_form_view
+msgid "Data creazione report"
+msgstr ""
+
+#. module: ak_report_fornitori
+#: model_terms:ir.ui.view,arch_db:ak_report_fornitori.report_fornitori_data_search_view
+#: model_terms:ir.ui.view,arch_db:ak_report_fornitori.report_fornitori_data_tree_view
+msgid "Data fattura"
+msgstr ""
+
+#. module: ak_report_fornitori
+#: model:ir.model.fields,field_description:ak_report_fornitori.field_report_fornitori_line__date
+msgid "Data invio"
+msgstr ""
+
+#. module: ak_report_fornitori
+#: model:ir.model.fields,field_description:ak_report_fornitori.field_report_fornitori__date_start
+msgid "Date Start"
+msgstr ""
+
+#. module: ak_report_fornitori
+#: model:ir.model.fields,field_description:ak_report_fornitori.field_report_fornitori__date_stop
+msgid "Date Stop"
+msgstr ""
+
+#. module: ak_report_fornitori
+#: model:ir.model,name:ak_report_fornitori.model_report_fornitori
+msgid "Description"
+msgstr ""
+
+#. module: ak_report_fornitori
+#: model:ir.model.fields,field_description:ak_report_fornitori.field_account_move__display_name
+#: model:ir.model.fields,field_description:ak_report_fornitori.field_product_product__display_name
+#: model:ir.model.fields,field_description:ak_report_fornitori.field_report_fornitori__display_name
+#: model:ir.model.fields,field_description:ak_report_fornitori.field_report_fornitori_data__display_name
+#: model:ir.model.fields,field_description:ak_report_fornitori.field_report_fornitori_line__display_name
+#: model:ir.model.fields,field_description:ak_report_fornitori.field_stock_move_line__display_name
+#: model:ir.model.fields,field_description:ak_report_fornitori.field_stock_picking_type__display_name
+#: model:ir.model.fields,field_description:ak_report_fornitori.field_stock_warehouse__display_name
+msgid "Display Name"
+msgstr "Nome visualizzato"
+
+#. module: ak_report_fornitori
+#: model:ir.model.fields,field_description:ak_report_fornitori.field_report_fornitori__partner_id
+msgid "Distributore"
+msgstr ""
+
+#. module: ak_report_fornitori
+#: model:ir.model.fields,field_description:ak_report_fornitori.field_report_fornitori__email
+msgid "Email"
+msgstr ""
+
+#. module: ak_report_fornitori
+#: model:ir.model.fields,field_description:ak_report_fornitori.field_report_fornitori__email_cc
+msgid "Email CC"
+msgstr ""
+
+#. module: ak_report_fornitori
+#: model:ir.model.fields.selection,name:ak_report_fornitori.selection__report_fornitori_data__move_type__invoice
+#: model_terms:ir.ui.view,arch_db:ak_report_fornitori.report_fornitori_data_search_view
+#: model_terms:ir.ui.view,arch_db:ak_report_fornitori.report_fornitori_data_tree_view
+msgid "Fattura"
+msgstr ""
+
+#. module: ak_report_fornitori
+#: model:ir.model.fields,field_description:ak_report_fornitori.field_report_fornitori_line__file
+msgid "File"
+msgstr ""
+
+#. module: ak_report_fornitori
+#: model:ir.model.fields,field_description:ak_report_fornitori.field_report_fornitori__message_follower_ids
+msgid "Followers"
+msgstr ""
+
+#. module: ak_report_fornitori
+#: model:ir.model.fields,field_description:ak_report_fornitori.field_report_fornitori__message_channel_ids
+msgid "Followers (Channels)"
+msgstr ""
+
+#. module: ak_report_fornitori
+#: model:ir.model.fields,field_description:ak_report_fornitori.field_report_fornitori__message_partner_ids
+msgid "Followers (Partners)"
+msgstr ""
+
+#. module: ak_report_fornitori
+#: model:ir.model.fields,help:ak_report_fornitori.field_report_fornitori__activity_type_icon
+msgid "Font awesome icon e.g. fa-tasks"
+msgstr ""
+
+#. module: ak_report_fornitori
+#: model:ir.model.fields,field_description:ak_report_fornitori.field_account_move__id
+#: model:ir.model.fields,field_description:ak_report_fornitori.field_product_product__id
+#: model:ir.model.fields,field_description:ak_report_fornitori.field_report_fornitori__id
+#: model:ir.model.fields,field_description:ak_report_fornitori.field_report_fornitori_data__id
+#: model:ir.model.fields,field_description:ak_report_fornitori.field_report_fornitori_line__id
+#: model:ir.model.fields,field_description:ak_report_fornitori.field_stock_move_line__id
+#: model:ir.model.fields,field_description:ak_report_fornitori.field_stock_picking_type__id
+#: model:ir.model.fields,field_description:ak_report_fornitori.field_stock_warehouse__id
+msgid "ID"
+msgstr ""
+
+#. module: ak_report_fornitori
+#: model:ir.model.fields,field_description:ak_report_fornitori.field_report_fornitori__activity_exception_icon
+msgid "Icon"
+msgstr ""
+
+#. module: ak_report_fornitori
+#: model:ir.model.fields,help:ak_report_fornitori.field_report_fornitori__activity_exception_icon
+msgid "Icon to indicate an exception activity."
+msgstr ""
+
+#. module: ak_report_fornitori
+#: model:ir.model.fields,help:ak_report_fornitori.field_report_fornitori__message_needaction
+#: model:ir.model.fields,help:ak_report_fornitori.field_report_fornitori__message_unread
+msgid "If checked, new messages require your attention."
+msgstr ""
+
+#. module: ak_report_fornitori
+#: model:ir.model.fields,help:ak_report_fornitori.field_report_fornitori__message_has_error
+#: model:ir.model.fields,help:ak_report_fornitori.field_report_fornitori__message_has_sms_error
+msgid "If checked, some messages have a delivery error."
+msgstr ""
+
+#. module: ak_report_fornitori
+#: model:ir.model.fields,field_description:ak_report_fornitori.field_report_fornitori__automatic_send
+msgid "Invia automaticamente"
+msgstr ""
+
+#. module: ak_report_fornitori
+#: model:ir.model.fields,field_description:ak_report_fornitori.field_report_fornitori_data__invoice_date
+msgid "Invoice Date"
+msgstr ""
+
+#. module: ak_report_fornitori
+#: model:ir.model.fields,field_description:ak_report_fornitori.field_report_fornitori__message_is_follower
+msgid "Is Follower"
+msgstr ""
+
+#. module: ak_report_fornitori
+#: model:ir.model.fields,field_description:ak_report_fornitori.field_stock_picking_type__is_new_coming_picking_type
+msgid "Is a new coming picking type"
+msgstr "E' un tipo operazione per nuovi arrivi"
+
+#. module: ak_report_fornitori
+#: model:ir.model.fields,field_description:ak_report_fornitori.field_stock_picking_type__is_scrap_picking_type
+msgid "Is a scrap picking type"
+msgstr "E' un tipo operazione per scarti"
+
+#. module: ak_report_fornitori
+#: model:ir.model.fields,field_description:ak_report_fornitori.field_stock_picking_type__is_sellout_picking_type
+msgid "Is a sellout picking type"
+msgstr "E' un tipo operazione per sellout"
+
+#. module: ak_report_fornitori
+#: model:ir.model,name:ak_report_fornitori.model_account_move
+msgid "Journal Entry"
+msgstr "Registrazione contabile"
+
+#. module: ak_report_fornitori
+#: model:ir.model.fields,field_description:ak_report_fornitori.field_account_move____last_update
+#: model:ir.model.fields,field_description:ak_report_fornitori.field_product_product____last_update
+#: model:ir.model.fields,field_description:ak_report_fornitori.field_report_fornitori____last_update
+#: model:ir.model.fields,field_description:ak_report_fornitori.field_report_fornitori_data____last_update
+#: model:ir.model.fields,field_description:ak_report_fornitori.field_report_fornitori_line____last_update
+#: model:ir.model.fields,field_description:ak_report_fornitori.field_stock_move_line____last_update
+#: model:ir.model.fields,field_description:ak_report_fornitori.field_stock_picking_type____last_update
+#: model:ir.model.fields,field_description:ak_report_fornitori.field_stock_warehouse____last_update
+msgid "Last Modified on"
+msgstr "Ultima modifica il"
+
+#. module: ak_report_fornitori
+#: model:ir.model.fields,field_description:ak_report_fornitori.field_report_fornitori__write_uid
+#: model:ir.model.fields,field_description:ak_report_fornitori.field_report_fornitori_data__write_uid
+#: model:ir.model.fields,field_description:ak_report_fornitori.field_report_fornitori_line__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: ak_report_fornitori
+#: model:ir.model.fields,field_description:ak_report_fornitori.field_report_fornitori__write_date
+#: model:ir.model.fields,field_description:ak_report_fornitori.field_report_fornitori_data__write_date
+#: model:ir.model.fields,field_description:ak_report_fornitori.field_report_fornitori_line__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: ak_report_fornitori
+#: model:ir.model.fields,field_description:ak_report_fornitori.field_report_fornitori__message_main_attachment_id
+msgid "Main Attachment"
+msgstr ""
+
+#. module: ak_report_fornitori
+#: model:ir.model.fields,field_description:ak_report_fornitori.field_report_fornitori__marchio_ids
+msgid "Marchi"
+msgstr ""
+
+#. module: ak_report_fornitori
+#: model:ir.model.fields,field_description:ak_report_fornitori.field_report_fornitori_data__marchio_id
+msgid "Marchio"
+msgstr ""
+
+#. module: ak_report_fornitori
+#: model:ir.model.fields,field_description:ak_report_fornitori.field_report_fornitori__message_has_error
+msgid "Message Delivery error"
+msgstr ""
+
+#. module: ak_report_fornitori
+#: model:ir.model.fields,field_description:ak_report_fornitori.field_report_fornitori__message_ids
+msgid "Messages"
+msgstr ""
+
+#. module: ak_report_fornitori
+#: model:ir.model.fields,field_description:ak_report_fornitori.field_report_fornitori_data__move_id
+msgid "Move"
+msgstr ""
+
+#. module: ak_report_fornitori
+#: model:ir.model.fields,field_description:ak_report_fornitori.field_report_fornitori_data__move_line
+msgid "Move Line"
+msgstr ""
+
+#. module: ak_report_fornitori
+#: model:ir.model.fields,field_description:ak_report_fornitori.field_report_fornitori_data__move_type
+msgid "Move Type"
+msgstr ""
+
+#. module: ak_report_fornitori
+#: model:ir.model.fields,field_description:ak_report_fornitori.field_report_fornitori_data__mrp_id
+msgid "Mrp"
+msgstr ""
+
+#. module: ak_report_fornitori
+#: model:ir.model.fields.selection,name:ak_report_fornitori.selection__report_fornitori__report_type_fornitore__msi
+msgid "Msi"
+msgstr ""
+
+#. module: ak_report_fornitori
+#: model:ir.model.fields,field_description:ak_report_fornitori.field_report_fornitori__my_activity_date_deadline
+msgid "My Activity Deadline"
+msgstr ""
+
+#. module: ak_report_fornitori
+#: model:ir.model.fields,field_description:ak_report_fornitori.field_report_fornitori_data__name
+msgid "Name"
+msgstr ""
+
+#. module: ak_report_fornitori
+#: model:ir.model.fields,field_description:ak_report_fornitori.field_report_fornitori__activity_date_deadline
+msgid "Next Activity Deadline"
+msgstr ""
+
+#. module: ak_report_fornitori
+#: model:ir.model.fields,field_description:ak_report_fornitori.field_report_fornitori__activity_summary
+msgid "Next Activity Summary"
+msgstr ""
+
+#. module: ak_report_fornitori
+#: model:ir.model.fields,field_description:ak_report_fornitori.field_report_fornitori__activity_type_id
+msgid "Next Activity Type"
+msgstr ""
+
+#. module: ak_report_fornitori
+#: model:ir.model.fields,field_description:ak_report_fornitori.field_report_fornitori_line__name
+msgid "Nome file"
+msgstr ""
+
+#. module: ak_report_fornitori
+#: model:ir.model.fields,field_description:ak_report_fornitori.field_report_fornitori__name
+msgid "Nome report"
+msgstr ""
+
+#. module: ak_report_fornitori
+#: model_terms:ir.actions.act_window,help:ak_report_fornitori.report_fornitori_act_window
+msgid "Non sono stati configurati report fornitori."
+msgstr ""
+
+#. module: ak_report_fornitori
+#: model:ir.model.fields,field_description:ak_report_fornitori.field_report_fornitori__message_needaction_counter
+msgid "Number of Actions"
+msgstr ""
+
+#. module: ak_report_fornitori
+#: model:ir.model.fields,field_description:ak_report_fornitori.field_report_fornitori__message_has_error_counter
+msgid "Number of errors"
+msgstr ""
+
+#. module: ak_report_fornitori
+#: model:ir.model.fields,help:ak_report_fornitori.field_report_fornitori__message_needaction_counter
+msgid "Number of messages which requires an action"
+msgstr ""
+
+#. module: ak_report_fornitori
+#: model:ir.model.fields,help:ak_report_fornitori.field_report_fornitori__message_has_error_counter
+msgid "Number of messages with delivery error"
+msgstr ""
+
+#. module: ak_report_fornitori
+#: model:ir.model.fields,help:ak_report_fornitori.field_report_fornitori__message_unread_counter
+msgid "Number of unread messages"
+msgstr ""
+
+#. module: ak_report_fornitori
+#: model:ir.model.fields.selection,name:ak_report_fornitori.selection__report_fornitori__report_type_fornitore__nvidia
+msgid "Nvidia"
+msgstr ""
+
+#. module: ak_report_fornitori
+#: model:ir.model.fields.selection,name:ak_report_fornitori.selection__report_fornitori_data__move_type__bom
+msgid "Ordine di prod"
+msgstr ""
+
+#. module: ak_report_fornitori
+#: model:ir.model.fields,field_description:ak_report_fornitori.field_report_fornitori_line__parent_id
+msgid "Parent"
+msgstr ""
+
+#. module: ak_report_fornitori
+#: model:ir.model.fields,field_description:ak_report_fornitori.field_report_fornitori_data__partner_id
+msgid "Partner"
+msgstr ""
+
+#. module: ak_report_fornitori
+#: model:ir.model,name:ak_report_fornitori.model_stock_picking_type
+msgid "Picking Type"
+msgstr "Tipologia prelievo"
+
+#. module: ak_report_fornitori
+#: model:ir.model.fields,field_description:ak_report_fornitori.field_report_fornitori_data__pos_order_id
+msgid "Pos Order"
+msgstr ""
+
+#. module: ak_report_fornitori
+#: model:ir.model.fields,field_description:ak_report_fornitori.field_report_fornitori_data__pos_order_line
+msgid "Pos order line"
+msgstr ""
+
+#. module: ak_report_fornitori
+#: model_terms:ir.ui.view,arch_db:ak_report_fornitori.report_fornitori_data_search_view
+#: model_terms:ir.ui.view,arch_db:ak_report_fornitori.report_fornitori_data_tree_view
+msgid "Prodotto"
+msgstr ""
+
+#. module: ak_report_fornitori
+#: model:ir.model,name:ak_report_fornitori.model_product_product
+#: model:ir.model.fields,field_description:ak_report_fornitori.field_report_fornitori_data__product_id
+msgid "Product"
+msgstr "Prodotto"
+
+#. module: ak_report_fornitori
+#: model:ir.model,name:ak_report_fornitori.model_stock_move_line
+msgid "Product Moves (Stock Move Line)"
+msgstr "Movimenti prodotto (riga movimento di magazzino)"
+
+#. module: ak_report_fornitori
+#: model:ir.model.fields,field_description:ak_report_fornitori.field_report_fornitori_data__product_type
+msgid "Product Type"
+msgstr ""
+
+#. module: ak_report_fornitori
+#: model:ir.model.fields,field_description:ak_report_fornitori.field_report_fornitori_data__quantity
+msgid "Qty"
+msgstr ""
+
+#. module: ak_report_fornitori
+#: model:ir.model.fields,field_description:ak_report_fornitori.field_stock_move_line__in_out_move
+msgid "Qty In/Out"
+msgstr ""
+
+#. module: ak_report_fornitori
+#: model_terms:ir.ui.view,arch_db:ak_report_fornitori.report_fornitori_data_tree_view
+msgid "Qtà"
+msgstr ""
+
+#. module: ak_report_fornitori
+#: model_terms:ir.ui.view,arch_db:ak_report_fornitori.report_fornitori_data_search_view
+msgid "Ragruppa"
+msgstr ""
+
+#. module: ak_report_fornitori
+#: model:mail.template,subject:ak_report_fornitori.email_report_base
+msgid "Report  ${object.name}"
+msgstr ""
+
+#. module: ak_report_fornitori
+#: model:ir.actions.act_window,name:ak_report_fornitori.report_fornitori_act_window
+#: model:ir.ui.menu,name:ak_report_fornitori.report_fornitori_menu
+#: model_terms:ir.ui.view,arch_db:ak_report_fornitori.report_fornitori_form_view
+#: model_terms:ir.ui.view,arch_db:ak_report_fornitori.report_fornitori_tree_view
+msgid "Report Fornitori"
+msgstr ""
+
+#. module: ak_report_fornitori
+#: model_terms:ir.ui.view,arch_db:ak_report_fornitori.report_fornitori_data_tree_view
+msgid "Report Fornitori Data"
+msgstr ""
+
+#. module: ak_report_fornitori
+#: model:ir.actions.act_window,name:ak_report_fornitori.report_fornitori_data_act_window
+msgid "Report Fornitori Datas"
+msgstr ""
+
+#. module: ak_report_fornitori
+#: model_terms:ir.ui.view,arch_db:ak_report_fornitori.report_fornitori_form_view
+msgid "Report Generali"
+msgstr ""
+
+#. module: ak_report_fornitori
+#: model:ir.model.fields,field_description:ak_report_fornitori.field_report_fornitori__report_line_id
+msgid "Report Generati"
+msgstr ""
+
+#. module: ak_report_fornitori
+#: model_terms:ir.ui.view,arch_db:ak_report_fornitori.report_fornitori_form_view
+msgid "Report Giacenze"
+msgstr ""
+
+#. module: ak_report_fornitori
+#: model_terms:ir.ui.view,arch_db:ak_report_fornitori.report_fornitori_form_view
+msgid "Report Venduto"
+msgstr ""
+
+#. module: ak_report_fornitori
+#: model_terms:ir.ui.view,arch_db:ak_report_fornitori.report_fornitori_form_view
+msgid "Report csv Samsung"
+msgstr ""
+
+#. module: ak_report_fornitori
+#: model:ir.model.fields,field_description:ak_report_fornitori.field_report_fornitori__report_type_fornitore
+msgid "Report di riferimento"
+msgstr ""
+
+#. module: ak_report_fornitori
+#: model_terms:ir.ui.view,arch_db:ak_report_fornitori.stock_picking_type_form_inherit
+msgid "Report fornitori"
+msgstr ""
+
+#. module: ak_report_fornitori
+#: model:ir.model.fields,field_description:ak_report_fornitori.field_report_fornitori__activity_user_id
+msgid "Responsible User"
+msgstr ""
+
+#. module: ak_report_fornitori
+#: model_terms:ir.ui.view,arch_db:ak_report_fornitori.report_fornitori_data_tree_view
+msgid "Riga fattura"
+msgstr ""
+
+#. module: ak_report_fornitori
+#: model:ir.model.fields,field_description:ak_report_fornitori.field_report_fornitori__message_has_sms_error
+msgid "SMS Delivery error"
+msgstr ""
+
+#. module: ak_report_fornitori
+#: model:ir.model.fields.selection,name:ak_report_fornitori.selection__report_fornitori__report_type_fornitore__samsung
+msgid "Samsung"
+msgstr ""
+
+#. module: ak_report_fornitori
+#: model:ir.model.fields.selection,name:ak_report_fornitori.selection__report_fornitori_data__product_type__direct
+msgid "Scarico in prod."
+msgstr ""
+
+#. module: ak_report_fornitori
+#: model:ir.model.fields,help:ak_report_fornitori.field_report_fornitori__activity_state
+msgid ""
+"Status based on activities\n"
+"Overdue: Due date is already passed\n"
+"Today: Activity date is today\n"
+"Planned: Future activities."
+msgstr ""
+
+#. module: ak_report_fornitori
+#: model:ir.model.fields,field_description:ak_report_fornitori.field_report_fornitori_data__stock_move
+msgid "Stock Move"
+msgstr ""
+
+#. module: ak_report_fornitori
+#: model:ir.model.fields,field_description:ak_report_fornitori.field_report_fornitori_data__stock_move_line
+msgid "Stock Move Line"
+msgstr ""
+
+#. module: ak_report_fornitori
+#: model:ir.ui.menu,name:ak_report_fornitori.report_fornitori_data_menu
+msgid "Tabella record report"
+msgstr ""
+
+#. module: ak_report_fornitori
+#: model_terms:ir.actions.act_window,help:ak_report_fornitori.report_fornitori_data_act_window
+msgid "There is no examples click here to add new ModelTitle."
+msgstr ""
+
+#. module: ak_report_fornitori
+#: model_terms:ir.ui.view,arch_db:ak_report_fornitori.report_fornitori_data_tree_view
+msgid "Tipo prodotto"
+msgstr ""
+
+#. module: ak_report_fornitori
+#: model:ir.model.fields,help:ak_report_fornitori.field_report_fornitori__activity_exception_decoration
+msgid "Type of the exception activity on record."
+msgstr ""
+
+#. module: ak_report_fornitori
+#: model:ir.model.fields,field_description:ak_report_fornitori.field_stock_move_line__movimenti_prodotto
+msgid "Unit value"
+msgstr ""
+
+#. module: ak_report_fornitori
+#: model:ir.model.fields,field_description:ak_report_fornitori.field_report_fornitori__message_unread
+msgid "Unread Messages"
+msgstr ""
+
+#. module: ak_report_fornitori
+#: model:ir.model.fields,field_description:ak_report_fornitori.field_report_fornitori__message_unread_counter
+msgid "Unread Messages Counter"
+msgstr ""
+
+#. module: ak_report_fornitori
+#: model:ir.model.fields,help:ak_report_fornitori.field_stock_picking_type__is_new_coming_picking_type
+#: model:ir.model.fields,help:ak_report_fornitori.field_stock_picking_type__is_scrap_picking_type
+#: model:ir.model.fields,help:ak_report_fornitori.field_stock_picking_type__is_sellout_picking_type
+msgid "Used for report fornitori"
+msgstr "Tipologia di operazione utilizzata per i report fornitori"
+
+#. module: ak_report_fornitori
+#: model:ir.model,name:ak_report_fornitori.model_stock_warehouse
+msgid "Warehouse"
+msgstr "Magazzino"
+
+#. module: ak_report_fornitori
+#: model:ir.model.fields,field_description:ak_report_fornitori.field_report_fornitori__website_message_ids
+msgid "Website Messages"
+msgstr ""
+
+#. module: ak_report_fornitori
+#: model:ir.model.fields,help:ak_report_fornitori.field_report_fornitori__website_message_ids
+msgid "Website communication history"
+msgstr ""
+
+#. module: ak_report_fornitori
+#: model:ir.model,name:ak_report_fornitori.model_report_fornitori_data
+msgid "report.fornitori.data"
+msgstr ""
+
+#. module: ak_report_fornitori
+#: model:ir.model,name:ak_report_fornitori.model_report_fornitori_line
+msgid "report.fornitori.line"
+msgstr ""

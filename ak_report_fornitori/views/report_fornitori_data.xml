@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+<!--        <record id="report_fornitori_data_form_view" model="ir.ui.view">-->
+<!--            <field name="name">report_fornitori_data.form</field>-->
+<!--            <field name="model">report.fornitori.data</field>-->
+<!--            <field name="arch" type="xml">-->
+<!--                <form string="Report Data">-->
+<!--                    <sheet>-->
+<!--                        <div class="oe_title">-->
+<!--                            <label for="example_title"/>-->
+<!--                            <h1>-->
+<!--                                <field name="example_title" placeholder="Title"/>-->
+<!--                            </h1>-->
+<!--                        </div>-->
+<!--                        <group>-->
+<!--                            <group>-->
+<!--                                <field name="create_date"/>-->
+<!--                            </group>-->
+<!--                            <group>-->
+<!--                                <field name="example_field"/>-->
+<!--                            </group>-->
+<!--                        </group>-->
+<!--                    </sheet>-->
+<!--                </form>-->
+<!--            </field>-->
+<!--        </record>-->
+
+        <record id="report_fornitori_data_tree_view" model="ir.ui.view">
+            <field name="name">report_fornitori_data.tree</field>
+            <field name="model">report.fornitori.data</field>
+            <field name="arch" type="xml">
+                <tree string="Report Fornitori Data" editable="top">
+                    <field name="move_id" string="Fattura"/>
+                    <field name="move_line" string="Riga fattura"/>
+                    <field name="product_id" string="Prodotto"/>
+                    <field name="product_type" string="Tipo prodotto"/>
+                    <field name="quantity" string="Qtà"/>
+                    <field name="partner_id" string="Cliente"/>
+                    <field name="invoice_date" string="Data fattura"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="report_fornitori_data_search_view" model="ir.ui.view">
+            <field name="name">report_fornitori_data.search</field>
+            <field name="model">report.fornitori.data</field>
+            <field name="arch" type="xml">
+                <search string="Cerca">
+                    <field string="Fattura" name="move_id"/>
+                    <field string="Prodotto" name="product_id"/>
+                    <field string="Cliente" name="partner_id"/>
+
+                    <group expand="1" string="Ragruppa">
+                        <filter string="Fattura" name="group_fattura" domain="[]"
+                                context="{'group_by':'move_id'}"/>
+                        <separator/>
+                    <filter string="Data fattura" name="invoice_date_filter" context="{'group_by':'invoice_date'}"/>
+
+
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record id="report_fornitori_data_act_window" model="ir.actions.act_window">
+            <field name="name">Report Fornitori Datas</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">report.fornitori.data</field>
+            <field name="view_mode">tree</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    There is no examples click here to add new ModelTitle.
+                </p>
+            </field>
+        </record>
+
+        <menuitem name="Tabella record report" id="report_fornitori_data_menu" parent="ak_connettorefornitori.ak_distributori_list" sequence="100" action="report_fornitori_data_act_window"/>
+
+    </data>
+</odoo>

@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_air_connector_config" model="ir.ui.view">
+            <field name="name">air_connector_config</field>
+            <field name="model">res.config.settings</field>
+            <field name="inherit_id" ref="base.res_config_settings_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[hasclass('settings')]" position="inside">
+                    <div class="app_settings_block" data-string="connettone_WordpressSyncGiacenze"
+                         string="AIR - Connector" data-key="connettone_WordpressSyncGiacenze">
+                        <div id="contacts_settings">
+                            <h2>WordPress configuration</h2>
+                            <div class="row mt16 o_settings_container" name="contacts_setting_container">
+                                <div class="col-xs-12 col-md-8 o_setting_box" id="url">
+                                    <div class="o_setting_right_pane" id="wp_url">
+                                        <div class="o_form_label">
+                                            Url
+                                        </div>
+                                        <field name="wp_url"/>
+                                        <div class="text-muted">
+                                            WordPress url
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-md-4 o_setting_box" id="version">
+                                    <div class="o_setting_right_pane" id="wp_version">
+                                        <div class="o_form_label">
+                                            Version
+                                        </div>
+                                        <field name="wp_version"/>
+                                        <div class="text-muted">
+                                             API version
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mt16 o_settings_container" name="contacts_setting_container">
+                                <div class="col-xs-12 col-md-12 o_setting_box" id="consumer_key">
+                                    <div class="o_setting_right_pane" id="wp_consumer_key">
+                                        <div class="o_form_label">
+                                            Consumer key
+                                        </div>
+                                        <field name="wp_consumer_key"/>
+                                        <div class="text-muted">
+                                            Consumer key API authentication (starts with ck_)
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-xs-12 col-md-12 o_setting_box" id="consumer_secret">
+                                    <div class="o_setting_right_pane" id="wp_consumer_secret">
+                                        <div class="o_form_label">
+                                            Consumer secret
+                                        </div>
+                                        <field name="wp_consumer_secret"/>
+                                        <div class="text-muted">
+                                            Consumer secret API authentication (starts with cs_)
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-md-12 o_setting_box" id="quantity_field">
+                                    <div class="o_setting_right_pane" id="wp_product_quantity_field">
+                                        <div class="o_form_label">
+                                            Quantity field
+                                        </div>
+                                        <field name="wp_product_quantity_field"/>
+                                        <div class="text-muted">
+                                             Field to use when updating stock quantity on WP
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-md-12 o_setting_box" id="sync_max_limit_field">
+                                    <div class="o_setting_right_pane" id="wp_sync_max_limit">
+                                        <div class="o_form_label">
+                                            Sync records max limit
+                                        </div>
+                                        <field name="wp_sync_max_limit"/>
+                                        <div class="text-muted">
+                                             Number of log records every sync should elaborate
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="wp_fields_mapping_settings">
+                            <h2>Odoo-WP fields settings</h2>
+                            <div class="row mt16 o_settings_container" name="mapping_setting_container">
+                                <div class="col-xs-12 col-md-12 o_setting_box" id="wp_product_fields_mapping">
+                                    <div class="o_setting_right_pane">
+                                        <div class="o_form_label">
+                                            Odoo-WP product fields mapping array
+                                        </div>
+                                        <field name="wp_product_fields_mapping"/>
+                                        <div class="text-muted">
+                                             Array of field mapping in the form [("odoo_field_1","wp_field_1"),("odoo_field_2","wp_field_2"),(...)]
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-xs-12 col-md-12 o_setting_box" id="wp_default_image">
+                                    <div class="o_setting_right_pane">
+                                        <div class="o_form_label">
+                                            Product default image
+                                        </div>
+                                        <field name="wp_default_image"  widget="image"/>
+                                        <div class="text-muted">
+                                             Default image for product to be passed to WP if the product has no picture.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="order_flow_settings">
+                            <h2>Orders flow</h2>
+                            <div class="row mt16 o_settings_container" name="contacts_setting_container">
+                                <div class="col-xs-12 col-md-12 o_setting_box" id="auto_create_invoice">
+                                    <div class="o_setting_left_pane" modifiers="{}">
+                                        <field name="auto_create_invoice" string="Crea fattura"
+                                               widget="upgrade_boolean" on_change="1"
+                                               modifiers="{}" id="auto_create_invoice"/>
+                                    </div>
+                                    <div class="o_setting_right_pane" id="auto_create_invoice">
+                                        <div class="o_form_label">
+                                            Auto create invoices
+                                        </div>
+                                        <div class="text-muted">
+                                            Automatically create the invoices for the received orders
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-md-12 o_setting_box" id="auto_confirm_invoice">
+                                    <div class="o_setting_left_pane" modifiers="{}">
+                                        <field name="auto_confirm_invoice" string="Crea fattura"
+                                               widget="upgrade_boolean" on_change="1"
+                                               modifiers="{}" id="auto_confirm_invoice"/>
+                                    </div>
+                                    <div class="o_setting_right_pane" id="auto_create_invoice">
+                                        <div class="o_form_label">
+                                            Auto confirm invoices
+                                        </div>
+                                        <div class="text-muted">
+                                            Automatically confirm the invoices for the confirmed orders
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-md-12 o_setting_box" id="auto_register_payment">
+                                    <div class="o_setting_left_pane" modifiers="{}">
+                                        <field name="auto_register_payment" string="Crea fattura"
+                                               widget="upgrade_boolean" on_change="1"
+                                               modifiers="{}" id="auto_register_payment"/>
+                                    </div>
+                                    <div class="o_setting_right_pane" id="auto_register_payment">
+                                        <div class="o_form_label">
+                                            Register payment
+                                        </div>
+                                        <div class="text-muted">
+                                            Automatically register payments for the the auto confirmed invoices
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>
+

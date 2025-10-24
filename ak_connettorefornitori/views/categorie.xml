@@ -1,0 +1,52 @@
+<odoo>
+    <data>
+        <record id="ak_categorie_tree_view" model="ir.ui.view">
+            <field name="name">ak_categorie.tree</field>
+            <field name="model">ak_connettore.categoria</field>
+            <field name="arch" type="xml">
+                <tree string="categorie"  decoration-warning="not categoria_mappata" editable="top">
+                    <field name="distributore_id"/>
+                    <field name="name"/>
+                    <field name="categoria_mappata"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="ak_categorie_form_view" model="ir.ui.view">
+            <field name="name">ak_categorie.form</field>
+            <field name="model">ak_connettore.categoria</field>
+            <field name="arch" type="xml">
+                <form string="categorie">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="distributore_id"/>
+                                <field name="name"/>
+                                <field name="categoria_mappata"/>
+                            </group>
+                            <group colspan="2">
+                                <field name="note"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="ak_categorie_search_view" model="ir.ui.view">
+            <field name="name">ak_categorie.search</field>
+            <field name="model">ak_connettore.categoria</field>
+            <field name="arch" type="xml">
+                <search string="Cerca"><field name="distributore_id"/>
+                    <field name="name"/>
+                    <field name="categoria_mappata"/>
+                    <filter string="Non mappate" name="non_mappate" domain="[('categoria_mappata', '=', False)]"/>
+                    <group expand="0" string="Group By">
+                       <filter string="Distributore" name="by_distributore" domain="[]" context="{'group_by':'distributore_id'}"/>
+                       <filter string="Categoria mappata" name="by_categoria_mappata" domain="[]" context="{'group_by':'categoria_mappata'}"/>
+                   </group>
+                </search>
+            </field>
+        </record>
+    </data>
+</odoo>

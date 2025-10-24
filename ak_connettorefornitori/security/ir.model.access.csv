@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_ak.distributori,ak_connettore.distributore,model_ak_connettore_distributore,,1,1,1,1
+access_ak.categorie,ak_connettore.categoria,model_ak_connettore_categoria,,1,1,1,1
+access_ak.marchi,ak_connettore.marchio,model_ak_connettore_marchio,,1,1,1,1
+access_ak.catalogo_prodotti,ak_connettore.catalogo_prodotti,model_ak_connettore_catalogo_prodotti,,1,1,1,1
+access_ak.setup_margini,ak_connettore.setup_margini,model_ak_connettore_setup_margini,,1,1,1,1

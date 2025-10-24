@@ -10,5 +10,3 @@ class AnimalBreed(models.Model):
 
     name = fields.Char(string="Name", translate=True)
     species_id = fields.Many2one("animal.species", string="Species", required=True)
-    active = fields.Boolean(default=True)
-    sequence = fields.Integer()

@@ -1,0 +1,733 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* air_connector
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 14.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-05-09 14:14+0000\n"
+"PO-Revision-Date: 2024-05-09 14:14+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: air_connector
+#: model_terms:ir.ui.view,arch_db:air_connector.view_air_connector_config
+msgid "AIR - Connector"
+msgstr ""
+
+#. module: air_connector
+#: model:ir.model,name:air_connector.model_connector_log
+msgid "AIR connector Ecommerce operations log"
+msgstr ""
+
+#. module: air_connector
+#: model_terms:ir.ui.view,arch_db:air_connector.view_air_connector_config
+msgid "API version"
+msgstr ""
+
+#. module: air_connector
+#: model:ir.actions.act_window,name:air_connector.connector_log_act_window
+msgid "Air connector log"
+msgstr ""
+
+#. module: air_connector
+#: model:ir.ui.menu,name:air_connector.connector_log_menu
+msgid "Air-WP connector log"
+msgstr ""
+
+#. module: air_connector
+#: model:ir.model.fields.selection,name:air_connector.selection__product_template__wp_stock_type__always_available
+msgid "Always available"
+msgstr ""
+
+#. module: air_connector
+#: model:ir.model.fields,help:air_connector.field_res_config_settings__wp_product_fields_mapping
+#: model_terms:ir.ui.view,arch_db:air_connector.view_air_connector_config
+msgid ""
+"Array of field mapping in the form "
+"[(\"odoo_field_1\",\"wp_field_1\"),(\"odoo_field_2\",\"wp_field_2\"),(...)]"
+msgstr ""
+
+#. module: air_connector
+#: model_terms:ir.ui.view,arch_db:air_connector.view_air_connector_config
+msgid "Auto confirm invoices"
+msgstr ""
+
+#. module: air_connector
+#: model_terms:ir.ui.view,arch_db:air_connector.view_air_connector_config
+msgid "Auto create invoices"
+msgstr ""
+
+#. module: air_connector
+#: model_terms:ir.ui.view,arch_db:air_connector.view_air_connector_config
+msgid "Automatically confirm the invoices for the confirmed orders"
+msgstr ""
+
+#. module: air_connector
+#: model_terms:ir.ui.view,arch_db:air_connector.view_air_connector_config
+msgid "Automatically create the invoices for the received orders"
+msgstr ""
+
+#. module: air_connector
+#: model_terms:ir.ui.view,arch_db:air_connector.view_air_connector_config
+msgid "Automatically register payments for the the auto confirmed invoices"
+msgstr ""
+
+#. module: air_connector
+#: model_terms:ir.ui.view,arch_db:air_connector.view_product_template_custom_fields
+msgid "Availability"
+msgstr ""
+
+#. module: air_connector
+#: model:ir.model.fields,field_description:air_connector.field_product_product__wp_availability_dealer
+#: model:ir.model.fields,field_description:air_connector.field_product_template__wp_availability_dealer
+msgid "Available Dealer"
+msgstr ""
+
+#. module: air_connector
+#: model:ir.model.fields,field_description:air_connector.field_product_product__wp_availability_store
+#: model:ir.model.fields,field_description:air_connector.field_product_template__wp_availability_store
+msgid "Available Store"
+msgstr ""
+
+#. module: air_connector
+#: model:ir.model.fields,field_description:air_connector.field_product_product__wp_availability_warehouse
+#: model:ir.model.fields,field_description:air_connector.field_product_template__wp_availability_warehouse
+msgid "Available Warehouse"
+msgstr ""
+
+#. module: air_connector
+#: model_terms:ir.ui.view,arch_db:air_connector.view_product_template_custom_fields
+msgid "Calculate WP"
+msgstr ""
+
+#. module: air_connector
+#: model:ir.model.fields,field_description:air_connector.field_product_product__wp_sold_with_no_stock
+#: model:ir.model.fields,field_description:air_connector.field_product_template__wp_sold_with_no_stock
+msgid "Can be sold with no stock"
+msgstr ""
+
+#. module: air_connector
+#: model_terms:ir.ui.view,arch_db:air_connector.ak_view_sale_order_delete_woocommerce_order
+msgid "Cancel Wordpress order"
+msgstr ""
+
+#. module: air_connector
+#: model:ir.model.fields,field_description:air_connector.field_product_product__wp_category
+#: model:ir.model.fields,field_description:air_connector.field_product_template__wp_category
+msgid "Category"
+msgstr ""
+
+#. module: air_connector
+#: model:ir.model.fields,help:air_connector.field_product_product__wp_sold_with_no_stock
+#: model:ir.model.fields,help:air_connector.field_product_template__wp_sold_with_no_stock
+msgid "Check if you want this product be sold even when out of stock."
+msgstr ""
+
+#. module: air_connector
+#: model:ir.model.fields,help:air_connector.field_product_product__wp_to_sync
+#: model:ir.model.fields,help:air_connector.field_product_template__wp_to_sync
+msgid "Check if you want this product to be Synchronized on WP."
+msgstr ""
+
+#. module: air_connector
+#: model:ir.model.fields,help:air_connector.field_product_product__wp_sync_stock
+#: model:ir.model.fields,help:air_connector.field_product_template__wp_sync_stock
+msgid "Check if you want to Synchronized the stock quantitys on WP."
+msgstr ""
+
+#. module: air_connector
+#: model:ir.model.fields,field_description:air_connector.field_mrp_production_tag__color
+msgid "Colore"
+msgstr ""
+
+#. module: air_connector
+#: model:ir.model,name:air_connector.model_res_config_settings
+msgid "Config Settings"
+msgstr "Impostazioni di configurazione"
+
+#. module: air_connector
+#: model:ir.model.fields,field_description:air_connector.field_res_config_settings__auto_confirm_invoice
+msgid "Confirm invoice"
+msgstr ""
+
+#. module: air_connector
+#: model_terms:ir.ui.view,arch_db:air_connector.view_air_connector_config
+msgid "Consumer key"
+msgstr ""
+
+#. module: air_connector
+#: model_terms:ir.ui.view,arch_db:air_connector.view_air_connector_config
+msgid "Consumer key API authentication (starts with ck_)"
+msgstr ""
+
+#. module: air_connector
+#: model_terms:ir.ui.view,arch_db:air_connector.view_air_connector_config
+msgid "Consumer secret"
+msgstr ""
+
+#. module: air_connector
+#: model_terms:ir.ui.view,arch_db:air_connector.view_air_connector_config
+msgid "Consumer secret API authentication (starts with cs_)"
+msgstr ""
+
+#. module: air_connector
+#: model_terms:ir.ui.view,arch_db:air_connector.view_air_connector_config
+msgid "Crea fattura"
+msgstr ""
+
+#. module: air_connector
+#: model:ir.model.fields,field_description:air_connector.field_res_config_settings__auto_create_invoice
+msgid "Create invoice"
+msgstr ""
+
+#. module: air_connector
+#: model:ir.model.fields,field_description:air_connector.field_connector_log__create_uid
+#: model:ir.model.fields,field_description:air_connector.field_mrp_production_tag__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: air_connector
+#: model:ir.model.fields,field_description:air_connector.field_connector_log__create_date
+#: model:ir.model.fields,field_description:air_connector.field_mrp_production_tag__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: air_connector
+#: model:ir.model.fields,field_description:air_connector.field_product_pricelist__date_end
+msgid "Data fine"
+msgstr ""
+
+#. module: air_connector
+#: model:ir.model.fields,field_description:air_connector.field_product_pricelist__date_start
+msgid "Data inizio"
+msgstr ""
+
+#. module: air_connector
+#: model:ir.model.fields,field_description:air_connector.field_connector_log__creation_date
+msgid "Date"
+msgstr ""
+
+#. module: air_connector
+#: model:ir.model.fields,help:air_connector.field_res_config_settings__wp_default_image
+#: model_terms:ir.ui.view,arch_db:air_connector.view_air_connector_config
+msgid ""
+"Default image for product to be passed to WP if the product has no picture."
+msgstr ""
+
+#. module: air_connector
+#: model:ir.model.fields,field_description:air_connector.field_connector_log__display_name
+#: model:ir.model.fields,field_description:air_connector.field_mrp_production__display_name
+#: model:ir.model.fields,field_description:air_connector.field_mrp_production_tag__display_name
+#: model:ir.model.fields,field_description:air_connector.field_product_pricelist__display_name
+#: model:ir.model.fields,field_description:air_connector.field_product_pricelist_item__display_name
+#: model:ir.model.fields,field_description:air_connector.field_product_template__display_name
+#: model:ir.model.fields,field_description:air_connector.field_res_config_settings__display_name
+#: model:ir.model.fields,field_description:air_connector.field_sale_order__display_name
+#: model:ir.model.fields,field_description:air_connector.field_sale_order_line__display_name
+#: model:ir.model.fields,field_description:air_connector.field_stock_move__display_name
+#: model:ir.model.fields,field_description:air_connector.field_stock_move_line__display_name
+#: model:ir.model.fields,field_description:air_connector.field_stock_picking__display_name
+msgid "Display Name"
+msgstr "Nome visualizzato"
+
+#. module: air_connector
+#: model:ir.actions.act_window,name:air_connector.mrp_production_tag_action
+#: model:ir.ui.menu,name:air_connector.mrp_production_tag_menu
+msgid "Etichette Produzione"
+msgstr ""
+
+#. module: air_connector
+#: model:ir.model.fields,field_description:air_connector.field_connector_log__execution_date
+msgid "Exec. date"
+msgstr ""
+
+#. module: air_connector
+#: model:ir.model.fields.selection,name:air_connector.selection__product_template__wp_stock_type__external
+msgid "External/referral"
+msgstr ""
+
+#. module: air_connector
+#: model_terms:ir.ui.view,arch_db:air_connector.view_air_connector_config
+msgid "Field to use when updating stock quantity on WP"
+msgstr ""
+
+#. module: air_connector
+#: model:ir.model.fields,field_description:air_connector.field_connector_log__id
+#: model:ir.model.fields,field_description:air_connector.field_mrp_production__id
+#: model:ir.model.fields,field_description:air_connector.field_mrp_production_tag__id
+#: model:ir.model.fields,field_description:air_connector.field_product_pricelist__id
+#: model:ir.model.fields,field_description:air_connector.field_product_pricelist_item__id
+#: model:ir.model.fields,field_description:air_connector.field_product_template__id
+#: model:ir.model.fields,field_description:air_connector.field_res_config_settings__id
+#: model:ir.model.fields,field_description:air_connector.field_sale_order__id
+#: model:ir.model.fields,field_description:air_connector.field_sale_order_line__id
+#: model:ir.model.fields,field_description:air_connector.field_stock_move__id
+#: model:ir.model.fields,field_description:air_connector.field_stock_move_line__id
+#: model:ir.model.fields,field_description:air_connector.field_stock_picking__id
+msgid "ID"
+msgstr ""
+
+#. module: air_connector
+#: model:ir.model.fields,help:air_connector.field_product_product__wp_category
+#: model:ir.model.fields,help:air_connector.field_product_template__wp_category
+#: model_terms:ir.ui.view,arch_db:air_connector.view_product_template_custom_fields
+msgid "Keep empty to use product category."
+msgstr ""
+
+#. module: air_connector
+#: model:ir.model.fields,help:air_connector.field_product_product__wp_product_name
+#: model:ir.model.fields,help:air_connector.field_product_template__wp_product_name
+#: model_terms:ir.ui.view,arch_db:air_connector.view_product_template_custom_fields
+msgid "Keep empty to use product name."
+msgstr ""
+
+#. module: air_connector
+#: model:ir.model.fields,field_description:air_connector.field_connector_log____last_update
+#: model:ir.model.fields,field_description:air_connector.field_mrp_production____last_update
+#: model:ir.model.fields,field_description:air_connector.field_mrp_production_tag____last_update
+#: model:ir.model.fields,field_description:air_connector.field_product_pricelist____last_update
+#: model:ir.model.fields,field_description:air_connector.field_product_pricelist_item____last_update
+#: model:ir.model.fields,field_description:air_connector.field_product_template____last_update
+#: model:ir.model.fields,field_description:air_connector.field_res_config_settings____last_update
+#: model:ir.model.fields,field_description:air_connector.field_sale_order____last_update
+#: model:ir.model.fields,field_description:air_connector.field_sale_order_line____last_update
+#: model:ir.model.fields,field_description:air_connector.field_stock_move____last_update
+#: model:ir.model.fields,field_description:air_connector.field_stock_move_line____last_update
+#: model:ir.model.fields,field_description:air_connector.field_stock_picking____last_update
+msgid "Last Modified on"
+msgstr "Ultima modifica il"
+
+#. module: air_connector
+#: model:ir.model.fields,field_description:air_connector.field_connector_log__write_uid
+#: model:ir.model.fields,field_description:air_connector.field_mrp_production_tag__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: air_connector
+#: model:ir.model.fields,field_description:air_connector.field_connector_log__write_date
+#: model:ir.model.fields,field_description:air_connector.field_mrp_production_tag__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: air_connector
+#: model:ir.model.fields,field_description:air_connector.field_product_product__wp_last_sync_date
+#: model:ir.model.fields,field_description:air_connector.field_product_template__wp_last_sync_date
+msgid "Last sync date"
+msgstr ""
+
+#. module: air_connector
+#: model:ir.ui.menu,name:air_connector.connector_log_list_menu
+msgid "Log list"
+msgstr ""
+
+#. module: air_connector
+#: model_terms:ir.ui.view,arch_db:air_connector.connector_log_form_view
+#: model_terms:ir.ui.view,arch_db:air_connector.connector_log_view
+msgid "Logs"
+msgstr ""
+
+#. module: air_connector
+#: model:ir.model.fields,field_description:air_connector.field_product_product__wp_long_description
+#: model:ir.model.fields,field_description:air_connector.field_product_template__wp_long_description
+#: model_terms:ir.ui.view,arch_db:air_connector.view_product_template_custom_fields
+msgid "Long description"
+msgstr ""
+
+#. module: air_connector
+#: model:ir.model.fields,field_description:air_connector.field_connector_log__model
+msgid "Model"
+msgstr ""
+
+#. module: air_connector
+#: model:ir.model.fields.selection,name:air_connector.selection__product_template__wp_sold_with_no_stock__no
+msgid "No"
+msgstr ""
+
+#. module: air_connector
+#: model:ir.model.fields,field_description:air_connector.field_mrp_production_tag__name
+msgid "Nome"
+msgstr ""
+
+#. module: air_connector
+#: model:ir.model.fields,field_description:air_connector.field_connector_log__notes
+msgid "Notes"
+msgstr ""
+
+#. module: air_connector
+#: model:ir.model.fields,help:air_connector.field_res_config_settings__wp_sync_max_limit
+#: model_terms:ir.ui.view,arch_db:air_connector.view_air_connector_config
+msgid "Number of log records every sync should elaborate"
+msgstr ""
+
+#. module: air_connector
+#: model:ir.model.fields,field_description:air_connector.field_product_product__wp_image_attachment_id
+#: model:ir.model.fields,field_description:air_connector.field_product_template__wp_image_attachment_id
+msgid "Odoo image attachment id"
+msgstr ""
+
+#. module: air_connector
+#: model_terms:ir.ui.view,arch_db:air_connector.view_air_connector_config
+msgid "Odoo-WP fields settings"
+msgstr ""
+
+#. module: air_connector
+#: model:ir.model.fields,field_description:air_connector.field_res_config_settings__wp_product_fields_mapping
+#: model_terms:ir.ui.view,arch_db:air_connector.view_air_connector_config
+msgid "Odoo-WP product fields mapping array"
+msgstr ""
+
+#. module: air_connector
+#: model:ir.model.fields.selection,name:air_connector.selection__res_config_settings__wp_product_quantity_field__qty_available
+msgid "On hand quantity"
+msgstr ""
+
+#. module: air_connector
+#: model:ir.model.fields,field_description:air_connector.field_connector_log__operation
+msgid "Operation"
+msgstr ""
+
+#. module: air_connector
+#: model:ir.model.fields,field_description:air_connector.field_sale_order__ecommerce_order_id
+msgid "Order id."
+msgstr ""
+
+#. module: air_connector
+#: model:ir.model.fields,field_description:air_connector.field_sale_order__ecommerce_order_ref
+msgid "Order ref."
+msgstr ""
+
+#. module: air_connector
+#: model_terms:ir.ui.view,arch_db:air_connector.view_air_connector_config
+msgid "Orders flow"
+msgstr ""
+
+#. module: air_connector
+#: model:ir.model.fields,field_description:air_connector.field_product_pricelist_item__sale_line_ids
+msgid "Ordini"
+msgstr ""
+
+#. module: air_connector
+#: model:ir.model.fields.selection,name:air_connector.selection__product_template__wp_stock_type__preorder
+msgid "Preorder"
+msgstr ""
+
+#. module: air_connector
+#: model:ir.model.fields,field_description:air_connector.field_product_product__wp_preorder_fee
+#: model:ir.model.fields,field_description:air_connector.field_product_template__wp_preorder_fee
+msgid "Preorder fee"
+msgstr ""
+
+#. module: air_connector
+#: model:ir.model.fields,field_description:air_connector.field_product_product__wp_preorder_start
+#: model:ir.model.fields,field_description:air_connector.field_product_template__wp_preorder_start
+msgid "Preorder start"
+msgstr ""
+
+#. module: air_connector
+#: model_terms:ir.ui.view,arch_db:air_connector.product_template_kanban_custom
+msgid "Previste:"
+msgstr ""
+
+#. module: air_connector
+#: model:ir.model,name:air_connector.model_product_pricelist
+msgid "Pricelist"
+msgstr "Listino prezzi"
+
+#. module: air_connector
+#: model:ir.model,name:air_connector.model_product_pricelist_item
+msgid "Pricelist Rule"
+msgstr "Regola listino prezzi"
+
+#. module: air_connector
+#: model:ir.model,name:air_connector.model_stock_move_line
+msgid "Product Moves (Stock Move Line)"
+msgstr "Movimenti prodotto (riga movimento di magazzino)"
+
+#. module: air_connector
+#: model:ir.model,name:air_connector.model_product_template
+msgid "Product Template"
+msgstr "Modello prodotto"
+
+#. module: air_connector
+#: model:ir.model.fields,field_description:air_connector.field_res_config_settings__wp_default_image
+#: model_terms:ir.ui.view,arch_db:air_connector.view_air_connector_config
+msgid "Product default image"
+msgstr ""
+
+#. module: air_connector
+#: model_terms:ir.ui.view,arch_db:air_connector.view_product_template_custom_fields
+msgid "Product info"
+msgstr ""
+
+#. module: air_connector
+#: model:ir.model.fields,field_description:air_connector.field_product_product__wp_product_name
+#: model:ir.model.fields,field_description:air_connector.field_product_template__wp_product_name
+msgid "Product name"
+msgstr ""
+
+#. module: air_connector
+#: model:ir.model,name:air_connector.model_mrp_production
+msgid "Production Order"
+msgstr "Ordine di produzione"
+
+#. module: air_connector
+#: model_terms:ir.ui.view,arch_db:air_connector.connector_log_view
+msgid "Push sync WP"
+msgstr ""
+
+#. module: air_connector
+#: model:ir.model.fields,field_description:air_connector.field_stock_move_line__in_out_move
+msgid "Qty In/Out"
+msgstr ""
+
+#. module: air_connector
+#: model:ir.model.fields,field_description:air_connector.field_product_pricelist_item__qty_promo
+msgid "Qty max promo"
+msgstr ""
+
+#. module: air_connector
+#: model:ir.model.fields,field_description:air_connector.field_product_pricelist_item__qty_salable
+msgid "Qty residua"
+msgstr ""
+
+#. module: air_connector
+#: model:ir.model.fields,field_description:air_connector.field_res_config_settings__wp_product_quantity_field
+#: model_terms:ir.ui.view,arch_db:air_connector.view_air_connector_config
+msgid "Quantity field"
+msgstr ""
+
+#. module: air_connector
+#: model:ir.model.fields,field_description:air_connector.field_connector_log__record_id
+msgid "Record id"
+msgstr ""
+
+#. module: air_connector
+#: model:ir.model.fields,field_description:air_connector.field_product_product__wp_referral
+#: model:ir.model.fields,field_description:air_connector.field_product_template__wp_referral
+msgid "Referral link"
+msgstr ""
+
+#. module: air_connector
+#: model:ir.model.fields,field_description:air_connector.field_res_config_settings__auto_register_payment
+#: model_terms:ir.ui.view,arch_db:air_connector.view_air_connector_config
+msgid "Register payment"
+msgstr ""
+
+#. module: air_connector
+#: model:ir.model.fields,field_description:air_connector.field_connector_log__response
+msgid "Response"
+msgstr ""
+
+#. module: air_connector
+#: model:ir.model,name:air_connector.model_sale_order
+msgid "Sales Order"
+msgstr "Ordine di vendita"
+
+#. module: air_connector
+#: model:ir.model,name:air_connector.model_sale_order_line
+msgid "Sales Order Line"
+msgstr "Riga ordine di vendita"
+
+#. module: air_connector
+#: model:ir.model.fields.selection,name:air_connector.selection__product_template__wp_stock_type__shadow
+msgid "Shadow"
+msgstr ""
+
+#. module: air_connector
+#: model:ir.model.fields,field_description:air_connector.field_product_product__wp_shadow_end
+#: model:ir.model.fields,field_description:air_connector.field_product_template__wp_shadow_end
+msgid "Shadow end"
+msgstr ""
+
+#. module: air_connector
+#: model:ir.model.fields,field_description:air_connector.field_product_product__wp_shadow_start
+#: model:ir.model.fields,field_description:air_connector.field_product_template__wp_shadow_start
+msgid "Shadow start"
+msgstr ""
+
+#. module: air_connector
+#: model:ir.model.fields,field_description:air_connector.field_product_product__wp_short_description
+#: model:ir.model.fields,field_description:air_connector.field_product_template__wp_short_description
+#: model_terms:ir.ui.view,arch_db:air_connector.view_product_template_custom_fields
+msgid "Short description"
+msgstr ""
+
+#. module: air_connector
+#: model:ir.model.fields,field_description:air_connector.field_product_product__wp_sku
+#: model:ir.model.fields,field_description:air_connector.field_product_template__wp_sku
+msgid "Sku code"
+msgstr ""
+
+#. module: air_connector
+#: model:ir.model.fields,field_description:air_connector.field_connector_log__status
+msgid "Status"
+msgstr ""
+
+#. module: air_connector
+#: model:ir.model,name:air_connector.model_stock_move
+msgid "Stock Move"
+msgstr "Movimento di magazzino"
+
+#. module: air_connector
+#: model:ir.model.fields.selection,name:air_connector.selection__product_template__wp_stock_type__stock_qty
+msgid "Stock qty"
+msgstr ""
+
+#. module: air_connector
+#: model:ir.model.fields,field_description:air_connector.field_product_product__wp_stock_type
+#: model:ir.model.fields,field_description:air_connector.field_product_template__wp_stock_type
+msgid "Stock type"
+msgstr ""
+
+#. module: air_connector
+#: model:ir.model.fields,field_description:air_connector.field_res_config_settings__wp_sync_max_limit
+#: model_terms:ir.ui.view,arch_db:air_connector.view_air_connector_config
+msgid "Sync records max limit"
+msgstr ""
+
+#. module: air_connector
+#: model:ir.model.fields,field_description:air_connector.field_product_product__wp_to_sync
+#: model:ir.model.fields,field_description:air_connector.field_product_template__wp_to_sync
+msgid "Synchronize on Woocommerce"
+msgstr ""
+
+#. module: air_connector
+#: model:ir.model.fields,field_description:air_connector.field_product_product__wp_sync_stock
+#: model:ir.model.fields,field_description:air_connector.field_product_template__wp_sync_stock
+msgid "Synchronize stock qtys"
+msgstr ""
+
+#. module: air_connector
+#: model:ir.model.fields,field_description:air_connector.field_product_pricelist__wp_tag_listino
+msgid "Tag Woocommerce"
+msgstr ""
+
+#. module: air_connector
+#: model:ir.model.fields,field_description:air_connector.field_mrp_production__tag_ids
+msgid "Tags"
+msgstr "Etichette"
+
+#. module: air_connector
+#: model_terms:ir.ui.view,arch_db:air_connector.connector_log_view
+msgid "Task id"
+msgstr ""
+
+#. module: air_connector
+#: model:ir.model.fields,field_description:air_connector.field_stock_move_line__products_value
+msgid "Tot. value"
+msgstr ""
+
+#. module: air_connector
+#: model_terms:ir.ui.view,arch_db:air_connector.product_pricelist_item_form_view_inherit
+msgid "Total qty"
+msgstr ""
+
+#. module: air_connector
+#: model:ir.model,name:air_connector.model_stock_picking
+msgid "Transfer"
+msgstr "Trasferimento"
+
+#. module: air_connector
+#: model:ir.model.fields,field_description:air_connector.field_stock_move_line__movimenti_prodotto
+msgid "Unit value"
+msgstr ""
+
+#. module: air_connector
+#: model_terms:ir.ui.view,arch_db:air_connector.view_air_connector_config
+msgid "Url"
+msgstr ""
+
+#. module: air_connector
+#: model:ir.model.fields,help:air_connector.field_res_config_settings__wp_product_quantity_field
+msgid "Value to use when updating stock quantity on WP."
+msgstr ""
+
+#. module: air_connector
+#: model_terms:ir.ui.view,arch_db:air_connector.view_air_connector_config
+msgid "Version"
+msgstr ""
+
+#. module: air_connector
+#: model:ir.model.fields.selection,name:air_connector.selection__res_config_settings__wp_product_quantity_field__virtual_available
+msgid "Virtual quantity"
+msgstr ""
+
+#. module: air_connector
+#: model:ir.model.fields,field_description:air_connector.field_res_config_settings__wp_url
+msgid "WP Url"
+msgstr ""
+
+#. module: air_connector
+#: model:ir.model.fields,field_description:air_connector.field_res_config_settings__wp_consumer_key
+msgid "WP consumer_key"
+msgstr ""
+
+#. module: air_connector
+#: model:ir.model.fields,field_description:air_connector.field_res_config_settings__wp_consumer_secret
+msgid "WP consumer_secret"
+msgstr ""
+
+#. module: air_connector
+#: model:ir.actions.server,name:air_connector.connector_log_act_force_sync
+#: model:ir.ui.menu,name:air_connector.connector_force_sync_menu
+msgid "WP force sync"
+msgstr ""
+
+#. module: air_connector
+#: model:ir.model.fields,field_description:air_connector.field_product_product__wp_price
+#: model:ir.model.fields,field_description:air_connector.field_product_template__wp_price
+msgid "WP price"
+msgstr ""
+
+#. module: air_connector
+#: model:ir.model.fields,field_description:air_connector.field_product_product__wp_price_list_id
+#: model:ir.model.fields,field_description:air_connector.field_product_template__wp_price_list_id
+msgid "WP pricelist"
+msgstr ""
+
+#. module: air_connector
+#: model:ir.model.fields,field_description:air_connector.field_product_product__wp_product_id
+#: model:ir.model.fields,field_description:air_connector.field_product_template__wp_product_id
+msgid "WP product id"
+msgstr ""
+
+#. module: air_connector
+#: model:ir.model.fields,field_description:air_connector.field_res_config_settings__wp_version
+msgid "WP version"
+msgstr ""
+
+#. module: air_connector
+#: model_terms:ir.ui.view,arch_db:air_connector.view_product_template_custom_fields
+msgid "WooCommerce"
+msgstr ""
+
+#. module: air_connector
+#: model_terms:ir.ui.view,arch_db:air_connector.view_air_connector_config
+msgid "WordPress configuration"
+msgstr ""
+
+#. module: air_connector
+#: model_terms:ir.ui.view,arch_db:air_connector.view_air_connector_config
+msgid "WordPress url"
+msgstr ""
+
+#. module: air_connector
+#: model:ir.model.fields.selection,name:air_connector.selection__product_template__wp_sold_with_no_stock__yes
+msgid "Yes"
+msgstr ""
+
+#. module: air_connector
+#: model:ir.model,name:air_connector.model_mrp_production_tag
+msgid "mrp.production.tag"
+msgstr ""
+
+#. module: air_connector
+#: model:ir.model.fields,field_description:air_connector.field_sale_order_line__pricelist_item_id
+msgid "pricelist item"
+msgstr ""

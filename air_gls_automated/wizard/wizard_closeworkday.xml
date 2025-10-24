@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="wizard_close_workday_form_view" model="ir.ui.view">
+            <field name="name">wizard_close_workday.form</field>
+            <field name="model">wizard.close.day</field>
+            <field name="arch" type="xml">
+                <form string="Chiudi spedizioni gls">
+                    <sheet>
+                        <group >
+
+                                <field name="name" />
+
+                        </group>
+                        <group>
+                                <field name="picking_ids" string="Spedizioni">
+                                        <tree editable="0">
+                                            <field name="name"/>
+                                            <field name="gls_state"/>
+                                            <field name="carrier_tracking_ref"/>
+<!--                                            <field name="carrier_id"/>-->
+                                            <field name="gls_shippment_status"/>
+                                        </tree>
+                                </field>
+
+
+                        </group>
+                    </sheet>
+                    <footer>
+                    <button name="button_close_work_day" string="Chiudi spedizione" type="object"
+                    class="oe_highlight" attrs="{'invisible': ['!',('picking_ids','=',False),('name','=','send')]}"/>
+                        <button name="button_send_gls" string="Invia spedizione" type="object"
+                    class="oe_highlight" attrs="{'invisible': ['!',('picking_ids','=',False),('name','=','close')]}"/>
+                    <button string="Annulla" class="oe_link" special="cancel"/>
+                </footer>
+                </form>
+            </field>
+        </record>
+
+
+
+
+
+        <record id="wizard_close_workday_act_window" model="ir.actions.act_window">
+            <field name="name">Chiudi spedizioni</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">wizard.close.day</field>
+            <field name="view_mode">form</field>
+             <field name="view_id" ref="wizard_close_workday_form_view"/>
+            <field name="target">new</field>
+        </record>
+
+        <menuitem name="Chiudi spedizioni" id="wizard_close_workday_menu" parent="stock.menu_stock_root" action="wizard_close_workday_act_window" groups="base.group_user"/>
+
+    </data>
+</odoo>

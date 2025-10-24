@@ -1,0 +1,22 @@
+Il report è composto dal file xls INVENTORY_[COMPANY_ID]_Y[YYYY]_W[KW] contenente i prodotti ASUS in giacenza e movimentati.
+Il company_id fa riferimento al codice univoco per l'azienda fornito da Asus, [YYYY] è l'anno,
+mentre [KW] fa riferimento al numero della settimana in cui è stato generato il report.
+
+I dati saranno poi così strutturati in tabella:
+Colonna A: Model = codice asus inserito nel campo codice riferimento prodotto padre
+Colonna B: Initial inventory = giacenza ad inizio settimana
+Colonna C: New coming = prodotti in ingresso da acquisti o produzione
+            (gestita tramite movimenti per cui è spuntato il flag E' un tipo operazione di merce in ingresso)
+Colonna D: Sellout = prodotti in uscita tra produzione e vendite
+            (gestita tramite movimenti per cui è spuntato il flag E' un tipo operazione di sellout)
+Colonna E: Final inventory = giacenza a fine settimana
+Colonna F: New order quantity = prodotti ordinati al fornitore
+Colonna L: Other new coming = momentaneamente sempre a 0 in quanto non hanno una gestione dei resi
+Colonna M: Other stock out = prodotti scartati
+            (gestito tramite movimenti per cui è spuntato il flag E' un tipo operazione di scarto)
+Colonna N: Part number = default code del prodotto (che coincide con quello di asus)
+Colonna T: Customer SKU = barcode del prodotto
+Colonna W: So backlog = prodotti in ordini di vendita o produzione non ancora disponibili
+Colonna X: So processing = prodotti in ordini di vendita o produzione prenotati ma non ancora completati
+
+Le colonne non indicate sono opzionali e lasciate vuote

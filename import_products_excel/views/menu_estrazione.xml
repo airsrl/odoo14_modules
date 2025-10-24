@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <menuitem id="menu_import"
+              name="Importa prodotti"
+              parent="stock.menu_stock_root"
+              groups="base.group_user"
+              />
+    <record id="wiz_errore" model="ir.ui.view">
+        <field name="name">wiz.error</field>
+        <field name="model">product.import.wizard</field>
+        <field name="priority">26</field>
+        <field name="arch" type="xml">
+            <form string="Errori">
+                <group>
+                    <p>
+                        <b>Durante il caricamento del file sono stati segnalati i seguenti errori:</b>
+                        <br/>
+                    </p>
+                    <p>
+                        <field name="error" readonly="1"/>
+                    </p>
+                </group>
+                <footer>
+                    <button string="Chiudi" class="oe_link" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+    <record id="wiz_successo" model="ir.ui.view">
+        <field name="name">wiz.successo</field>
+        <field name="model">product.import.wizard</field>
+        <field name="priority">26</field>
+        <field name="arch" type="xml">
+            <form string="Errori">
+                <group>
+                    <p>
+                        <field name="error" readonly="1"/>
+                    </p>
+                </group>
+                <footer>
+                    <button string="Chiudi" class="oe_link" special="cancel"/>
+                </footer>
+
+            </form>
+        </field>
+    </record>
+
+    <!--    view wizard importazione prodotti   -->
+    <record id="import_product_xls" model="ir.ui.view">
+        <field name="name">import.product.xls</field>
+        <field name="model">product.import.wizard</field>
+        <field name="priority">2</field>
+        <field name="arch" type="xml">
+             <form string="Importa file">
+                <group string="Caricamento file prodotti e varianti">
+
+                  <group >
+                      <field name="import_file" attrs="{'invisible': [('res_id', '=', False)]}" string="Importa File xls"/>
+                      <button name="check_data_columns" class="oe_highlight" string="Verifica struttra file" type="object" attrs="{'invisible': [('check_column','=',True)]}"/>
+                      <field name="check_column"  invisible="1"/>
+                      <p  attrs="{'invisible': [('check_column','=',False)]}">File formalmente corretto, è possibile importare i dati.</p>
+                  </group>
+
+                  <group >
+                      <b><a href="import_products_excel/static/file_template/Template import prodotti-variazioni.xls">Scarica file Excel modello</a></b>
+                      <br/>
+                      <p>Il file contiene 3 fogli:
+                      <ul>
+                          <li>Template: è il file vero e proprio da valorizzare</li>
+                          <li>Legenda: contiene la spiegazione colonna per colonna di come deve essere compilato</li>
+                          <li>Esempio: è il foglio template con prodotti e varianti di esempio</li>
+                      </ul>
+                      </p>
+                  </group>
+                  <group col="2" colspan="2">
+                      <field name="res_model" invisible="1"/>
+                      <field name="res_id" invisible="1"/>
+                  </group>
+                </group>
+
+                <footer>
+                    <button name="ImportExcelProdottiRettificata" string="Importa" type="object"
+                    class="oe_highlight" attrs="{'invisible': [('check_column','=',False)]}" />
+                    <button string="Annulla" class="oe_link" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+     <record id="action_import_product_xls" model="ir.actions.act_window">
+        <field name="name">Importa prodotti</field>
+        <field name="res_model">product.import.wizard</field>
+<!--        <field name="view_type">form</field>-->
+        <field name="view_mode">form</field>
+         <field name="view_id" ref="import_product_xls"/>
+        <field name="target">new</field>
+    </record>
+    <menuitem id ="menu_import_xls"
+                  name="Importa prodotti excel"
+                  sequence="2"
+                  parent="menu_import"
+                  groups="base.group_user"
+                action ="action_import_product_xls"
+                />
+<!-- #######################################-->
+<!--    view wizard importazione immagini-->
+
+<record id="import_image_jpg" model="ir.ui.view">
+        <field name="name">import.image.jpg</field>
+        <field name="model">product.import.wizard</field>
+        <field name="priority">2</field>
+        <field name="arch" type="xml">
+            <form string="Importa file zip">
+                <group >
+                    <group>
+                        <field name="import_file"  string="Importa File zip"/>
+
+                    </group>
+                    <group>
+                        <field name="res_model" invisible="1"/>
+                        <field name="res_id" invisible="1"/>
+                    </group>
+                </group>
+
+                <footer >
+                    <button name="upload_product_image" string="Carica" type="object" class="oe_highlight"/>
+
+                    <button string="Annulla" class="oe_link" special="cancel"/>
+                </footer>
+
+            </form>
+        </field>
+    </record>
+     <record id="action_import_image_jpg" model="ir.actions.act_window">
+        <field name="name">Importa immagini</field>
+        <field name="res_model">product.import.wizard</field>
+<!--        <field name="view_type">form</field>-->
+        <field name="view_mode">form</field>
+         <field name="view_id" ref="import_image_jpg"/>
+        <field name="target">new</field>
+    </record>
+    <menuitem id ="menu_import_jpg"
+                  name="Importa immagini prodotti"
+                  sequence="3"
+                  parent="menu_import"
+                  groups="base.group_user"
+                action ="action_import_image_jpg"
+                />
+
+<!--&lt;!&ndash;###########################################################################################&ndash;&gt;-->
+<!--&lt;!&ndash;importazione brochure e manuali&ndash;&gt;-->
+<!--&lt;!&ndash; #######################################&ndash;&gt;-->
+
+
+<!--<record id="import_product_broch_manu" model="ir.ui.view">-->
+<!--        <field name="name">import.doc.pdf</field>-->
+<!--        <field name="model">product.import.wizard</field>-->
+<!--        <field name="priority">2</field>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <form string="Importa file zip">-->
+<!--                <group >-->
+<!--                    <group>-->
+<!--                        <field name="import_file"  string="Importa File zip/pdf" filename="file_name"/>-->
+<!--                        <field name="file_name" invisible="1"/>-->
+<!--                    </group>-->
+<!--                    <group>-->
+<!--                        <field name="res_model" invisible="1"/>-->
+<!--                        <field name="res_id" invisible="1"/>-->
+<!--                    </group>-->
+<!--                </group>-->
+
+<!--                <footer >-->
+<!--                    <button name="upload_product_brochure_manual" string="Carica" type="object" class="oe_highlight"/>-->
+
+<!--                    <button string="Annulla" class="oe_link" special="cancel"/>-->
+<!--                </footer>-->
+
+<!--            </form>-->
+<!--        </field>-->
+<!--    </record>-->
+<!--     <record id="action_import_doc_pdf" model="ir.actions.act_window">-->
+<!--        <field name="name">Importa brochure e manuali</field>-->
+<!--        <field name="res_model">product.import.wizard</field>-->
+<!--        <field name="view_type">form</field>-->
+<!--        <field name="view_mode">form</field>-->
+<!--         <field name="view_id" ref="import_product_broch_manu"/>-->
+<!--        <field name="target">new</field>-->
+<!--    </record>-->
+<!--    <menuitem id ="menu_import_doc_pdf"-->
+<!--                  name="Importa brochure e manuali"-->
+<!--                  sequence="4"-->
+<!--                  parent="menu_import"-->
+<!--                  groups="base.group_user"-->
+<!--                action ="action_import_doc_pdf"-->
+<!--                />-->
+
+
+</odoo>

@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="report_fornitori_form_view" model="ir.ui.view">
+            <field name="name">report_fornitori.form</field>
+            <field name="model">report.fornitori</field>
+            <field name="arch" type="xml">
+                <form string="Report Fornitori">
+                    <header>
+                        <button string="Crea e invia report" type="object" name="create_xls" attrs="{'invisible':[('report_type_fornitore','=','asus')]}"/>
+                        <button string="Report Giacenze" type="object" name="create_stock_xls" attrs="{'invisible':[('report_type_fornitore','=','samsung')]}" />
+                        <button string="Report Venduto" type="object" name="create_sell_xls"  attrs="{'invisible':[('report_type_fornitore','in',['samsung', 'asus'])]}"/>
+                        <button string="Report csv Samsung" type="object" name="create_report_samsung" attrs="{'invisible':[('report_type_fornitore','!=','samsung')]}"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_title">
+                            <label for="name"/>
+                            <h1>
+                                <field name="name" />
+                            </h1>
+                        </div>
+                        <group>
+
+                            <group>
+                                <field name="email"/>
+                                <field name="email_cc"/>
+                                <field name="marchio_ids"  widget="many2many_tags"/>
+                                <field name="categorie_ids" widget="many2many_tags"/>
+                                <field name="report_type_fornitore"/>
+                                <field name="date_start" />
+                                <field name="date_stop"/>
+                            </group>
+                            <group>
+                                <field name="automatic_send"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Report Generali">
+                                <field name="report_line_id">
+
+                                    <tree editable="bottom">
+                                        <field name="name" />
+                                        <field name="date"/>
+                                        <field name="create_date" string="Data creazione report"/>
+                                     </tree>
+                                    <form>
+                                        <sheet>
+                                            <group>
+                                                <field name="name" invisible="1"/>
+                                                <field name="file"  filename="name"/>
+                                                <field name="date"/>
+                                            </group>
+
+                                        </sheet>
+
+                                    </form>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                            <div class="oe_chatter">
+                                <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                                <field name="activity_ids" widget="mail_activity"/>
+                                <field name="message_ids" widget="mail_thread"/>
+                            </div>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record id="report_fornitori_tree_view" model="ir.ui.view">
+            <field name="name">report_fornitori.tree</field>
+            <field name="model">report.fornitori</field>
+            <field name="arch" type="xml">
+                <tree string="Report Fornitori">
+                        <field name="name"/>
+                        <field name="email"/>
+                        <field name="email_cc"/>
+
+                </tree>
+            </field>
+        </record>
+
+        <record id="report_fornitori_search_view" model="ir.ui.view">
+            <field name="name">report_fornitori.search</field>
+            <field name="model">report.fornitori</field>
+            <field name="arch" type="xml">
+                <search string="Cerca">
+                    <field name="name"/>
+                    <field name="email"/>
+                    <field name="email_cc"/>
+
+                </search>
+            </field>
+        </record>
+
+        <record id="report_fornitori_act_window" model="ir.actions.act_window">
+            <field name="name">Report Fornitori</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">report.fornitori</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Non sono stati configurati report fornitori.
+                </p>
+            </field>
+        </record>
+
+        <menuitem name="Report Fornitori" id="report_fornitori_menu" parent="ak_connettorefornitori.ak_distributori_list" action="report_fornitori_act_window"/>
+
+    </data>
+</odoo>

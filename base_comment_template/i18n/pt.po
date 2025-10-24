@@ -20,14 +20,6 @@ msgstr ""
 "X-Generator: Weblate 4.3.2\n"
 
 #. module: base_comment_template
-#: model_terms:ir.ui.view,arch_db:base_comment_template.base_comment_template_preview_form
-msgid ""
-"<span class=\"text-warning\" attrs=\"{'invisible': [('no_record', '=', "
-"False)]}\">No records\n"
-"                            </span>"
-msgstr ""
-
-#. module: base_comment_template
 #: model:ir.model.fields,field_description:base_comment_template.field_base_comment_template__active
 msgid "Active"
 msgstr "Ativo"
@@ -38,49 +30,9 @@ msgid "Archived"
 msgstr "Arquivado"
 
 #. module: base_comment_template
-#: model_terms:ir.ui.view,arch_db:base_comment_template.base_comment_template_preview_form
-msgid "Base Comment Preview"
-msgstr ""
-
-#. module: base_comment_template
-#: model:ir.model.fields,field_description:base_comment_template.field_base_comment_template_preview__base_comment_template_id
-msgid "Base Comment Template"
-msgstr ""
-
-#. module: base_comment_template
-#: model:ir.model,name:base_comment_template.model_base_comment_template_preview
-msgid "Base Comment Template Preview"
-msgstr ""
-
-#. module: base_comment_template
-#: model_terms:ir.ui.view,arch_db:base_comment_template.base_comment_template_preview_form
-msgid "Base Comment content"
-msgstr ""
-
-#. module: base_comment_template
-#: model:ir.model.fields,field_description:base_comment_template.field_base_comment_template_preview__body
-msgid "Body"
-msgstr ""
-
-#. module: base_comment_template
 #: model:ir.model.fields.selection,name:base_comment_template.selection__base_comment_template__position__after_lines
 msgid "Bottom"
 msgstr "Fundo"
-
-#. module: base_comment_template
-#: model_terms:ir.ui.view,arch_db:base_comment_template.base_comment_template_preview_form
-msgid "Choose a language:"
-msgstr ""
-
-#. module: base_comment_template
-#: model_terms:ir.ui.view,arch_db:base_comment_template.base_comment_template_preview_form
-msgid "Choose an engine:"
-msgstr ""
-
-#. module: base_comment_template
-#: model_terms:ir.ui.view,arch_db:base_comment_template.base_comment_template_preview_form
-msgid "Choose an example"
-msgstr ""
 
 #. module: base_comment_template
 #: model_terms:ir.ui.view,arch_db:base_comment_template.view_base_comment_template_form
@@ -122,29 +74,16 @@ msgstr "Contacto"
 
 #. module: base_comment_template
 #: model:ir.model.fields,field_description:base_comment_template.field_base_comment_template__create_uid
-#: model:ir.model.fields,field_description:base_comment_template.field_base_comment_template_preview__create_uid
 msgid "Created by"
 msgstr "Criado por"
 
 #. module: base_comment_template
 #: model:ir.model.fields,field_description:base_comment_template.field_base_comment_template__create_date
-#: model:ir.model.fields,field_description:base_comment_template.field_base_comment_template_preview__create_date
 msgid "Created on"
 msgstr "Criado em"
 
 #. module: base_comment_template
-#: model:ir.model.fields,field_description:base_comment_template.field_base_comment_template__null_value
-msgid "Default Value"
-msgstr ""
-
-#. module: base_comment_template
-#: model_terms:ir.ui.view,arch_db:base_comment_template.base_comment_template_preview_form
-msgid "Discard"
-msgstr ""
-
-#. module: base_comment_template
 #: model:ir.model.fields,field_description:base_comment_template.field_base_comment_template__display_name
-#: model:ir.model.fields,field_description:base_comment_template.field_base_comment_template_preview__display_name
 #: model:ir.model.fields,field_description:base_comment_template.field_comment_template__display_name
 #: model:ir.model.fields,field_description:base_comment_template.field_ir_model__display_name
 #: model:ir.model.fields,field_description:base_comment_template.field_res_partner__display_name
@@ -152,30 +91,12 @@ msgid "Display Name"
 msgstr "Nome"
 
 #. module: base_comment_template
-#: model_terms:ir.ui.view,arch_db:base_comment_template.view_base_comment_template_form
-msgid "Dynamic Placeholder Generator"
-msgstr ""
-
-#. module: base_comment_template
-#: model:ir.model.fields,field_description:base_comment_template.field_base_comment_template__model_object_field
-msgid "Field"
-msgstr ""
-
-#. module: base_comment_template
 #: model:ir.model.fields,field_description:base_comment_template.field_base_comment_template__domain
 msgid "Filter Domain"
 msgstr "Domínio Filtro"
 
 #. module: base_comment_template
-#: model:ir.model.fields,help:base_comment_template.field_base_comment_template__copyvalue
-msgid ""
-"Final placeholder expression, to be copy-pasted in the desired template "
-"field."
-msgstr ""
-
-#. module: base_comment_template
 #: model:ir.model.fields,field_description:base_comment_template.field_base_comment_template__id
-#: model:ir.model.fields,field_description:base_comment_template.field_base_comment_template_preview__id
 #: model:ir.model.fields,field_description:base_comment_template.field_comment_template__id
 #: model:ir.model.fields,field_description:base_comment_template.field_ir_model__id
 #: model:ir.model.fields,field_description:base_comment_template.field_res_partner__id
@@ -184,7 +105,6 @@ msgstr "ID"
 
 #. module: base_comment_template
 #: model:ir.model.fields,field_description:base_comment_template.field_base_comment_template__model_ids
-#: model:ir.model.fields,field_description:base_comment_template.field_base_comment_template_preview__model_ids
 msgid "IR Model"
 msgstr "Modelo IR"
 
@@ -205,18 +125,7 @@ msgstr ""
 "selecionado."
 
 #. module: base_comment_template
-#: model:ir.model.fields.selection,name:base_comment_template.selection__base_comment_template_preview__engine__jinja
-msgid "Jinja"
-msgstr ""
-
-#. module: base_comment_template
-#: model:ir.model.fields,field_description:base_comment_template.field_base_comment_template__lang
-msgid "Language"
-msgstr ""
-
-#. module: base_comment_template
 #: model:ir.model.fields,field_description:base_comment_template.field_base_comment_template____last_update
-#: model:ir.model.fields,field_description:base_comment_template.field_base_comment_template_preview____last_update
 #: model:ir.model.fields,field_description:base_comment_template.field_comment_template____last_update
 #: model:ir.model.fields,field_description:base_comment_template.field_ir_model____last_update
 #: model:ir.model.fields,field_description:base_comment_template.field_res_partner____last_update
@@ -225,20 +134,13 @@ msgstr "Modificado a última vez por"
 
 #. module: base_comment_template
 #: model:ir.model.fields,field_description:base_comment_template.field_base_comment_template__write_uid
-#: model:ir.model.fields,field_description:base_comment_template.field_base_comment_template_preview__write_uid
 msgid "Last Updated by"
 msgstr "Atualizado pela última vez por"
 
 #. module: base_comment_template
 #: model:ir.model.fields,field_description:base_comment_template.field_base_comment_template__write_date
-#: model:ir.model.fields,field_description:base_comment_template.field_base_comment_template_preview__write_date
 msgid "Last Updated on"
 msgstr "Atualizado pela última vez em"
-
-#. module: base_comment_template
-#: model:ir.model.fields,field_description:base_comment_template.field_base_comment_template_preview__model_id
-msgid "Model"
-msgstr ""
 
 #. module: base_comment_template
 #: model:ir.model,name:base_comment_template.model_ir_model
@@ -258,66 +160,14 @@ msgid "Name/description of this comment template"
 msgstr "Nome/descrição deste modelo de comentário"
 
 #. module: base_comment_template
-#: model:ir.model.fields,field_description:base_comment_template.field_base_comment_template_preview__no_record
-msgid "No Record"
-msgstr ""
-
-#. module: base_comment_template
-#: model:ir.model.fields,help:base_comment_template.field_base_comment_template__lang
-msgid ""
-"Optional translation language (ISO code) to select when sending out an "
-"email. If not set, the english version will be used. This should usually be "
-"a placeholder expression that provides the appropriate language, e.g. "
-"${object.partner_id.lang}."
-msgstr ""
-
-#. module: base_comment_template
-#: model:ir.model.fields,help:base_comment_template.field_base_comment_template__null_value
-msgid "Optional value to use if the target field is empty"
-msgstr ""
-
-#. module: base_comment_template
 #: model:ir.model.fields,field_description:base_comment_template.field_base_comment_template__partner_ids
 msgid "Partner"
 msgstr "Parceiro"
 
 #. module: base_comment_template
-#: model:ir.model.fields,field_description:base_comment_template.field_base_comment_template__copyvalue
-msgid "Placeholder Expression"
-msgstr ""
-
-#. module: base_comment_template
 #: model:ir.model.fields,field_description:base_comment_template.field_base_comment_template__position
 msgid "Position on document"
 msgstr "Posição no documento"
-
-#. module: base_comment_template
-#: model_terms:ir.ui.view,arch_db:base_comment_template.view_base_comment_template_form
-msgid "Preview"
-msgstr ""
-
-#. module: base_comment_template
-#: model_terms:ir.ui.view,arch_db:base_comment_template.base_comment_template_preview_form
-msgid "Preview of"
-msgstr ""
-
-#. module: base_comment_template
-#: model:ir.model.fields.selection,name:base_comment_template.selection__base_comment_template_preview__engine__qweb
-msgid "QWeb"
-msgstr ""
-
-#. module: base_comment_template
-#: model:ir.model.fields,field_description:base_comment_template.field_base_comment_template_preview__resource_ref
-msgid "Record reference"
-msgstr ""
-
-#. module: base_comment_template
-#: model:ir.model.fields,help:base_comment_template.field_base_comment_template__model_object_field
-msgid ""
-"Select target field from the related document model.\n"
-"If it is a relationship field you will be able to select a target field at "
-"the destination of the relationship."
-msgstr ""
 
 #. module: base_comment_template
 #: model:ir.model.fields,field_description:base_comment_template.field_base_comment_template__sequence
@@ -332,34 +182,9 @@ msgstr ""
 "Comentários específicos de parceiros que podem ser incluídos em relatórios"
 
 #. module: base_comment_template
-#: model:ir.model.fields,field_description:base_comment_template.field_base_comment_template__sub_model_object_field
-msgid "Sub-field"
-msgstr ""
-
-#. module: base_comment_template
-#: model:ir.model.fields,field_description:base_comment_template.field_base_comment_template__sub_object
-msgid "Sub-model"
-msgstr ""
-
-#. module: base_comment_template
 #: model:ir.model.fields,field_description:base_comment_template.field_base_comment_template__text
 msgid "Template"
 msgstr "Modelo"
-
-#. module: base_comment_template
-#: model:ir.actions.act_window,name:base_comment_template.base_comment_template_preview_action
-msgid "Template Preview"
-msgstr ""
-
-#. module: base_comment_template
-#: model:ir.model.fields,field_description:base_comment_template.field_base_comment_template_preview__engine
-msgid "Template Preview Engine"
-msgstr ""
-
-#. module: base_comment_template
-#: model:ir.model.fields,field_description:base_comment_template.field_base_comment_template_preview__lang
-msgid "Template Preview Language"
-msgstr ""
 
 #. module: base_comment_template
 #: model:ir.model.fields,help:base_comment_template.field_base_comment_template__sequence
@@ -368,7 +193,6 @@ msgstr "O número menor = A maior prioridade"
 
 #. module: base_comment_template
 #: model:ir.model.fields,help:base_comment_template.field_base_comment_template__model_ids
-#: model:ir.model.fields,help:base_comment_template.field_base_comment_template_preview__model_ids
 msgid ""
 "This comment template will be available on this models. You can see here "
 "only models allowed to set the coment template."
@@ -401,20 +225,6 @@ msgid "Top"
 msgstr "Topo"
 
 #. module: base_comment_template
-#: model:ir.model.fields,help:base_comment_template.field_base_comment_template__sub_model_object_field
-msgid ""
-"When a relationship field is selected as first field, this field lets you "
-"select the target field within the destination document model (sub-model)."
-msgstr ""
-
-#. module: base_comment_template
-#: model:ir.model.fields,help:base_comment_template.field_base_comment_template__sub_object
-msgid ""
-"When a relationship field is selected as first field, this field shows the "
-"document model the relationship goes to."
-msgstr ""
-
-#. module: base_comment_template
 #: model:ir.model.fields,help:base_comment_template.field_ir_model__is_comment_template
 msgid "Whether this model supports in reports to add comment templates."
 msgstr ""
@@ -429,11 +239,6 @@ msgid ""
 msgstr ""
 "base.comment.template para colocar cabeçalho e rodapé em relatórios baseados "
 "em modelos de comentários criados"
-
-#. module: base_comment_template
-#: model_terms:ir.ui.view,arch_db:base_comment_template.base_comment_template_preview_form
-msgid "record:"
-msgstr ""
 
 #~ msgid "After lines"
 #~ msgstr "Após as linhas"

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- Inherit Form View to Modify it -->
+        <record id="stock_picking_gls_PD" model="ir.ui.view">
+            <field name="name">stock_picking_gls_PD</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="stock.view_picking_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='origin']" position="after">
+                    <field name="xml_filename" invisible="1"/>
+                    <field name="integrative_insurance" string="Assicurazione integrativa" required="1"/>
+                    <field name="gentextfile" filename="xml_filename"  string="File xml" attrs="{'invisible':[('gls_state','=','to_send')]}"/>
+                    <field name="gls_state" readonly="1" string="Stato GLS"/>
+                    <button name="gls_italy_send" string="Invia a GLS"  class="oe_link oe_highlight" type="object" attrs="{'invisible':[('gls_state','in',['inviato'])]}"/>
+                    <button name="gls_italy_cancel_shipment" string="Annulla GLS"  class="oe_link oe_highlight" type="object" attrs="{'invisible':[('gls_state','in',['to_send','annullato'])]}"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

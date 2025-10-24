@@ -1,0 +1,55 @@
+
+<section class="oe_container lead bi_title_box">
+	<div >
+		<div >
+			<h2 class="oe_slogan bi_title" style="color:#5082c4;">
+				<b>AIR - connettone Wordpress SyncGiacenza</b>
+			</h2>
+			<p class="oe_slogan">
+				Attività automatiche del connettone per aggiornare le giacenze su wordpress
+			</p>
+		</div>
+	</div>
+</section>
+
+<section class="oe_container lead mt64">
+	<div >
+		<div class="oe_slogan oe_spaced text-center">
+			<a class="btn mt8 mr8" title="Demo Request" style="background-color: #2875aa;color: #FFFFFF !important;font-size: 20px;font-weight: bold;border-radius: 7px;" href="mailto:info@air-srl.com?Subject=Modulo scheduler activities" target="_top"> Invia una mail </a>
+			<a class="btn mt8 ml8" title="Video Tutorial" style="background-color: #2875aa;color: #FFFFFF !important;font-size: 20px;font-weight: bold;border-radius: 7px;" href="http://www.air-srl.com" target="_blank"> Contatti</a>
+		</div>
+	</div>
+</section>
+
+<section class="oe_container">
+	<div >
+		<div >
+			<h3 class="oe_slogan">Info sviluppo:</h2>
+			<p class="oe_slogan" style="font-size: 16px; ">
+				Creare una Automated Action passando i parametri 
+				<code>
+					<p>
+						url="http://example.com/wordpress/" <br>
+						consumer_key="ck_1234567890" <br>
+						consumer_secret="cs_1234567890" <br>
+						version="wc/v3" <br>
+						# Tipo di quantità: 
+						# qty_available è quella effettivamente presente in magazzino.
+						# qty_virtual è quella in magazzino + entrata acquisti - uscite vendite
+						campoQta="qty_available" <br>
+					</p>
+
+					<p>
+						# Metodo che fa il sync della giacenza <br>
+						try:
+							# Metodo che fa il sync della giacenza
+							model.SyncGiacenza(record, url, consumer_key, consumer_secret, version, campoQta)
+						except:
+							log('Azioni programmate - Connettone - WP sync giacenze', level='error')<br>
+					</p>
+				</code>
+			</p>
+		</div>
+	</div>
+</section>
+

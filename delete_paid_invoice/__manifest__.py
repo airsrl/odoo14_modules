@@ -1,6 +1,6 @@
 {
     'name': 'Delete Invoice(paid and cancelled)',
-    'version': '14.1',
+    'version': '14.0',
     'category': 'Accounting',
     'summary': 'Force delete invoices(paid invoice,posted invoice and cancelled invoice) and payments',
     'description': """
@@ -8,9 +8,7 @@
     """,
     'depends': ['account'],
     'data': [
-        'security/ir.model.access.csv',
         'views/account_move_view.xml',
-        'wizard/wizard_delete_invoice.xml'
     ],
     'author': 'Teqstars',
     'website': 'https://teqstars.com',

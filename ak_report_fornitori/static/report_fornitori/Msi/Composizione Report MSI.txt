@@ -1,0 +1,29 @@
+Il report è da mandare settimanalmente a it-backoffice@msi.com, tianwenjuang@msi.com e giorgiomorell@msi.com
+in cc cicolarialessio@akinformatica.it e acquisti@akinformatica.it
+
+
+Il report è comnposto da 2 file xls entrambi contengono i prodotti a marca msi movimentati a stock e venduti
+
+
+Il primo File è l'inventario Nome del file Stock-MSI-(data Espressa in aaaa-mm-gg)
+Contiene il codice del magazzino di scarico ( cosi da far vedere il magazzino)
+il L'ean e il codice secondario che è solitamente il codice prodotto dato dalla caa madre
+la descrizione 
+La giacenza 
+e il prezzo di acquisto dell'prodotto dal fornitore l'ultima volta
+
+
+
+Secondo file è il venduto dell'anno  Sell-MSI-(data Espressa in aaaa-mm-gg)
+
+Contiene tutti i dati di vendita dei prodotti a marchio msi
+Data di vendita 
+L'ean e il codice secondario 
+La Descrizione
+a chi è stato venduto, ( solo nome della persona o azienda) partitva iva Località e provincia 
+il numero della fattura 
+la causale di scarico è indicante se per uso tipo produzione o per vendita diretta-
+la quantità venduta
+il magazzino di scarico 
+il costo di acquisto ultimo di quel prodotto 
+e la categoria del prodotto 

@@ -8,8 +8,6 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 
-from random import randint
-
 from odoo import _, fields, models
 from odoo.exceptions import UserError, ValidationError
 from odoo.tools.safe_eval import safe_eval
@@ -20,10 +18,6 @@ class ResPartnerIdCategory(models.Model):
     _description = "Partner ID Category"
     _order = "name"
 
-    def _get_default_color(self):
-        return randint(1, 11)
-
-    color = fields.Integer(string="Color Index", default=_get_default_color)
     code = fields.Char(
         string="Code",
         size=16,

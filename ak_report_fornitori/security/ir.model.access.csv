@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_ak_report_fornitori,access.report.fornitori,model_report_fornitori,,1,1,1,1
+access_ak_report_fornitori_line,access.report.fornitori.line,model_report_fornitori_line,,1,1,1,1
+access_report_fornitori_data,access.report.fornitori.data,model_report_fornitori_data,,1,1,1,1

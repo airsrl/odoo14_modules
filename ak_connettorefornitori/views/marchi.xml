@@ -1,0 +1,48 @@
+<odoo>
+    <data>
+        <record id="ak_marchi_tree_view" model="ir.ui.view">
+            <field name="name">ak_marchi.tree</field>
+            <field name="model">ak_connettore.marchio</field>
+            <field name="arch" type="xml">
+                <tree string="marchi">
+                    <field name="distributore_id"/>
+                    <field name="name"/>
+                    <field name="marchio_mappata"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="ak_marchi_form_view" model="ir.ui.view">
+            <field name="name">ak_marchi.form</field>
+            <field name="model">ak_connettore.marchio</field>
+            <field name="arch" type="xml">
+                <form string="marchi">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="distributore_id"/>
+                                <field name="name"/>
+                                <field name="marchio_mappata"/>
+                            </group>
+                            <group colspan="2">
+                                <field name="note"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="ak_marchi_search_view" model="ir.ui.view">
+            <field name="name">ak_marchi.search</field>
+            <field name="model">ak_connettore.marchio</field>
+            <field name="arch" type="xml">
+                <search string="Cerca">
+                    <field name="distributore_id"/>
+                    <field name="name"/>
+                    <field name="marchio_mappata"/>
+                </search>
+            </field>
+        </record>
+    </data>
+</odoo>

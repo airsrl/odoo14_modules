@@ -3,7 +3,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 import logging
-from datetime import datetime, timedelta
+from datetime import datetime
 
 from psycopg2 import ProgrammingError
 
@@ -279,7 +279,7 @@ class BiSQLView(models.Model):
 
     # Overload Section
     def write(self, vals):
-        res = super().write(vals)
+        res = super(BiSQLView, self).write(vals)
         if vals.get("sequence", False):
             for rec in self.filtered(lambda x: x.menu_id):
                 rec.menu_id.sequence = rec.sequence
@@ -293,9 +293,8 @@ class BiSQLView(models.Model):
                     "If you want to delete them, first set them to draft."
                 )
             )
-        if self.mapped("cron_id"):
-            self.mapped("cron_id").unlink()
-        return super().unlink()
+        self.cron_id.unlink()
+        return super(BiSQLView, self).unlink()
 
     def copy(self, default=None):
         self.ensure_one()
@@ -306,7 +305,7 @@ class BiSQLView(models.Model):
                 "technical_name": "%s_copy" % self.technical_name,
             }
         )
-        return super().copy(default=default)
+        return super(BiSQLView, self).copy(default=default)
 
     # Action Section
     def button_create_sql_view_and_model(self):
@@ -430,7 +429,7 @@ class BiSQLView(models.Model):
             "numbercall": -1,
             "interval_number": 1,
             "interval_type": "days",
-            "nextcall": now + timedelta(days=1),
+            "nextcall": datetime(now.year, now.month, now.day + 1),
             "active": True,
         }
 
@@ -659,7 +658,7 @@ class BiSQLView(models.Model):
         the database structure is done, to know fields type."""
         self.ensure_one()
         sql_view_field_obj = self.env["bi.sql.view.field"]
-        columns = super()._check_execution()
+        columns = super(BiSQLView, self)._check_execution()
         field_ids = []
         for column in columns:
             existing_field = self.bi_sql_view_field_ids.filtered(
@@ -716,7 +715,7 @@ class BiSQLView(models.Model):
                 # Alter name of the action, to display last refresh
                 # datetime of the materialized view
                 sql_view.action_id.with_context(
-                    lang=self.env.context.get("lang", self.env.user.lang)
+                    lang=self.env.user.lang
                 ).name = sql_view._prepare_action_name()
 
     def _refresh_size(self):
@@ -730,9 +729,9 @@ class BiSQLView(models.Model):
     def check_manual_fields(self, model):
         # check the fields we need are defined on self, to stop it going
         # early on install / startup - particularly problematic during upgrade
-        if model._name.startswith(
-            self._model_prefix
-        ) and "group_operator" in table_columns(self.env.cr, "bi_sql_view_field"):
+        if "group_operator" in table_columns(
+            self.env.cr, "bi_sql_view_field"
+        ) and model._name.startswith(self._model_prefix):
             # Use SQL instead of ORM, as ORM might not be fully initialised -
             # we have no control over the order that fields are defined!
             # We are not concerned about user security rules.

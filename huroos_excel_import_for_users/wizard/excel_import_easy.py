@@ -34,11 +34,11 @@ class ExcelImportEasy(models.TransientModel):
     def print_xlsx_template(self):
         return self.env.ref('huroos_excel_import_for_users.action_report_excel_template').report_action(self)
 
-    def get_many2one_field(self, field_value, field_relation, create=True, alternative_search=False):
+    def get_many2one_field(self, field_value, field_relation, create=True, alternative_search=False, operator='='):
         if not alternative_search:
-            value_id = self.env[field_relation].search([('name', '=', field_value)], limit=1)
+            value_id = self.env[field_relation].search([('name', operator, field_value)], limit=1)
         else:
-            value_id = self.env[field_relation].search([(alternative_search, '=', field_value)], limit=1)
+            value_id = self.env[field_relation].search([(alternative_search, operator, field_value)], limit=1)
         if not value_id and create:
             value_id = self.env[field_relation].create({'name': field_value})
         elif not value_id and not create:
@@ -103,7 +103,8 @@ class ExcelImportEasy(models.TransientModel):
 
     def get_variant(self, default_code, variants_to_check):
         product_tmpl = self.env['product.template'].search([('default_code', '=', default_code)], limit=1)
-        variants_to_check.replace(" ", "")
+        # Rimuovo gli spazi
+        variants_to_check = variants_to_check.replace(" ", "")
         variants_to_check = variants_to_check.split(',')
         for variant in product_tmpl.product_variant_ids:
             variant_list = list()
@@ -233,10 +234,11 @@ class ExcelImportEasy(models.TransientModel):
                     for customer_line in product.customer_ids:
                         if customer_line.name.id == model_to_append_data['name']:
                             existing = True
-                            product.write({'customer_ids': [(1, customer_line.id, model_to_append_data)]})
-                            _logger.info(f"Prodotto ID {product.id} -- Aggiornato codice cliente {customer_line.name.name}")
+                            if model_to_append_data.get('product_code', False):
+                                product.write({'customer_ids': [(1, customer_line.id, model_to_append_data)]})
+                                _logger.info(f"Prodotto ID {product.id} -- Aggiornato codice cliente {customer_line.name.name}")
 
-                    if not existing:
+                    if not existing and model_to_append_data.get('product_code', False):
                         product.write({key: [(0, 0, model_to_append_data)]})
                         _logger.info(f"Prodotto ID {product.id} -- Creato nuovo codice cliente")
                     # Mi salvo l'oggetto del cliente per poterlo usare poi nella creazione del listino

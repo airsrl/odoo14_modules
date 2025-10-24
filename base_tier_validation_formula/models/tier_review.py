@@ -29,10 +29,7 @@ class TierReview(models.Model):
 
     @api.depends("definition_id.reviewer_expression", "review_type", "model", "res_id")
     def _compute_python_reviewer_ids(self):
-        for rec in self:
-            if rec.review_type != "expression":
-                rec.python_reviewer_ids = self.env["res.users"].browse()
-                continue
+        for rec in self.filtered(lambda x: x.review_type == "expression"):
             record = rec.env[rec.model].browse(rec.res_id).exists()
             try:
                 reviewer_ids = safe_eval(

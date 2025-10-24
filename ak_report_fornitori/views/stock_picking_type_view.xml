@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="stock_picking_type_form_inherit" model="ir.ui.view">
+            <field name="name">stock_picking_type.form</field>
+            <field name="model">stock.picking.type</field>
+            <field name="inherit_id" ref="stock.view_picking_type_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//sheet/group[2]" position="inside">
+                    <group string="Report fornitori">
+                        <field name="is_sellout_picking_type"/>
+                        <field name="is_scrap_picking_type"/>
+                        <field name="is_new_coming_picking_type"/>
+                    </group>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

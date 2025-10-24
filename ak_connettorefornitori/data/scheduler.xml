@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data >
+        <record model="ir.cron" id="cron_update_age">
+        <field name='name'>AK - Sync da AK catalogo fornitori a prodotti in Odoo.
+            Vengono aggiornati solo i prodotti in AK Catalogo che hanno il flag Sincronizzare con Odoo spuntato</field>
+        <field name='interval_number'>15</field>
+        <field name='interval_type'>minutes</field>
+        <field name="numbercall">-1</field>
+        <field name="active">True</field>
+        <field name="model_id" ref="ak_connettorefornitori.model_ak_connettore_catalogo_prodotti"/>
+        <field name="state">code</field>
+        <field name="code">model.scheduler_sync_catalogo_prodotto_odoo()</field>
+    </record>
+    </data>
+</odoo>

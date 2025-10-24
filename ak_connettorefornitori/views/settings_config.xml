@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_air_connettone_config" model="ir.ui.view">
+            <field name="name">ambient7_custom_config</field>
+            <field name="model">res.config.settings</field>
+            <field name="inherit_id" ref="base.res_config_settings_view_form" />
+            <field name="arch" type="xml">
+            <xpath expr="//div[hasclass('settings')]" position="inside">
+                <div  class="app_settings_block" data-string="ambient7_custom"
+                                 string="AIR - Connettore" data-key="ambient7_custom">
+
+                    <div id="cg_settings">
+                      <h2>Parametri connessione API Computer Gross</h2>
+                      <div class="row mt16 o_settings_container" name="contacts_setting_container">
+                          <div class="col-xs-12 col-md-12 o_setting_box" id="url_ext">
+                                  <div class="o_setting_right_pane" id="cg_url">
+                                      <div class="o_form_label">
+                                      Url
+                                      </div>
+                                      <field name="cg_url"/>
+                                      <div class="text-muted">
+                                          Url API Computer Gross
+                                      </div>
+                                  </div>
+                          </div>
+                      </div>
+                      <div class="row mt16 o_settings_container" name="contacts_setting_container">
+                          <div class="col-xs-12 col-md-12 o_setting_box" id="cg_user_ext">
+                              <div class="o_setting_right_pane" id="cg_user">
+                                  <div class="o_form_label">
+                                    User
+                                  </div>
+                                  <field name="cg_user"/>
+                                  <div class="text-muted">
+                                      User API Computer Gross
+                                  </div>
+                              </div>
+                          </div>
+                          <div class="col-xs-12 col-md-12 o_setting_box" id="consumer_secret_ext">
+                            <div class="o_setting_right_pane" id="cg_password">
+                                  <div class="o_form_label">
+                                    Password
+                                  </div>
+                                  <field name="cg_password"/>
+                                  <div class="text-muted">
+                                      Password API Computer Gross
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                    </div>
+
+                    <div id="an_settings">
+                      <h2>Parametri connessione All Net</h2>
+                      <div class="row mt16 o_settings_container" name="contacts_setting_container">
+                          <div class="col-xs-12 col-md-12 o_setting_box" id="an_url_ext">
+                                  <div class="o_setting_right_pane" id="an_url">
+                                      <div class="o_form_label">
+                                      Url
+                                      </div>
+                                      <field name="an_url"/>
+                                      <div class="text-muted">
+                                          URL FTP AllNet
+                                      </div>
+                                  </div>
+                          </div>
+                      </div>
+                      <div class="row mt16 o_settings_container" name="contacts_setting_container">
+                          <div class="col-xs-12 col-md-12 o_setting_box" id="an_user_ext">
+                              <div class="o_setting_right_pane" id="an_user">
+                                  <div class="o_form_label">
+                                    User
+                                  </div>
+                                  <field name="an_user"/>
+                                  <div class="text-muted">
+                                     User FTP AllNet
+                                  </div>
+                              </div>
+                          </div>
+                          <div class="col-xs-12 col-md-12 o_setting_box" id="consumer_secret_ext">
+                            <div class="o_setting_right_pane" id="an_password">
+                                  <div class="o_form_label">
+                                    Password
+                                  </div>
+                                  <field name="an_password"/>
+                                  <div class="text-muted">
+                                      Password FTP AllNet
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                    </div>
+
+                    <div id="td_settings">
+                      <h2>Parametri connessione Techdata</h2>
+                      <div class="row mt16 o_settings_container" name="contacts_setting_container">
+                          <div class="col-xs-12 col-md-12 o_setting_box" id="td_url_ext">
+                                  <div class="o_setting_right_pane" id="td_url">
+                                      <div class="o_form_label">
+                                      Url
+                                      </div>
+                                      <field name="td_url"/>
+                                      <div class="text-muted">
+                                          URL FTP Techdata
+                                      </div>
+                                  </div>
+                          </div>
+                      </div>
+                      <div class="row mt16 o_settings_container" name="contacts_setting_container">
+                          <div class="col-xs-12 col-md-12 o_setting_box" id="td_user_ext">
+                              <div class="o_setting_right_pane" id="td_user">
+                                  <div class="o_form_label">
+                                    User
+                                  </div>
+                                  <field name="td_user"/>
+                                  <div class="text-muted">
+                                     User FTP Techdata
+                                  </div>
+                              </div>
+                          </div>
+                          <div class="col-xs-12 col-md-12 o_setting_box" id="consumer_secret_ext">
+                            <div class="o_setting_right_pane" id="td_password">
+                                  <div class="o_form_label">
+                                    Password
+                                  </div>
+                                  <field name="td_password"/>
+                                  <div class="text-muted">
+                                      Password FTP Techdata
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                    </div>
+                </div>
+            </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>
+

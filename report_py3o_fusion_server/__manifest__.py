@@ -12,10 +12,7 @@
     "Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/reporting-engine",
     "depends": ["report_py3o"],
-    "external_dependencies": {
-        "python": ["py3o.template", "py3o.formats"],
-        "deb": ["libreoffice"],
-    },
+    "external_dependencies": {"python": ["py3o.template", "py3o.formats"]},
     "demo": ["demo/report_py3o.xml", "demo/py3o_pdf_options.xml"],
     "data": [
         "views/ir_actions_report.xml",
