@@ -2,7 +2,7 @@
 # Part of BrowseInfo. See LICENSE file for full copyright and licensing details.
 {
     'name': 'Passoladro custom fields',
-    'version': "1.0.0.0",
+    'version': "1.0.0.1",
     'author': "AIR-sc",
     'summary': 'Consente di specificare alcuni campi personalizzati per PassoLadro',
     'description': 'Consente di specificare alcuni campi personalizzati per PassoLadro',
@@ -13,7 +13,7 @@
              #'security/ir.model.access.csv',
              ],
     'website': 'https://www.air-srl.com',
-    'depends': ['stock'],
+    'depends': ['stock', 'sale'],
     'installable': True,
     'auto_install': False,
     "images": ['static/description/icon.png'],
