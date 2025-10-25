@@ -6,22 +6,20 @@
 {
     "name": "Import Statement Files",
     "category": "Accounting",
-    "version": "14.0.3.3.0",
+    "version": "14.0.1.2.1",
     "license": "LGPL-3",
-    "depends": ["account_statement_import_base"],
+    "depends": ["account"],
     "author": "Odoo SA, Akretion, Odoo Community Association (OCA)",
     "maintainers": ["alexis-via"],
-    "development_status": "Mature",
     "website": "https://github.com/OCA/bank-statement-import",
     "data": [
         "security/ir.model.access.csv",
         "wizard/account_statement_import_view.xml",
         "views/account_journal.xml",
-        "templates/assets.xml",
+        "views/account_bank_statement_line.xml",
     ],
     "demo": [
         "demo/partner_bank.xml",
     ],
     "installable": True,
-    "qweb": ["static/src/xml/account_dashboard_kanban.xml"],
 }

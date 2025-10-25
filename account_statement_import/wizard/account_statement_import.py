@@ -24,7 +24,9 @@ class AccountStatementImport(models.TransientModel):
     )
     statement_filename = fields.Char()
 
-    def _import_file(self):
+    def import_file_button(self):
+        """Process the file chosen in the wizard, create bank statement(s)
+        and return an action."""
         self.ensure_one()
         result = {
             "statement_ids": [],
@@ -42,25 +44,34 @@ class AccountStatementImport(models.TransientModel):
                 )
             )
         self.env["ir.attachment"].create(self._prepare_create_attachment(result))
-        return result
-
-    def import_file_button(self):
-        """Process the file chosen in the wizard, create bank statement(s)
-        and return an action."""
-        result = self._import_file()
-        action = self.env["ir.actions.actions"]._for_xml_id(
-            "account.action_bank_statement_tree"
-        )
-        if len(result["statement_ids"]) == 1:
-            action.update(
-                {
-                    "view_mode": "form,tree",
-                    "views": False,
-                    "res_id": result["statement_ids"][0],
-                }
+        if self.env.context.get("return_regular_interface_action"):
+            action = (
+                self.env.ref("account.action_bank_statement_tree").sudo().read([])[0]
             )
+            if len(result["statement_ids"]) == 1:
+                action.update(
+                    {
+                        "view_mode": "form,tree",
+                        "views": False,
+                        "res_id": result["statement_ids"][0],
+                    }
+                )
+            else:
+                action["domain"] = [("id", "in", result["statement_ids"])]
         else:
-            action["domain"] = [("id", "in", result["statement_ids"])]
+            # dispatch to reconciliation interface
+            lines = self.env["account.bank.statement.line"].search(
+                [("statement_id", "in", result["statement_ids"])]
+            )
+            action = {
+                "type": "ir.actions.client",
+                "tag": "bank_statement_reconciliation_view",
+                "context": {
+                    "statement_line_ids": lines.ids,
+                    "company_ids": self.env.user.company_ids.ids,
+                    "notifications": result["notifications"],
+                },
+            }
         return action
 
     def _prepare_create_attachment(self, result):
@@ -220,15 +231,6 @@ class AccountStatementImport(models.TransientModel):
                 ],
                 limit=1,
             )
-            journal_id = self.env.context.get("journal_id")
-            if journal_id and journal.id != journal_id:
-                raise UserError(
-                    _(
-                        "The journal found for the file is not consistent with the "
-                        "selected journal. You should use the proper journal or "
-                        "use the generic button on the top of the Accounting Dashboard"
-                    )
-                )
 
             if not journal:
                 bank_accounts = self.env["res.partner.bank"].search(
@@ -275,15 +277,43 @@ class AccountStatementImport(models.TransientModel):
             )
         return journal
 
+    @api.model
+    def _update_partner_from_account_number(self, lvals):
+        partner_bank = self.env["res.partner.bank"].search(
+            [("acc_number", "=", lvals["account_number"])], limit=1
+        )
+        if partner_bank:
+            lvals["partner_bank_id"] = partner_bank.id
+            lvals["partner_id"] = partner_bank.partner_id.id
+
     def _complete_stmts_vals(self, stmts_vals, journal, account_number):
-        speeddict = journal._statement_line_import_speeddict()
         for st_vals in stmts_vals:
             st_vals["journal_id"] = journal.id
             for lvals in st_vals["transactions"]:
-                journal._statement_line_import_update_unique_import_id(
-                    lvals, account_number
-                )
-                journal._statement_line_import_update_hook(lvals, speeddict)
+                unique_import_id = lvals.get("unique_import_id")
+                if unique_import_id:
+                    sanitized_account_number = sanitize_account_number(account_number)
+                    lvals["unique_import_id"] = (
+                        (
+                            sanitized_account_number
+                            and sanitized_account_number + "-"
+                            or ""
+                        )
+                        + str(journal.id)
+                        + "-"
+                        + unique_import_id
+                    )
+
+                if (
+                    not lvals.get("partner_bank_id")
+                    and lvals.get("account_number")
+                    and not lvals.get("partner_id")
+                ):
+                    # Find the partner from his bank account number
+                    # The partner selected during the
+                    # reconciliation process will be linked to the bank account
+                    # when the statement is closed (code in the account module)
+                    self._update_partner_from_account_number(lvals)
                 if not lvals.get("payment_ref"):
                     raise UserError(_("Missing payment_ref on a transaction."))
         return stmts_vals

@@ -1,0 +1,23 @@
+
+Version 14.0.0.1 : (09-06-21)
+		- Update validation for lot product ,Now user can sold only avaialble quantity.
+
+Version 14.0.0.2 : (11-06-21)
+		- calculate lot quantity based on location,and show it in selection popup and also used it in validation.
+
+Version 14.0.0.3 : (09-09-21)
+		- Now Scan lot product and open lot selection popup.
+
+Version 14.0.0.4 : (30-09-21)
+		-1.) user have the option to remove the product when Lot/Serial Number Expired
+        -2.) user can Auto Disable product once its not is Stock
+
+Version 14.0.0.5 : (08-10-21)
+		-1.) user have the option to remove the product when Lot/Serial Number Expired
+        -2.) user can Auto Disable product once its not is Stock(product screen) on hand quantity zero ot is a Disable.
+        -3.) Numpad widget without any Orderline back button show in the popup so solve it.
+
+Version 14.0.0.6 : (22-10-21)
+		-- If Product have a single lot valid lot then add it directly.
+		-- If product do not have any valid lot then show Invalid lot Popup. 
+		-- if there is no lot then open popup same as odoo standard and ask for the lot.

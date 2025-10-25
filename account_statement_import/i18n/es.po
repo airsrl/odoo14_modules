@@ -21,15 +21,15 @@ msgstr ""
 "Project-Id-Version: Odoo Server saas~12.5\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-09-27 09:10+0000\n"
-"PO-Revision-Date: 2022-10-28 16:44+0000\n"
-"Last-Translator: Harald Panten <harald.panten@sygel.es>\n"
+"PO-Revision-Date: 2021-02-09 21:44+0000\n"
+"Last-Translator: Pedro M. Baeza <pedro.baeza@gmail.com>\n"
 "Language-Team: Spanish (https://www.transifex.com/odoo/teams/41243/es/)\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.14.1\n"
+"X-Generator: Weblate 4.3.2\n"
 
 #. module: account_statement_import
 #: code:addons/account_statement_import/wizard/account_statement_import.py:0
@@ -44,10 +44,20 @@ msgid "1 transaction had already been imported and was ignored."
 msgstr "1 transacción ha sido ya importada y será ignorada."
 
 #. module: account_statement_import
+#: model:ir.model.constraint,message:account_statement_import.constraint_account_bank_statement_line_unique_import_id
+msgid "A bank account transaction can be imported only once!"
+msgstr "¡Una transacción bancaria solo se puede importar una vez!"
+
+#. module: account_statement_import
 #: code:addons/account_statement_import/wizard/account_statement_import.py:0
 #, python-format
 msgid "Already imported items"
 msgstr "Elementos ya importados"
+
+#. module: account_statement_import
+#: model:ir.model,name:account_statement_import.model_account_bank_statement_line
+msgid "Bank Statement Line"
+msgstr "Línea de extracto bancario"
 
 #. module: account_statement_import
 #: model_terms:ir.ui.view,arch_db:account_statement_import.account_statement_import_form
@@ -74,6 +84,7 @@ msgid "Created on"
 msgstr "Creado el"
 
 #. module: account_statement_import
+#: model:ir.model.fields,field_description:account_statement_import.field_account_bank_statement_line__display_name
 #: model:ir.model.fields,field_description:account_statement_import.field_account_journal__display_name
 #: model:ir.model.fields,field_description:account_statement_import.field_account_statement_import__display_name
 msgid "Display Name"
@@ -89,6 +100,7 @@ msgstr ""
 "selecciónelos aquí."
 
 #. module: account_statement_import
+#: model:ir.model.fields,field_description:account_statement_import.field_account_bank_statement_line__id
 #: model:ir.model.fields,field_description:account_statement_import.field_account_journal__id
 #: model:ir.model.fields,field_description:account_statement_import.field_account_statement_import__id
 msgid "ID"
@@ -96,14 +108,11 @@ msgstr "ID"
 
 #. module: account_statement_import
 #: code:addons/account_statement_import/models/account_journal.py:0
+#: model_terms:ir.ui.view,arch_db:account_statement_import.account_statement_import_form
+#: model_terms:ir.ui.view,arch_db:account_statement_import.journal_dashboard_view_inherit
 #, python-format
 msgid "Import"
 msgstr "Importar"
-
-#. module: account_statement_import
-#: model_terms:ir.ui.view,arch_db:account_statement_import.journal_dashboard_view_inherit
-msgid "Import (OCA)"
-msgstr "Importar (OCA)"
 
 #. module: account_statement_import
 #: model:ir.actions.act_window,name:account_statement_import.account_statement_import_action
@@ -118,19 +127,14 @@ msgid "Import Bank Statement Files"
 msgstr "Importar extracto bancario"
 
 #. module: account_statement_import
-#: model:ir.ui.menu,name:account_statement_import.account_statement_import_menu
-msgid "Import Statement"
-msgstr "Importar extracto"
+#: model:ir.model.fields,field_description:account_statement_import.field_account_bank_statement_line__unique_import_id
+msgid "Import ID"
+msgstr "ID de importación"
 
 #. module: account_statement_import
 #: model_terms:ir.ui.view,arch_db:account_statement_import.journal_dashboard_view_inherit
-msgid "Import Statement (OCA)"
-msgstr "Importar Extracto (OCA)"
-
-#. module: account_statement_import
-#: model_terms:ir.ui.view,arch_db:account_statement_import.account_statement_import_form
-msgid "Import and View"
-msgstr "Importar y Ver"
+msgid "Import Statement"
+msgstr "Importar extracto"
 
 #. module: account_statement_import
 #: model:ir.model,name:account_statement_import.model_account_journal
@@ -138,6 +142,7 @@ msgid "Journal"
 msgstr "Diario"
 
 #. module: account_statement_import
+#: model:ir.model.fields,field_description:account_statement_import.field_account_bank_statement_line____last_update
 #: model:ir.model.fields,field_description:account_statement_import.field_account_journal____last_update
 #: model:ir.model.fields,field_description:account_statement_import.field_account_statement_import____last_update
 msgid "Last Modified on"
@@ -164,6 +169,12 @@ msgstr ""
 #, fuzzy, python-format
 msgid "Missing payment_ref on a transaction."
 msgstr "Este archivo no contiene ninguna transacción."
+
+#. module: account_statement_import
+#: model:ir.model.fields,field_description:account_statement_import.field_account_bank_statement_line__partner_bank_id
+#, fuzzy
+msgid "Partner Bank Account"
+msgstr "Cuentas bancaria"
 
 #. module: account_statement_import
 #: model:ir.model.fields,field_description:account_statement_import.field_account_statement_import__statement_file
@@ -229,15 +240,6 @@ msgstr ""
 #. module: account_statement_import
 #: code:addons/account_statement_import/wizard/account_statement_import.py:0
 #, python-format
-msgid ""
-"The journal found for the file is not consistent with the selected journal. "
-"You should use the proper journal or use the generic button on the top of "
-"the Accounting Dashboard"
-msgstr ""
-
-#. module: account_statement_import
-#: code:addons/account_statement_import/wizard/account_statement_import.py:0
-#, python-format
 msgid "The parsing of the statement file returned an invalid result."
 msgstr ""
 
@@ -274,19 +276,6 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:account_statement_import.journal_dashboard_view_inherit
 msgid "or"
 msgstr "o"
-
-#~ msgid "A bank account transaction can be imported only once!"
-#~ msgstr "¡Una transacción bancaria solo se puede importar una vez!"
-
-#~ msgid "Bank Statement Line"
-#~ msgstr "Línea de extracto bancario"
-
-#~ msgid "Import ID"
-#~ msgstr "ID de importación"
-
-#, fuzzy
-#~ msgid "Partner Bank Account"
-#~ msgstr "Cuentas bancaria"
 
 #~ msgid "This file doesn't contain any statement."
 #~ msgstr "Este archivo no contiene ninguno extracto."

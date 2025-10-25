@@ -2,3 +2,4 @@
 
 from . import models
 from . import wizards
+from .tests import online_bank_statement_provider_dummy

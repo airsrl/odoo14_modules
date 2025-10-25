@@ -21,11 +21,11 @@
                     <footer>
                         <button
                         name="import_file_button"
-                        string="Import and View"
+                        string="Import"
                         type="object"
                         class="btn-primary"
-                    />
-
+                        context="{'return_regular_interface_action': True}"
+                    />  <!-- The context may be temporary... waiting for the port of the reconcile interface -->
                         <button string="Cancel" class="btn-default" special="cancel" />
                     </footer>
                 </form>
@@ -37,13 +37,6 @@
             <field name="res_model">account.statement.import</field>
             <field name="view_mode">form</field>
             <field name="target">new</field>
-        </record>
-
-        <record id="account_statement_import_menu" model="ir.ui.menu">
-            <field name="name">Import Statement</field>
-            <field name="parent_id" ref="account.menu_finance_entries_actions" />
-            <field name="action" ref="account_statement_import_action" />
-            <field name="sequence" eval="70" />
         </record>
 
 </odoo>

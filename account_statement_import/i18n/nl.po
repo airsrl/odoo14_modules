@@ -39,10 +39,20 @@ msgid "1 transaction had already been imported and was ignored."
 msgstr "1 transactie werd reeds geïmporteerd en werd genegeerd."
 
 #. module: account_statement_import
+#: model:ir.model.constraint,message:account_statement_import.constraint_account_bank_statement_line_unique_import_id
+msgid "A bank account transaction can be imported only once!"
+msgstr "Een banktransactie kan slechts eenmaal worden geïmporteerd !"
+
+#. module: account_statement_import
 #: code:addons/account_statement_import/wizard/account_statement_import.py:0
 #, python-format
 msgid "Already imported items"
 msgstr "Al geïmporteerde items"
+
+#. module: account_statement_import
+#: model:ir.model,name:account_statement_import.model_account_bank_statement_line
+msgid "Bank Statement Line"
+msgstr "Bankafschriftregel"
 
 #. module: account_statement_import
 #: model_terms:ir.ui.view,arch_db:account_statement_import.account_statement_import_form
@@ -72,6 +82,7 @@ msgid "Created on"
 msgstr "Aangemaakt op"
 
 #. module: account_statement_import
+#: model:ir.model.fields,field_description:account_statement_import.field_account_bank_statement_line__display_name
 #: model:ir.model.fields,field_description:account_statement_import.field_account_journal__display_name
 #: model:ir.model.fields,field_description:account_statement_import.field_account_statement_import__display_name
 msgid "Display Name"
@@ -87,6 +98,7 @@ msgstr ""
 "deze hier."
 
 #. module: account_statement_import
+#: model:ir.model.fields,field_description:account_statement_import.field_account_bank_statement_line__id
 #: model:ir.model.fields,field_description:account_statement_import.field_account_journal__id
 #: model:ir.model.fields,field_description:account_statement_import.field_account_statement_import__id
 msgid "ID"
@@ -94,14 +106,11 @@ msgstr "ID"
 
 #. module: account_statement_import
 #: code:addons/account_statement_import/models/account_journal.py:0
+#: model_terms:ir.ui.view,arch_db:account_statement_import.account_statement_import_form
+#: model_terms:ir.ui.view,arch_db:account_statement_import.journal_dashboard_view_inherit
 #, python-format
 msgid "Import"
 msgstr "Importeer"
-
-#. module: account_statement_import
-#: model_terms:ir.ui.view,arch_db:account_statement_import.journal_dashboard_view_inherit
-msgid "Import (OCA)"
-msgstr ""
 
 #. module: account_statement_import
 #: model:ir.actions.act_window,name:account_statement_import.account_statement_import_action
@@ -116,19 +125,14 @@ msgid "Import Bank Statement Files"
 msgstr "Bankafschriften importeren"
 
 #. module: account_statement_import
-#: model:ir.ui.menu,name:account_statement_import.account_statement_import_menu
-msgid "Import Statement"
-msgstr "Bankafschrift importeren"
+#: model:ir.model.fields,field_description:account_statement_import.field_account_bank_statement_line__unique_import_id
+msgid "Import ID"
+msgstr "Import ID"
 
 #. module: account_statement_import
 #: model_terms:ir.ui.view,arch_db:account_statement_import.journal_dashboard_view_inherit
-msgid "Import Statement (OCA)"
-msgstr ""
-
-#. module: account_statement_import
-#: model_terms:ir.ui.view,arch_db:account_statement_import.account_statement_import_form
-msgid "Import and View"
-msgstr ""
+msgid "Import Statement"
+msgstr "Bankafschrift importeren"
 
 #. module: account_statement_import
 #: model:ir.model,name:account_statement_import.model_account_journal
@@ -136,6 +140,7 @@ msgid "Journal"
 msgstr "Dagboek"
 
 #. module: account_statement_import
+#: model:ir.model.fields,field_description:account_statement_import.field_account_bank_statement_line____last_update
 #: model:ir.model.fields,field_description:account_statement_import.field_account_journal____last_update
 #: model:ir.model.fields,field_description:account_statement_import.field_account_statement_import____last_update
 msgid "Last Modified on"
@@ -162,6 +167,11 @@ msgstr "Valutacode ontbreekt in het bankafschriftbestand."
 #, python-format
 msgid "Missing payment_ref on a transaction."
 msgstr "Er ontbreekt een betaal referentie voor deze transactie."
+
+#. module: account_statement_import
+#: model:ir.model.fields,field_description:account_statement_import.field_account_bank_statement_line__partner_bank_id
+msgid "Partner Bank Account"
+msgstr "Bankrekening van relatie"
 
 #. module: account_statement_import
 #: model:ir.model.fields,field_description:account_statement_import.field_account_statement_import__statement_file
@@ -231,15 +241,6 @@ msgstr ""
 #. module: account_statement_import
 #: code:addons/account_statement_import/wizard/account_statement_import.py:0
 #, python-format
-msgid ""
-"The journal found for the file is not consistent with the selected journal. "
-"You should use the proper journal or use the generic button on the top of "
-"the Accounting Dashboard"
-msgstr ""
-
-#. module: account_statement_import
-#: code:addons/account_statement_import/wizard/account_statement_import.py:0
-#, python-format
 msgid "The parsing of the statement file returned an invalid result."
 msgstr ""
 "Er is een fout opgetreden bij het verwerken van het bankafschrift bestand."
@@ -278,18 +279,6 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:account_statement_import.journal_dashboard_view_inherit
 msgid "or"
 msgstr "of"
-
-#~ msgid "A bank account transaction can be imported only once!"
-#~ msgstr "Een banktransactie kan slechts eenmaal worden geïmporteerd !"
-
-#~ msgid "Bank Statement Line"
-#~ msgstr "Bankafschriftregel"
-
-#~ msgid "Import ID"
-#~ msgstr "Import ID"
-
-#~ msgid "Partner Bank Account"
-#~ msgstr "Bankrekening van relatie"
 
 #~ msgid "This file doesn't contain any statement."
 #~ msgstr "Dit bestand bevat geen enkel afschrift."

@@ -12,6 +12,7 @@ from pytz import timezone, utc
 
 from odoo import _, api, fields, models
 
+from odoo.addons.base.models.res_bank import sanitize_account_number
 from odoo.addons.base.models.res_partner import _tz_get
 
 _logger = logging.getLogger(__name__)
@@ -69,10 +70,7 @@ class OnlineBankStatementProvider(models.Model):
         string="Update Schedule",
         compute="_compute_update_schedule",
     )
-    last_successful_run = fields.Datetime(
-        string="Last successful pull",
-        readonly=True,
-    )
+    last_successful_run = fields.Datetime(string="Last successful pull")
     next_run = fields.Datetime(
         string="Next scheduled pull",
         default=fields.Datetime.now,
@@ -97,7 +95,6 @@ class OnlineBankStatementProvider(models.Model):
     certificate_public_key = fields.Text()
     certificate_private_key = fields.Text()
     certificate_chain = fields.Text()
-    allow_empty_statements = fields.Boolean(string="Allow empty statements")
 
     _sql_constraints = [
         (
@@ -207,8 +204,6 @@ class OnlineBankStatementProvider(models.Model):
             )
         if not data:
             data = ([], {})
-        if not data[0] and not data[1] and not self.allow_empty_statements:
-            return
         lines_data, statement_values = data
         if not lines_data:
             lines_data = []
@@ -261,8 +256,6 @@ class OnlineBankStatementProvider(models.Model):
         """Get lines from line data, but only for the right date."""
         AccountBankStatementLine = self.env["account.bank.statement.line"]
         provider_tz = timezone(self.tz) if self.tz else utc
-        journal = self.journal_id
-        speeddict = journal._statement_line_import_speeddict()
         filtered_lines = []
         for line_values in lines_data:
             date = line_values["date"]
@@ -286,18 +279,23 @@ class OnlineBankStatementProvider(models.Model):
             date = date.replace(tzinfo=utc)
             date = date.astimezone(provider_tz).replace(tzinfo=None)
             line_values["date"] = date
-            journal._statement_line_import_update_unique_import_id(
-                line_values, self.account_number
-            )
             unique_import_id = line_values.get("unique_import_id")
             if unique_import_id:
+                unique_import_id = self._generate_unique_import_id(unique_import_id)
+                line_values.update({"unique_import_id": unique_import_id})
                 if AccountBankStatementLine.sudo().search(
                     [("unique_import_id", "=", unique_import_id)], limit=1
                 ):
                     continue
-            if not line_values.get("payment_ref"):
-                line_values["payment_ref"] = line_values.get("ref")
-            journal._statement_line_import_update_hook(line_values, speeddict)
+            bank_account_number = line_values.get("account_number")
+            if bank_account_number:
+                line_values.update(
+                    {
+                        "account_number": (
+                            self._sanitize_bank_account_number(bank_account_number)
+                        ),
+                    }
+                )
             filtered_lines.append(line_values)
         return filtered_lines
 
@@ -348,6 +346,20 @@ class OnlineBankStatementProvider(models.Model):
         date_since = date_since.replace(tzinfo=utc).astimezone(tz)
         return date_since.date()
 
+    def _generate_unique_import_id(self, unique_import_id):
+        self.ensure_one()
+        return (
+            (self.account_number and self.account_number + "-" or "")
+            + str(self.journal_id.id)
+            + "-"
+            + unique_import_id
+        )
+
+    def _sanitize_bank_account_number(self, bank_account_number):
+        """Hook for extension"""
+        self.ensure_one()
+        return sanitize_account_number(bank_account_number)
+
     def _get_next_run_period(self):
         self.ensure_one()
         if self.interval_type == "minutes":
@@ -371,8 +383,7 @@ class OnlineBankStatementProvider(models.Model):
                 "Pulling online bank statements of: %s"
                 % ", ".join(providers.mapped("journal_id.name"))
             )
-            for provider in providers.with_context(scheduled=True):
-                provider._adjust_schedule()
+            for provider in providers.with_context({"scheduled": True}):
                 date_since = (
                     (provider.last_successful_run)
                     if provider.last_successful_run
@@ -382,22 +393,6 @@ class OnlineBankStatementProvider(models.Model):
                 provider._pull(date_since, date_until)
 
         _logger.info("Scheduled pull of online bank statements complete.")
-
-    def _adjust_schedule(self):
-        """Make sure next_run is current.
-
-        Current means adding one more period would put if after the
-        current moment. This will be done at the end of the run.
-        The net effect of this method and the adjustment after the run
-        will be for the next_run to be in the future.
-        """
-        self.ensure_one()
-        delta = self._get_next_run_period()
-        now = datetime.now()
-        next_run = self.next_run + delta
-        while next_run < now:
-            self.next_run = next_run
-            next_run = self.next_run + delta
 
     def _obtain_statement_data(self, date_since, date_until):
         """Hook for extension"""

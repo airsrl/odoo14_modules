@@ -39,10 +39,21 @@ msgid "1 transaction had already been imported and was ignored."
 msgstr "1 transakce již byla importována a byla ignorována."
 
 #. module: account_statement_import
+#: model:ir.model.constraint,message:account_statement_import.constraint_account_bank_statement_line_unique_import_id
+#, fuzzy
+msgid "A bank account transaction can be imported only once!"
+msgstr "Transakce bankovního účtu lze importovat pouze jednou!"
+
+#. module: account_statement_import
 #: code:addons/account_statement_import/wizard/account_statement_import.py:0
 #, python-format
 msgid "Already imported items"
 msgstr ""
+
+#. module: account_statement_import
+#: model:ir.model,name:account_statement_import.model_account_bank_statement_line
+msgid "Bank Statement Line"
+msgstr "Řádek bankovního výkazu"
 
 #. module: account_statement_import
 #: model_terms:ir.ui.view,arch_db:account_statement_import.account_statement_import_form
@@ -69,6 +80,7 @@ msgid "Created on"
 msgstr "Vytvořeno"
 
 #. module: account_statement_import
+#: model:ir.model.fields,field_description:account_statement_import.field_account_bank_statement_line__display_name
 #: model:ir.model.fields,field_description:account_statement_import.field_account_journal__display_name
 #: model:ir.model.fields,field_description:account_statement_import.field_account_statement_import__display_name
 msgid "Display Name"
@@ -82,6 +94,7 @@ msgid ""
 msgstr ""
 
 #. module: account_statement_import
+#: model:ir.model.fields,field_description:account_statement_import.field_account_bank_statement_line__id
 #: model:ir.model.fields,field_description:account_statement_import.field_account_journal__id
 #: model:ir.model.fields,field_description:account_statement_import.field_account_statement_import__id
 msgid "ID"
@@ -89,14 +102,11 @@ msgstr "ID"
 
 #. module: account_statement_import
 #: code:addons/account_statement_import/models/account_journal.py:0
+#: model_terms:ir.ui.view,arch_db:account_statement_import.account_statement_import_form
+#: model_terms:ir.ui.view,arch_db:account_statement_import.journal_dashboard_view_inherit
 #, python-format
 msgid "Import"
 msgstr "Import"
-
-#. module: account_statement_import
-#: model_terms:ir.ui.view,arch_db:account_statement_import.journal_dashboard_view_inherit
-msgid "Import (OCA)"
-msgstr ""
 
 #. module: account_statement_import
 #: model:ir.actions.act_window,name:account_statement_import.account_statement_import_action
@@ -111,18 +121,13 @@ msgid "Import Bank Statement Files"
 msgstr "Import Výpisu z bankovního účtu"
 
 #. module: account_statement_import
-#: model:ir.ui.menu,name:account_statement_import.account_statement_import_menu
-msgid "Import Statement"
+#: model:ir.model.fields,field_description:account_statement_import.field_account_bank_statement_line__unique_import_id
+msgid "Import ID"
 msgstr ""
 
 #. module: account_statement_import
 #: model_terms:ir.ui.view,arch_db:account_statement_import.journal_dashboard_view_inherit
-msgid "Import Statement (OCA)"
-msgstr ""
-
-#. module: account_statement_import
-#: model_terms:ir.ui.view,arch_db:account_statement_import.account_statement_import_form
-msgid "Import and View"
+msgid "Import Statement"
 msgstr ""
 
 #. module: account_statement_import
@@ -131,6 +136,7 @@ msgid "Journal"
 msgstr "Deník"
 
 #. module: account_statement_import
+#: model:ir.model.fields,field_description:account_statement_import.field_account_bank_statement_line____last_update
 #: model:ir.model.fields,field_description:account_statement_import.field_account_journal____last_update
 #: model:ir.model.fields,field_description:account_statement_import.field_account_statement_import____last_update
 msgid "Last Modified on"
@@ -157,6 +163,12 @@ msgstr ""
 #, python-format
 msgid "Missing payment_ref on a transaction."
 msgstr ""
+
+#. module: account_statement_import
+#: model:ir.model.fields,field_description:account_statement_import.field_account_bank_statement_line__partner_bank_id
+#, fuzzy
+msgid "Partner Bank Account"
+msgstr "Bankovní účet"
 
 #. module: account_statement_import
 #: model:ir.model.fields,field_description:account_statement_import.field_account_statement_import__statement_file
@@ -218,15 +230,6 @@ msgstr ""
 #. module: account_statement_import
 #: code:addons/account_statement_import/wizard/account_statement_import.py:0
 #, python-format
-msgid ""
-"The journal found for the file is not consistent with the selected journal. "
-"You should use the proper journal or use the generic button on the top of "
-"the Accounting Dashboard"
-msgstr ""
-
-#. module: account_statement_import
-#: code:addons/account_statement_import/wizard/account_statement_import.py:0
-#, python-format
 msgid "The parsing of the statement file returned an invalid result."
 msgstr ""
 
@@ -263,17 +266,6 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:account_statement_import.journal_dashboard_view_inherit
 msgid "or"
 msgstr "nebo"
-
-#, fuzzy
-#~ msgid "A bank account transaction can be imported only once!"
-#~ msgstr "Transakce bankovního účtu lze importovat pouze jednou!"
-
-#~ msgid "Bank Statement Line"
-#~ msgstr "Řádek bankovního výkazu"
-
-#, fuzzy
-#~ msgid "Partner Bank Account"
-#~ msgstr "Bankovní účet"
 
 #~ msgid "This file doesn't contain any statement."
 #~ msgstr "Tento soubor neobsahuje žádné příkazy."
