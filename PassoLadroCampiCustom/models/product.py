@@ -42,7 +42,7 @@ class SaleOrder(models.Model):
 	wc_total_diff = fields.Boolean(string="Diferenze totale Woocommerce")
 
 	def import_woocommerce_data(self):
-		orders = self.search([('sync_wc', '=', False), ('client_order_ref', '!=', False), ('date_order', '>=', '2025-10-01'), ('state', '=', 'sale'), ('invoice_status', '=', 'to invoice')], order='date_order asc')
+		orders = self.search([('sync_wc', '=', False), ('client_order_ref', '!=', False), ('date_order', '>=', '2025-10-01'), ('state', '=', 'sale')], order='date_order asc')
 		for order in orders:
 			if 'PL' in order.client_order_ref:
 				BASE_URL = "https://passoladro.it"  # senza / finale
