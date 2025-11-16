@@ -1,8 +1,7 @@
 import logging
-
 import requests
-
 from odoo import api, fields, models, _
+from odoo.tools import float_round
 
 
 class product_template_custom(models.Model):
@@ -40,6 +39,53 @@ class SaleOrder(models.Model):
 	wc_amount = fields.Float(string="Totale Woocommerce")
 	sync_wc = fields.Boolean(string="Sincronizzato Woocommerce")
 	wc_total_diff = fields.Boolean(string="Diferenze totale Woocommerce")
+
+
+    def correct_wc_total(self):
+        Tax = self.env['account.tax']
+        SaleOrder = self.env['sale.order']
+        SaleOrderLine = self.env['sale.order.line']
+        arrotondamento = self.env['product.product'].search([('default_code', '=', 'arrotondamento')], limit=1)
+
+        tax = Tax.browse(1)  # IVA 22%, NON compresa nel prezzo
+
+        orders = SaleOrder.search([('wc_total_diff', '=', True),('name', '=', 'S29938'),('invoice_status', '=', 'to invoice')])
+        for order in orders:
+            # Totali wc e odoo, già ivati
+            wc_amount_rounded = float_round(order.wc_amount, precision_digits=2)
+            odoo_amount_rounded = float_round(order.amount_total, precision_digits=2)
+
+            # Differenza sui totali (lordi)
+            diff = wc_amount_rounded - odoo_amount_rounded
+
+            # Se differenza nulla o oltre 5 centesimi, non faccio nulla
+            if not diff or abs(diff) > 0.05:
+                continue
+
+            # diff è lordo, tax non è price_include -> ricavo l'imponibile
+            tax_factor = 1.0
+            if tax and tax.amount_type == 'percent' and not tax.price_include:
+                tax_factor += tax.amount / 100.0  # es. 1 + 22/100 = 1.22
+
+            base_amount = diff / tax_factor  # imponibile da usare come price_unit
+
+            # Arrotondo all’ultima cifra decimale di prezzo
+            base_amount = float_round(base_amount, precision_digits=2)
+
+            # Se si annulla dopo l'arrotondamento, salto
+            if not base_amount:
+                continue
+
+            SaleOrderLine.create({
+                'product_id': arrotondamento.id,
+                'order_id': order.id,
+                'name': _('Arrotondamento'),
+                'product_uom_qty': 1.0,
+                'price_unit': base_amount,
+                'tax_id': [(6, 0, [tax.id])],
+            })
+
+
 
 	def import_woocommerce_data(self):
 		orders = self.search([('sync_wc', '=', False), ('client_order_ref', '!=', False), ('date_order', '>=', '2025-10-01'), ('state', '=', 'sale')], order='date_order asc')
