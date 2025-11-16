@@ -39,6 +39,7 @@ class SaleOrder(models.Model):
     wc_amount = fields.Float(string="Totale Woocommerce")
     sync_wc = fields.Boolean(string="Sincronizzato Woocommerce")
     wc_total_diff = fields.Boolean(string="Diferenze totale Woocommerce")
+    correct_amount_wc = fields.Boolean()
 
 
     def correct_wc_total(self):
@@ -84,6 +85,8 @@ class SaleOrder(models.Model):
                 'price_unit': base_amount,
                 'tax_id': [(6, 0, [tax.id])],
             })
+
+            order.write({'correct_amount_wc': True})
 
             wc_amount_rounded = float_round(order.wc_amount, precision_digits=2)
             odoo_amount_rounded = float_round(order.amount_total, precision_digits=2)
