@@ -57,7 +57,6 @@ class SaleOrder(models.Model):
             ('wc_total_diff', '=', True),
             ('correct_amount_wc', '=', False),
             ('invoice_status', '=', 'to invoice'),
-            ('name', '=', 'S30426')
         ], limit=10, order='date_order asc')
 
         for order in orders:
