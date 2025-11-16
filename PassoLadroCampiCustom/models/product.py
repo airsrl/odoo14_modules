@@ -68,8 +68,8 @@ class SaleOrder(models.Model):
             order._amount_all()
 
             # Totali wc e odoo, già ivati
-            wc_amount_rounded = float_round(order.wc_amount, precision_digits=3)
-            odoo_amount_rounded = float_round(order.amount_total, precision_digits=3)
+            wc_amount_rounded = float_round(order.wc_amount, precision_digits=2)
+            odoo_amount_rounded = float_round(order.amount_total, precision_digits=2)
 
             # Differenza sui totali (LORDI): Woo - Odoo
             diff = wc_amount_rounded - odoo_amount_rounded
