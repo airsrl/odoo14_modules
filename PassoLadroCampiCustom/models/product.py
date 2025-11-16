@@ -41,6 +41,7 @@ class SaleOrder(models.Model):
     sync_wc = fields.Boolean(string="Sincronizzato Woocommerce")
     wc_total_diff = fields.Boolean(string="Diferenze totale Woocommerce")
     correct_amount_wc = fields.Boolean()
+    diff_min_five = fields.Boolean()
 
     def correct_wc_total(self):
         Tax = self.env['account.tax']
@@ -81,6 +82,8 @@ class SaleOrder(models.Model):
             # Se differenza nulla o oltre 5 centesimi, non faccio nulla
             if not diff or abs(diff) > 0.05:
                 continue
+            else:
+                order.write({'diff_min_five': True})
 
             # IVA compresa nel prezzo:
             # diff è già un importo lordo, quindi lo uso direttamente come price_unit
