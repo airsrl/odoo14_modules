@@ -2,6 +2,7 @@ import logging
 import requests
 from odoo import api, fields, models, _
 from odoo.tools import float_round
+from odoo.exceptions import UserError
 
 
 class product_template_custom(models.Model):
@@ -72,6 +73,8 @@ class SaleOrder(models.Model):
 
             # Differenza sui totali (LORDI): Woo - Odoo
             diff = wc_amount_rounded - odoo_amount_rounded
+
+            raise UserError(diff)
 
             # In ogni caso, segno che ho provato a correggere questo ordine
             order.write({'correct_amount_wc': True})
