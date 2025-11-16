@@ -74,7 +74,7 @@ class SaleOrder(models.Model):
             # Differenza sui totali (LORDI): Woo - Odoo
             diff = wc_amount_rounded - odoo_amount_rounded
 
-            raise UserError(diff)
+            #raise UserError(diff)
 
             # In ogni caso, segno che ho provato a correggere questo ordine
             order.write({'correct_amount_wc': True})
