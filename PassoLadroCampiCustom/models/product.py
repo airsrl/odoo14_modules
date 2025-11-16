@@ -62,6 +62,8 @@ class SaleOrder(models.Model):
 
         for order in orders:
 
+            self.env.cr.commit()
+
             #Ricalcolo totali
             for line in order.order_line:
                 line._compute_amount()
