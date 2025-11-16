@@ -56,7 +56,7 @@ class SaleOrder(models.Model):
             ('wc_total_diff', '=', True),
             ('correct_amount_wc', '=', False),
             ('invoice_status', '=', 'to invoice')
-        ], limit=10)
+        ], limit=10, order='date_order asc')
 
         for order in orders:
             # Totali wc e odoo, già ivati
