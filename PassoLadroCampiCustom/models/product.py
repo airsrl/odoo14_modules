@@ -41,39 +41,41 @@ class SaleOrder(models.Model):
     wc_total_diff = fields.Boolean(string="Diferenze totale Woocommerce")
     correct_amount_wc = fields.Boolean()
 
-
     def correct_wc_total(self):
         Tax = self.env['account.tax']
         SaleOrder = self.env['sale.order']
         SaleOrderLine = self.env['sale.order.line']
-        arrotondamento = self.env['product.product'].search([('default_code', '=', 'arrotondamento')], limit=1)
+        arrotondamento = self.env['product.product'].search(
+            [('default_code', '=', 'arrotondamento')], limit=1
+        )
 
-        tax = Tax.browse(1)  # IVA 22%, NON compresa nel prezzo
+        # IVA 22% COMPRESA NEL PREZZO (price_include = True)
+        tax = Tax.browse(68)
 
-        orders = SaleOrder.search([('wc_total_diff', '=', True),('correct_amount_wc', '=', False),('invoice_status', '=', 'to invoice')], limit=10)
+        orders = SaleOrder.search([
+            ('wc_total_diff', '=', True),
+            ('correct_amount_wc', '=', False),
+            ('invoice_status', '=', 'to invoice')
+        ], limit=10)
+
         for order in orders:
             # Totali wc e odoo, già ivati
             wc_amount_rounded = float_round(order.wc_amount, precision_digits=2)
             odoo_amount_rounded = float_round(order.amount_total, precision_digits=2)
 
-            # Differenza sui totali (lordi)
+            # Differenza sui totali (LORDI): Woo - Odoo
             diff = wc_amount_rounded - odoo_amount_rounded
 
+            # In ogni caso, segno che ho provato a correggere questo ordine
             order.write({'correct_amount_wc': True})
 
             # Se differenza nulla o oltre 5 centesimi, non faccio nulla
             if not diff or abs(diff) > 0.05:
                 continue
 
-            # diff è lordo, tax non è price_include -> ricavo l'imponibile
-            tax_factor = 1.0
-            if tax and tax.amount_type == 'percent' and not tax.price_include:
-                tax_factor += tax.amount / 100.0  # es. 1 + 22/100 = 1.22
-
-            base_amount = diff / tax_factor  # imponibile da usare come price_unit
-
-            # Arrotondo all’ultima cifra decimale di prezzo
-            base_amount = float_round(base_amount, precision_digits=2)
+            # IVA compresa nel prezzo:
+            # diff è già un importo lordo, quindi lo uso direttamente come price_unit
+            base_amount = float_round(diff, precision_digits=2)
 
             # Se si annulla dopo l'arrotondamento, salto
             if not base_amount:
@@ -84,15 +86,19 @@ class SaleOrder(models.Model):
                 'order_id': order.id,
                 'name': _('Arrotondamento'),
                 'product_uom_qty': 1.0,
-                'price_unit': base_amount,
-                'tax_id': [(6, 0, [tax.id])],
+                'price_unit': base_amount,  # lordo (IVA inclusa)
+                'tax_id': [(6, 0, [tax.id])] if tax else False,
             })
 
-
+            # Rieseguo il confronto dopo aver aggiunto la riga
             wc_amount_rounded = float_round(order.wc_amount, precision_digits=2)
             odoo_amount_rounded = float_round(order.amount_total, precision_digits=2)
+
+            # Se ora combaciano, marco l'ordine come allineato
             if wc_amount_rounded == odoo_amount_rounded:
                 order.write({'wc_total_diff': False, 'sync_wc': False})
+
+
 
 
     def import_woocommerce_data(self):
