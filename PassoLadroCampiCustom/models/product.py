@@ -85,6 +85,10 @@ class SaleOrder(models.Model):
                 'tax_id': [(6, 0, [tax.id])],
             })
 
+            wc_amount_rounded = float_round(order.wc_amount, precision_digits=2)
+            odoo_amount_rounded = float_round(order.amount_total, precision_digits=2)
+            if wc_amount_rounded == odoo_amount_rounded:
+                order.write({'wc_total_diff': False, 'sync_wc': False})
 
 
     def import_woocommerce_data(self):
