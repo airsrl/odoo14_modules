@@ -55,10 +55,17 @@ class SaleOrder(models.Model):
         orders = SaleOrder.search([
             ('wc_total_diff', '=', True),
             ('correct_amount_wc', '=', False),
-            ('invoice_status', '=', 'to invoice')
+            ('invoice_status', '=', 'to invoice'),
+            ('name', '=', 'S30426')
         ], limit=10, order='date_order asc')
 
         for order in orders:
+
+            #Ricalcolo totali
+            for line in order.order_line:
+                line._compute_amount()
+            order._amount_all()
+
             # Totali wc e odoo, già ivati
             wc_amount_rounded = float_round(order.wc_amount, precision_digits=2)
             odoo_amount_rounded = float_round(order.amount_total, precision_digits=2)
