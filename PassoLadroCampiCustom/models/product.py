@@ -50,7 +50,7 @@ class SaleOrder(models.Model):
 
         tax = Tax.browse(1)  # IVA 22%, NON compresa nel prezzo
 
-        orders = SaleOrder.search([('wc_total_diff', '=', True),('invoice_status', '=', 'to invoice')], limit=10)
+        orders = SaleOrder.search([('wc_total_diff', '=', True),('correct_amount_wc', '=', False),('invoice_status', '=', 'to invoice')], limit=10)
         for order in orders:
             # Totali wc e odoo, già ivati
             wc_amount_rounded = float_round(order.wc_amount, precision_digits=2)
