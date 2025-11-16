@@ -59,6 +59,8 @@ class SaleOrder(models.Model):
             # Differenza sui totali (lordi)
             diff = wc_amount_rounded - odoo_amount_rounded
 
+            order.write({'correct_amount_wc': True})
+
             # Se differenza nulla o oltre 5 centesimi, non faccio nulla
             if not diff or abs(diff) > 0.05:
                 continue
@@ -86,7 +88,6 @@ class SaleOrder(models.Model):
                 'tax_id': [(6, 0, [tax.id])],
             })
 
-            order.write({'correct_amount_wc': True})
 
             wc_amount_rounded = float_round(order.wc_amount, precision_digits=2)
             odoo_amount_rounded = float_round(order.amount_total, precision_digits=2)
